@@ -65,7 +65,7 @@ $dir = realpath(urldecode($dirparam));
 if ( $dir == '' || !is_dir($dir) ) {
     internalServerError('Source directory not exist');
 }
-if ( !preg_match('/\d\d/', $dir) ) {
+if ( !preg_match('/docs/', $dir) ) {
     internalServerError('Directory is not in the accepted path scope');                                               
 }
 $dir .= DIRECTORY_SEPARATOR;
