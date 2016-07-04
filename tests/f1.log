@@ -1,0 +1,2748 @@
+TeX log appears below
+[verbose]: Creating arXiv submission AutoTeX object
+[verbose]: Calling arXiv submission AutoTeX process
+[verbose]: TeX/AutoTeX.pm: admin_timeout = minion
+[verbose]: <Trans-with-shock-U.tex> is of type 'TEX'.
+[verbose]: <h_ESW-SW.tex> is of type 'TEX'.
+[verbose]: <SatuT.eps> is of type 'Postscript'.
+[verbose]: <Trans-with-shock.tex> is of type 'TEX'.
+[verbose]: <delta1_ESW-SW.tex> is of type 'TEX'.
+[verbose]: <ESW-SW_friction.eps> is of type 'Postscript'.
+[verbose]: <Lin-U-delta-4.eps> is of type 'Postscript'.
+[verbose]: <Trans-without-shock.eps> is of type 'Postscript'.
+[verbose]: <Lin-h-delta-4.tex> is of type 'TEX'.
+[verbose]: <Prof-tau.tex> is of type 'TEX'.
+[verbose]: <Amp-tau_n.tex> is of type 'TEX'.
+[verbose]: <Blasius_800.tex> is of type 'TEX'.
+[verbose]: <delta1_ESW-SW.eps> is of type 'Postscript'.
+[verbose]: <Amp-tau.eps> is of type 'Postscript'.
+[verbose]: <ESW-zb.eps> is of type 'Postscript'.
+[verbose]: <airwater.pdf> is of type 'PDF'.
+[verbose]: <width-delta.tex> is of type 'TEX'.
+[verbose]: <profiles2.pdf> is of type 'PDF'.
+[verbose]: <Amp-delta.eps> is of type 'Postscript'.
+[verbose]: <profiles1.pdf> is of type 'PDF'.
+[verbose]: <Prof-ue.tex> is of type 'TEX'.
+[verbose]: <Lin-h-delta-4.eps> is of type 'Postscript'.
+[verbose]: <Amp-tau.tex> is of type 'TEX'.
+[verbose]: <Amp-delta_n.eps> is of type 'Postscript'.
+[verbose]: <SatuODE.tex> is of type 'TEX'.
+[verbose]: <U_ESW-SW.eps> is of type 'Postscript'.
+[verbose]: <Prof-delta1.eps> is of type 'Postscript'.
+[verbose]: <width-tau.tex> is of type 'TEX'.
+[verbose]: <ESW-g.tex> is of type 'TEX'.
+[verbose]: <SatuT.tex> is of type 'TEX'.
+[verbose]: <width-deltan.tex> is of type 'TEX'.
+[verbose]: <Trans-without-shock-delta1.tex> is of type 'TEX'.
+[verbose]: <Trans-with-shock-delta1.eps> is of type 'Postscript'.
+[verbose]: <ESW-SW_friction.tex> is of type 'TEX'.
+[verbose]: <delta1-starting.eps> is of type 'Postscript'.
+[verbose]: <ESW-SW_frictionP.eps> is of type 'Postscript'.
+[verbose]: <Prof-ue.eps> is of type 'Postscript'.
+[verbose]: <Lin-U-delta-4.tex> is of type 'TEX'.
+[verbose]: <Lin-ue-delta-4.eps> is of type 'Postscript'.
+[verbose]: <Trans-with-shock-delta1D.tex> is of type 'TEX'.
+[verbose]: <width-delta.eps> is of type 'Postscript'.
+[verbose]: <Re-tau.eps> is of type 'Postscript'.
+[verbose]: <Amp-delta.tex> is of type 'TEX'.
+[verbose]: <Trans-without-shock.tex> is of type 'TEX'.
+[verbose]: <ESW-g.eps> is of type 'Postscript'.
+[verbose]: <Lin-delta1-b-10.eps> is of type 'Postscript'.
+[verbose]: <Amp-lim-delta.tex> is of type 'TEX'.
+[verbose]: <SatuODE.eps> is of type 'Postscript'.
+[verbose]: <Lin-ue-delta-4.tex> is of type 'TEX'.
+[verbose]: <Amp-delta_n.tex> is of type 'TEX'.
+[verbose]: <Trans-without-shock-U.eps> is of type 'Postscript'.
+[verbose]: <delta1-starting.tex> is of type 'TEX'.
+[verbose]: <Re-delta1.tex> is of type 'TEX'.
+[verbose]: <TwoLayers.tex> is of type 'PDFLATEX'.
+[verbose]: <Amp-tau_n.eps> is of type 'Postscript'.
+[verbose]: <Prof-delta1.tex> is of type 'TEX'.
+[verbose]: <Re-delta1.eps> is of type 'Postscript'.
+[verbose]: <Trans-with-shockD.eps> is of type 'Postscript'.
+[verbose]: <Blasius_800.eps> is of type 'Postscript'.
+[verbose]: <width-taun.tex> is of type 'TEX'.
+[verbose]: <h_ESW-SW.eps> is of type 'Postscript'.
+[verbose]: <width-deltan.eps> is of type 'Postscript'.
+[verbose]: <Trans-with-shockD.tex> is of type 'TEX'.
+[verbose]: <Trans-with-shock-delta1.tex> is of type 'TEX'.
+[verbose]: <U_ESW-SW.tex> is of type 'TEX'.
+[verbose]: <Trans-without-shock-U.tex> is of type 'TEX'.
+[verbose]: <Trans-with-shock-U.eps> is of type 'Postscript'.
+[verbose]: <Trans-with-shock-delta1D.eps> is of type 'Postscript'.
+[verbose]: <Trans-without-shock-delta1.eps> is of type 'Postscript'.
+[verbose]: <Re-tau.tex> is of type 'TEX'.
+[verbose]: <ESW-SW_frictionP.tex> is of type 'TEX'.
+[verbose]: <width-taun.eps> is of type 'Postscript'.
+[verbose]: <Amp-lim-delta.eps> is of type 'Postscript'.
+[verbose]: <width-tau.eps> is of type 'Postscript'.
+[verbose]: <Trans-with-shock.eps> is of type 'Postscript'.
+[verbose]: <Lin-delta1-b-10.tex> is of type 'TEX'.
+[verbose]: <Prof-tau.eps> is of type 'Postscript'.
+[verbose]: <ESW-zb.tex> is of type 'TEX'.
+[verbose]: ~~~~~~~~~~~ Processing file 'TwoLayers.tex'
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running hpdflatex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && pdflatex 'TwoLayers.tex' < /dev/null)" 2>&1
+[verbose]: This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011)
+restricted \write18 enabled.
+entering extended mode
+(./TwoLayers.tex
+LaTeX2e <2011/06/27>
+Babel <v3.8m> and hyphenation patterns for english, dumylang, nohyphenation, ge
+rman-x-2011-07-01, ngerman-x-2011-07-01, afrikaans, ancientgreek, ibycus, arabi
+c, armenian, basque, bulgarian, catalan, pinyin, coptic, croatian, czech, danis
+h, dutch, ukenglish, usenglishmax, esperanto, estonian, ethiopic, farsi, finnis
+h, french, galician, german, ngerman, swissgerman, monogreek, greek, hungarian,
+icelandic, assamese, bengali, gujarati, hindi, kannada, malayalam, marathi, or
+iya, panjabi, tamil, telugu, indonesian, interlingua, irish, italian, kurmanji,
+lao, latin, latvian, lithuanian, mongolian, mongolianlmc, bokmal, nynorsk, pol
+ish, portuguese, romanian, russian, sanskrit, serbian, serbianc, slovak, sloven
+ian, spanish, swedish, turkish, turkmen, ukrainian, uppersorbian, welsh, loaded
+.
+(/texlive/2011/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
+(/texlive/2011/texmf-dist/tex/latex/base/size11.clo))
+(/texlive/2011/texmf-dist/tex/generic/babel/babel.sty
+(/texlive/2011/texmf-dist/tex/generic/babel/frenchb.ldf
+(/texlive/2011/texmf-dist/tex/generic/babel/babel.def)
+*************************************
+* Local config file frenchb.cfg used
+*
+(/texlive/2011/texmf-dist/tex/generic/babel/frenchb.cfg))
+(/texlive/2011/texmf-dist/tex/generic/babel/english.ldf))
+(/texlive/2011/texmf-dist/tex/latex/carlisle/scalefnt.sty)
+(/texlive/2011/texmf-dist/tex/latex/graphics/keyval.sty)
+(/texlive/2011/texmf-dist/tex/latex/base/inputenc.sty
+(/texlive/2011/texmf-dist/tex/latex/base/utf8.def
+(/texlive/2011/texmf-dist/tex/latex/base/t1enc.dfu)
+(/texlive/2011/texmf-dist/tex/latex/base/ot1enc.dfu)
+(/texlive/2011/texmf-dist/tex/latex/base/omsenc.dfu)))
+(/texlive/2011/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/texlive/2011/texmf-dist/tex/latex/amsmath/amstext.sty
+(/texlive/2011/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/texlive/2011/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/texlive/2011/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/texlive/2011/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/texlive/2011/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(/texlive/2011/texmf-dist/tex/latex/amscls/amsthm.sty)
+(/texlive/2011/texmf-dist/tex/latex/graphics/color.sty
+(/texlive/2011/texmf-dist/tex/latex/latexconfig/color.cfg)
+(/texlive/2011/texmf-dist/tex/latex/pdftex-def/pdftex.def
+(/texlive/2011/texmf-dist/tex/generic/oberdiek/infwarerr.sty)
+(/texlive/2011/texmf-dist/tex/generic/oberdiek/ltxcmds.sty)))
+(/texlive/2011/texmf-dist/tex/latex/caption/caption.sty
+(/texlive/2011/texmf-dist/tex/latex/caption/caption3.sty))
+(/texlive/2011/texmf-dist/tex/latex/graphics/graphicx.sty
+(/texlive/2011/texmf-dist/tex/latex/graphics/graphics.sty
+(/texlive/2011/texmf-dist/tex/latex/graphics/trig.sty)
+(/texlive/2011/texmf-dist/tex/latex/latexconfig/graphics.cfg)))
+(/texlive/2011/texmf-dist/tex/latex/oberdiek/epstopdf.sty
+(/texlive/2011/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+(/texlive/2011/texmf-dist/tex/latex/oberdiek/grfext.sty
+(/texlive/2011/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty))
+(/texlive/2011/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+(/texlive/2011/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+(/texlive/2011/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+(/texlive/2011/texmf-dist/tex/generic/oberdiek/ifluatex.sty))))
+(/texlive/2011/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+(/texlive/2011/texmf-dist/tex/generic/oberdiek/ifpdf.sty))
+(/texlive/2011/texmf-config/tex/latex/latexconfig/epstopdf-sys.cfg)))
+(/texlive/2011/texmf-dist/tex/latex/pstricks/pstricks.sty
+(/texlive/2011/texmf-dist/tex/generic/pstricks/pstricks.tex
+(/texlive/2011/texmf-dist/tex/generic/xkeyval/pst-xkey.tex
+(/texlive/2011/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+(/texlive/2011/texmf-dist/tex/generic/xkeyval/xkeyval.tex)))
+(/texlive/2011/texmf-dist/tex/generic/pstricks/pst-fp.tex
+`pst-fp' v0.05, 2010/01/17 (hv))
+`PSTricks' v2.23 <2011/09/04> (tvz)
+(/texlive/2011/texmf-dist/tex/generic/pstricks/pstricks.con))
+(/texlive/2011/texmf-dist/tex/generic/pstricks/pst-fp.tex)
+(/texlive/2011/texmf-dist/tex/latex/xcolor/xcolor.sty
+(/texlive/2011/texmf-dist/tex/latex/latexconfig/color.cfg)))
+(/texlive/2011/texmf-dist/tex/latex/cases/cases.sty)
+(/texlive/2011/texmf-dist/tex/latex/hyperref/hyperref.sty
+(/texlive/2011/texmf-dist/tex/generic/oberdiek/hobsub-hyperref.sty
+(/texlive/2011/texmf-dist/tex/generic/oberdiek/hobsub-generic.sty))
+(/texlive/2011/texmf-dist/tex/generic/ifxetex/ifxetex.sty)
+(/texlive/2011/texmf-dist/tex/latex/hyperref/pd1enc.def)
+(/texlive/2011/texmf-config/tex/latex/latexconfig/hyperref.cfg)
+(/texlive/2011/texmf-dist/tex/latex/url/url.sty))
+
+Package hyperref Message: Driver: hpdftex.
+
+(/texlive/2011/texmf-dist/tex/latex/hyperref/hpdftex.def
+(/texlive/2011/texmf-dist/tex/latex/oberdiek/rerunfilecheck.sty))
+No file TwoLayers.aux.
+
+Package frenchb.ldf Warning: OT1 encoding should not be used for French.
+(frenchb.ldf) Add \usepackage[T1]{fontenc} to the preamble
+(frenchb.ldf) of your document, on input line 55.
+
+(/texlive/2011/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (/texlive/2011/texmf-dist/tex/latex/hyperref/nameref.sty
+(/texlive/2011/texmf-dist/tex/generic/oberdiek/gettitlestring.sty))
+(/texlive/2011/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/texlive/2011/texmf-dist/tex/latex/amsfonts/umsb.fd)
+
+LaTeX Warning: No \author given.
+
+
+LaTeX Warning: Citation `SaintV' on page 1 undefined on input line 114.
+
+
+LaTeX Warning: Citation `Trans' on page 1 undefined on input line 115.
+
+
+LaTeX Warning: Citation `Burguete04' on page 1 undefined on input line 115.
+
+
+LaTeX Warning: Citation `Caleffi' on page 1 undefined on input line 116.
+
+
+LaTeX Warning: Citation `Rivlin95' on page 1 undefined on input line 116.
+
+
+LaTeX Warning: Citation `Govindaraju96' on page 1 undefined on input line 116.
+
+
+LaTeX Warning: Citation `MalpassetAlcrudo' on page 1 undefined on input line 11
+7.
+
+
+LaTeX Warning: Citation `MalpassetValiani' on page 1 undefined on input line 11
+7.
+
+
+LaTeX Warning: Citation `George' on page 1 undefined on input line 117.
+
+
+LaTeX Warning: Citation `Kim' on page 1 undefined on input line 117.
+
+
+LaTeX Warning: Citation `PopinetTsu' on page 1 undefined on input line 117.
+
+
+LaTeX Warning: Citation `Overland' on page 1 undefined on input line 117.
+
+
+LaTeX Warning: Citation `Overland2' on page 1 undefined on input line 117.
+
+
+LaTeX Warning: Citation `Rainwater' on page 1 undefined on input line 117.
+
+
+LaTeX Warning: Citation `Minh-erosion' on page 1 undefined on input line 117.
+
+[1
+Non-PDF special ignored!
+Non-PDF special ignored!
+Non-PDF special ignored!
+Non-PDF special ignored!
+Non-PDF special ignored!
+Non-PDF special ignored!{/texlive/2011/texmf-var/fonts/map/pdftex/updmap/pdftex
+.map}]
+
+LaTeX Warning: Citation `Chow' on page 2 undefined on input line 132.
+
+
+LaTeX Warning: Reference `subsec:SW' on page 2 undefined on input line 145.
+
+
+LaTeX Warning: Citation `Sch' on page 2 undefined on input line 152.
+
+
+LaTeX Warning: Reference `fig:domain' on page 2 undefined on input line 154.
+
+
+LaTeX Warning: Reference `FinalMass' on page 2 undefined on input line 166.
+
+
+LaTeX Warning: Reference `FinalIdeal' on page 2 undefined on input line 166.
+
+
+LaTeX Warning: Reference `fig:domain' on page 2 undefined on input line 183.
+
+[2] <airwater.pdf, id=32, 917.4275pt x 233.87375pt> <use airwater.pdf>
+
+LaTeX Warning: Reference `subsec:SW' on page 3 undefined on input line 198.
+
+
+LaTeX Warning: Reference `subsec:SW' on page 3 undefined on input line 198.
+
+
+LaTeX Warning: Citation `Sch' on page 3 undefined on input line 202.
+
+(/texlive/2011/texmf-dist/tex/latex/base/omscmr.fd) [3 <./airwater.pdf>]
+
+LaTeX Warning: Reference `Mass' on page 4 undefined on input line 258.
+
+
+LaTeX Warning: Reference `Mass' on page 4 undefined on input line 281.
+
+
+LaTeX Warning: Reference `Momentum2' on page 4 undefined on input line 281.
+
+
+LaTeX Warning: Reference `tildeM2' on page 4 undefined on input line 298.
+
+
+LaTeX Warning: Citation `FLF' on page 4 undefined on input line 302.
+
+
+LaTeX Warning: Reference `tildeM1' on page 4 undefined on input line 303.
+
+[4]
+
+LaTeX Warning: Reference `adhesion' on page 5 undefined on input line 345.
+
+
+LaTeX Warning: Reference `sec:BoundLayer' on page 5 undefined on input line 351
+.
+
+
+LaTeX Warning: Citation `Audusse-multicouche' on page 5 undefined on input line
+353.
+
+
+LaTeX Warning: Reference `EqflupCL1' on page 5 undefined on input line 364.
+
+
+LaTeX Warning: Reference `EqflupCL5' on page 5 undefined on input line 364.
+
+
+LaTeX Warning: Reference `sec:ESW' on page 5 undefined on input line 370.
+
+[5]
+
+LaTeX Warning: Reference `SWcM' on page 6 undefined on input line 381.
+
+
+LaTeX Warning: Reference `SWcMo' on page 6 undefined on input line 381.
+
+
+LaTeX Warning: Reference `SWcM' on page 6 undefined on input line 385.
+
+
+LaTeX Warning: Citation `Hogg' on page 6 undefined on input line 390.
+
+
+LaTeX Warning: Reference `SWcM' on page 6 undefined on input line 403.
+
+
+LaTeX Warning: Reference `SWcMo' on page 6 undefined on input line 403.
+
+
+LaTeX Warning: Reference `Pois' on page 6 undefined on input line 404.
+
+
+LaTeX Warning: Citation `Chow' on page 6 undefined on input line 406.
+
+
+LaTeX Warning: Citation `Prandtl' on page 6 undefined on input line 423.
+
+
+LaTeX Warning: Citation `Sch' on page 6 undefined on input line 423.
+
+
+LaTeX Warning: Citation `RNS' on page 6 undefined on input line 426.
+
+[6]
+
+LaTeX Warning: Reference `LWmass' on page 7 undefined on input line 445.
+
+
+LaTeX Warning: Reference `LWmass' on page 7 undefined on input line 455.
+
+
+LaTeX Warning: Reference `LWmomentum' on page 7 undefined on input line 455.
+
+
+LaTeX Warning: Reference `Hydrop' on page 7 undefined on input line 455.
+
+
+LaTeX Warning: Reference `adhesion' on page 7 undefined on input line 455.
+
+
+LaTeX Warning: Reference `Estidelta2' on page 7 undefined on input line 464.
+
+
+LaTeX Warning: Reference `Estidelta1' on page 7 undefined on input line 464.
+
+
+LaTeX Warning: Citation `Sch' on page 7 undefined on input line 493.
+
+
+LaTeX Warning: Reference `Eccl2' on page 7 undefined on input line 493.
+
+
+LaTeX Warning: Reference `Eccl3' on page 7 undefined on input line 497.
+
+
+LaTeX Warning: Reference `Eccl2' on page 7 undefined on input line 497.
+
+[7]
+
+LaTeX Warning: Reference `EqflupCL2' on page 8 undefined on input line 512.
+
+
+LaTeX Warning: Reference `EqflupCL5' on page 8 undefined on input line 512.
+
+
+LaTeX Warning: Citation `Sch' on page 8 undefined on input line 522.
+
+
+LaTeX Warning: Citation `Sch' on page 8 undefined on input line 525.
+
+
+LaTeX Warning: Reference `MeanVel' on page 8 undefined on input line 526.
+
+
+LaTeX Warning: Citation `Sch' on page 8 undefined on input line 547.
+
+
+LaTeX Warning: Reference `Eque' on page 8 undefined on input line 571.
+
+
+LaTeX Warning: Reference `Eccl3' on page 8 undefined on input line 577.
+
+
+LaTeX Warning: Reference `Eccl2' on page 8 undefined on input line 578.
+
+[8]
+
+LaTeX Warning: Reference `Eccl1' on page 9 undefined on input line 583.
+
+
+LaTeX Warning: Reference `Eccl4' on page 9 undefined on input line 583.
+
+
+LaTeX Warning: Reference `Eccl5' on page 9 undefined on input line 599.
+
+
+LaTeX Warning: Reference `parietal' on page 9 undefined on input line 610.
+
+
+LaTeX Warning: Reference `Equedelta' on page 9 undefined on input line 623.
+
+
+LaTeX Warning: Reference `Equedelta' on page 9 undefined on input line 629.
+
+
+LaTeX Warning: Reference `Eque' on page 9 undefined on input line 629.
+
+[9]
+
+LaTeX Warning: Reference `profileProp' on page 10 undefined on input line 652.
+
+
+LaTeX Warning: Reference `Equedelta' on page 10 undefined on input line 663.
+
+
+LaTeX Warning: Citation `Sch' on page 10 undefined on input line 669.
+
+
+LaTeX Warning: Citation `Sch' on page 10 undefined on input line 670.
+
+
+LaTeX Warning: Reference `L-Pprofiles' on page 10 undefined on input line 671.
+
+
+LaTeX Warning: Citation `PressureDrop' on page 10 undefined on input line 671.
+
+
+LaTeX Warning: Command \textquoteright invalid in math mode on input line 685.
+
+
+LaTeX Warning: Command \textquoteright invalid in math mode on input line 685.
+
+<profiles2.pdf, id=130, 361.35pt x 216.81pt> <use profiles2.pdf>
+<profiles1.pdf, id=131, 361.35pt x 216.81pt> <use profiles1.pdf>
+
+LaTeX Warning: Reference `tildeUfctue' on page 10 undefined on input line 696.
+
+
+LaTeX Warning: Reference `tildeUfctue' on page 10 undefined on input line 696.
+
+
+LaTeX Warning: Citation `GerPer' on page 10 undefined on input line 714.
+
+[10 <./profiles2.pdf> <./profiles1.pdf>]
+
+LaTeX Warning: Reference `LWmass' on page 11 undefined on input line 733.
+
+
+LaTeX Warning: Reference `adhesion' on page 11 undefined on input line 738.
+
+
+LaTeX Warning: Reference `kinematic' on page 11 undefined on input line 738.
+
+
+LaTeX Warning: Reference `Consvmassint' on page 11 undefined on input line 740.
+
+
+
+LaTeX Warning: Reference `parietal' on page 11 undefined on input line 752.
+
+
+LaTeX Warning: Reference `LWmomentum' on page 11 undefined on input line 756.
+
+
+LaTeX Warning: Reference `Scaling' on page 11 undefined on input line 757.
+
+
+LaTeX Warning: Reference `RemGradP' on page 11 undefined on input line 761.
+
+
+LaTeX Warning: Reference `Mass' on page 11 undefined on input line 772.
+
+
+LaTeX Warning: Reference `parietal' on page 11 undefined on input line 774.
+
+
+LaTeX Warning: Reference `Consvmomint' on page 11 undefined on input line 779.
+
+
+LaTeX Warning: Reference `Consvmassint' on page 11 undefined on input line 783.
+
+
+
+LaTeX Warning: Reference `Consvmomint' on page 11 undefined on input line 783.
+
+
+LaTeX Warning: Reference `EqflupCL5' on page 11 undefined on input line 784.
+
+
+LaTeX Warning: Reference `Pois' on page 11 undefined on input line 789.
+
+
+LaTeX Warning: Reference `Consvmassint' on page 11 undefined on input line 794.
+
+
+
+LaTeX Warning: Reference `Consvmomint' on page 11 undefined on input line 794.
+
+
+LaTeX Warning: Reference `parietalwithprofile' on page 11 undefined on input li
+ne 796.
+
+
+LaTeX Warning: Reference `subsec:SW' on page 11 undefined on input line 799.
+
+[11]
+
+LaTeX Warning: Reference `usquarefctue' on page 12 undefined on input line 801.
+
+
+
+LaTeX Warning: Reference `sec:ViscProf' on page 12 undefined on input line 805.
+
+
+
+LaTeX Warning: Reference `eq:mass' on page 12 undefined on input line 818.
+
+
+LaTeX Warning: Reference `eq:moment' on page 12 undefined on input line 818.
+
+
+LaTeX Warning: Reference `eq:FP' on page 12 undefined on input line 818.
+
+
+LaTeX Warning: Reference `tildeUfctue' on page 12 undefined on input line 819.
+
+
+LaTeX Warning: Reference `Equedelta' on page 12 undefined on input line 819.
+
+
+LaTeX Warning: Reference `tildeUfctue' on page 12 undefined on input line 826.
+
+
+LaTeX Warning: Reference `eq:moment' on page 12 undefined on input line 830.
+
+
+LaTeX Warning: Reference `eq:FP' on page 12 undefined on input line 834.
+
+
+LaTeX Warning: Reference `eq:mass' on page 12 undefined on input line 838.
+
+
+LaTeX Warning: Reference `tildeUfctue' on page 12 undefined on input line 846.
+
+
+LaTeX Warning: Reference `eq:fluxJ' on page 12 undefined on input line 846.
+
+
+LaTeX Warning: Reference `tildeUfctue' on page 12 undefined on input line 848.
+
+
+LaTeX Warning: Reference `eq:mass' on page 12 undefined on input line 862.
+
+
+LaTeX Warning: Reference `eq:FP' on page 12 undefined on input line 862.
+
+
+LaTeX Warning: Reference `tildeUfctue' on page 12 undefined on input line 862.
+
+
+LaTeX Warning: Reference `Equedelta' on page 12 undefined on input line 862.
+
+
+LaTeX Warning: Reference `eq:mass' on page 12 undefined on input line 862.
+
+
+LaTeX Warning: Reference `eq:FP' on page 12 undefined on input line 862.
+
+
+LaTeX Warning: Reference `eq:fluxJ' on page 12 undefined on input line 865.
+
+
+LaTeX Warning: Reference `eq:mass' on page 12 undefined on input line 865.
+
+
+LaTeX Warning: Reference `eq:moment' on page 12 undefined on input line 865.
+
+
+LaTeX Warning: Reference `eq:FP' on page 12 undefined on input line 865.
+
+
+LaTeX Warning: Reference `Equedelta' on page 12 undefined on input line 867.
+
+
+LaTeX Warning: Reference `tildeUfctue' on page 12 undefined on input line 867.
+
+[12]
+
+LaTeX Warning: Reference `tildeUfctue' on page 13 undefined on input line 876.
+
+
+LaTeX Warning: Reference `Close-flux' on page 13 undefined on input line 897.
+
+
+LaTeX Warning: Reference `parietalwithprofile' on page 13 undefined on input li
+ne 897.
+
+
+LaTeX Warning: Reference `delta2fnctdelta1' on page 13 undefined on input line
+897.
+
+
+LaTeX Warning: Reference `Hydrop' on page 13 undefined on input line 899.
+
+
+LaTeX Warning: Reference `Close-flux' on page 13 undefined on input line 908.
+
+
+LaTeX Warning: Reference `Caract-delta' on page 13 undefined on input line 908.
+
+
+
+LaTeX Warning: Reference `tildeUfctue' on page 13 undefined on input line 909.
+
+
+LaTeX Warning: Reference `tildeUfctue' on page 13 undefined on input line 919.
+
+
+LaTeX Warning: Reference `usquarefctue' on page 13 undefined on input line 919.
+
+
+
+LaTeX Warning: Reference `SWcMo' on page 13 undefined on input line 931.
+
+
+LaTeX Warning: Citation `Rolls' on page 13 undefined on input line 934.
+
+
+LaTeX Warning: Reference `FinalMass' on page 13 undefined on input line 937.
+
+
+LaTeX Warning: Reference `FinalMom' on page 13 undefined on input line 937.
+
+
+LaTeX Warning: Reference `FinalIdeal' on page 13 undefined on input line 937.
+
+
+LaTeX Warning: Reference `VKprof' on page 13 undefined on input line 937.
+
+
+LaTeX Warning: Reference `FinalMass' on page 13 undefined on input line 937.
+
+
+LaTeX Warning: Reference `FinalMom' on page 13 undefined on input line 937.
+
+
+LaTeX Warning: Reference `FinalIdeal' on page 13 undefined on input line 937.
+
+
+LaTeX Warning: Reference `FinalCloseFlux' on page 13 undefined on input line 93
+7.
+
+
+LaTeX Warning: Reference `VKprof' on page 13 undefined on input line 937.
+
+
+LaTeX Warning: Reference `Analsol' on page 13 undefined on input line 937.
+
+
+LaTeX Warning: Reference `Num' on page 13 undefined on input line 937.
+
+[13]
+
+LaTeX Warning: Reference `L-Pprofiles' on page 14 undefined on input line 940.
+
+
+LaTeX Warning: Reference `FinalMom' on page 14 undefined on input line 940.
+
+
+LaTeX Warning: Reference `VKprof' on page 14 undefined on input line 940.
+
+
+LaTeX Warning: Reference `FinalMom' on page 14 undefined on input line 942.
+
+
+LaTeX Warning: Reference `FinalMass' on page 14 undefined on input line 942.
+
+
+LaTeX Warning: Reference `FinalIdeal' on page 14 undefined on input line 942.
+
+
+LaTeX Warning: Reference `FinalCloseFlux' on page 14 undefined on input line 94
+2.
+
+
+LaTeX Warning: Reference `VKprof' on page 14 undefined on input line 942.
+
+
+LaTeX Warning: Reference `FinalMom' on page 14 undefined on input line 943.
+
+
+LaTeX Warning: Citation `IBL' on page 14 undefined on input line 945.
+
+
+LaTeX Warning: Reference `Num' on page 14 undefined on input line 952.
+
+
+LaTeX Warning: Citation `Stew' on page 14 undefined on input line 956.
+
+
+LaTeX Warning: Reference `VKprof' on page 14 undefined on input line 962.
+
+
+LaTeX Warning: Reference `Blasiustime' on page 14 undefined on input line 978.
+
+(./Blasius_800.tex
+
+! Package pdftex.def Error: File `Blasius_800.pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type H <return> for immediate help.
+...
+
+l.117 \put(0,0){\includegraphics{Blasius_800}}
+%
+?
+! Emergency stop.
+...
+
+l.117 \put(0,0){\includegraphics{Blasius_800}}
+%
+! ==> Fatal error occurred, no output PDF file produced!
+Transcript written on TwoLayers.log.
+
+[verbose]: pdflatex 'TwoLayers.tex' failed.
+[verbose]: Removing (La)TeX AUX file called 'TwoLayers.aux' (1467208335 >= 1467208334)
+[verbose]: Removing (La)TeX AUX file called 'TwoLayers.out' (1467208335 >= 1467208334)
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running pdflatex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && pdflatex 'TwoLayers.tex' < /dev/null)" 2>&1
+[verbose]: This is pdfTeX, Version 3.1415926-2.3-1.40.12 (TeX Live 2011)
+restricted \write18 enabled.
+entering extended mode
+(./TwoLayers.tex
+LaTeX2e <2011/06/27>
+Babel <v3.8m> and hyphenation patterns for english, dumylang, nohyphenation, ge
+rman-x-2011-07-01, ngerman-x-2011-07-01, afrikaans, ancientgreek, ibycus, arabi
+c, armenian, basque, bulgarian, catalan, pinyin, coptic, croatian, czech, danis
+h, dutch, ukenglish, usenglishmax, esperanto, estonian, ethiopic, farsi, finnis
+h, french, galician, german, ngerman, swissgerman, monogreek, greek, hungarian,
+icelandic, assamese, bengali, gujarati, hindi, kannada, malayalam, marathi, or
+iya, panjabi, tamil, telugu, indonesian, interlingua, irish, italian, kurmanji,
+lao, latin, latvian, lithuanian, mongolian, mongolianlmc, bokmal, nynorsk, pol
+ish, portuguese, romanian, russian, sanskrit, serbian, serbianc, slovak, sloven
+ian, spanish, swedish, turkish, turkmen, ukrainian, uppersorbian, welsh, loaded
+.
+(/texlive/2011/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2007/10/19 v1.4h Standard LaTeX document class
+(/texlive/2011/texmf-dist/tex/latex/base/size11.clo))
+(/texlive/2011/texmf-dist/tex/generic/babel/babel.sty
+(/texlive/2011/texmf-dist/tex/generic/babel/frenchb.ldf
+(/texlive/2011/texmf-dist/tex/generic/babel/babel.def)
+*************************************
+* Local config file frenchb.cfg used
+*
+(/texlive/2011/texmf-dist/tex/generic/babel/frenchb.cfg))
+(/texlive/2011/texmf-dist/tex/generic/babel/english.ldf))
+(/texlive/2011/texmf-dist/tex/latex/carlisle/scalefnt.sty)
+(/texlive/2011/texmf-dist/tex/latex/graphics/keyval.sty)
+(/texlive/2011/texmf-dist/tex/latex/base/inputenc.sty
+(/texlive/2011/texmf-dist/tex/latex/base/utf8.def
+(/texlive/2011/texmf-dist/tex/latex/base/t1enc.dfu)
+(/texlive/2011/texmf-dist/tex/latex/base/ot1enc.dfu)
+(/texlive/2011/texmf-dist/tex/latex/base/omsenc.dfu)))
+(/texlive/2011/texmf-dist/tex/latex/amsmath/amsmath.sty
+For additional information on amsmath, use the `?' option.
+(/texlive/2011/texmf-dist/tex/latex/amsmath/amstext.sty
+(/texlive/2011/texmf-dist/tex/latex/amsmath/amsgen.sty))
+(/texlive/2011/texmf-dist/tex/latex/amsmath/amsbsy.sty)
+(/texlive/2011/texmf-dist/tex/latex/amsmath/amsopn.sty))
+(/texlive/2011/texmf-dist/tex/latex/amsfonts/amssymb.sty
+(/texlive/2011/texmf-dist/tex/latex/amsfonts/amsfonts.sty))
+(/texlive/2011/texmf-dist/tex/latex/amscls/amsthm.sty)
+(/texlive/2011/texmf-dist/tex/latex/graphics/color.sty
+(/texlive/2011/texmf-dist/tex/latex/latexconfig/color.cfg)
+(/texlive/2011/texmf-dist/tex/latex/pdftex-def/pdftex.def
+(/texlive/2011/texmf-dist/tex/generic/oberdiek/infwarerr.sty)
+(/texlive/2011/texmf-dist/tex/generic/oberdiek/ltxcmds.sty)))
+(/texlive/2011/texmf-dist/tex/latex/caption/caption.sty
+(/texlive/2011/texmf-dist/tex/latex/caption/caption3.sty))
+(/texlive/2011/texmf-dist/tex/latex/graphics/graphicx.sty
+(/texlive/2011/texmf-dist/tex/latex/graphics/graphics.sty
+(/texlive/2011/texmf-dist/tex/latex/graphics/trig.sty)
+(/texlive/2011/texmf-dist/tex/latex/latexconfig/graphics.cfg)))
+(/texlive/2011/texmf-dist/tex/latex/oberdiek/epstopdf.sty
+(/texlive/2011/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+(/texlive/2011/texmf-dist/tex/latex/oberdiek/grfext.sty
+(/texlive/2011/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty))
+(/texlive/2011/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+(/texlive/2011/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+(/texlive/2011/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+(/texlive/2011/texmf-dist/tex/generic/oberdiek/ifluatex.sty))))
+(/texlive/2011/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+(/texlive/2011/texmf-dist/tex/generic/oberdiek/ifpdf.sty))
+(/texlive/2011/texmf-config/tex/latex/latexconfig/epstopdf-sys.cfg)))
+(/texlive/2011/texmf-dist/tex/latex/pstricks/pstricks.sty
+(/texlive/2011/texmf-dist/tex/generic/pstricks/pstricks.tex
+(/texlive/2011/texmf-dist/tex/generic/xkeyval/pst-xkey.tex
+(/texlive/2011/texmf-dist/tex/latex/xkeyval/xkeyval.sty
+(/texlive/2011/texmf-dist/tex/generic/xkeyval/xkeyval.tex)))
+(/texlive/2011/texmf-dist/tex/generic/pstricks/pst-fp.tex
+`pst-fp' v0.05, 2010/01/17 (hv))
+`PSTricks' v2.23 <2011/09/04> (tvz)
+(/texlive/2011/texmf-dist/tex/generic/pstricks/pstricks.con))
+(/texlive/2011/texmf-dist/tex/generic/pstricks/pst-fp.tex)
+(/texlive/2011/texmf-dist/tex/latex/xcolor/xcolor.sty
+(/texlive/2011/texmf-dist/tex/latex/latexconfig/color.cfg)))
+(/texlive/2011/texmf-dist/tex/latex/cases/cases.sty)
+No file TwoLayers.aux.
+
+Package frenchb.ldf Warning: OT1 encoding should not be used for French.
+(frenchb.ldf) Add \usepackage[T1]{fontenc} to the preamble
+(frenchb.ldf) of your document, on input line 54.
+
+(/texlive/2011/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+) (/texlive/2011/texmf-dist/tex/latex/amsfonts/umsa.fd)
+(/texlive/2011/texmf-dist/tex/latex/amsfonts/umsb.fd)
+
+LaTeX Warning: No \author given.
+
+
+LaTeX Warning: Citation `SaintV' on page 1 undefined on input line 113.
+
+
+LaTeX Warning: Citation `Trans' on page 1 undefined on input line 114.
+
+
+LaTeX Warning: Citation `Burguete04' on page 1 undefined on input line 114.
+
+
+LaTeX Warning: Citation `Caleffi' on page 1 undefined on input line 115.
+
+
+LaTeX Warning: Citation `Rivlin95' on page 1 undefined on input line 115.
+
+
+LaTeX Warning: Citation `Govindaraju96' on page 1 undefined on input line 115.
+
+
+LaTeX Warning: Citation `MalpassetAlcrudo' on page 1 undefined on input line 11
+6.
+
+
+LaTeX Warning: Citation `MalpassetValiani' on page 1 undefined on input line 11
+6.
+
+
+LaTeX Warning: Citation `George' on page 1 undefined on input line 116.
+
+
+LaTeX Warning: Citation `Kim' on page 1 undefined on input line 116.
+
+
+LaTeX Warning: Citation `PopinetTsu' on page 1 undefined on input line 116.
+
+
+LaTeX Warning: Citation `Overland' on page 1 undefined on input line 116.
+
+
+LaTeX Warning: Citation `Overland2' on page 1 undefined on input line 116.
+
+
+LaTeX Warning: Citation `Rainwater' on page 1 undefined on input line 116.
+
+
+LaTeX Warning: Citation `Minh-erosion' on page 1 undefined on input line 116.
+
+[1
+Non-PDF special ignored!
+Non-PDF special ignored!
+Non-PDF special ignored!
+Non-PDF special ignored!
+Non-PDF special ignored!
+Non-PDF special ignored!{/texlive/2011/texmf-var/fonts/map/pdftex/updmap/pdftex
+.map}]
+
+LaTeX Warning: Citation `Chow' on page 2 undefined on input line 131.
+
+
+LaTeX Warning: Reference `subsec:SW' on page 2 undefined on input line 144.
+
+
+LaTeX Warning: Citation `Sch' on page 2 undefined on input line 151.
+
+
+LaTeX Warning: Reference `fig:domain' on page 2 undefined on input line 153.
+
+
+LaTeX Warning: Reference `FinalMass' on page 2 undefined on input line 165.
+
+
+LaTeX Warning: Reference `FinalIdeal' on page 2 undefined on input line 165.
+
+
+LaTeX Warning: Reference `fig:domain' on page 2 undefined on input line 182.
+
+[2] <airwater.pdf, id=25, 917.4275pt x 233.87375pt> <use airwater.pdf>
+
+LaTeX Warning: Reference `subsec:SW' on page 3 undefined on input line 197.
+
+
+LaTeX Warning: Reference `subsec:SW' on page 3 undefined on input line 197.
+
+
+LaTeX Warning: Citation `Sch' on page 3 undefined on input line 201.
+
+(/texlive/2011/texmf-dist/tex/latex/base/omscmr.fd) [3 <./airwater.pdf>]
+
+LaTeX Warning: Reference `Mass' on page 4 undefined on input line 257.
+
+
+LaTeX Warning: Reference `Mass' on page 4 undefined on input line 280.
+
+
+LaTeX Warning: Reference `Momentum2' on page 4 undefined on input line 280.
+
+
+LaTeX Warning: Reference `tildeM2' on page 4 undefined on input line 297.
+
+
+LaTeX Warning: Citation `FLF' on page 4 undefined on input line 301.
+
+
+LaTeX Warning: Reference `tildeM1' on page 4 undefined on input line 302.
+
+[4]
+
+LaTeX Warning: Reference `adhesion' on page 5 undefined on input line 344.
+
+
+LaTeX Warning: Reference `sec:BoundLayer' on page 5 undefined on input line 350
+.
+
+
+LaTeX Warning: Citation `Audusse-multicouche' on page 5 undefined on input line
+352.
+
+
+LaTeX Warning: Reference `EqflupCL1' on page 5 undefined on input line 363.
+
+
+LaTeX Warning: Reference `EqflupCL5' on page 5 undefined on input line 363.
+
+
+LaTeX Warning: Reference `sec:ESW' on page 5 undefined on input line 369.
+
+[5]
+
+LaTeX Warning: Reference `SWcM' on page 6 undefined on input line 380.
+
+
+LaTeX Warning: Reference `SWcMo' on page 6 undefined on input line 380.
+
+
+LaTeX Warning: Reference `SWcM' on page 6 undefined on input line 384.
+
+
+LaTeX Warning: Citation `Hogg' on page 6 undefined on input line 389.
+
+
+LaTeX Warning: Reference `SWcM' on page 6 undefined on input line 402.
+
+
+LaTeX Warning: Reference `SWcMo' on page 6 undefined on input line 402.
+
+
+LaTeX Warning: Reference `Pois' on page 6 undefined on input line 403.
+
+
+LaTeX Warning: Citation `Chow' on page 6 undefined on input line 405.
+
+
+LaTeX Warning: Citation `Prandtl' on page 6 undefined on input line 422.
+
+
+LaTeX Warning: Citation `Sch' on page 6 undefined on input line 422.
+
+
+LaTeX Warning: Citation `RNS' on page 6 undefined on input line 425.
+
+[6]
+
+LaTeX Warning: Reference `LWmass' on page 7 undefined on input line 444.
+
+
+LaTeX Warning: Reference `LWmass' on page 7 undefined on input line 454.
+
+
+LaTeX Warning: Reference `LWmomentum' on page 7 undefined on input line 454.
+
+
+LaTeX Warning: Reference `Hydrop' on page 7 undefined on input line 454.
+
+
+LaTeX Warning: Reference `adhesion' on page 7 undefined on input line 454.
+
+
+LaTeX Warning: Reference `Estidelta2' on page 7 undefined on input line 463.
+
+
+LaTeX Warning: Reference `Estidelta1' on page 7 undefined on input line 463.
+
+
+LaTeX Warning: Citation `Sch' on page 7 undefined on input line 492.
+
+
+LaTeX Warning: Reference `Eccl2' on page 7 undefined on input line 492.
+
+
+LaTeX Warning: Reference `Eccl3' on page 7 undefined on input line 496.
+
+
+LaTeX Warning: Reference `Eccl2' on page 7 undefined on input line 496.
+
+[7]
+
+LaTeX Warning: Reference `EqflupCL2' on page 8 undefined on input line 511.
+
+
+LaTeX Warning: Reference `EqflupCL5' on page 8 undefined on input line 511.
+
+
+LaTeX Warning: Citation `Sch' on page 8 undefined on input line 521.
+
+
+LaTeX Warning: Citation `Sch' on page 8 undefined on input line 524.
+
+
+LaTeX Warning: Reference `MeanVel' on page 8 undefined on input line 525.
+
+
+LaTeX Warning: Citation `Sch' on page 8 undefined on input line 546.
+
+
+LaTeX Warning: Reference `Eque' on page 8 undefined on input line 570.
+
+
+LaTeX Warning: Reference `Eccl3' on page 8 undefined on input line 576.
+
+
+LaTeX Warning: Reference `Eccl2' on page 8 undefined on input line 577.
+
+[8]
+
+LaTeX Warning: Reference `Eccl1' on page 9 undefined on input line 582.
+
+
+LaTeX Warning: Reference `Eccl4' on page 9 undefined on input line 582.
+
+
+LaTeX Warning: Reference `Eccl5' on page 9 undefined on input line 598.
+
+
+LaTeX Warning: Reference `parietal' on page 9 undefined on input line 609.
+
+
+LaTeX Warning: Reference `Equedelta' on page 9 undefined on input line 622.
+
+
+LaTeX Warning: Reference `Equedelta' on page 9 undefined on input line 628.
+
+
+LaTeX Warning: Reference `Eque' on page 9 undefined on input line 628.
+
+[9]
+
+LaTeX Warning: Reference `profileProp' on page 10 undefined on input line 651.
+
+
+LaTeX Warning: Reference `Equedelta' on page 10 undefined on input line 662.
+
+
+LaTeX Warning: Citation `Sch' on page 10 undefined on input line 668.
+
+
+LaTeX Warning: Citation `Sch' on page 10 undefined on input line 669.
+
+
+LaTeX Warning: Reference `L-Pprofiles' on page 10 undefined on input line 670.
+
+
+LaTeX Warning: Citation `PressureDrop' on page 10 undefined on input line 670.
+
+
+LaTeX Warning: Command \textquoteright invalid in math mode on input line 684.
+
+
+LaTeX Warning: Command \textquoteright invalid in math mode on input line 684.
+
+<profiles2.pdf, id=64, 361.35pt x 216.81pt> <use profiles2.pdf>
+<profiles1.pdf, id=65, 361.35pt x 216.81pt> <use profiles1.pdf>
+
+LaTeX Warning: Reference `tildeUfctue' on page 10 undefined on input line 695.
+
+
+LaTeX Warning: Reference `tildeUfctue' on page 10 undefined on input line 695.
+
+
+LaTeX Warning: Citation `GerPer' on page 10 undefined on input line 713.
+
+[10 <./profiles2.pdf> <./profiles1.pdf>]
+
+LaTeX Warning: Reference `LWmass' on page 11 undefined on input line 732.
+
+
+LaTeX Warning: Reference `adhesion' on page 11 undefined on input line 737.
+
+
+LaTeX Warning: Reference `kinematic' on page 11 undefined on input line 737.
+
+
+LaTeX Warning: Reference `Consvmassint' on page 11 undefined on input line 739.
+
+
+
+LaTeX Warning: Reference `parietal' on page 11 undefined on input line 751.
+
+
+LaTeX Warning: Reference `LWmomentum' on page 11 undefined on input line 755.
+
+
+LaTeX Warning: Reference `Scaling' on page 11 undefined on input line 756.
+
+
+LaTeX Warning: Reference `RemGradP' on page 11 undefined on input line 760.
+
+
+LaTeX Warning: Reference `Mass' on page 11 undefined on input line 771.
+
+
+LaTeX Warning: Reference `parietal' on page 11 undefined on input line 773.
+
+
+LaTeX Warning: Reference `Consvmomint' on page 11 undefined on input line 778.
+
+
+LaTeX Warning: Reference `Consvmassint' on page 11 undefined on input line 782.
+
+
+
+LaTeX Warning: Reference `Consvmomint' on page 11 undefined on input line 782.
+
+
+LaTeX Warning: Reference `EqflupCL5' on page 11 undefined on input line 783.
+
+
+LaTeX Warning: Reference `Pois' on page 11 undefined on input line 788.
+
+
+LaTeX Warning: Reference `Consvmassint' on page 11 undefined on input line 793.
+
+
+
+LaTeX Warning: Reference `Consvmomint' on page 11 undefined on input line 793.
+
+
+LaTeX Warning: Reference `parietalwithprofile' on page 11 undefined on input li
+ne 795.
+
+
+LaTeX Warning: Reference `subsec:SW' on page 11 undefined on input line 798.
+
+[11]
+
+LaTeX Warning: Reference `usquarefctue' on page 12 undefined on input line 800.
+
+
+
+LaTeX Warning: Reference `sec:ViscProf' on page 12 undefined on input line 804.
+
+
+
+LaTeX Warning: Reference `eq:mass' on page 12 undefined on input line 817.
+
+
+LaTeX Warning: Reference `eq:moment' on page 12 undefined on input line 817.
+
+
+LaTeX Warning: Reference `eq:FP' on page 12 undefined on input line 817.
+
+
+LaTeX Warning: Reference `tildeUfctue' on page 12 undefined on input line 818.
+
+
+LaTeX Warning: Reference `Equedelta' on page 12 undefined on input line 818.
+
+
+LaTeX Warning: Reference `tildeUfctue' on page 12 undefined on input line 825.
+
+
+LaTeX Warning: Reference `eq:moment' on page 12 undefined on input line 829.
+
+
+LaTeX Warning: Reference `eq:FP' on page 12 undefined on input line 833.
+
+
+LaTeX Warning: Reference `eq:mass' on page 12 undefined on input line 837.
+
+
+LaTeX Warning: Reference `tildeUfctue' on page 12 undefined on input line 845.
+
+
+LaTeX Warning: Reference `eq:fluxJ' on page 12 undefined on input line 845.
+
+
+LaTeX Warning: Reference `tildeUfctue' on page 12 undefined on input line 847.
+
+
+LaTeX Warning: Reference `eq:mass' on page 12 undefined on input line 861.
+
+
+LaTeX Warning: Reference `eq:FP' on page 12 undefined on input line 861.
+
+
+LaTeX Warning: Reference `tildeUfctue' on page 12 undefined on input line 861.
+
+
+LaTeX Warning: Reference `Equedelta' on page 12 undefined on input line 861.
+
+
+LaTeX Warning: Reference `eq:mass' on page 12 undefined on input line 861.
+
+
+LaTeX Warning: Reference `eq:FP' on page 12 undefined on input line 861.
+
+
+LaTeX Warning: Reference `eq:fluxJ' on page 12 undefined on input line 864.
+
+
+LaTeX Warning: Reference `eq:mass' on page 12 undefined on input line 864.
+
+
+LaTeX Warning: Reference `eq:moment' on page 12 undefined on input line 864.
+
+
+LaTeX Warning: Reference `eq:FP' on page 12 undefined on input line 864.
+
+
+LaTeX Warning: Reference `Equedelta' on page 12 undefined on input line 866.
+
+
+LaTeX Warning: Reference `tildeUfctue' on page 12 undefined on input line 866.
+
+[12]
+
+LaTeX Warning: Reference `tildeUfctue' on page 13 undefined on input line 875.
+
+
+LaTeX Warning: Reference `Close-flux' on page 13 undefined on input line 896.
+
+
+LaTeX Warning: Reference `parietalwithprofile' on page 13 undefined on input li
+ne 896.
+
+
+LaTeX Warning: Reference `delta2fnctdelta1' on page 13 undefined on input line
+896.
+
+
+LaTeX Warning: Reference `Hydrop' on page 13 undefined on input line 898.
+
+
+LaTeX Warning: Reference `Close-flux' on page 13 undefined on input line 907.
+
+
+LaTeX Warning: Reference `Caract-delta' on page 13 undefined on input line 907.
+
+
+
+LaTeX Warning: Reference `tildeUfctue' on page 13 undefined on input line 908.
+
+
+LaTeX Warning: Reference `tildeUfctue' on page 13 undefined on input line 918.
+
+
+LaTeX Warning: Reference `usquarefctue' on page 13 undefined on input line 918.
+
+
+
+LaTeX Warning: Reference `SWcMo' on page 13 undefined on input line 930.
+
+
+LaTeX Warning: Citation `Rolls' on page 13 undefined on input line 933.
+
+
+LaTeX Warning: Reference `FinalMass' on page 13 undefined on input line 936.
+
+
+LaTeX Warning: Reference `FinalMom' on page 13 undefined on input line 936.
+
+
+LaTeX Warning: Reference `FinalIdeal' on page 13 undefined on input line 936.
+
+
+LaTeX Warning: Reference `VKprof' on page 13 undefined on input line 936.
+
+
+LaTeX Warning: Reference `FinalMass' on page 13 undefined on input line 936.
+
+
+LaTeX Warning: Reference `FinalMom' on page 13 undefined on input line 936.
+
+
+LaTeX Warning: Reference `FinalIdeal' on page 13 undefined on input line 936.
+
+
+LaTeX Warning: Reference `FinalCloseFlux' on page 13 undefined on input line 93
+6.
+
+
+LaTeX Warning: Reference `VKprof' on page 13 undefined on input line 936.
+
+
+LaTeX Warning: Reference `Analsol' on page 13 undefined on input line 936.
+
+
+LaTeX Warning: Reference `Num' on page 13 undefined on input line 936.
+
+[13]
+
+LaTeX Warning: Reference `L-Pprofiles' on page 14 undefined on input line 939.
+
+
+LaTeX Warning: Reference `FinalMom' on page 14 undefined on input line 939.
+
+
+LaTeX Warning: Reference `VKprof' on page 14 undefined on input line 939.
+
+
+LaTeX Warning: Reference `FinalMom' on page 14 undefined on input line 941.
+
+
+LaTeX Warning: Reference `FinalMass' on page 14 undefined on input line 941.
+
+
+LaTeX Warning: Reference `FinalIdeal' on page 14 undefined on input line 941.
+
+
+LaTeX Warning: Reference `FinalCloseFlux' on page 14 undefined on input line 94
+1.
+
+
+LaTeX Warning: Reference `VKprof' on page 14 undefined on input line 941.
+
+
+LaTeX Warning: Reference `FinalMom' on page 14 undefined on input line 942.
+
+
+LaTeX Warning: Citation `IBL' on page 14 undefined on input line 944.
+
+
+LaTeX Warning: Reference `Num' on page 14 undefined on input line 951.
+
+
+LaTeX Warning: Citation `Stew' on page 14 undefined on input line 955.
+
+
+LaTeX Warning: Reference `VKprof' on page 14 undefined on input line 961.
+
+
+LaTeX Warning: Reference `Blasiustime' on page 14 undefined on input line 977.
+
+(./Blasius_800.tex
+
+! Package pdftex.def Error: File `Blasius_800.pdf' not found.
+
+See the pdftex.def package documentation for explanation.
+Type H <return> for immediate help.
+...
+
+l.117 \put(0,0){\includegraphics{Blasius_800}}
+%
+?
+! Emergency stop.
+...
+
+l.117 \put(0,0){\includegraphics{Blasius_800}}
+%
+! ==> Fatal error occurred, no output PDF file produced!
+Transcript written on TwoLayers.log.
+
+[verbose]: pdflatex 'TwoLayers.tex' failed.
+[verbose]: Removing (La)TeX AUX file called 'TwoLayers.aux' (1467208335 >= 1467208335)
+[verbose]: 'htex' is not a valid TeX format; will ignore.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running htex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'TwoLayers.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./TwoLayers.tex
+! Undefined control sequence.
+l.1 \documentclass
+[11pt]{article}
+?
+! Emergency stop.
+l.1 \documentclass
+[11pt]{article}
+No pages of output.
+Transcript written on TwoLayers.log.
+
+[verbose]: tex 'TwoLayers.tex' failed.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running tex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'TwoLayers.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./TwoLayers.tex
+! Undefined control sequence.
+l.1 \documentclass
+[11pt]{article}
+?
+! Emergency stop.
+l.1 \documentclass
+[11pt]{article}
+No pages of output.
+Transcript written on TwoLayers.log.
+
+[verbose]: tex 'TwoLayers.tex' failed.
+[verbose]: We failed utterly to process the TeX file 'TwoLayers.tex'
+[verbose]: ~~~~~~~~~~~ Processing file 'Amp-delta.tex'
+[verbose]: 'htex' is not a valid TeX format; will ignore.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running htex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Amp-delta.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Amp-delta.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Amp-delta.log.
+
+[verbose]: tex 'Amp-delta.tex' failed.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running tex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Amp-delta.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Amp-delta.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Amp-delta.log.
+
+[verbose]: tex 'Amp-delta.tex' failed.
+[verbose]: We failed utterly to process the TeX file 'Amp-delta.tex'
+[verbose]: ~~~~~~~~~~~ Processing file 'Amp-delta_n.tex'
+[verbose]: 'htex' is not a valid TeX format; will ignore.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running htex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Amp-delta_n.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Amp-delta_n.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Amp-delta_n.log.
+
+[verbose]: tex 'Amp-delta_n.tex' failed.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running tex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Amp-delta_n.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Amp-delta_n.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Amp-delta_n.log.
+
+[verbose]: tex 'Amp-delta_n.tex' failed.
+[verbose]: We failed utterly to process the TeX file 'Amp-delta_n.tex'
+[verbose]: ~~~~~~~~~~~ Processing file 'Amp-lim-delta.tex'
+[verbose]: 'htex' is not a valid TeX format; will ignore.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running htex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Amp-lim-delta.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Amp-lim-delta.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Amp-lim-delta.log.
+
+[verbose]: tex 'Amp-lim-delta.tex' failed.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running tex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Amp-lim-delta.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Amp-lim-delta.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Amp-lim-delta.log.
+
+[verbose]: tex 'Amp-lim-delta.tex' failed.
+[verbose]: We failed utterly to process the TeX file 'Amp-lim-delta.tex'
+[verbose]: ~~~~~~~~~~~ Processing file 'Amp-tau.tex'
+[verbose]: 'htex' is not a valid TeX format; will ignore.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running htex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Amp-tau.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Amp-tau.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Amp-tau.log.
+
+[verbose]: tex 'Amp-tau.tex' failed.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running tex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Amp-tau.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Amp-tau.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Amp-tau.log.
+
+[verbose]: tex 'Amp-tau.tex' failed.
+[verbose]: We failed utterly to process the TeX file 'Amp-tau.tex'
+[verbose]: ~~~~~~~~~~~ Processing file 'Amp-tau_n.tex'
+[verbose]: 'htex' is not a valid TeX format; will ignore.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running htex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Amp-tau_n.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Amp-tau_n.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Amp-tau_n.log.
+
+[verbose]: tex 'Amp-tau_n.tex' failed.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running tex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Amp-tau_n.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Amp-tau_n.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Amp-tau_n.log.
+
+[verbose]: tex 'Amp-tau_n.tex' failed.
+[verbose]: We failed utterly to process the TeX file 'Amp-tau_n.tex'
+[verbose]: ~~~~~~~~~~~ Processing file 'Blasius_800.tex'
+[verbose]: 'htex' is not a valid TeX format; will ignore.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running htex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Blasius_800.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Blasius_800.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Blasius_800.log.
+
+[verbose]: tex 'Blasius_800.tex' failed.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running tex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Blasius_800.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Blasius_800.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Blasius_800.log.
+
+[verbose]: tex 'Blasius_800.tex' failed.
+[verbose]: We failed utterly to process the TeX file 'Blasius_800.tex'
+[verbose]: ~~~~~~~~~~~ Processing file 'ESW-SW_friction.tex'
+[verbose]: 'htex' is not a valid TeX format; will ignore.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running htex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'ESW-SW_friction.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./ESW-SW_friction.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on ESW-SW_friction.log.
+
+[verbose]: tex 'ESW-SW_friction.tex' failed.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running tex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'ESW-SW_friction.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./ESW-SW_friction.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on ESW-SW_friction.log.
+
+[verbose]: tex 'ESW-SW_friction.tex' failed.
+[verbose]: We failed utterly to process the TeX file 'ESW-SW_friction.tex'
+[verbose]: ~~~~~~~~~~~ Processing file 'ESW-SW_frictionP.tex'
+[verbose]: 'htex' is not a valid TeX format; will ignore.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running htex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'ESW-SW_frictionP.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./ESW-SW_frictionP.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on ESW-SW_frictionP.log.
+
+[verbose]: tex 'ESW-SW_frictionP.tex' failed.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running tex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'ESW-SW_frictionP.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./ESW-SW_frictionP.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on ESW-SW_frictionP.log.
+
+[verbose]: tex 'ESW-SW_frictionP.tex' failed.
+[verbose]: We failed utterly to process the TeX file 'ESW-SW_frictionP.tex'
+[verbose]: ~~~~~~~~~~~ Processing file 'ESW-g.tex'
+[verbose]: 'htex' is not a valid TeX format; will ignore.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running htex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'ESW-g.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./ESW-g.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on ESW-g.log.
+
+[verbose]: tex 'ESW-g.tex' failed.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running tex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'ESW-g.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./ESW-g.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on ESW-g.log.
+
+[verbose]: tex 'ESW-g.tex' failed.
+[verbose]: We failed utterly to process the TeX file 'ESW-g.tex'
+[verbose]: ~~~~~~~~~~~ Processing file 'ESW-zb.tex'
+[verbose]: 'htex' is not a valid TeX format; will ignore.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running htex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'ESW-zb.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./ESW-zb.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on ESW-zb.log.
+
+[verbose]: tex 'ESW-zb.tex' failed.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running tex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'ESW-zb.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./ESW-zb.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on ESW-zb.log.
+
+[verbose]: tex 'ESW-zb.tex' failed.
+[verbose]: We failed utterly to process the TeX file 'ESW-zb.tex'
+[verbose]: ~~~~~~~~~~~ Processing file 'Lin-U-delta-4.tex'
+[verbose]: 'htex' is not a valid TeX format; will ignore.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running htex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Lin-U-delta-4.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Lin-U-delta-4.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Lin-U-delta-4.log.
+
+[verbose]: tex 'Lin-U-delta-4.tex' failed.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running tex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Lin-U-delta-4.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Lin-U-delta-4.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Lin-U-delta-4.log.
+
+[verbose]: tex 'Lin-U-delta-4.tex' failed.
+[verbose]: We failed utterly to process the TeX file 'Lin-U-delta-4.tex'
+[verbose]: ~~~~~~~~~~~ Processing file 'Lin-delta1-b-10.tex'
+[verbose]: 'htex' is not a valid TeX format; will ignore.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running htex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Lin-delta1-b-10.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Lin-delta1-b-10.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Lin-delta1-b-10.log.
+
+[verbose]: tex 'Lin-delta1-b-10.tex' failed.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running tex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Lin-delta1-b-10.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Lin-delta1-b-10.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Lin-delta1-b-10.log.
+
+[verbose]: tex 'Lin-delta1-b-10.tex' failed.
+[verbose]: We failed utterly to process the TeX file 'Lin-delta1-b-10.tex'
+[verbose]: ~~~~~~~~~~~ Processing file 'Lin-h-delta-4.tex'
+[verbose]: 'htex' is not a valid TeX format; will ignore.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running htex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Lin-h-delta-4.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Lin-h-delta-4.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Lin-h-delta-4.log.
+
+[verbose]: tex 'Lin-h-delta-4.tex' failed.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running tex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Lin-h-delta-4.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Lin-h-delta-4.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Lin-h-delta-4.log.
+
+[verbose]: tex 'Lin-h-delta-4.tex' failed.
+[verbose]: We failed utterly to process the TeX file 'Lin-h-delta-4.tex'
+[verbose]: ~~~~~~~~~~~ Processing file 'Lin-ue-delta-4.tex'
+[verbose]: 'htex' is not a valid TeX format; will ignore.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running htex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Lin-ue-delta-4.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Lin-ue-delta-4.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Lin-ue-delta-4.log.
+
+[verbose]: tex 'Lin-ue-delta-4.tex' failed.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running tex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Lin-ue-delta-4.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Lin-ue-delta-4.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Lin-ue-delta-4.log.
+
+[verbose]: tex 'Lin-ue-delta-4.tex' failed.
+[verbose]: We failed utterly to process the TeX file 'Lin-ue-delta-4.tex'
+[verbose]: ~~~~~~~~~~~ Processing file 'Prof-delta1.tex'
+[verbose]: 'htex' is not a valid TeX format; will ignore.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running htex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Prof-delta1.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Prof-delta1.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Prof-delta1.log.
+
+[verbose]: tex 'Prof-delta1.tex' failed.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running tex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Prof-delta1.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Prof-delta1.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Prof-delta1.log.
+
+[verbose]: tex 'Prof-delta1.tex' failed.
+[verbose]: We failed utterly to process the TeX file 'Prof-delta1.tex'
+[verbose]: ~~~~~~~~~~~ Processing file 'Prof-tau.tex'
+[verbose]: 'htex' is not a valid TeX format; will ignore.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running htex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Prof-tau.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Prof-tau.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Prof-tau.log.
+
+[verbose]: tex 'Prof-tau.tex' failed.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running tex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Prof-tau.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Prof-tau.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Prof-tau.log.
+
+[verbose]: tex 'Prof-tau.tex' failed.
+[verbose]: We failed utterly to process the TeX file 'Prof-tau.tex'
+[verbose]: ~~~~~~~~~~~ Processing file 'Prof-ue.tex'
+[verbose]: 'htex' is not a valid TeX format; will ignore.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running htex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Prof-ue.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Prof-ue.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Prof-ue.log.
+
+[verbose]: tex 'Prof-ue.tex' failed.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running tex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Prof-ue.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Prof-ue.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Prof-ue.log.
+
+[verbose]: tex 'Prof-ue.tex' failed.
+[verbose]: We failed utterly to process the TeX file 'Prof-ue.tex'
+[verbose]: ~~~~~~~~~~~ Processing file 'Re-delta1.tex'
+[verbose]: 'htex' is not a valid TeX format; will ignore.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running htex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Re-delta1.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Re-delta1.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Re-delta1.log.
+
+[verbose]: tex 'Re-delta1.tex' failed.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running tex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Re-delta1.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Re-delta1.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Re-delta1.log.
+
+[verbose]: tex 'Re-delta1.tex' failed.
+[verbose]: We failed utterly to process the TeX file 'Re-delta1.tex'
+[verbose]: ~~~~~~~~~~~ Processing file 'Re-tau.tex'
+[verbose]: 'htex' is not a valid TeX format; will ignore.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running htex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Re-tau.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Re-tau.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Re-tau.log.
+
+[verbose]: tex 'Re-tau.tex' failed.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running tex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Re-tau.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Re-tau.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Re-tau.log.
+
+[verbose]: tex 'Re-tau.tex' failed.
+[verbose]: We failed utterly to process the TeX file 'Re-tau.tex'
+[verbose]: ~~~~~~~~~~~ Processing file 'SatuODE.tex'
+[verbose]: 'htex' is not a valid TeX format; will ignore.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running htex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'SatuODE.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./SatuODE.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on SatuODE.log.
+
+[verbose]: tex 'SatuODE.tex' failed.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running tex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'SatuODE.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./SatuODE.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on SatuODE.log.
+
+[verbose]: tex 'SatuODE.tex' failed.
+[verbose]: We failed utterly to process the TeX file 'SatuODE.tex'
+[verbose]: ~~~~~~~~~~~ Processing file 'SatuT.tex'
+[verbose]: 'htex' is not a valid TeX format; will ignore.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running htex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'SatuT.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./SatuT.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on SatuT.log.
+
+[verbose]: tex 'SatuT.tex' failed.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running tex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'SatuT.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./SatuT.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on SatuT.log.
+
+[verbose]: tex 'SatuT.tex' failed.
+[verbose]: We failed utterly to process the TeX file 'SatuT.tex'
+[verbose]: ~~~~~~~~~~~ Processing file 'Trans-with-shock-U.tex'
+[verbose]: 'htex' is not a valid TeX format; will ignore.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running htex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Trans-with-shock-U.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Trans-with-shock-U.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Trans-with-shock-U.log.
+
+[verbose]: tex 'Trans-with-shock-U.tex' failed.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running tex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Trans-with-shock-U.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Trans-with-shock-U.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Trans-with-shock-U.log.
+
+[verbose]: tex 'Trans-with-shock-U.tex' failed.
+[verbose]: We failed utterly to process the TeX file 'Trans-with-shock-U.tex'
+[verbose]: ~~~~~~~~~~~ Processing file 'Trans-with-shock-delta1.tex'
+[verbose]: 'htex' is not a valid TeX format; will ignore.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running htex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Trans-with-shock-delta1.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Trans-with-shock-delta1.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Trans-with-shock-delta1.log.
+
+[verbose]: tex 'Trans-with-shock-delta1.tex' failed.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running tex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Trans-with-shock-delta1.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Trans-with-shock-delta1.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Trans-with-shock-delta1.log.
+
+[verbose]: tex 'Trans-with-shock-delta1.tex' failed.
+[verbose]: We failed utterly to process the TeX file 'Trans-with-shock-delta1.tex'
+[verbose]: ~~~~~~~~~~~ Processing file 'Trans-with-shock-delta1D.tex'
+[verbose]: 'htex' is not a valid TeX format; will ignore.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running htex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Trans-with-shock-delta1D.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Trans-with-shock-delta1D.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Trans-with-shock-delta1D.log.
+
+[verbose]: tex 'Trans-with-shock-delta1D.tex' failed.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running tex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Trans-with-shock-delta1D.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Trans-with-shock-delta1D.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Trans-with-shock-delta1D.log.
+
+[verbose]: tex 'Trans-with-shock-delta1D.tex' failed.
+[verbose]: We failed utterly to process the TeX file 'Trans-with-shock-delta1D.tex'
+[verbose]: ~~~~~~~~~~~ Processing file 'Trans-with-shock.tex'
+[verbose]: 'htex' is not a valid TeX format; will ignore.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running htex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Trans-with-shock.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Trans-with-shock.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Trans-with-shock.log.
+
+[verbose]: tex 'Trans-with-shock.tex' failed.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running tex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Trans-with-shock.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Trans-with-shock.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Trans-with-shock.log.
+
+[verbose]: tex 'Trans-with-shock.tex' failed.
+[verbose]: We failed utterly to process the TeX file 'Trans-with-shock.tex'
+[verbose]: ~~~~~~~~~~~ Processing file 'Trans-with-shockD.tex'
+[verbose]: 'htex' is not a valid TeX format; will ignore.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running htex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Trans-with-shockD.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Trans-with-shockD.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Trans-with-shockD.log.
+
+[verbose]: tex 'Trans-with-shockD.tex' failed.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running tex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Trans-with-shockD.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Trans-with-shockD.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Trans-with-shockD.log.
+
+[verbose]: tex 'Trans-with-shockD.tex' failed.
+[verbose]: We failed utterly to process the TeX file 'Trans-with-shockD.tex'
+[verbose]: ~~~~~~~~~~~ Processing file 'Trans-without-shock-U.tex'
+[verbose]: 'htex' is not a valid TeX format; will ignore.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running htex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Trans-without-shock-U.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Trans-without-shock-U.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Trans-without-shock-U.log.
+
+[verbose]: tex 'Trans-without-shock-U.tex' failed.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running tex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Trans-without-shock-U.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Trans-without-shock-U.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Trans-without-shock-U.log.
+
+[verbose]: tex 'Trans-without-shock-U.tex' failed.
+[verbose]: We failed utterly to process the TeX file 'Trans-without-shock-U.tex'
+[verbose]: ~~~~~~~~~~~ Processing file 'Trans-without-shock-delta1.tex'
+[verbose]: 'htex' is not a valid TeX format; will ignore.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running htex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Trans-without-shock-delta1.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Trans-without-shock-delta1.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Trans-without-shock-delta1.log.
+
+[verbose]: tex 'Trans-without-shock-delta1.tex' failed.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running tex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Trans-without-shock-delta1.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Trans-without-shock-delta1.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Trans-without-shock-delta1.log.
+
+[verbose]: tex 'Trans-without-shock-delta1.tex' failed.
+[verbose]: We failed utterly to process the TeX file 'Trans-without-shock-delta1.tex'
+[verbose]: ~~~~~~~~~~~ Processing file 'Trans-without-shock.tex'
+[verbose]: 'htex' is not a valid TeX format; will ignore.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running htex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Trans-without-shock.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Trans-without-shock.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Trans-without-shock.log.
+
+[verbose]: tex 'Trans-without-shock.tex' failed.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running tex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'Trans-without-shock.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./Trans-without-shock.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on Trans-without-shock.log.
+
+[verbose]: tex 'Trans-without-shock.tex' failed.
+[verbose]: We failed utterly to process the TeX file 'Trans-without-shock.tex'
+[verbose]: ~~~~~~~~~~~ Processing file 'U_ESW-SW.tex'
+[verbose]: 'htex' is not a valid TeX format; will ignore.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running htex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'U_ESW-SW.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./U_ESW-SW.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on U_ESW-SW.log.
+
+[verbose]: tex 'U_ESW-SW.tex' failed.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running tex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'U_ESW-SW.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./U_ESW-SW.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on U_ESW-SW.log.
+
+[verbose]: tex 'U_ESW-SW.tex' failed.
+[verbose]: We failed utterly to process the TeX file 'U_ESW-SW.tex'
+[verbose]: ~~~~~~~~~~~ Processing file 'delta1-starting.tex'
+[verbose]: 'htex' is not a valid TeX format; will ignore.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running htex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'delta1-starting.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./delta1-starting.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on delta1-starting.log.
+
+[verbose]: tex 'delta1-starting.tex' failed.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running tex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'delta1-starting.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./delta1-starting.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on delta1-starting.log.
+
+[verbose]: tex 'delta1-starting.tex' failed.
+[verbose]: We failed utterly to process the TeX file 'delta1-starting.tex'
+[verbose]: ~~~~~~~~~~~ Processing file 'delta1_ESW-SW.tex'
+[verbose]: 'htex' is not a valid TeX format; will ignore.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running htex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'delta1_ESW-SW.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./delta1_ESW-SW.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on delta1_ESW-SW.log.
+
+[verbose]: tex 'delta1_ESW-SW.tex' failed.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running tex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'delta1_ESW-SW.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./delta1_ESW-SW.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on delta1_ESW-SW.log.
+
+[verbose]: tex 'delta1_ESW-SW.tex' failed.
+[verbose]: We failed utterly to process the TeX file 'delta1_ESW-SW.tex'
+[verbose]: ~~~~~~~~~~~ Processing file 'h_ESW-SW.tex'
+[verbose]: 'htex' is not a valid TeX format; will ignore.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running htex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'h_ESW-SW.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./h_ESW-SW.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on h_ESW-SW.log.
+
+[verbose]: tex 'h_ESW-SW.tex' failed.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running tex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'h_ESW-SW.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./h_ESW-SW.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on h_ESW-SW.log.
+
+[verbose]: tex 'h_ESW-SW.tex' failed.
+[verbose]: We failed utterly to process the TeX file 'h_ESW-SW.tex'
+[verbose]: ~~~~~~~~~~~ Processing file 'width-delta.tex'
+[verbose]: 'htex' is not a valid TeX format; will ignore.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running htex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'width-delta.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./width-delta.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on width-delta.log.
+
+[verbose]: tex 'width-delta.tex' failed.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running tex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'width-delta.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./width-delta.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on width-delta.log.
+
+[verbose]: tex 'width-delta.tex' failed.
+[verbose]: We failed utterly to process the TeX file 'width-delta.tex'
+[verbose]: ~~~~~~~~~~~ Processing file 'width-deltan.tex'
+[verbose]: 'htex' is not a valid TeX format; will ignore.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running htex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'width-deltan.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./width-deltan.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on width-deltan.log.
+
+[verbose]: tex 'width-deltan.tex' failed.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running tex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'width-deltan.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./width-deltan.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on width-deltan.log.
+
+[verbose]: tex 'width-deltan.tex' failed.
+[verbose]: We failed utterly to process the TeX file 'width-deltan.tex'
+[verbose]: ~~~~~~~~~~~ Processing file 'width-tau.tex'
+[verbose]: 'htex' is not a valid TeX format; will ignore.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running htex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'width-tau.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./width-tau.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on width-tau.log.
+
+[verbose]: tex 'width-tau.tex' failed.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running tex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'width-tau.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./width-tau.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on width-tau.log.
+
+[verbose]: tex 'width-tau.tex' failed.
+[verbose]: We failed utterly to process the TeX file 'width-tau.tex'
+[verbose]: ~~~~~~~~~~~ Processing file 'width-taun.tex'
+[verbose]: 'htex' is not a valid TeX format; will ignore.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running htex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'width-taun.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./width-taun.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on width-taun.log.
+
+[verbose]: tex 'width-taun.tex' failed.
+[verbose]: TEXMFCNF is unset.
+[verbose]: ~~~~~~~~~~~ Running tex for the first time ~~~~~~~~
+[verbose]: Running: "(export HOME=/tmp PATH=/texlive/2011/bin/arch:/bin; cd /submissions/1600860/ && tex 'width-taun.tex' < /dev/null)" 2>&1
+[verbose]: This is TeX, Version 3.1415926 (TeX Live 2011)
+(./width-taun.tex
+! Undefined control sequence.
+l.3 \makeatletter
+
+?
+! Emergency stop.
+l.3 \makeatletter
+
+No pages of output.
+Transcript written on width-taun.log.
+
+[verbose]: tex 'width-taun.tex' failed.
+[verbose]: We failed utterly to process the TeX file 'width-taun.tex'
+[error]: Unable to sucessfully process tex files.
+*** AutoTeX ABORTING ***
+
+[verbose]: AutoTeX returned error: Unable to sucessfully process tex files.
+
+[verbose]: $autotex->process failed $@: $?: 0 $!: Inappropriate ioctl for device
+[verbose]: Error running AutoTeX process:
