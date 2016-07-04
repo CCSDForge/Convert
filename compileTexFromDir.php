@@ -118,7 +118,7 @@ $bin = $compilateur -> checkTexBin();
 try {
     $fileCreated = $compilateur -> compile($bin,$dir,$tex_files,$filename);
     foreach ($fileCreated as $file => $destname) {
-        error_log("copy $temprep/$file vers, $dir/$destname");
+        # error_log("copy $temprep/$file vers, $dir/$destname");
         copy("$temprep/$file", "$dir/$destname");
         if (preg_match('/\.pdf$/', $file)) {
             $pdfCreated[] = $destname;
@@ -128,7 +128,7 @@ try {
     internalServerError($e -> getMessage());
 }
                                                    
-#recurse_rmdir($temprep);
+recurse_rmdir($temprep);
 if ( count($pdfCreated) ) {
     header('HTTP/1.1 200 OK');
     echo '<files><pdf>'.implode('</pdf><pdf>', $pdfCreated).'</pdf></files>';

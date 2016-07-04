@@ -18,7 +18,7 @@ class Ccsd_Tex_Compile {
     private $path=array();
     private static $ChrootCMD='/usr/sbin/chroot';
 
-    function __construct($texlivepath, $paths, $compildir='.',$chrootdir='', $withLogFile=true, $stopOnError=true, $debug=true) {
+    function __construct($texlivepath, $paths, $compildir='.',$chrootdir='', $withLogFile=true, $stopOnError=true, $debug=false) {
         $this -> chroot = $chrootdir;
         $this -> compileDir = $compildir;
         $this -> withLogFile = $withLogFile;
