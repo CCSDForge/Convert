@@ -43,13 +43,13 @@ class Ccsd_Compile_Test extends PHPUnit_Framework_TestCase {
     public function testValues3() {
         $compilateur = new Ccsd_Tex_Compile("/usr/local/texlive/2014", $this -> Conf, BASETEMPREP, CHROOT);
 
-        assertTrue($compilateur -> is_chrooted());
-        assertTrue($compilateur -> is_executable('/usr/local/texlive/2014/bin/i386-linux/pdflatex'), "Pb d'exe latex");
-        assertFalse($compilateur -> is_executable('/usr/local/texlive/2014/bin/i386-linux/Fooprgm'), "Pb d'exe autre");
-        assertEquals('/tmp/ccsdtex'          , $compilateur -> get_compileDir());
-        assertEquals('/latexRoot'            , $compilateur -> get_chroot());
-        assertEquals('/latexRoot/tmp/ccsdtex', $compilateur -> chrootedcompileDir());
-        assertEquals('/usr/sbin/chroot'      , $compilateur -> get_chrootcmd());
+        $this -> assertTrue($compilateur -> is_chrooted());
+        $this -> assertTrue($compilateur -> is_executable('/usr/local/texlive/2014/bin/i386-linux/pdflatex'), "Pb d'exe latex");
+        $this -> assertFalse($compilateur -> is_executable('/usr/local/texlive/2014/bin/i386-linux/Fooprgm'), "Pb d'exe autre");
+        $this -> assertEquals('/tmp/ccsdtex'          , $compilateur -> get_compileDir());
+        $this -> assertEquals('/latexRoot'            , $compilateur -> get_chroot());
+        $this -> assertEquals('/latexRoot/tmp/ccsdtex', $compilateur -> chrootedcompileDir());
+        $this -> assertEquals('/usr/sbin/chroot'      , $compilateur -> get_chrootcmd());
     }
     
     public function testCompile() {
