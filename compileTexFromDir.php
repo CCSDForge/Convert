@@ -65,7 +65,7 @@ $dir = realpath(urldecode($dirparam));
 if ( $dir == '' || !is_dir($dir) ) {
     internalServerError('Source directory not exist');
 }
-if ( !preg_match('/docs/', $dir) ) {
+if ( !preg_match('+(^/docs|/cache)/+', $dir) ) {   # /docs/... pour Hal ou  pour sc
     # Attention, il faut accepter les /docs/xx/xx/xx
     # Et les compilations de frontpage dans /docs/tmp/... 
     internalServerError('Directory is not in the accepted path scope');                                               
@@ -111,6 +111,7 @@ $compilateur =  new Ccsd_Tex_Compile($GLOBALS['texlive'], $GLOBALS, $tempchrootr
 
 $tex_files = $compilateur -> mainTexFile();
 if ( count($tex_files) == 0 ) {
+    recurse_rmdir($temprep);
     internalServerError('No TeX, LaTeX or PdfLaTeX primary source file found');
 }
 $pdfCreated = array();
@@ -127,6 +128,7 @@ try {
         }
     }
 } catch (TexCompileException $e) {
+    recurse_rmdir($temprep);
     internalServerError($e -> getMessage());
 }
                                                    
@@ -134,6 +136,7 @@ if ( count($pdfCreated) ) {
     header('HTTP/1.1 200 OK');
     echo '<files><pdf>'.implode('</pdf><pdf>', $pdfCreated).'</pdf></files>';
 } else {
+    recurse_rmdir($temprep);
     internalServerError('No pdf created');
 }
 recurse_rmdir($temprep);
