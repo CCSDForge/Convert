@@ -24,7 +24,7 @@ class Ccsd_Compile_Test extends PHPUnit_Framework_TestCase {
         
         parent::setUp();
     }
-        
+
     public function testCompile() {
         foreach (array('/docs/01/01/01/06', '/docs/01/02/01/61', '/docs/01/02/01/56') as $dir) {
             mkdir($this -> temprep, 0777, true) or exit;
@@ -40,7 +40,6 @@ class Ccsd_Compile_Test extends PHPUnit_Framework_TestCase {
             }  catch (TexCompileException $e) {
                 $this -> assertTrue(false);
             }
-        
         }
     }
 }
