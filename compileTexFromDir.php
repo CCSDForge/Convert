@@ -130,11 +130,11 @@ try {
     internalServerError($e -> getMessage());
 }
                                                    
-recurse_rmdir($temprep);
 if ( count($pdfCreated) ) {
     header('HTTP/1.1 200 OK');
     echo '<files><pdf>'.implode('</pdf><pdf>', $pdfCreated).'</pdf></files>';
 } else {
     internalServerError('No pdf created');
 }
+recurse_rmdir($temprep);
 exit;
