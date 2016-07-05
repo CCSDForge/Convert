@@ -63,12 +63,12 @@ if ( $dirparam == '' ) {
 // Répertoire des fichiers sources
 $dir = realpath(urldecode($dirparam));
 if ( $dir == '' || !is_dir($dir) ) {
-    internalServerError('Source directory not exist');
+    internalServerError("Source directory '$dir' not exist");
 }
 if ( !preg_match('+(^/docs|/cache)/+', $dir) ) {   # /docs/... pour Hal ou  pour sc
     # Attention, il faut accepter les /docs/xx/xx/xx
     # Et les compilations de frontpage dans /docs/tmp/... 
-    internalServerError('Directory is not in the accepted path scope');                                               
+    internalServerError("Directory '$dir' is not in the accepted path scope");                                               
 }
 $dir .= DIRECTORY_SEPARATOR;
 
