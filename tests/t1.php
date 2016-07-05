@@ -25,6 +25,33 @@ class Ccsd_Compile_Test extends PHPUnit_Framework_TestCase {
         parent::setUp();
     }
 
+    public function testValues1() {
+        $compilateur = new Ccsd_Tex_Compile("/usr/local/texlive/2014", $Conf, '.', '');
+        $this -> assertNotEmpty($compilateur -> check_for_compilation_error('f1'));
+        $this -> assertTrue($compilateur -> check_for_bad_citation('f1'));
+        $this -> assertFalse($compilateur -> check_for_bad_natbib('f1'));
+
+    }
+
+    public function testValues2() {
+        $compilateur = new Ccsd_Tex_Compile("/usr/local/texlive/2014", $Conf, __DIR__.'/exemple1', '');
+        $this -> assertEqual( __DIR__.'/exemple1', $compilateur -> chrootedcompileDir());
+        $this -> assertEqual('latex',$compilateur -> checkTexBin(), "Pb pour determiner le type du fichier tex 1");
+        $this -> assertEqual(__DIR__.'/exemple1', $compilateur -> get_compileDir());
+    }
+
+    public function testValues3() {
+        $compilateur = new Ccsd_Tex_Compile("/usr/local/texlive/2014", $Conf, BASETEMPREP, CHROOT);
+
+        assertTrue($compilateur -> is_chrooted());
+        assertTrue($compilateur -> is_executable('/usr/local/texlive/2014/bin/i386-linux/pdflatex'), "Pb d'exe latex");
+        assertFalse($compilateur -> is_executable('/usr/local/texlive/2014/bin/i386-linux/Fooprgm'), "Pb d'exe autre");
+        assertEqual('/tmp/ccsdtex'          , $compilateur -> get_compileDir());
+        assertEqual('/latexRoot'            , $compilateur -> get_chroot());
+        assertEqual('/latexRoot/tmp/ccsdtex', $compilateur -> chrootedcompileDir());
+        assertEqual('/usr/sbin/chroot'      , $compilateur -> get_chrootcmd());
+    }
+    
     public function testCompile() {
         foreach (array('/docs/01/01/01/06', '/docs/01/02/01/61', '/docs/01/02/01/56') as $dir) {
             mkdir($this -> temprep, 0777, true) or exit;
@@ -35,11 +62,46 @@ class Ccsd_Compile_Test extends PHPUnit_Framework_TestCase {
             $tex_files = $this -> compilateur -> mainTexFile();
             try {
                 $pdfCreated = $this -> compilateur -> compile($bin,$dir,$tex_files,'');
-                var_dump($pdfCreated);
                 $this -> assertTrue(true);
             }  catch (TexCompileException $e) {
                 $this -> assertTrue(false);
             }
+            recurse_rmdir($this -> temprep);
+        }
+    }
+
+    public function testCompile2() {
+        foreach (array('/docs/01/10/08/11') as $dir) {
+            mkdir($this -> temprep, 0777, true) or exit;
+            recurse_copy($dir, $this -> temprep, false);
+            recurse_unzip($this -> temprep);
+            chdir($this -> temprep);
+            $bin = $this -> compilateur -> checkTexBin();
+            $tex_files = $this -> compilateur -> mainTexFile();
+            try {
+                $pdfCreated = $this -> compilateur -> compile($bin,$dir,$tex_files,'');
+                $this -> assertTrue(false);
+            }  catch (TexCompileException $e) {
+                $this -> assertTrue(true);
+            }
+            recurse_rmdir($this -> temprep);
+        }
+    }
+    public function testCompile3() {
+        foreach (array('/docs/preprod/01/00/04/28', '/docs/preprod/01/00/07/98', '/docs/preprod/01/00/19/84') as $dir) {
+            mkdir($this -> temprep, 0777, true) or exit;
+            recurse_copy($dir, $this -> temprep, false);
+            recurse_unzip($this -> temprep);
+            chdir($this -> temprep);
+            $bin = $this -> compilateur -> checkTexBin();
+            $tex_files = $this -> compilateur -> mainTexFile();
+            try {
+                $pdfCreated = $this -> compilateur -> compile($bin,$dir,$tex_files,'');
+                $this -> assertTrue(true);
+            }  catch (TexCompileException $e) {
+                $this -> assertTrue(false);
+            }
+            recurse_rmdir($this -> temprep);
         }
     }
 }
