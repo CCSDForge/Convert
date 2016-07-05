@@ -71,6 +71,7 @@ class Ccsd_Compile_Test extends PHPUnit_Framework_TestCase {
     }
 
     public function testCompile2() {
+        # Tests devant echouer... normalement
         foreach (array('/docs/01/10/08/11') as $dir) {
             mkdir($this -> temprep, 0777, true) or exit;
             recurse_copy($dir, $this -> temprep, false);
