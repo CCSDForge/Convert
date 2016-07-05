@@ -66,6 +66,8 @@ if ( $dir == '' || !is_dir($dir) ) {
     internalServerError('Source directory not exist');
 }
 if ( !preg_match('/docs/', $dir) ) {
+    # Attention, il faut accepter les /docs/xx/xx/xx
+    # Et les compilations de frontpage dans /docs/tmp/... 
     internalServerError('Directory is not in the accepted path scope');                                               
 }
 $dir .= DIRECTORY_SEPARATOR;
