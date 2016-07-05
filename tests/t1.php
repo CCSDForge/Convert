@@ -26,7 +26,7 @@ class Ccsd_Compile_Test extends PHPUnit_Framework_TestCase {
     }
 
     public function testValues1() {
-        $compilateur = new Ccsd_Tex_Compile("/usr/local/texlive/2014", $Conf, '.', '');
+        $compilateur = new Ccsd_Tex_Compile("/usr/local/texlive/2014", $this -> Conf, '.', '');
         $this -> assertNotEmpty($compilateur -> check_for_compilation_error('f1'));
         $this -> assertTrue($compilateur -> check_for_bad_citation('f1'));
         $this -> assertFalse($compilateur -> check_for_bad_natbib('f1'));
@@ -34,14 +34,14 @@ class Ccsd_Compile_Test extends PHPUnit_Framework_TestCase {
     }
 
     public function testValues2() {
-        $compilateur = new Ccsd_Tex_Compile("/usr/local/texlive/2014", $Conf, __DIR__.'/exemple1', '');
+        $compilateur = new Ccsd_Tex_Compile("/usr/local/texlive/2014", $this -> Conf, __DIR__.'/exemple1', '');
         $this -> assertEqual( __DIR__.'/exemple1', $compilateur -> chrootedcompileDir());
         $this -> assertEqual('latex',$compilateur -> checkTexBin(), "Pb pour determiner le type du fichier tex 1");
         $this -> assertEqual(__DIR__.'/exemple1', $compilateur -> get_compileDir());
     }
 
     public function testValues3() {
-        $compilateur = new Ccsd_Tex_Compile("/usr/local/texlive/2014", $Conf, BASETEMPREP, CHROOT);
+        $compilateur = new Ccsd_Tex_Compile("/usr/local/texlive/2014", $this -> Conf, BASETEMPREP, CHROOT);
 
         assertTrue($compilateur -> is_chrooted());
         assertTrue($compilateur -> is_executable('/usr/local/texlive/2014/bin/i386-linux/pdflatex'), "Pb d'exe latex");
