@@ -1,8 +1,16 @@
 <?php
 
+/* 
+   Utilitaire de compilation latex
+   Auteur: B Marmol a partir du code de L Capelli/Y Barborini...
+   Jul 2016
+   Permet la compilation en environnement Chroot ou non/
+   Le repertoire src des fichiers n'est accede qu'en lecture
+ */
+
 class TexCompileException extends Exception {
     public $logfile;
-    
+
     function __construct($msg, $file = null) {
         parent::__construct($msg);
         $this->logfile =  $file;
@@ -24,7 +32,7 @@ class Ccsd_Tex_Compile {
         $this -> withLogFile = $withLogFile;
         $this -> stopOnError = $stopOnError;
         $this -> debug = $debug;
-        
+
         foreach ($paths as $type => $cmd) {
             if (preg_match('/tex|latex|pdflatex|bibtex|makeindex|dvips|ps2pdf/',$type)) {
                 if (preg_match('+^/+', $cmd)) {
@@ -36,7 +44,7 @@ class Ccsd_Tex_Compile {
         }
         putenv("TEXMFVAR=$texlivepath/texmf-var");
         putenv("PATH=$texlivepath/bin/i386-linux/:/usr/bin/:/bin");
-        
+
     }
 
     function debug($msg) {
@@ -77,7 +85,7 @@ class Ccsd_Tex_Compile {
         }
         return (is_executable($binpath));
     }
-    
+
     function runCmd($cmd) {
         $shellcmd = "cd  " . $this->get_compileDir() .";$cmd";
         $chrootcmd=$this -> get_chrootcmd();
@@ -163,8 +171,7 @@ class Ccsd_Tex_Compile {
         return $tex_files;
     }
 
-    
-    /* 
+    /*
      * Determine le type du fichier tex pour savoir si on lance latex, pdflatex, tex ou xelatex
      * Bon, le dernier a affecter la valeur a raison!
      */
@@ -200,7 +207,7 @@ class Ccsd_Tex_Compile {
      * Si bool est vrai, la valeur de retour est un booleen (vrai si trouve, faux si pas trouve)
      * Si bool est faux, alors la ligne matchant est retourne, chaine vide en cas d'echec
      * La valeur de retour chaine est filtrer en supprimant les caracteres du tableau $filter
-     * $option correspond aux options de la fonction php: file() 
+     * $option correspond aux options de la fonction php: file()
      */
     static function check_for_line($file, $pattern, $bool=false, $option=null, $filter = array("'", '"', '`')) {
         if ($option == null) {
@@ -226,23 +233,23 @@ class Ccsd_Tex_Compile {
     static function check_for_compilation_error($file) {
         return self::check_for_line($file.'.log','/latex error|found error:|dvips error|emergency stop|Undefined control sequence/');
     }
-    
+
     static function check_for_bad_citation($file) {
         return self::check_for_line($file.'.log', '/Warning: (Citation.*undefined|.*undefined citations)/', true);
     }
-    
+
     static function check_for_bad_natbib($file) {
         return self::check_for_line($file.'.log', '/^! Package natbib Error/', true);
     }
-    
+
     static function check_for_bad_reference($file) {
         return self::check_for_line($file.'.log', '/Warning: Reference.*&quot;/', true) ;
     }
-    
+
     static function check_for_reference_change($file) {
         return self::check_for_line($file.'.log', '/Rerun/', true);
     }
-    
+
     static function check_for_bibtex_errors($file) {
         return self::check_for_line($file.'.blg', '/error message/', true);
     }
@@ -254,7 +261,7 @@ class Ccsd_Tex_Compile {
         if ( is_file($file.'.log') ) {
             foreach ( file($file.'.log', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line ) {
                 if ( preg_match('/^No file (.*)\./', $line, $match) || preg_match('/File (.*) not found\./', $line, $match) ) {
-                    if ( preg_match('/[\"\`\']?'.$file.'[\'\`\"]?\.(aux|bbl|ind|toc|brf|lof|lot)/', $match[1]) ) {  
+                    if ( preg_match('/[\"\`\']?'.$file.'[\'\`\"]?\.(aux|bbl|ind|toc|brf|lof|lot)/', $match[1]) ) {
                         continue;
                     }
                     return str_replace(array("'", '"', '`'), '', $match[1]);
@@ -298,7 +305,7 @@ class Ccsd_Tex_Compile {
             $makeindex = $this -> maybeRunMakeindex($main_tex_file);
             // BibTeX, Citations resolved
             $bibtex = $this -> maybeRunBibtex($main_tex_file);
-               
+
             if ( $this -> stopOnError() && is_file($main_tex_file.'.bib') && $this -> check_for_bibtex_errors($main_tex_file) ) {
                 throw new TexCompileException('Bibtex reported an error for the compilation of '.$main_tex_file);
             }
@@ -308,7 +315,7 @@ class Ccsd_Tex_Compile {
             $this -> check_for_reference_change($main_tex_file) and $this -> runTex($bin, $main_tex_file);
 
             # Recuperation des logs Latex
-            
+
             if ( $this -> withLogFile() && is_file($main_tex_file.'.log') && filesize($main_tex_file.'.log') > 0 ) {
                 $logfile = $main_tex_file.'.log';
             }
@@ -324,22 +331,22 @@ class Ccsd_Tex_Compile {
             $this -> dvi2pdf($main_tex_file);
 
 
-            // Partie a remettre apres la compilation car elle a un effet de bord en dehors de la compilation
+            // Preparation de la valeur de retour:
+            //  ==> L'ensemble des fichiers construits interessants (log, bbl, pdf)
             if ($logfile) {
-                $pdfCreated[$logfile] = $logfile;
+                $filesCreated[$logfile] = $logfile;
             }
-            // Copy pdf compiled file
             if ( is_file($main_tex_file.'.pdf') ) {
                 $out = ( count($tex_files) == 1 && ($filename != '') ) ? $filename :  $main_tex_file.'.pdf';
-                $pdfCreated[$main_tex_file.'.pdf'] = $out;
+                $filesCreated[$main_tex_file.'.pdf'] = $out;
                 if ( $this -> withLogFile() && is_file($main_tex_file.'.bbl') && filesize($main_tex_file.'.bbl') > 0 ) {
-                    $pdfCreated[$main_tex_file.'.bbl'] = $main_tex_file.'.bbl';
+                    $filesCreated[$main_tex_file.'.bbl'] = $main_tex_file.'.bbl';
                 }
             } else {
-                throw new TexCompileException('Could not find or save pdf file for the compilation of '.$main_tex_file, $logfile );
+                throw new TexCompileException('Could not find pdf file for the compilation of '.$main_tex_file, $logfile );
             }
         }
-        return($pdfCreated); 
+        return($filesCreated);
     }
 }
 
@@ -358,6 +365,14 @@ function unlinkTexTmp($file) {
 	return true;
 };
 
+/*
+ * Copie recursivement $src vers $dst
+ * Valeur de retour: true si ok, false si une copy a generee une erreur.
+ * Attention:
+ *    Les liens symboliques pointant en relatif a l'exterieur de $src seront faux
+ *    Les liens symboliques pointant en absolus a l'interieur de la zone seront faux
+ */
+
 function recurse_copy($src, $dst, $create=true) {
     $copy = true;
     $dir = opendir($src);
@@ -365,12 +380,13 @@ function recurse_copy($src, $dst, $create=true) {
         @mkdir($dst);
     }
     while(false !== ( $file = readdir($dir) ) ) {
-        if ( ( $file != '.' ) && ( $file != '..' ) ) {
-            if ( is_dir($src . DIRECTORY_SEPARATOR . $file) ) {
-                $copy = $copy && recurse_copy($src . DIRECTORY_SEPARATOR . $file, $dst . DIRECTORY_SEPARATOR . $file);
-            } else {
-                $copy = $copy && copy($src . DIRECTORY_SEPARATOR . $file, $dst . DIRECTORY_SEPARATOR . $file);
-            }
+        if ( ( $file == '.' ) || ( $file == '..' ) ) {
+            continue;
+        }
+        if ( is_dir($src . DIRECTORY_SEPARATOR . $file) ) {
+            $copy = $copy && recurse_copy($src . DIRECTORY_SEPARATOR . $file, $dst . DIRECTORY_SEPARATOR . $file);
+        } else {
+            $copy = $copy && copy($src . DIRECTORY_SEPARATOR . $file, $dst . DIRECTORY_SEPARATOR . $file);
         }
     }
     closedir($dir);
@@ -378,8 +394,10 @@ function recurse_copy($src, $dst, $create=true) {
 }
 
 function recurse_rmdir($dir) {
-    $files = array_diff(scandir($dir), array('.','..'));
-    foreach ($files as $file) {
+    foreach (scandir($dir) as $file) {
+        if ( ( $file == '.' ) || ( $file == '..' ) ) {
+            continue;
+        }
         (is_dir($dir.DIRECTORY_SEPARATOR.$file)) ? recurse_rmdir($dir.DIRECTORY_SEPARATOR.$file) : unlink($dir.DIRECTORY_SEPARATOR.$file);
     }
     return rmdir($dir);
