@@ -141,6 +141,12 @@ try {
         }
     }
 } catch (TexCompileException $e) {
+    // Recuperation des log en cas d'erreur!
+    $logfile = $e -> logfile;
+    error_log("$tempchrootrep ne compile pas avec retour $logfile");
+    if (isset($logfile) && file_exists($logfile)) {
+        copy("$temprep/$logfile", "$dir/$logfile");
+    }
     recurse_rmdir($temprep);
     internalServerError($e -> getMessage());
 }
