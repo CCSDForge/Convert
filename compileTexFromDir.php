@@ -1,5 +1,18 @@
 <?php
 
+/*
+  En entree, la requete est:
+    de type POST
+    parametres:
+       - dir: (commence par  /docs/ ou /cache)
+       - source: 
+       - stopOnError: 
+       - withLogFile: 
+       - fileName: 
+
+ */
+
+
 include "tex.php";
 
 ini_set("memory_limit","-1");
@@ -42,7 +55,7 @@ $GLOBALS['chroot']    = "/usr/sbin/chroot";
 
 function internalServerError($msg) {
     header('HTTP/1.1 500 Internal Server Error');
-    error_log($msg);
+    # error_log($msg);
     echo $msg;
     exit;
 }
@@ -107,7 +120,7 @@ recurse_unzip($temprep);
 chdir($temprep);
 // recherche des fichiers à compiler
 
-$compilateur =  new Ccsd_Tex_Compile($GLOBALS['texlive'], $GLOBALS, $tempchrootrep, CHROOT);
+$compilateur =  new Ccsd_Tex_Compile($GLOBALS['texlive'], $GLOBALS, $tempchrootrep, CHROOT, $withLogFile, $stopOnError);
 
 $tex_files = $compilateur -> mainTexFile();
 if ( count($tex_files) == 0 ) {
