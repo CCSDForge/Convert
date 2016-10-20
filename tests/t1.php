@@ -122,4 +122,21 @@ class Ccsd_Compile_Test extends PHPUnit_Framework_TestCase {
             recurse_rmdir($this -> temprep);
         }
     }
+    public function testCompile5() {
+        foreach (array('/docs/01/37/67/31') as $dir) {
+            mkdir($this -> temprep, 0777, true) or exit;
+            recurse_copy($dir, $this -> temprep, false);
+            recurse_unzip($this -> temprep);
+            chdir($this -> temprep);
+            $bin = $this -> compilateur -> checkTexBin();
+            $tex_files = $this -> compilateur -> mainTexFile();
+            try {
+                $pdfCreated = $this -> compilateur -> compile($bin,$dir,$tex_files,'');
+                $this -> assertTrue(true);
+            }  catch (TexCompileException $e) {
+                $this -> assertTrue(false);
+            }
+            recurse_rmdir($this -> temprep);
+        }
+    }
 }
