@@ -154,10 +154,14 @@ class Ccsd_Tex_Compile {
 
     function mainTexFile() {
         $tex_files = array();
+        $only_one_file = '';
+        $nbr_tex_file = 0;
         foreach ( new RecursiveIteratorIterator( new RecursiveDirectoryIterator($this->chrootedcompileDir()) ) as $file ) {
             $filename = $file->getFilename(); // seulement le nom final: mieux pour tester l'extension
             $pathname = $file->getPathname();
             if ( $file->isFile() && preg_match('/\.tex$/i', $filename) ) {
+                $nbr_tex_file++;
+                $only_one_file = $filename;
                 foreach ( file($pathname, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line ) {
                     if ( preg_match('/^\s*(\\\\begin\s*{document}|\\\\bye\s*$|\\\\end\s*$|\\\\documentstyle)/', $line) && !in_array($filename, $tex_files) ) {
                         $tex_files[] = $filename;
@@ -167,6 +171,11 @@ class Ccsd_Tex_Compile {
                     }
                 }
             }
+        }
+        if (($nbr_tex_file == 1) && (count($tex_files) == 0)) {
+            # Seulement un fichier tex et il n'a pas ete detecte...
+            # On le prends quand meme
+            $tex_files[] = $only_one_file;
         }
         return $tex_files;
     }
@@ -274,6 +283,7 @@ class Ccsd_Tex_Compile {
 
     function compile($bin, $fromdir, $tex_files, $filename) {
         $destdir = $this -> chrootedcompileDir();
+        $filesCreated = array();
         foreach ( $tex_files as $tex_file ) {
             $this -> debug("Treat file: $tex_file");
             $logfile=null;
