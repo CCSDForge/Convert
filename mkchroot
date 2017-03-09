@@ -1,7 +1,8 @@
 #!/bin/bash
-#Author: Patrice Ferlet <metal3d _at_ copix.org>
-#Licence: GPL v2
+# Author: Patrice Ferlet <metal3d _at_ copix.org>
+# Licence: GPL v2
 #
+# Modify by B Marmol <Bruno.Marmol _at_ inria.fr> for it's own use
 usage=<< EOF
 Usage: 
     $0 target_dir [commands]
@@ -26,9 +27,16 @@ Example:
 EOF
 
 nocopydir=0
-BINS="bash env ls cat more gs ps2pdf14 ps2pdfwr dirname basename grep"
+BINS="bash env ls cat more gs ps2pdf14 ps2pdfwr dirname basename grep ldconfig ldconfig.real dash sh"
 
-while getopts "cd:t:" opt; do
+case `hostname` in
+    ccsdlatex*) TREES="/usr/share/ghostscript";;
+    *) TREES="/usr/local/texlive /usr/share/ghostscript";;
+esac
+
+# ----------------------------------------------------------------------
+# Argument control
+while getopts "cd:t:h" opt; do
     case $opt in
     	 d) DIRS="$DIRS $OPTARG";;
 	 c) nocopydir=1;;
@@ -43,12 +51,12 @@ for arg ; do
     BINS="$BINS $arg"
 done
 
-
 if [[ "$TARGET" == "" ]];then 
-    echo "target dirctory needed"
+    echo "target directory needed"
     exit 1
 fi
 
+# ----------------------------------------------------------------------
 #on vérifie que le chroot n'existe pas
 if [[ -d $TARGET  ]]; then
     echo "$TARGET existe, voulez vous le vider avant de recréer le chroot (o/N)?"
@@ -60,17 +68,18 @@ if [[ -d $TARGET  ]]; then
         rm -rf $TARGET
     fi
 fi
- 
 
 echo "Création du chroot en cours... merci de patienter"
 
-#crée le répertoire et récupère le chemin absolu
+# ----------------------------------------------------------------------
+# crée le répertoire et récupère le chemin absolu
 mkdir -p $TARGET > /dev/null 2>&1
 pushd $TARGET > /dev/null 2>&1
 TARGET=`pwd`
 popd > /dev/null 2>&1
 
-#pour chaque commande à copier
+# ----------------------------------------------------------------------
+# pour chaque commande à copier
 for basecommand in $BINS
 do
     #recherche relative des binaire qui correspondent
@@ -94,31 +103,34 @@ do
     done
 done
 
+# ----------------------------------------------------------------------
+# pour chaque arborescence a copier
 [ $nocopydir -eq 0 ] && { 
     echo "Copy needed filesystem path"
-    for dir in /usr/local/texlive /usr/share/ghostscript /etc/fonts /usr/share/fonts/; do
+    for dir in $TREES; do
 	dirname=`dirname $dir`
 	rsync -ar  $dir $TARGET$dirname
     done
 }
 
-mkdir $TARGET/home 2>/dev/null
-mkdir $TARGET/etc 2>/dev/null
+# ----------------------------------------------------------------------
+# Create special nodes and absolutely necessary things
+rmdir $TARGET/home 2> /dev/null ;  mkdir $TARGET/home 2>/dev/null
+rmdir $TARGET/etc  2> /dev/null ;  mkdir $TARGET/etc 2>/dev/null
 cp /etc/ld.so.conf $TARGET/etc/
 mkdir $TARGET/etc/ld.so.conf.d 2>/dev/null
 cp /etc/ld.so.conf.d/freetype.conf $TARGET/etc/ld.so.conf.d/
 
+# On crée le noeud /dev/null 
+[ -d  $TARGET/dev ]         || mkdir $TARGET/dev
+[ -e $TARGET/dev/null ]     || mknod $TARGET/dev/null c 1 3
+# et les périphériques de randomisation
+[ -e $TARGET/dev/random  ]  || mknod -m 0444 $TARGET/dev/random c 1 8
+[ -e $TARGET/dev/urandom  ] || mknod -m 0444 $TARGET/dev/urandom c 1 9
 
 mkdir -p $TARGET/tmp/ccsdtex > /dev/null 2>&1
 mkdir $TARGET/home/nobody 2>/dev/null
 chown nobody $TARGET/tmp/ccsdtex $TARGET/home/nobody
-
-#On crée le noeud /dev/null 
-mkdir $TARGET/dev
-mknod $TARGET/dev/null c 1 3
-#et les périphériques de randomisation
-mknod -m 0444 $TARGET/dev/random c 1 8
-mknod -m 0444 $TARGET/dev/urandom c 1 9
 
 chroot $TARGET ldconfig
 
