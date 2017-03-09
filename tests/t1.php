@@ -2,6 +2,10 @@
 
 define('BASETEMPREP', '/tmp/ccsdtex');
 define('CHROOT', '/latexRoot');
+define('LATEX', '/usr/local/texlive/2016');     # Latex courant
+define('LATEX2016', '/usr/local/texlive/2016'); # Latex version fixe 2016
+define('LATEX2014', '/usr/local/texlive/2014'); # Latex version fixe 2014
+
 require __DIR__ . "/../tex.php";
 
 class Ccsd_Compile_Test extends PHPUnit_Framework_TestCase {
@@ -10,7 +14,7 @@ class Ccsd_Compile_Test extends PHPUnit_Framework_TestCase {
         $this -> tempchrootrep = BASETEMPREP.DIRECTORY_SEPARATOR.uniqid().DIRECTORY_SEPARATOR;
         $this -> temprep = CHROOT.$this -> tempchrootrep;
         $this -> pdfCreated = array();
-        $this -> Conf['texlive']   = "/usr/local/texlive/2014";
+        $this -> Conf['texlive']   = LATEX;
         $this -> Conf['tex']       = "tex -interaction=nonstopmode";
         $this -> Conf['latex']     = "latex -interaction=nonstopmode";
         $this -> Conf['pdflatex']  = "pdflatex -interaction=nonstopmode";
@@ -19,14 +23,13 @@ class Ccsd_Compile_Test extends PHPUnit_Framework_TestCase {
         $this -> Conf['dvips']     = "dvips -q -Ptype1";
         $this -> Conf['ps2pdf']    = "/usr/bin/ps2pdf14";
         $this -> Conf['chroot']    = "/usr/sbin/chroot";
-        $this -> compilateur = new Ccsd_Tex_Compile("/usr/local/texlive/2014", $this -> Conf, $this -> tempchrootrep, CHROOT);
-        
+        $this -> compilateur = new Ccsd_Tex_Compile(LATEX, $this -> Conf, $this -> tempchrootrep, CHROOT);
         
         parent::setUp();
     }
 
     public function testValues1() {
-        $compilateur = new Ccsd_Tex_Compile("/usr/local/texlive/2014", $this -> Conf, '.', '');
+        $compilateur = new Ccsd_Tex_Compile(LATEX, $this -> Conf, '.', '');
         $this -> assertNotEmpty($compilateur -> check_for_compilation_error('f1'));
         $this -> assertTrue($compilateur -> check_for_bad_citation('f1'));
         $this -> assertFalse($compilateur -> check_for_bad_natbib('f1'));
@@ -34,18 +37,18 @@ class Ccsd_Compile_Test extends PHPUnit_Framework_TestCase {
     }
 
     public function testValues2() {
-        $compilateur = new Ccsd_Tex_Compile("/usr/local/texlive/2014", $this -> Conf, __DIR__.'/exemple1', '');
+        $compilateur = new Ccsd_Tex_Compile(LATEX, $this -> Conf, __DIR__.'/exemple1', '');
         $this -> assertEquals( __DIR__.'/exemple1', $compilateur -> chrootedcompileDir());
         $this -> assertEquals('latex',$compilateur -> checkTexBin(), "Pb pour determiner le type du fichier tex 1");
         $this -> assertEquals(__DIR__.'/exemple1', $compilateur -> get_compileDir());
     }
 
     public function testValues3() {
-        $compilateur = new Ccsd_Tex_Compile("/usr/local/texlive/2014", $this -> Conf, BASETEMPREP, CHROOT);
+        $compilateur = new Ccsd_Tex_Compile(LATEX, $this -> Conf, BASETEMPREP, CHROOT);
 
         $this -> assertTrue($compilateur -> is_chrooted());
-        $this -> assertTrue($compilateur -> is_executable('/usr/local/texlive/2014/bin/i386-linux/pdflatex'), "Pb d'exe latex");
-        $this -> assertFalse($compilateur -> is_executable('/usr/local/texlive/2014/bin/i386-linux/Fooprgm'), "Pb d'exe autre");
+        $this -> assertTrue($compilateur -> is_executable(LATEX . '/bin/i386-linux/pdflatex'), "Pb d'exe latex");
+        $this -> assertFalse($compilateur -> is_executable(LATEX . '/bin/i386-linux/Fooprgm'), "Pb d'exe autre");
         $this -> assertEquals('/tmp/ccsdtex'          , $compilateur -> get_compileDir());
         $this -> assertEquals('/latexRoot'            , $compilateur -> get_chroot());
         $this -> assertEquals('/latexRoot/tmp/ccsdtex', $compilateur -> chrootedcompileDir());
