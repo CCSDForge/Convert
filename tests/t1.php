@@ -15,10 +15,10 @@ class Ccsd_Compile_Test extends PHPUnit_Framework_TestCase {
         $arch = php_uname('m');
         if ($arch == 'x86_64') {
             $this -> Conf['ARCH'] = 'x86_64-linux';
-            $this -> Conf['TEXLIVEVERSION'] = '2016');
+            $this -> Conf['TEXLIVEVERSION'] = '2016';
         } else {
             $this -> Conf['ARCH'] = 'i386-linux');
-            $this -> Conf['TEXLIVEVERSION'] = '2014');
+            $this -> Conf['TEXLIVEVERSION'] = '2014';
         }
 
         $this -> tempchrootrep = BASETEMPREP.DIRECTORY_SEPARATOR.uniqid().DIRECTORY_SEPARATOR;
