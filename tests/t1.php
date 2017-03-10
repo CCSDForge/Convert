@@ -49,8 +49,8 @@ class Ccsd_Compile_Test extends PHPUnit_Framework_TestCase {
 
         
         $this -> assertTrue($compilateur -> is_chrooted());
-        $this -> assertTrue($compilateur -> is_executable(LATEX . '/bin/' . $this -> Arch . '/pdflatex'), "Pb d'exe latex");
-        $this -> assertFalse($compilateur -> is_executable(LATEX . '/bin/' . $this -> Arch . '/Fooprgm'), "Pb d'exe autre");
+        $this -> assertTrue($compilateur -> is_executable(LATEX . '/bin/' . $compilateur -> Arch . '/pdflatex'), "Pb d'exe latex");
+        $this -> assertFalse($compilateur -> is_executable(LATEX . '/bin/' . $compilateur -> Arch . '/Fooprgm'), "Pb d'exe autre");
         $this -> assertEquals('/tmp/ccsdtex'          , $compilateur -> get_compileDir());
         $this -> assertEquals('/latexRoot'            , $compilateur -> get_chroot());
         $this -> assertEquals('/latexRoot/tmp/ccsdtex', $compilateur -> chrootedcompileDir());
