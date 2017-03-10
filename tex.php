@@ -32,17 +32,26 @@ class Ccsd_Tex_Compile {
         $this -> stopOnError = $stopOnError;
         $this -> debug = $debug;
 
+        $arch = php_uname('m');
+        if ($arch == 'x86_64') {
+            $this -> Arch = 'x86_64-linux';
+            $this -> Texversion= '2016';
+        } else {
+            $this -> Arch = 'i386-linux';
+            $this -> Texversion = '2014';
+        }
+
         foreach ($paths as $type => $cmd) {
             if (preg_match('/tex|latex|pdflatex|bibtex|makeindex|dvips|ps2pdf/',$type)) {
                 if (preg_match('+^/+', $cmd)) {
                     $this -> path[$type] = $cmd;
                 } else {
-                    $this -> path[$type] = $texlivepath . '/bin/i386-linux/' . $cmd;
+                    $this -> path[$type] = $texlivepath . '/bin/' . $this -> Arch . '/' . $cmd;
                 }
             }
         }
         putenv("TEXMFVAR=$texlivepath/texmf-var");
-        putenv("PATH=$texlivepath/bin/i386-linux/:/usr/bin/:/bin");
+        putenv("PATH=$texlivepath/bin/" . $this -> Arch . "/:/usr/bin/:/bin");
 
     }
 
