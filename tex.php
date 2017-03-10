@@ -22,7 +22,6 @@ class Ccsd_Tex_Compile {
     private $compileDir;
     private $stopOnError;
     private $withLogFile;
-    private $MyLogFile;
     private $path=array();
     private static $ChrootCMD='/usr/sbin/chroot';
 
@@ -77,11 +76,10 @@ class Ccsd_Tex_Compile {
     # Comme is_executable mais ajoute le prefix de chroot si necessaire
     # Cmd est une ligne de commande avec argument, on retire les arguments
     function is_executable($cmd) {
-        $chroot = $this ->chroot;
         if ( strpos($cmd, ' ') >0) {
-            $binpath=$chroot . substr($cmd, 0, strpos($cmd, ' '));
+            $binpath=$this ->chroot . substr($cmd, 0, strpos($cmd, ' '));
         } else {
-            $binpath=$chroot . $cmd;
+            $binpath=$this ->chroot . $cmd;
         }
         return (is_executable($binpath));
     }
@@ -95,9 +93,9 @@ class Ccsd_Tex_Compile {
         } else {
             $chrootedcmd = $cmd;
         }
-        # $this -> debug("Run: $chrootedcmd  in  " . getcwd());
+
         @exec($chrootedcmd, $output);
-        # $this -> debug(implode($output));
+
         return ($output);
     }
 
@@ -106,7 +104,7 @@ class Ccsd_Tex_Compile {
         if ( $this->is_executable($cmd) ) {
             $latexcmd = $cmd." ".escapeshellarg($file);
             $output = $this->runCmd($latexcmd);
-            return ( count($output) ) ? true : false;
+            return (count($output) > 0);
         }
         return false;
     }
@@ -213,6 +211,7 @@ class Ccsd_Tex_Compile {
 
     /*
      * Chercher dans file le pattern
+     *       file est soit un tableau de ligne, soit un nom de fichier
      * Si bool est vrai, la valeur de retour est un booleen (vrai si trouve, faux si pas trouve)
      * Si bool est faux, alors la ligne matchant est retourne, chaine vide en cas d'echec
      * La valeur de retour chaine est filtrer en supprimant les caracteres du tableau $filter
@@ -222,6 +221,7 @@ class Ccsd_Tex_Compile {
         if ($option == null) {
             $option=FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES;
         }
+        $content=[];
         if ( is_array($file)) {
             $content = $file;
         } elseif (is_file($file) ) {
@@ -230,13 +230,13 @@ class Ccsd_Tex_Compile {
         foreach ($content as $line) {
             if ( preg_match($pattern, $line)) {
                 if ($filter) {
-                    return $bool ? true : str_replace($filter, '', $line);
+                    return $bool || str_replace($filter, '', $line);
                 } else {
-                    return $bool ? true : $line;
+                    return $bool || $line;
                 }
             }
         }
-        return $bool ? false : '';
+        return !$bool && '';
     }
 
     static function check_for_compilation_error($file) {
@@ -282,7 +282,6 @@ class Ccsd_Tex_Compile {
     }
 
     function compile($bin, $fromdir, $tex_files, $filename) {
-        $destdir = $this -> chrootedcompileDir();
         $filesCreated = array();
         foreach ( $tex_files as $tex_file ) {
             $this -> debug("Treat file: $tex_file");
@@ -291,7 +290,7 @@ class Ccsd_Tex_Compile {
             // compilation
             unlinkTexTmp($main_tex_file);
             // Premiere compilation
-            if ( $this -> runTex($bin, $main_tex_file) == false ) {
+            if ( !$this -> runTex($bin, $main_tex_file)) {
                 throw new TexCompileException('Could not compile file '.$main_tex_file);
             }
             if ( $this -> stopOnError() && ( ( $if = $this -> check_for_bad_inputfile($main_tex_file) ) != '' ) ) {
@@ -307,25 +306,23 @@ class Ccsd_Tex_Compile {
             if ( $this -> stopOnError() && ( ( $error = $this -> check_for_compilation_error($main_tex_file) ) != '')  ) {
                 if ( $this -> withLogFile() && is_file($main_tex_file.'.log') && filesize($main_tex_file.'.log') > 0 ) {
                     $logfile = $main_tex_file.'.log';
-                    # copy($main_tex_file.'.log', $fromdir.$main_tex_file.'.log');
                 }
                 throw new TexCompileException('Latex produced an error "'.$error.'" for the compilation of '.$main_tex_file, $logfile);
             }
             // MakeIndex ?
-            $makeindex = $this -> maybeRunMakeindex($main_tex_file);
+            $this -> maybeRunMakeindex($main_tex_file);
             // BibTeX, Citations resolved
-            $bibtex = $this -> maybeRunBibtex($main_tex_file);
+            $this -> maybeRunBibtex($main_tex_file);
 
             if ( $this -> stopOnError() && is_file($main_tex_file.'.bib') && $this -> check_for_bibtex_errors($main_tex_file) ) {
                 throw new TexCompileException('Bibtex reported an error for the compilation of '.$main_tex_file);
             }
 
             $this -> runTex($bin, $main_tex_file);
-            $this -> check_for_reference_change($main_tex_file) and $this -> runTex($bin, $main_tex_file);
-            $this -> check_for_reference_change($main_tex_file) and $this -> runTex($bin, $main_tex_file);
+            $this -> check_for_reference_change($main_tex_file) && $this -> runTex($bin, $main_tex_file);
+            $this -> check_for_reference_change($main_tex_file) && $this -> runTex($bin, $main_tex_file);
 
             # Recuperation des logs Latex
-
             if ( $this -> withLogFile() && is_file($main_tex_file.'.log') && filesize($main_tex_file.'.log') > 0 ) {
                 $logfile = $main_tex_file.'.log';
             }
@@ -339,7 +336,6 @@ class Ccsd_Tex_Compile {
                 throw new TexCompileException('Package natbib Error: Bibliography not compatible with author-year citations for the compilation of '.$main_tex_file, $logfile);
             }
             $this -> dvi2pdf($main_tex_file);
-
 
             // Preparation de la valeur de retour:
             //  ==> L'ensemble des fichiers construits interessants (log, bbl, pdf)
@@ -373,7 +369,7 @@ function unlinkTexTmp($file) {
 		}
 	}
 	return true;
-};
+}
 
 /*
  * Copie recursivement $src vers $dst

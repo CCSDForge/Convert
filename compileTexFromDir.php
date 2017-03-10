@@ -9,33 +9,30 @@
        - stopOnError: 
        - withLogFile: 
        - fileName: 
-
  */
-
 
 include "tex.php";
-
 ini_set("memory_limit","-1");
 set_time_limit(0);
-/*
- *
- * compile method
- *
- *
- * @param string $directory base directory
- * @return string TeX/LaTeX/pdfLaTeX error
- *
- */
 
 define('CHROOT', '/latexRoot');
-define('TEXLIVEVERSION', '2014');
+/* Pour transition entre ccsd06 et MV */
+$arch = php_uname('m');
+if ($arch == 'x86_64') {
+    define('ARCH', 'x86_64-linux');
+    define('TEXLIVEVERSION', '2016');
+} else {
+    define('ARCH', 'i386-linux');
+    define('TEXLIVEVERSION', '2014');
+}
+
 define('BASETEMPREP', '/tmp/ccsdtex');
 putenv('HOME=/home/nobody');
-putenv('TEXMFVAR=/usr/local/texlive/" . TEXLIVEVERSION . "/texmf-var');
-putenv('PATH=/usr/local/texlive/" . TEXLIVEVERSION . "/bin/i386-linux/:/usr/bin/:/bin');
+putenv('TEXMFVAR=/usr/local/texlive/' . TEXLIVEVERSION . '/texmf-var');
+putenv('PATH=/usr/local/texlive/' . TEXLIVEVERSION . '/bin/' . ARCH . '/:/usr/bin/:/bin');
 
 $GLOBALS['texlive']   = "/usr/local/texlive/" . TEXLIVEVERSION;
-$GLOBALS['path']      = "/usr/local/texlive/" . TEXLIVEVERSION . "/bin/i386-linux/";
+$GLOBALS['path']      = "/usr/local/texlive/" . TEXLIVEVERSION . '/bin/' . ARCH . '/';
 $GLOBALS['tex']       = "tex -interaction=nonstopmode";
 $GLOBALS['latex']     = "latex -interaction=nonstopmode";
 $GLOBALS['pdflatex']  = "pdflatex -interaction=nonstopmode";
@@ -45,17 +42,9 @@ $GLOBALS['dvips']     = "dvips -q -Ptype1";
 $GLOBALS['ps2pdf']    = "/usr/bin/ps2pdf14";
 $GLOBALS['chroot']    = "/usr/sbin/chroot";
 
-// Fonctions semble-t-il non utilisees
-// Deplacees dans OldV2 si besoin
-
-// function compile( $rootrep='' ) {
-// }
-// function compileFromFile( $content='' ) {
-// }
 
 function internalServerError($msg) {
     header('HTTP/1.1 500 Internal Server Error');
-    # error_log($msg);
     echo $msg;
     exit;
 }
@@ -89,12 +78,12 @@ $source    = isset($_POST['source']) ? $_POST['source'] : '';
 // récupération de la variable stopOnError
 $stopOnError = true;   # default value
 if ( isset($_POST['stopOnError']) ) {
-    $stopOnError = ( $_POST['stopOnError'] == 1 ) ? true : false;
+    $stopOnError = ( $_POST['stopOnError'] == 1 );
 }
 // récupération de la variable withLogFile
 $withLogFile = true;  # default value
 if ( isset($_POST['withLogFile']) ) {
-    $withLogFile = ( $_POST['withLogFile'] == 1 ) ? true : false;
+    $withLogFile = ( $_POST['withLogFile'] == 1 );
 }
 $filename = isset($_POST['fileName']) ? $_POST['fileName'] : '';
 
@@ -134,7 +123,6 @@ $bin = $compilateur -> checkTexBin();
 try {
     $fileCreated = $compilateur -> compile($bin,$dir,$tex_files,$filename);
     foreach ($fileCreated as $file => $destname) {
-        # error_log("copy $temprep/$file vers, $dir/$destname");
         copy("$temprep/$file", "$dir/$destname");
         if (preg_match('/\.pdf$/', $file)) {
             $pdfCreated[] = $destname;
