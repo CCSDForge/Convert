@@ -17,7 +17,7 @@ class Ccsd_Compile_Test extends PHPUnit_Framework_TestCase {
             $this -> Conf['ARCH'] = 'x86_64-linux';
             $this -> Conf['TEXLIVEVERSION'] = '2016';
         } else {
-            $this -> Conf['ARCH'] = 'i386-linux');
+            $this -> Conf['ARCH'] = 'i386-linux';
             $this -> Conf['TEXLIVEVERSION'] = '2014';
         }
 
