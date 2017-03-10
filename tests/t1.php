@@ -11,6 +11,16 @@ require __DIR__ . "/../tex.php";
 class Ccsd_Compile_Test extends PHPUnit_Framework_TestCase {
     // ...
     public function setUp() {
+
+        $arch = php_uname('m');
+        if ($arch == 'x86_64') {
+            define('ARCH', 'x86_64-linux');
+            define('TEXLIVEVERSION', '2016');
+        } else {
+            define('ARCH', 'i386-linux');
+            define('TEXLIVEVERSION', '2014');
+        }
+
         $this -> tempchrootrep = BASETEMPREP.DIRECTORY_SEPARATOR.uniqid().DIRECTORY_SEPARATOR;
         $this -> temprep = CHROOT.$this -> tempchrootrep;
         $this -> pdfCreated = array();
@@ -46,9 +56,10 @@ class Ccsd_Compile_Test extends PHPUnit_Framework_TestCase {
     public function testValues3() {
         $compilateur = new Ccsd_Tex_Compile(LATEX, $this -> Conf, BASETEMPREP, CHROOT);
 
+        
         $this -> assertTrue($compilateur -> is_chrooted());
-        $this -> assertTrue($compilateur -> is_executable(LATEX . '/bin/i386-linux/pdflatex'), "Pb d'exe latex");
-        $this -> assertFalse($compilateur -> is_executable(LATEX . '/bin/i386-linux/Fooprgm'), "Pb d'exe autre");
+        $this -> assertTrue($compilateur -> is_executable(LATEX . '/bin/' . ARCH . '/pdflatex'), "Pb d'exe latex");
+        $this -> assertFalse($compilateur -> is_executable(LATEX . '/bin/' . ARCH . '/Fooprgm'), "Pb d'exe autre");
         $this -> assertEquals('/tmp/ccsdtex'          , $compilateur -> get_compileDir());
         $this -> assertEquals('/latexRoot'            , $compilateur -> get_chroot());
         $this -> assertEquals('/latexRoot/tmp/ccsdtex', $compilateur -> chrootedcompileDir());
