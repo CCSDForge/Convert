@@ -2,9 +2,13 @@
 
 define('BASETEMPREP', '/tmp/ccsdtex');
 define('CHROOT', '/latexRoot');
-define('LATEX', '/usr/local/texlive/2016');     # Latex courant
 define('LATEX2016', '/usr/local/texlive/2016'); # Latex version fixe 2016
 define('LATEX2014', '/usr/local/texlive/2014'); # Latex version fixe 2014
+if (php_uname('m') == 'x86_64') {
+    define('LATEX', '/usr/local/texlive/2016');     # Latex courant
+} else {
+    define('LATEX', '/usr/local/texlive/2014');     # Latex courant
+}
 
 require __DIR__ . "/../tex.php";
 
@@ -15,10 +19,10 @@ class Ccsd_Compile_Test1 extends PHPUnit_Framework_TestCase {
      * @var Ccsd_Tex_Compile
      */
     private $compilateur = null;
-    private $Conf = [];
+    private $Conf = array();
 
-    public $pdfCreated = [];
-    public $fileCreated = [];
+    public $pdfCreated = array();
+    public $fileCreated = array();
 
     // ...
     public function setUp() {

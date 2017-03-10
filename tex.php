@@ -230,7 +230,7 @@ class Ccsd_Tex_Compile {
         if ($option == null) {
             $option=FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES;
         }
-        $content=[];
+        $content=array();
         if ( is_array($file)) {
             $content = $file;
         } elseif (is_file($file) ) {
