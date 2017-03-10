@@ -40,11 +40,8 @@ class Ccsd_Compile_Test2 extends PHPUnit_Framework_TestCase {
     }
 
     public function testCompileArxiv() {
-        # Le fichier tex est unique mais mal reconnu comme fichier principal
-        # Comme il est unique, cela doit marcher
 
-        # Actuellement, il manque un fichier pour la compilation passe, mais c'est un pb tex
-        foreach (array('/docs/01/38/07/07') as $dir) {
+        foreach (array('/docs/01/38/07/39') as $dir) {
             mkdir($this -> temprep, 0777, true) || exit;
             recurse_copy($dir, $this -> temprep, false);
             recurse_unzip($this -> temprep);
