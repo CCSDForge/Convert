@@ -119,13 +119,21 @@ class Ccsd_Tex_Compile {
     }
 
     /* Lance bibtex si necessaire et retourne la sortie de la commande bibtex ou vide */
-    function maybeRunBibtex($main_tex_file) {
+    function maybeRunBibtex($main_tex_file)
+    {
         $bibtex = '';
         $cmd = $this->path['bibtex'];
-        if ( !is_file($main_tex_file.'.bbl') || filesize($main_tex_file.'.bbl') == 0 || $this -> check_for_bad_citation($main_tex_file) ) {
+        $cmd = $cmd." ".escapeshellarg($main_tex_file)." > bibtex.log 2>&1";
+
+        if ($this->check_for_bad_citation($main_tex_file) && is_file($main_tex_file . '.bib')) {
+            $bibtex = $this->runCmd($cmd);
+        }
+        /* OLD CODE
+            if ( !is_file($main_tex_file.'.bbl') || filesize($main_tex_file.'.bbl') == 0 || $this -> check_for_bad_citation($main_tex_file) ) {
             $cmd =  $cmd." ".escapeshellarg($main_tex_file)." > bibtex.log 2>&1";
             $bibtex = $this -> runCmd($cmd);
         }
+        */
         return $bibtex;
     }
 
@@ -235,6 +243,8 @@ class Ccsd_Tex_Compile {
             $content = $file;
         } elseif (is_file($file) ) {
             $content = file($file, $option);
+        } else {
+            error_log("$file is a bad param for check_for_line");
         }
         foreach ($content as $line) {
             if ( preg_match($pattern, $line)) {
@@ -327,6 +337,10 @@ class Ccsd_Tex_Compile {
                 throw new TexCompileException('Bibtex reported an error for the compilation of '.$main_tex_file);
             }
 
+            /** TODO  On devrait recuperer les logs de Latex une fois pour toute
+             * Cela eviterait de les relire systematiquement pour maybeRunBibtex, check_for_bad_citation, check_for_bad_reference,...
+             * runtex renvois justement ces logs
+             * */
             $this -> runTex($bin, $main_tex_file);
             $this -> check_for_reference_change($main_tex_file) && $this -> runTex($bin, $main_tex_file);
             $this -> check_for_reference_change($main_tex_file) && $this -> runTex($bin, $main_tex_file);
