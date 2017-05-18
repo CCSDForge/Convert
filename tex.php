@@ -1,11 +1,10 @@
 <?php
-
-/* 
-   Utilitaire de compilation latex
-   Auteur: B Marmol a partir du code de L Capelli/Y Barborini...
-   Jul 2016
-   Permet la compilation en environnement Chroot ou non/
-   Le repertoire src des fichiers n'est accede qu'en lecture
+/*
+   Tools for LaTeX compilation
+   Auteur: B Marmol from code of  L Capelli/Y Barborini...
+   Jul 2016 / May 2017
+   You can compile into chroot environnement or not
+   The directory of source files is only read access
  */
 
 class TexCompileException extends Exception {
@@ -52,7 +51,6 @@ class Ccsd_Tex_Compile {
         }
         putenv("TEXMFVAR=$texlivepath/texmf-var");
         putenv("PATH=$texlivepath/bin/" . $this -> Arch . "/:/usr/bin/:/bin");
-
     }
 
     function debug($msg) {
@@ -82,8 +80,13 @@ class Ccsd_Tex_Compile {
     function chrootedcompileDir() {
         return $this-> chroot . $this -> compileDir;
     }
-    # Comme is_executable mais ajoute le prefix de chroot si necessaire
-    # Cmd est une ligne de commande avec argument, on retire les arguments
+
+    /**
+     *  Like php: is_executable but add chroot prefix if necessairy
+     * Cmd is comand line with argument, We clean argument before testing execution status
+     * @param string
+     * @return boolean
+     * */
     function is_executable($cmd) {
         if ( strpos($cmd, ' ') >0) {
             $binpath=$this ->chroot . substr($cmd, 0, strpos($cmd, ' '));
@@ -118,26 +121,36 @@ class Ccsd_Tex_Compile {
         return false;
     }
 
-    /* Lance bibtex si necessaire et retourne la sortie de la commande bibtex ou vide */
+    /**
+     * Run bibtex if needed
+     * @return string // bibtex output or empty
+     */
     function maybeRunBibtex($main_tex_file)
     {
         $bibtex = '';
         $cmd = $this->path['bibtex'];
         $cmd = $cmd." ".escapeshellarg($main_tex_file)." > bibtex.log 2>&1";
 
-        if ($this->check_for_bad_citation($main_tex_file) && is_file($main_tex_file . '.bib')) {
+        if (($this->check_for_bad_citation($main_tex_file) && is_file($main_tex_file . '.bib'))
+            /* There is biblio errors and a bib file exists: we generate a bbl file. */
+        || ( !is_file($main_tex_file.'.bbl') || filesize($main_tex_file.'.bbl') == 0)) {
+            /* This case when there is only a bibliographie into tex file, so non reference  on error but we need a bbl */
             $bibtex = $this->runCmd($cmd);
         }
-        /* OLD CODE
-            if ( !is_file($main_tex_file.'.bbl') || filesize($main_tex_file.'.bbl') == 0 || $this -> check_for_bad_citation($main_tex_file) ) {
-            $cmd =  $cmd." ".escapeshellarg($main_tex_file)." > bibtex.log 2>&1";
-            $bibtex = $this -> runCmd($cmd);
-        }
+        /* OLD TEST
+           !is_file($main_tex_file.'.bbl')
+        || filesize($main_tex_file.'.bbl') == 0
+        || $this -> check_for_bad_citation($main_tex_file)
         */
         return $bibtex;
     }
 
-    /* Lance makeindex si necessaire et retourne la sortie de la commande makeindex ou vide */
+    /**
+     * Run makeindex if necessary and return makeindex cmd output or empty
+     * @param string $main_tex_file  // filename
+     * @return string
+     * @throws TexCompileException
+     */
     function maybeRunMakeindex($main_tex_file) {
         $makeindex = '';
         $cmd = $this->path['makeindex'];
@@ -151,8 +164,12 @@ class Ccsd_Tex_Compile {
         return $makeindex;
     }
 
+    /**
+     * Make ps and pdf from dvi if needed
+     * @param string $main_tex_file  // filename
+     * @throws TexCompileException
+     */
     function dvi2pdf($main_tex_file) {
-        // Make ps and pdf from dvi if needed
         $cmd = $this->path['dvips'];
         if ( is_file($main_tex_file.'.dvi') && $this->is_executable($cmd)) {
             $cmd = "$cmd '$main_tex_file.dvi' -o '$main_tex_file.ps' > ./dvips.log 2>&1";
@@ -167,12 +184,16 @@ class Ccsd_Tex_Compile {
         }
     }
 
+    /**
+     * @return string[] // List of filename of TeX file to compile
+     *                  // Ie: contening a \begin{document}, or other TeX mark...
+     */
     function mainTexFile() {
         $tex_files = array();
         $only_one_file = '';
         $nbr_tex_file = 0;
         foreach ( new RecursiveIteratorIterator( new RecursiveDirectoryIterator($this->chrootedcompileDir()) ) as $file ) {
-            $filename = $file->getFilename(); // seulement le nom final: mieux pour tester l'extension
+            $filename = $file->getFilename(); // Only final name: better for testing extension
             $pathname = $file->getPathname();
             if ( $file->isFile() && preg_match('/\.tex$/i', $filename) ) {
                 $nbr_tex_file++;
@@ -180,15 +201,15 @@ class Ccsd_Tex_Compile {
                 foreach ( file($pathname, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line ) {
                     if ( preg_match('/^\s*(\\\\begin\s*{document}|\\\\bye\s*$|\\\\end\s*$|\\\\documentstyle)/', $line) && !in_array($filename, $tex_files) ) {
                         $tex_files[] = $filename;
-                        // Pas la peine de continuer, le fichier est bien un tex
-                        // le !in_array doit aussi etre en trop!
+                        // No need to continue, file est a TeX file,
+                        // TODO The !in_array seems to be not usefull
                         break;
                     }
                 }
             }
         }
         if (($nbr_tex_file == 1) && (count($tex_files) == 0)) {
-            # Seulement un fichier tex et il n'a pas ete detecte...
+            # Seulement un fichier tex et il n'a pas ete detecte comme contenant un begin document...
             # On le prends quand meme
             $tex_files[] = $only_one_file;
         }
@@ -196,13 +217,13 @@ class Ccsd_Tex_Compile {
     }
 
     /*
-     * Determine le type du fichier tex pour savoir si on lance latex, pdflatex, tex ou xelatex
-     * Bon, le dernier a affecter la valeur a raison!
+     * Determine flavor of TeX for the file: latex, pdflatex, tex or xelatex
+     * Ok... the last is the winner!
      */
     function checkTexBin() {
         $bin = 'latex';
         foreach ( new RecursiveIteratorIterator( new RecursiveDirectoryIterator($this->chrootedcompileDir()) ) as $file ) {
-            $filename = $file->getFilename();  // seulement le nom final: mieux pour tester l'extension
+            $filename = $file->getFilename();  // Only final name: better for testing extension
             $pathname = $file->getPathname();
             if ( $file->isFile() && preg_match('/\.(tex|pdf_t|tex_t)$/i', $filename) ) {
                 $il = 0;
@@ -227,12 +248,12 @@ class Ccsd_Tex_Compile {
     }
 
     /*
-     * Chercher dans file le pattern
-     *       file est soit un tableau de ligne, soit un nom de fichier
-     * Si bool est vrai, la valeur de retour est un booleen (vrai si trouve, faux si pas trouve)
-     * Si bool est faux, alors la ligne matchant est retourne, chaine vide en cas d'echec
-     * La valeur de retour chaine est filtrer en supprimant les caracteres du tableau $filter
-     * $option correspond aux options de la fonction php: file()
+     * Search pattern in file
+     *       file is either an array of string line, either a filename
+     * If bool is true, return value is a boolean (true if we find pattern, false if not)
+     * If bool is false, return matching line if exists or empty string in case of no match
+     * characters of array $filter are suppressed  from the string result
+     * $option corresponds to the php: file() function options
      */
     static function check_for_line($file, $pattern, $bool=false, $option=null, $filter = array("'", '"', '`')) {
         if ($option == null) {
@@ -279,11 +300,17 @@ class Ccsd_Tex_Compile {
     }
 
     static function check_for_bibtex_errors($file) {
-        return self::check_for_line($file.'.blg', '/error message/', true);
+        $bibtexlogfile = $file.'.blg';
+        if (file_exists($bibtexlogfile)) {
+            return self::check_for_line($bibtexlogfile, '/error message/', true);
+        } else {
+            return false;
+        }
     }
     /*
-     * Valeur de retour, le nom d'un fichier manquant
-     *     $file.'.log' ou le nom trouve dans l'expression $file.aux, $file.bbl,...
+     * @return string // filename of needed file marked as 'Not found by tex cmd in log file
+     *     $file.'.log' if it doesn't exists
+     *     filename found in log: eg $file.aux, $file.bbl,...
      */
     static function check_for_bad_inputfile($file) {
         if ( is_file($file.'.log') ) {
@@ -300,6 +327,14 @@ class Ccsd_Tex_Compile {
         return $file.'.log';
     }
 
+    /**
+     * @param string $bin
+     * @param string $fromdir
+     * @param string[] $tex_files
+     * @param string $filename
+     * @return array
+     * @throws TexCompileException
+     */
     function compile($bin, $fromdir, $tex_files, $filename) {
         $filesCreated = array();
         foreach ( $tex_files as $tex_file ) {
@@ -337,15 +372,15 @@ class Ccsd_Tex_Compile {
                 throw new TexCompileException('Bibtex reported an error for the compilation of '.$main_tex_file);
             }
 
-            /** TODO  On devrait recuperer les logs de Latex une fois pour toute
-             * Cela eviterait de les relire systematiquement pour maybeRunBibtex, check_for_bad_citation, check_for_bad_reference,...
-             * runtex renvois justement ces logs
+            /** TODO  We should read tex log file once...
+             * To avoid reading it  for  maybeRunBibtex, check_for_bad_citation, check_for_bad_reference,...
+             * runtex returns those logs
              * */
             $this -> runTex($bin, $main_tex_file);
             $this -> check_for_reference_change($main_tex_file) && $this -> runTex($bin, $main_tex_file);
             $this -> check_for_reference_change($main_tex_file) && $this -> runTex($bin, $main_tex_file);
 
-            # Recuperation des logs Latex
+            # gitting latex logs filename
             if ( $this -> withLogFile() && is_file($main_tex_file.'.log') && filesize($main_tex_file.'.log') > 0 ) {
                 $logfile = $main_tex_file.'.log';
             }
@@ -360,8 +395,8 @@ class Ccsd_Tex_Compile {
             }
             $this -> dvi2pdf($main_tex_file);
 
-            // Preparation de la valeur de retour:
-            //  ==> L'ensemble des fichiers construits interessants (log, bbl, pdf)
+            // Prepare return value:
+            //  ==> The set of all interesting files (log, bbl, pdf)
             if ($logfile) {
                 $filesCreated[$logfile] = $logfile;
             }
@@ -379,7 +414,12 @@ class Ccsd_Tex_Compile {
     }
 }
 
-/* Suppression des fichiers temporaire Latex pour commencer une compilation propre */
+/**
+ * Delete temporary latex file to begin a clean compilation
+ * bbl file can be given by user: don't delete it!
+ * @param string $file
+ * @return true
+ */
 function unlinkTexTmp($file) {
 	foreach( array('.dvi', '.pdf', '.ps', '.log', '.toc', '.idx', '.aux', '.auk', '.blg', '.ilg', '.lof', '.lot', '.dep', '.out') as $ext ) {
 		if ( is_file($file.$ext) ) {
@@ -395,11 +435,11 @@ function unlinkTexTmp($file) {
 }
 
 /*
- * Copie recursivement $src vers $dst
- * Valeur de retour: true si ok, false si une copy a generee une erreur.
- * Attention:
- *    Les liens symboliques pointant en relatif a l'exterieur de $src seront faux
- *    Les liens symboliques pointant en absolus a l'interieur de la zone seront faux
+ * Copy  recursively $src to $dst
+ * @return boolean // true if ok, false if A copy generate an error
+ * BEWARE:
+ *    Symbolic link relatively linked to outside of $src will be incorrect
+ *    Absolute Symbolic link to inside of $src will be false
  */
 
 function recurse_copy($src, $dst, $create=true) {

@@ -10,12 +10,15 @@
        - withLogFile: 
        - fileName: 
  */
+/**
+ * LIMITS: Original documents must be in directory name as /docs/ or /cache/
+ *         The regep is not in config yet
+ */
 
-include "tex.php";
+include __DIR__ . "/tex.php";
 ini_set("memory_limit","-1");
 set_time_limit(0);
 
-define('CHROOT', '/latexRoot');
 /* Pour transition entre ccsd06 et MV */
 $arch = php_uname('m');
 if ($arch == 'x86_64') {
@@ -26,10 +29,12 @@ if ($arch == 'x86_64') {
     define('TEXLIVEVERSION', '2014');
 }
 
-define('BASETEMPREP', '/tmp/ccsdtex');
-putenv('HOME=/home/nobody');
-putenv('TEXMFVAR=/usr/local/texlive/' . TEXLIVEVERSION . '/texmf-var');
-putenv('PATH=/usr/local/texlive/' . TEXLIVEVERSION . '/bin/' . ARCH . '/:/usr/bin/:/bin');
+/** Default configuration */
+
+/* Les constantes correspondantes seront definies apres l'include de la configuration */
+$CHROOT='/latexRoot';
+$BASETEMPREP='/tmp/ccsdtex';
+$HOME='/home/nobody';
 
 $GLOBALS['texlive']   = "/usr/local/texlive/" . TEXLIVEVERSION;
 $GLOBALS['path']      = "/usr/local/texlive/" . TEXLIVEVERSION . '/bin/' . ARCH . '/';
@@ -42,6 +47,16 @@ $GLOBALS['dvips']     = "dvips -q -Ptype1";
 $GLOBALS['ps2pdf']    = "/usr/bin/ps2pdf14";
 $GLOBALS['chroot']    = "/usr/sbin/chroot";
 
+$conffile = __DIR__ . "/conf.php";
+if (file_exists($conffile)) {
+    include $conffile;
+}
+
+define('CHROOT', $CHROOT);
+define('BASETEMPREP', $BASETEMPREP);
+putenv("HOME=$HOME");
+putenv('TEXMFVAR=/usr/local/texlive/' . TEXLIVEVERSION . '/texmf-var');
+putenv('PATH=/usr/local/texlive/'     . TEXLIVEVERSION . '/bin/' . ARCH . '/:/usr/bin/:/bin');
 
 function internalServerError($msg) {
     header('HTTP/1.1 500 Internal Server Error');
