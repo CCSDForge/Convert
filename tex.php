@@ -8,6 +8,7 @@
  */
 
 class TexCompileException extends Exception {
+
     public $logfile;
 
     function __construct($msg, $file = null) {
@@ -17,14 +18,32 @@ class TexCompileException extends Exception {
 }
 
 class Ccsd_Tex_Compile {
+    const ACCEPTED_LATEX_COMMAND_REGEXP = "pdflatex|latex|xelatex|tex";
+
+    /** @var string  */
     private $chroot;
+    /** @var string  */
     private $compileDir;
+    /** @var bool */
     private $stopOnError;
+    /** @var bool  */
     private $withLogFile;
+    /** @var string[]  */
     private $path=array();
+    /** @var string  */
     private static $ChrootCMD='/usr/sbin/chroot';
 
-    function __construct($texlivepath, $paths, $compildir='.',$chrootdir='', $withLogFile=true, $stopOnError=true, $debug=false) {
+    /**
+     * Ccsd_Tex_Compile constructor.
+     * @param string   $texlivepath
+     * @param string[] $paths
+     * @param string   $compildir
+     * @param string   $chrootdir
+     * @param bool     $withLogFile
+     * @param bool     $stopOnError
+     * @param bool     $debug
+     */
+    public function __construct($texlivepath, $paths, $compildir='.',$chrootdir='', $withLogFile=true, $stopOnError=true, $debug=false) {
         $this -> chroot = $chrootdir;
         $this -> compileDir = $compildir;
         $this -> withLogFile = $withLogFile;
@@ -53,30 +72,56 @@ class Ccsd_Tex_Compile {
         putenv("PATH=$texlivepath/bin/" . $this -> Arch . "/:/usr/bin/:/bin");
     }
 
+    /**
+     * @param $msg
+     */
     function debug($msg) {
         if ($this->debug) {
             error_log($msg);
         }
     }
 
+    /**
+     * @return string
+     */
     function get_compileDir() {
         return $this -> compileDir;
     }
+
+    /**
+     * @return string
+     */
     function get_chroot() {
         return $this -> chroot;
     }
+    /**
+     * @return string
+     */
     function get_chrootcmd() {
         return self::$ChrootCMD;
     }
+    /**
+     * @return bool
+     */
     function stopOnError() {
         return $this -> stopOnError;
     }
+    /**
+     * @return bool
+     */
     function withLogFile() {
         return $this -> withLogFile;
     }
+    /**
+     * @return bool
+     */
     function is_chrooted() {
         return ($this -> chroot != '');
     }
+
+    /**
+     * @return string
+     */
     function chrootedcompileDir() {
         return $this-> chroot . $this -> compileDir;
     }
@@ -96,6 +141,10 @@ class Ccsd_Tex_Compile {
         return (is_executable($binpath));
     }
 
+    /**
+     * @param $cmd
+     * @return mixed
+     */
     function runCmd($cmd) {
         $shellcmd = "cd  " . $this->get_compileDir() .";$cmd";
         $chrootcmd=$this -> get_chrootcmd();
@@ -111,6 +160,11 @@ class Ccsd_Tex_Compile {
         return ($output);
     }
 
+    /**
+     * @param string $bin
+     * @param string $file
+     * @return bool
+     */
     function runTex($bin, $file) {
         $cmd = $this->path[$bin];
         if ( $this->is_executable($cmd) ) {
@@ -123,6 +177,7 @@ class Ccsd_Tex_Compile {
 
     /**
      * Run bibtex if needed
+     * @param string $main_tex_file
      * @return string // bibtex output or empty
      */
     function maybeRunBibtex($main_tex_file)
@@ -216,6 +271,36 @@ class Ccsd_Tex_Compile {
         return $tex_files;
     }
 
+    /**
+     * @param RecursiveDirectoryIterator $file
+     * @return string
+     */
+    function checkTexBinForFile($file) {
+        $il = 0;
+        $pathname = $file->getPathname();
+        $command = '';
+        foreach ( file($pathname, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line ) {
+            $matches = [];
+            if ( preg_match('/%% +-\*- +latex-command: *(' . self::ACCEPTED_LATEX_COMMAND_REGEXP .') *-\*-/', $line, $matches)) {
+                $command =  $matches[1];
+                break;
+            }
+            if ( preg_match('/^[^%]*\\\\(includegraphics|includepdf|epsfig)[^%]*\.(pdf|png|gif|jpg)\s*}/i', $line)
+                || ( $il++ < 10 &&  preg_match('/^[^%]*\\\\pdfoutput\s*=\s*1/', $line) ) ) {
+                $command =  'pdflatex';
+                break;
+            }
+            if ( preg_match('/^[^%]*(\\\\bye|\\\\end)\s*$/', $line) ) {
+                $command =  'tex';
+                break;
+                            }
+            if ( preg_match('/^[^%]*\\\\usepackage{xltxtra}\s*$/', $line) ) {
+                $command = 'xelatex';
+                break;
+            }
+        }
+        return $command;
+    }
     /*
      * Determine flavor of TeX for the file: latex, pdflatex, tex or xelatex
      * Ok... the last is the winner!
@@ -224,23 +309,11 @@ class Ccsd_Tex_Compile {
         $bin = 'latex';
         foreach ( new RecursiveIteratorIterator( new RecursiveDirectoryIterator($this->chrootedcompileDir()) ) as $file ) {
             $filename = $file->getFilename();  // Only final name: better for testing extension
-            $pathname = $file->getPathname();
+            $bin = '';
             if ( $file->isFile() && preg_match('/\.(tex|pdf_t|tex_t)$/i', $filename) ) {
-                $il = 0;
-                foreach ( file($pathname, FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line ) {
-                    if (   preg_match('/^[^%]*\\\\(includegraphics|includepdf|epsfig)[^%]*\.(pdf|png|gif|jpg)\s*}/i', $line)
-                           || ( $il++ < 10 &&  preg_match('/^[^%]*\\\\pdfoutput\s*=\s*1/', $line) ) ) {
-                        $bin = 'pdflatex';
-                        break;
-                    }
-                    if ( preg_match('/^[^%]*(\\\\bye|\\\\end)\s*$/', $line) ) {
-                        $bin = 'tex';
-                        break;
-                    }
-                    if ( preg_match('/^[^%]*\\\\usepackage{xltxtra}\s*$/', $line) ) {
-                        $bin = 'xelatex';
-                        break;
-                    }
+                $bin = $this->checkTexBinForFile($file);
+                if ($bin != '') {
+                    break;
                 }
             }
         }
