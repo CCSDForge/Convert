@@ -41,6 +41,7 @@ $GLOBALS['path']      = "/usr/local/texlive/" . TEXLIVEVERSION . '/bin/' . ARCH 
 $GLOBALS['tex']       = "tex -interaction=nonstopmode";
 $GLOBALS['latex']     = "latex -interaction=nonstopmode";
 $GLOBALS['pdflatex']  = "pdflatex -interaction=nonstopmode";
+$GLOBALS['xelatex']   = "xelatex -interaction=nonstopmode";
 $GLOBALS['bibtex']    = "bibtex -terse";
 $GLOBALS['makeindex'] = "makeindex -q";
 $GLOBALS['dvips']     = "dvips -q -Ptype1";
