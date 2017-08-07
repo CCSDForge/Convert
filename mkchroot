@@ -26,11 +26,18 @@ Example:
     $0 /var/mychroot2 ls cat python
 EOF
 
+# Package de fonts pour xelatex internationnalise:
+# fonts-baekmuk, fonts-ipaexfont-mincho,  fonts-ipafont,  fonts-aksharyogini2,
+# fonts-deva, fonts-deva-extra, fonts-gargi, fonts-sahadeva, fonts-cwtex-fs,
+# fonts-arphic-bkai00mp, fonts-arphic-gkai00mp, fonts-arphic-ukai, fonts-wqy-zenhei,
+# fonts-arphic-gbsn00lp, fonts-nakula, fonts-noto-hinted, fonts-noto-cjk, fonts-noto-unhinted
+# fonts-font-awesome
+
 nocopydir=0
 BINS="bash env ls cat more gs ps2pdf14 ps2pdfwr dirname basename grep ldconfig ldconfig.real dash sh"
 
 case `hostname` in
-    ccsdlatex*) TREES="/usr/share/ghostscript /etc/fonts /usr/share/fonts";;
+    ccsdlatex*) TREES="/usr/share/ghostscript /etc/fonts /usr/share/fonts /usr/share/fonts-font-awesome";;
     *) TREES="/usr/local/texlive /usr/share/ghostscript";;
 esac
 
