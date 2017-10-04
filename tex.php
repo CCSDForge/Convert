@@ -306,13 +306,14 @@ class Ccsd_Tex_Compile {
      * Ok... the last is the winner!
      */
     function checkTexBin() {
-        $bin = 'latex';
+        $bin = 'latex';  // par defaut
         foreach ( new RecursiveIteratorIterator( new RecursiveDirectoryIterator($this->chrootedcompileDir()) ) as $file ) {
             $filename = $file->getFilename();  // Only final name: better for testing extension
-            $bin = '';
+            $bin4file = '';
             if ( $file->isFile() && preg_match('/\.(tex|pdf_t|tex_t)$/i', $filename) ) {
-                $bin = $this->checkTexBinForFile($file);
-                if ($bin != '') {
+                $bin4file = $this->checkTexBinForFile($file);
+                if ($bin4file != '') {
+                    $bin = $bin4file;
                     break;
                 }
             }
@@ -420,20 +421,19 @@ class Ccsd_Tex_Compile {
             if ( !$this -> runTex($bin, $main_tex_file)) {
                 throw new TexCompileException('Could not compile file '.$main_tex_file);
             }
+
+            if ($this -> withLogFile() && is_file($main_tex_file.'.log') && filesize($main_tex_file.'.log') > 0 ) {
+                    $logfile = $main_tex_file.'.log';
+            }
+
             if ( $this -> stopOnError() && ( ( $if = $this -> check_for_bad_inputfile($main_tex_file) ) != '' ) ) {
-                throw new TexCompileException($if.' not found');
+                throw new TexCompileException($if.' not found', $logfile);
             }
             if ( $this -> stopOnError() && ( !(is_file($main_tex_file.'.dvi') || is_file($main_tex_file.'.pdf')) ) ) {
-                if ( $this -> withLogFile() && is_file($main_tex_file.'.log') && filesize($main_tex_file.'.log') > 0 ) {
-                    $logfile = $main_tex_file.'.log';
-                }
                 throw new TexCompileException('Latex produced no output for the compilation of '.$main_tex_file, $logfile);
             }
             // Check LaTeX Error
             if ( $this -> stopOnError() && ( ( $error = $this -> check_for_compilation_error($main_tex_file) ) != '')  ) {
-                if ( $this -> withLogFile() && is_file($main_tex_file.'.log') && filesize($main_tex_file.'.log') > 0 ) {
-                    $logfile = $main_tex_file.'.log';
-                }
                 throw new TexCompileException('Latex produced an error "'.$error.'" for the compilation of '.$main_tex_file, $logfile);
             }
             // MakeIndex ?
