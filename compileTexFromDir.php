@@ -61,13 +61,13 @@ putenv('PATH=/usr/local/texlive/'     . TEXLIVEVERSION . '/bin/' . ARCH . '/:/us
 
 function internalServerError($msg) {
     header('HTTP/1.1 500 Internal Server Error');
-    echo $msg;
+    print("$msg\n");
     exit;
 }
 
 if ( $_SERVER['REQUEST_METHOD'] != "POST" ) {
     header('HTTP/1.1 400 Bad Request');
-    echo 'Use POST HTTP method';
+    print('Use POST HTTP method');
     exit;
 }
 
@@ -75,7 +75,7 @@ if ( $_SERVER['REQUEST_METHOD'] != "POST" ) {
 $dirparam=isset($_POST['dir']) ? $_POST['dir'] : '';
 if ( $dirparam == '' ) {
     header('HTTP/1.1 400 Bad Request');
-    echo 'Source directory undefined';
+    print('Source directory undefined');
     exit;
 }
 // Répertoire des fichiers sources
