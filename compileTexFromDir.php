@@ -120,7 +120,9 @@ if ( ($source != '') && is_file($dir.DIRECTORY_SEPARATOR.$source) ) { // un fich
     }
 }
 // unzip du répertoire $temprep
-recurse_unzip($temprep);
+if (! file_exists(BASETEMPREP . DIRECTORY_SEPARATOR. "NO_RM")) {
+    recurse_unzip($temprep);
+}
 // on se place dans le répertoire de travail tempo privé
 chdir($temprep);
 // recherche des fichiers à compiler
