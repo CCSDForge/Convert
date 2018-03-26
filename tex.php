@@ -346,6 +346,7 @@ class Ccsd_Tex_Compile {
             $content = file($file, $option);
         } else {
             error_log("$file is a bad param for check_for_line");
+            return $bool ? false : '';
         }
         foreach ($content as $line) {
             if ( preg_match($pattern, $line)) {
@@ -376,7 +377,8 @@ class Ccsd_Tex_Compile {
     }
 
     static function check_for_reference_change($file) {
-        return self::check_for_line($file.'.log', '/Rerun/', true);
+        // Rerun is not sufficient... : Package: rerunfilecheck 2016/05/16 v1.8 Rerun checks for auxiliary file
+        return self::check_for_line($file.'.log', '/Rerun to /', true);
     }
 
     static function check_for_bibtex_errors($file) {
