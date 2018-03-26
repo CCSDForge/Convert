@@ -1,0 +1,29 @@
+<!-- bootstrap="./bootstrap.php"  -->
+<phpunit
+         
+         display_errors="on"
+         error_reporting="E_ALL"
+	 
+         display_startup_errors= "On"
+         colors="true"
+         verbose="true"
+>
+    <php>
+        <!-- -->
+        <includePath>../</includePath>
+    </php>
+    <testsuites>
+        <testsuite name="Convert Test Suite">
+            <directory>.</directory>
+        </testsuite>
+        
+    </testsuites>
+    <filter>
+        <!-- If Zend Framework is inside your project's library, uncomment this filter -->
+        <!-- 
+        <whitelist>
+            <directory suffix=".php">../../library/Zend</directory>
+        </whitelist>
+        -->
+    </filter>
+</phpunit>
