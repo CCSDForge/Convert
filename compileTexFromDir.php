@@ -104,7 +104,7 @@ if ( isset($_POST['withLogFile']) ) {
 $filename = isset($_POST['fileName']) ? $_POST['fileName'] : '';
 
 // création du répertoire tempo privé
-$tempchrootrep = BASETEMPREP.DIRECTORY_SEPARATOR.uniqid().DIRECTORY_SEPARATOR;
+$tempchrootrep = BASETEMPREP.DIRECTORY_SEPARATOR.uniqid('', true).DIRECTORY_SEPARATOR;
 $temprep = CHROOT.$tempchrootrep;
 if ( !mkdir($temprep, 0777, true) ) {
     internalServerError('Can\'t make temp directory' . $temprep);
