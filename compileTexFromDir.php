@@ -147,7 +147,7 @@ try {
 } catch (TexCompileException $e) {
     // Recuperation des log en cas d'erreur!
     $logfile = $e -> logfile;
-    error_log("$tempchrootrep ne compile pas avec retour $logfile");
+    error_log("$tempchrootrep ne compile pas. Logfile: $logfile . Et message: " . $e ->getMessage());
     if (isset($logfile) && file_exists($logfile)) {
         copy("$temprep/$logfile", "$dir/$logfile");
     }

@@ -30,6 +30,12 @@ class Ccsd_Tex_Compile {
     private $withLogFile;
     /** @var string[]  */
     private $path=array();
+    /** @var bool */
+    private $debug=false;
+    /** @var string */
+    private $Texversion=null;
+    /** @var string */
+    private $Arch = null;
     /** @var string  */
     private static $ChrootCMD='/usr/sbin/chroot';
 
@@ -44,11 +50,11 @@ class Ccsd_Tex_Compile {
      * @param bool     $debug
      */
     public function __construct($texlivepath, $paths, $compildir='.',$chrootdir='', $withLogFile=true, $stopOnError=true, $debug=false) {
-        $this -> chroot = $chrootdir;
-        $this -> compileDir = $compildir;
+        $this -> chroot      = $chrootdir;
+        $this -> compileDir  = $compildir;
         $this -> withLogFile = $withLogFile;
         $this -> stopOnError = $stopOnError;
-        $this -> debug = $debug;
+        $this -> debug       = $debug;
 
         $arch = php_uname('m');
         if ($arch == 'x86_64') {
@@ -237,6 +243,7 @@ class Ccsd_Tex_Compile {
                 throw new TexCompileException('Could not find or make ps from dvi file for the compilation of '.$main_tex_file);
             }
         }
+        // Else If pdflatex, no dvi created...
     }
 
     /**
@@ -309,7 +316,6 @@ class Ccsd_Tex_Compile {
         $bin = 'latex';  // par defaut
         foreach ( new RecursiveIteratorIterator( new RecursiveDirectoryIterator($this->chrootedcompileDir()) ) as $file ) {
             $filename = $file->getFilename();  // Only final name: better for testing extension
-            $bin4file = '';
             if ( $file->isFile() && preg_match('/\.(tex|pdf_t|tex_t)$/i', $filename) ) {
                 $bin4file = $this->checkTexBinForFile($file);
                 if ($bin4file != '') {
@@ -417,15 +423,14 @@ class Ccsd_Tex_Compile {
             $main_tex_file = mb_substr($tex_file, 0, -4);
             // compilation
             unlinkTexTmp($main_tex_file);
+            // -----------------------------------------------------
             // Premiere compilation
             if ( !$this -> runTex($bin, $main_tex_file)) {
                 throw new TexCompileException('Could not compile file '.$main_tex_file);
             }
-
             if ($this -> withLogFile() && is_file($main_tex_file.'.log') && filesize($main_tex_file.'.log') > 0 ) {
                     $logfile = $main_tex_file.'.log';
             }
-
             if ( $this -> stopOnError() && ( ( $if = $this -> check_for_bad_inputfile($main_tex_file) ) != '' ) ) {
                 throw new TexCompileException($if.' not found', $logfile);
             }
@@ -436,11 +441,12 @@ class Ccsd_Tex_Compile {
             if ( $this -> stopOnError() && ( ( $error = $this -> check_for_compilation_error($main_tex_file) ) != '')  ) {
                 throw new TexCompileException('Latex produced an error "'.$error.'" for the compilation of '.$main_tex_file, $logfile);
             }
+
             // MakeIndex ?
             $this -> maybeRunMakeindex($main_tex_file);
+            // -----------------------------------------------------
             // BibTeX, Citations resolved
             $this -> maybeRunBibtex($main_tex_file);
-
             if ( $this -> stopOnError() && is_file($main_tex_file.'.bib') && $this -> check_for_bibtex_errors($main_tex_file) ) {
                 throw new TexCompileException('Bibtex reported an error for the compilation of '.$main_tex_file);
             }
@@ -449,44 +455,51 @@ class Ccsd_Tex_Compile {
              * To avoid reading it  for  maybeRunBibtex, check_for_bad_citation, check_for_bad_reference,...
              * runtex returns those logs
              * */
+            // -----------------------------------------------------
+            // Second and supplementary latex compilation for crossreferences
             $this -> runTex($bin, $main_tex_file);
             $this -> check_for_reference_change($main_tex_file) && $this -> runTex($bin, $main_tex_file);
             $this -> check_for_reference_change($main_tex_file) && $this -> runTex($bin, $main_tex_file);
 
-            # gitting latex logs filename
+            # getting latex logs filename
             if ( $this -> withLogFile() && is_file($main_tex_file.'.log') && filesize($main_tex_file.'.log') > 0 ) {
                 $logfile = $main_tex_file.'.log';
             }
-            if ( $this -> stopOnError() && $this -> check_for_bad_reference($main_tex_file) ) {
-                throw new TexCompileException('LaTeX could not resolve all references for the compilation of '.$main_tex_file, $logfile);
+            if ($this -> stopOnError()) {
+                if ($this->check_for_bad_reference($main_tex_file)) {
+                    throw new TexCompileException('LaTeX could not resolve all references for the compilation of ' . $main_tex_file, $logfile);
+                }
+                if ($this->check_for_bad_citation($main_tex_file)) {
+                    throw new TexCompileException('LaTeX could not resolve all citations or labels for the compilation of ' . $main_tex_file, $logfile);
+                }
+                if ($this->check_for_bad_natbib($main_tex_file)) {
+                    throw new TexCompileException('Package natbib Error: Bibliography not compatible with author-year citations for the compilation of ' . $main_tex_file, $logfile);
+                }
             }
-            if ( $this -> stopOnError() && $this -> check_for_bad_citation($main_tex_file) ) {
-                throw new TexCompileException('LaTeX could not resolve all citations or labels for the compilation of '.$main_tex_file, $logfile);
-            }
-            if ( $this -> stopOnError() && $this -> check_for_bad_natbib($main_tex_file) ) {
-                throw new TexCompileException('Package natbib Error: Bibliography not compatible with author-year citations for the compilation of '.$main_tex_file, $logfile);
-            }
+            // -----------------------------------------------------
             $this -> dvi2pdf($main_tex_file);
 
             // Prepare return value:
             //  ==> The set of all interesting files (log, bbl, pdf)
             if ($logfile) {
+                // Log file in all cases!
                 $filesCreated[$logfile] = $logfile;
             }
             if ( is_file($main_tex_file.'.pdf') ) {
+                // bbl is given only with pdf
                 $out = ( count($tex_files) == 1 && ($filename != '') ) ? $filename :  $main_tex_file.'.pdf';
                 $filesCreated[$main_tex_file.'.pdf'] = $out;
                 if ( $this -> withLogFile() && is_file($main_tex_file.'.bbl') && filesize($main_tex_file.'.bbl') > 0 ) {
                     $filesCreated[$main_tex_file.'.bbl'] = $main_tex_file.'.bbl';
                 }
             } else {
-                throw new TexCompileException('Could not find pdf file for the compilation of '.$main_tex_file, $logfile );
+                $mode = $this -> stopOnError() ? "StopOnError" : "NoStopOnError";
+                throw new TexCompileException('Could not find pdf file for the compilation of '.$main_tex_file . "  (mode: $mode)" , $logfile );
             }
         }
         return($filesCreated);
     }
 }
-
 /**
  * Delete temporary latex file to begin a clean compilation
  * bbl file can be given by user: don't delete it!
@@ -506,7 +519,6 @@ function unlinkTexTmp($file) {
 	}
 	return true;
 }
-
 /*
  * Copy  recursively $src to $dst
  * @return boolean // true if ok, false if A copy generate an error
@@ -514,7 +526,6 @@ function unlinkTexTmp($file) {
  *    Symbolic link relatively linked to outside of $src will be incorrect
  *    Absolute Symbolic link to inside of $src will be false
  */
-
 function recurse_copy($src, $dst, $create=true) {
     $copy = true;
     $dir = opendir($src);
@@ -534,7 +545,10 @@ function recurse_copy($src, $dst, $create=true) {
     closedir($dir);
     return $copy;
 }
-
+/**
+ * @param $dir
+ * @return bool
+ */
 function recurse_rmdir($dir) {
     foreach (scandir($dir) as $file) {
         if ( ( $file == '.' ) || ( $file == '..' ) ) {
@@ -544,7 +558,9 @@ function recurse_rmdir($dir) {
     }
     return rmdir($dir);
 }
-
+/**
+ * @param $src
+ */
 function recurse_unzip($src) {
     do {
         $continue = false;
