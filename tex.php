@@ -431,15 +431,17 @@ class Ccsd_Tex_Compile {
             if ($this -> withLogFile() && is_file($main_tex_file.'.log') && filesize($main_tex_file.'.log') > 0 ) {
                     $logfile = $main_tex_file.'.log';
             }
-            if ( $this -> stopOnError() && ( ( $if = $this -> check_for_bad_inputfile($main_tex_file) ) != '' ) ) {
-                throw new TexCompileException($if.' not found', $logfile);
-            }
-            if ( $this -> stopOnError() && ( !(is_file($main_tex_file.'.dvi') || is_file($main_tex_file.'.pdf')) ) ) {
-                throw new TexCompileException('Latex produced no output for the compilation of '.$main_tex_file, $logfile);
-            }
-            // Check LaTeX Error
-            if ( $this -> stopOnError() && ( ( $error = $this -> check_for_compilation_error($main_tex_file) ) != '')  ) {
-                throw new TexCompileException('Latex produced an error "'.$error.'" for the compilation of '.$main_tex_file, $logfile);
+            if ( $this -> stopOnError()) {
+                if (($if = $this->check_for_bad_inputfile($main_tex_file)) != '') {
+                    throw new TexCompileException($if . ' not found', $logfile);
+                }
+                if (!(is_file($main_tex_file . '.dvi') || is_file($main_tex_file . '.pdf'))) {
+                    throw new TexCompileException('Latex produced no output for the compilation of ' . $main_tex_file, $logfile);
+                }
+                // Check LaTeX Error
+                if (($error = $this->check_for_compilation_error($main_tex_file)) != '') {
+                    throw new TexCompileException('Latex produced an error "' . $error . '" for the compilation of ' . $main_tex_file, $logfile);
+                }
             }
 
             // MakeIndex ?
@@ -493,8 +495,9 @@ class Ccsd_Tex_Compile {
                     $filesCreated[$main_tex_file.'.bbl'] = $main_tex_file.'.bbl';
                 }
             } else {
-                $mode = $this -> stopOnError() ? "StopOnError" : "NoStopOnError";
-                throw new TexCompileException('Could not find pdf file for the compilation of '.$main_tex_file . "  (mode: $mode)" , $logfile );
+                $logmode = $this -> withLogFile() ? "WithLog" : "WithOutLog";
+                $mode    = $this -> stopOnError() ? "StopOnError" : "NoStopOnError";
+                throw new TexCompileException('Could not find pdf file for the compilation of '.$main_tex_file . "  (mode: $mode, $logmode)" , $logfile );
             }
         }
         return($filesCreated);
