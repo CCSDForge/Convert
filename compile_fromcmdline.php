@@ -37,6 +37,7 @@ $GLOBALS['makeindex'] = "makeindex -q";
 $GLOBALS['dvips']     = "dvips -q -Ptype1";
 $GLOBALS['ps2pdf']    = "/usr/bin/ps2pdf14";
 $GLOBALS['chroot']    = "/usr/sbin/chroot";
+$GLOBALS['xelatex']   = "xelatex -interaction=nonstopmode";
 
 $tempchrootrep = '/home/marmol/tmp/textcompile';
 $temprep =  $tempchrootrep;
