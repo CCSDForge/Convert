@@ -120,9 +120,7 @@ if ( ($source != '') && is_file($dir.DIRECTORY_SEPARATOR.$source) ) { // un fich
     }
 }
 // unzip du répertoire $temprep
-if (! file_exists(BASETEMPREP . DIRECTORY_SEPARATOR. "NO_RM")) {
-    recurse_unzip($temprep);
-}
+recurse_unzip($temprep);
 // on se place dans le répertoire de travail tempo privé
 chdir($temprep);
 // recherche des fichiers à compiler
@@ -164,5 +162,7 @@ if ( count($pdfCreated) ) {
     recurse_rmdir($temprep);
     internalServerError('No pdf created');
 }
-recurse_rmdir($temprep);
+if (! file_exists(BASETEMPREP . DIRECTORY_SEPARATOR. "NO_RM")) {
+    recurse_rmdir($temprep);
+}
 exit;
