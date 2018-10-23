@@ -33,6 +33,9 @@ EOF
 # fonts-arphic-gbsn00lp, fonts-nakula, fonts-noto-hinted, fonts-noto-cjk, fonts-noto-unhinted
 # fonts-font-awesome
 
+# For problem on font installation:
+# font not found but installed: fc-cahe -fsv
+
 nocopydir=0
 BINS="bash env ls cat more gs ps2pdf14 ps2pdfwr dirname basename grep ldconfig ldconfig.real dash sh tty tr uniq"
 

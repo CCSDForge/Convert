@@ -182,6 +182,26 @@ class Ccsd_Tex_Compile {
     }
 
     /**
+     * @param string $texfile
+     * @return string
+     * @throws TexCompileException
+     */
+    function runLatex2rtf($texfile) {
+
+        $cmd = $this->path['latex2rtf'];
+        $rtffile = str_replace('.tex', '.rtf', $texfile);
+        if (is_file($texfile) && $this->is_executable($cmd) ) {
+            $cmd = $cmd ." ".escapeshellarg($texfile);
+            $this -> runCmd($cmd);
+            if ( is_file($rtffile)) {
+                throw new TexCompileException("Latex2Rtf can't produce rtf file");
+            }
+        }
+        return $rtffile;
+    }
+
+
+    /**
      * Run bibtex if needed
      * @param string $main_tex_file
      * @return string // bibtex output or empty
