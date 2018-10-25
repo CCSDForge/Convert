@@ -18,17 +18,18 @@
 
 include __DIR__ . "/prefix.php";
 
+$fileCreated1 = [];
+$fileCreated2 = [];
 
-
-
-$pdfCreated = array();
-$fileCreated = array();
 // latex ou pdflatex ?
 $bin = $compilateur -> checkTexBin();
 try {
-    $fileCreated  = $compilateur -> compile($bin,$dir,$tex_files,$filename);
-    $pdfCreated[] = $compilateur -> runLatex2rtf($tex_files[0]);
-
+    $fileCreated1 = $compilateur -> compile($bin,$dir,$tex_files,$filename);
+    $fileCreated2 = $compilateur -> runLatex2rtf($tex_files[0]);
+    $fileCreated1 = array_merge($fileCreated1, $fileCreated2);
+    foreach ($fileCreated as $file => $destname) {
+        copy("$temprep/$file", "$dir/$destname");
+    }
 } catch (TexCompileException $e) {
     // Recuperation des log en cas d'erreur!
     $logfile = $e -> logfile;
@@ -40,9 +41,18 @@ try {
     internalServerError($e -> getMessage());
 }
                                                    
-if ( count($pdfCreated) ) {
+if ( count($fileCreated) ) {
     header('HTTP/1.1 200 OK');
-    echo '<files><pdf>'.implode('</pdf><pdf>', $pdfCreated).'</pdf></files>';
+    echo '<files>';
+    foreach ($fileCreated as $file) {
+        switch (pathinfo($file, PATHINFO_EXTENSION)) {
+            case 'pdf': echo '<pdf>' . $file .'</pdf>';
+            break;
+            case 'rtf': echo '<rdf>' . $file . '</rdf>';
+            break;
+        }
+    }
+    echo '</files>';
 } else {
     recurse_rmdir($temprep);
     internalServerError('No pdf created');
