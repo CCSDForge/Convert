@@ -197,7 +197,7 @@ class Ccsd_Tex_Compile {
                 throw new TexCompileException("Latex2Rtf can't produce rtf file");
             }
         }
-        return [ $rtffile ];
+        return [ $rtffile => $rtffile ];
     }
 
 
