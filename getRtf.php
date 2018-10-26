@@ -26,7 +26,7 @@ $bin = $compilateur -> checkTexBin();
 try {
     $fileCreated1 = $compilateur -> compile($bin,$dir,$tex_files,$filename);
     $fileCreated2 = $compilateur -> runLatex2rtf($tex_files[0]);
-    $fileCreated1 = array_merge($fileCreated1, $fileCreated2);
+    $fileCreated = array_merge($fileCreated1, $fileCreated2);
     foreach ($fileCreated as $file => $destname) {
         copy("$temprep/$file", "$dir/$destname");
     }
