@@ -193,7 +193,7 @@ class Ccsd_Tex_Compile {
         if (is_file($texfile) && $this->is_executable($cmd) ) {
             $cmd = $cmd ." ".escapeshellarg($texfile);
             $this -> runCmd($cmd);
-            if ( is_file($rtffile)) {
+            if ( ! is_file($rtffile)) {
                 throw new TexCompileException("Latex2Rtf can't produce rtf file");
             }
         }

@@ -47,7 +47,7 @@ $GLOBALS['makeindex'] = "makeindex -q";
 $GLOBALS['dvips']     = "dvips -q -Ptype1";
 $GLOBALS['ps2pdf']    = "/usr/bin/ps2pdf14";
 $GLOBALS['chroot']    = "/usr/sbin/chroot";
-$GLOBALS['latex2rtf'] = "/usr/bin/latex2rtf";
+$GLOBALS['latex2rtf'] = "/usr/local/bin/latex2rtf";
 
 $conffile = __DIR__ . "/conf.php";
 if (file_exists($conffile)) {
