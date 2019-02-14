@@ -83,7 +83,7 @@ $dir = realpath(urldecode($dirparam));
 if ( $dir == '' || !is_dir($dir) ) {
     internalServerError("Source directory '$dir' not exist");
 }
-if ( !preg_match('+(^/docs/|/cache)+', $dir) ) {   # /docs/... pour Hal ou  pour sc
+if ( !preg_match('+(^/docs/|/cache|/nas/spm/docs)+', $dir) ) {   # /docs/... pour Hal ou  pour sc
     # Attention, il faut accepter les /docs/xx/xx/xx
     # Et les compilations de frontpage dans /docs/tmp/... 
     internalServerError("Directory '$dir' is not in the accepted path scope");                                               
@@ -115,7 +115,7 @@ if ( ($source != '') && is_file($dir.DIRECTORY_SEPARATOR.$source) ) { // un fich
         internalServerError('Can\'t copy source file "'.$dir.DIRECTORY_SEPARATOR.$source.'" to temp directory "'.$temprep.$source.'"');
     }
 } else { // on copie tout le répertoire $_POST['dir']
-    if ( in_array($dir, array('/docs/tmp/', '/docs/preprod/tmp/', '/docs/test/tmp/')) || false === recurse_copy($dir, $temprep, false) ) {
+    if ( in_array($dir, array('/docs/tmp/', '/docs/preprod/tmp/', '/docs/test/tmp/','/nas/spm/docs/tmp')) || false === recurse_copy($dir, $temprep, false) ) {
         internalServerError('Can\'t copy directory "'.$dir.'" to temp directory "'.$temprep.'"');
     }
 }
