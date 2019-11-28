@@ -115,7 +115,7 @@ if ( ($source != '') && is_file($dir.DIRECTORY_SEPARATOR.$source) ) { // un fich
         internalServerError('Can\'t copy source file "'.$dir.DIRECTORY_SEPARATOR.$source.'" to temp directory "'.$temprep.$source.'"');
     }
 } else { // on copie tout le répertoire $_POST['dir']
-    if ( in_array($dir, array('/docs/tmp/', '/docs/preprod/tmp/', '/docs/test/tmp/','/nas/spm/docs/tmp')) || false === recurse_copy($dir, $temprep, false) ) {
+    if (preg_match('|/tmp/?$|', $dir) || false === recurse_copy($dir, $temprep, false) ) {
         internalServerError('Can\'t copy directory "'.$dir.'" to temp directory "'.$temprep.'"');
     }
 }
