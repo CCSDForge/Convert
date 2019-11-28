@@ -112,10 +112,12 @@ if ( !mkdir($temprep, 0777, true) ) {
 // copie fichiers sources dans un répertoire tempo privé
 if ( ($source != '') && is_file($dir.DIRECTORY_SEPARATOR.$source) ) { // un fichier source est fourni
     if ( false === copy($dir.DIRECTORY_SEPARATOR.$source, $temprep.$source) ) {
+        error_log("Can't copy file $dir/$source to temp directory $temprep");
         internalServerError('Can\'t copy source file "'.$dir.DIRECTORY_SEPARATOR.$source.'" to temp directory "'.$temprep.$source.'"');
     }
 } else { // on copie tout le répertoire $_POST['dir']
     if (preg_match('|/tmp/?$|', $dir) || false === recurse_copy($dir, $temprep, false) ) {
+        error_log('Can\'t copy directory "'.$dir.'" to temp directory "'.$temprep.' (source=$source)"');
         internalServerError('Can\'t copy directory "'.$dir.'" to temp directory "'.$temprep.'"');
     }
 }
