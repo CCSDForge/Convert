@@ -2,7 +2,8 @@
 
 define('BASETEMPREP', '/tmp/ccsdtex');
 define('CHROOT', '/latexRoot');
-define('LATEX', '/usr/local/texlive/2016');     # Latex courant
+define('LATEX', '/usr/local/texlive/2020');     # Latex courant
+define('LATEX2020', '/usr/local/texlive/2020'); # Latex version
 define('LATEX2016', '/usr/local/texlive/2016'); # Latex version fixe 2016
 define('LATEX2014', '/usr/local/texlive/2014'); # Latex version fixe 2014
 

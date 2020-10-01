@@ -21,13 +21,10 @@ set_time_limit(0);
 
 /* Pour transition entre ccsd06 et MV */
 $arch = php_uname('m');
-if ($arch == 'x86_64') {
-    define('ARCH', 'x86_64-linux');
-    define('TEXLIVEVERSION', '2016');
-} else {
-    define('ARCH', 'i386-linux');
-    define('TEXLIVEVERSION', '2014');
-}
+
+/** Bon ce serait bien d'avoir ca en config globale...  */
+define('ARCH', 'x86_64-linux');
+define('TEXLIVEVERSION', '2020');
 
 /** Default configuration */
 

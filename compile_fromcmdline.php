@@ -8,23 +8,16 @@
 $options = getopt("D:");
 
 $directory=$options['D'];
-
-if (php_uname('m') == 'x86_64') {
-    define('ARCH', 'x86_64-linux');
-    define('TEXLIVEVERSION', '2016');
-} else {
-    define('ARCH', 'i386-linux');
-    define('TEXLIVEVERSION', '2014');
-}
+/** Bon ce serait bien d'avoir ca en config globale...  */
+define('TEXLIVEVERSION', '2020');
 define('BASETEMPREP', '/tmp/ccsdtex');
 define('CHROOT', '');
+define('LATEX2020', '/usr/local/texlive/2020'); # Latex version fixe 2020
 define('LATEX2016', '/usr/local/texlive/2016'); # Latex version fixe 2016
 define('LATEX2014', '/usr/local/texlive/2014'); # Latex version fixe 2014
-if (php_uname('m') == 'x86_64') {
-    define('LATEX', '/usr/local/texlive/2016');     # Latex courant
-} else {
-    define('LATEX', '/usr/local/texlive/2014');     # Latex courant
-}
+
+define('ARCH', 'x86_64-linux');
+define('LATEX', LATEX2020);     # Latex courant
 
 require __DIR__ . "/tex.php";
 $GLOBALS['texlive']   = LATEX;

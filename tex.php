@@ -35,7 +35,7 @@ class Ccsd_Tex_Compile {
     /** @var string */
     private $Texversion=null;
     /** @var string */
-    private $Arch = null;
+    public $Arch = null;
     /** @var string  */
     private static $ChrootCMD='/usr/sbin/chroot';
 
@@ -57,13 +57,9 @@ class Ccsd_Tex_Compile {
         $this -> debug       = $debug;
 
         $arch = php_uname('m');
-        if ($arch == 'x86_64') {
-            $this -> Arch = 'x86_64-linux';
-            $this -> Texversion= '2016';
-        } else {
-            $this -> Arch = 'i386-linux';
-            $this -> Texversion = '2014';
-        }
+        /** Bon ce serait bien d'avoir ca en config globale...  */
+        $this -> Arch = 'x86_64-linux';
+        $this -> Texversion= '2020';
 
         foreach ($paths as $type => $cmd) {
             if (preg_match('/tex|latex|pdflatex|bibtex|makeindex|dvips|ps2pdf/',$type)) {
