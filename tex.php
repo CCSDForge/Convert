@@ -59,7 +59,7 @@ class Ccsd_Tex_Compile {
         $arch = php_uname('m');
         /** Bon ce serait bien d'avoir ca en config globale...  */
         $this -> Arch = 'x86_64-linux';
-        $this -> Texversion= '2020';
+        $this -> Texversion= defined('TEXLIVEVERSION') ? TEXLIVEVERSION : '2020';
 
         foreach ($paths as $type => $cmd) {
             if (preg_match('/tex|latex|pdflatex|bibtex|makeindex|dvips|ps2pdf/',$type)) {

@@ -21,10 +21,20 @@ set_time_limit(0);
 
 /* Pour transition entre ccsd06 et MV */
 $arch = php_uname('m');
-
+$confFile = '/etc/default/convert';
 /** Bon ce serait bien d'avoir ca en config globale...  */
 define('ARCH', 'x86_64-linux');
-define('TEXLIVEVERSION', '2020');
+$texliveversion = 2020;  // by default... is it needed ? Can break if config not here ?
+# on a machine, we can choose the good latex version
+if (file_exists($confFile)) {
+    $config = file_get_contents($confFile);
+    $matches = [];
+    if (preg_match('/TEXLIVEVERSION\s+=\s+(\d+)/', $config, $matches)) {
+        $texliveversion = $matches[1];
+    }
+}
+
+define('TEXLIVEVERSION', $texliveversion);
 
 /** Default configuration */
 
@@ -58,13 +68,13 @@ putenv('PATH=/usr/local/texlive/'     . TEXLIVEVERSION . '/bin/' . ARCH . '/:/us
 
 function internalServerError($msg) {
     header('HTTP/1.1 500 Internal Server Error');
-    print("$msg\n");
+    print "$msg\n";
     exit;
 }
 
 if ( $_SERVER['REQUEST_METHOD'] != "POST" ) {
     header('HTTP/1.1 400 Bad Request');
-    print('Use POST HTTP method');
+    print 'Use POST HTTP method';
     exit;
 }
 
@@ -72,7 +82,7 @@ if ( $_SERVER['REQUEST_METHOD'] != "POST" ) {
 $dirparam=isset($_POST['dir']) ? $_POST['dir'] : '';
 if ( $dirparam == '' ) {
     header('HTTP/1.1 400 Bad Request');
-    print('Source directory undefined');
+    print 'Source directory undefined';
     exit;
 }
 // Répertoire des fichiers sources
@@ -80,10 +90,10 @@ $dir = realpath(urldecode($dirparam));
 if ( $dir == '' || !is_dir($dir) ) {
     internalServerError("Source directory '$dir' not exist");
 }
-if ( !preg_match('+(^/docs/|/cache|/nas/spm/docs|/nas/docs)+', $dir) ) {   # /docs/... pour Hal ou  pour sc
+if ( !preg_match('+^(/docs/|/cache|/nas/spm/docs|/nas/docs)+', $dir) ) {   # /docs/... pour Hal ou  pour sc
     # Attention, il faut accepter les /docs/xx/xx/xx
     # Et les compilations de frontpage dans /docs/tmp/... 
-    internalServerError("Directory '$dir' is not in the accepted path scope");                                               
+    internalServerError("Directory '$dir' is not in the accepted path scope");
 }
 $dir .= DIRECTORY_SEPARATOR;
 
@@ -110,7 +120,9 @@ if ( !mkdir($temprep, 0777, true) ) {
 if ( ($source != '') && is_file($dir.DIRECTORY_SEPARATOR.$source) ) { // un fichier source est fourni
     if ( false === copy($dir.DIRECTORY_SEPARATOR.$source, $temprep.$source) ) {
         error_log("Can't copy file $dir/$source to temp directory $temprep");
-        internalServerError('Can\'t copy source file "'.$dir.DIRECTORY_SEPARATOR.$source.'" to temp directory "'.$temprep.$source.'"');
+        internalServerError('Can\'t copy source file '
+            . " (Dirparam: $dirparam) : "
+            . '"'. $dir.DIRECTORY_SEPARATOR.$source.'" to temp directory "'.$temprep.$source.'"');
     }
 } else { // on copie tout le répertoire $_POST['dir']
     if (preg_match('|/tmp/?$|', $dir) || false === recurse_copy($dir, $temprep, false) ) {
