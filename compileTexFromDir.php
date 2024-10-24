@@ -126,7 +126,7 @@ if ( ($source != '') && is_file($dir.DIRECTORY_SEPARATOR.$source) ) { // un fich
     }
 } else { // on copie tout le répertoire $_POST['dir']
     if (preg_match('|/tmp/?$|', $dir) || false === recurse_copy($dir, $temprep, false) ) {
-        error_log('Can\'t copy directory "'.$dir.'" to temp directory "'.$temprep.' (source=$source)"');
+        error_log('Can\'t copy directory "'.$dir.'" to temp directory "'.$temprep." (source=$source)");
         internalServerError('Can\'t copy directory "'.$dir.'" to temp directory "'.$temprep.'"');
     }
 }
