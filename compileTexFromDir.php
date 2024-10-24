@@ -1,14 +1,14 @@
 <?php
 
 /*
-  En entree, la requete est:
+  En entree, la requete est :
     de type POST
-    parametres:
-       - dir: (commence par  /docs/ ou /cache)
-       - source: 
-       - stopOnError: 
-       - withLogFile: 
-       - fileName: 
+    parametres :
+       - dir : (commence par  /docs/ ou /cache)
+       - source :
+       - stopOnError :
+       - withLogFile :
+       - fileName :
  */
 /**
  * LIMITS: Original documents must be in directory name as /docs/ or /cache/
@@ -22,7 +22,7 @@ set_time_limit(0);
 /* Pour transition entre ccsd06 et MV */
 $arch = php_uname('m');
 $confFile = '/etc/default/convert';
-/** Bon ce serait bien d'avoir ca en config globale...  */
+/** Bon ce serait bien d'avoir ça en config globale...  */
 define('ARCH', 'x86_64-linux');
 $texliveversion = 2020;  // by default... is it needed ? Can break if config not here ?
 # on a machine, we can choose the good latex version
@@ -57,7 +57,7 @@ $GLOBALS['chroot']    = "/usr/sbin/chroot";
 
 $conffile = __DIR__ . "/conf.php";
 if (file_exists($conffile)) {
-    include $conffile;
+    include_once $conffile;
 }
 
 define('CHROOT', $CHROOT);
@@ -90,9 +90,9 @@ $dir = realpath(urldecode($dirparam));
 if ( $dir == '' || !is_dir($dir) ) {
     internalServerError("Source directory '$dir' not exist");
 }
-if ( !preg_match('+^(/docs/|/cache|/nas/spm/docs|/nas/docs)+', $dir) ) {   # /docs/... pour Hal ou  pour sc
+if ( !preg_match('+^(/docs/|/cache|/nas/spm/docs|/nas/docs)+', $dir) ) {   # /docs/... pour Hal ou pour sc
     # Attention, il faut accepter les /docs/xx/xx/xx
-    # Et les compilations de frontpage dans /docs/tmp/... 
+    # Et les compilations de frontpage dans /docs/tmp/...
     internalServerError("Directory '$dir' is not in the accepted path scope");
 }
 $dir .= DIRECTORY_SEPARATOR;
@@ -117,14 +117,14 @@ if ( !mkdir($temprep, 0777, true) ) {
     internalServerError('Can\'t make temp directory' . $temprep);
 }
 // copie fichiers sources dans un répertoire tempo privé
-if ( ($source != '') && is_file($dir.DIRECTORY_SEPARATOR.$source) ) { // un fichier source est fourni
+if ( ($source != '') && is_file($dir.DIRECTORY_SEPARATOR.$source) ) { // un fichier source est fourni.
     if ( false === copy($dir.DIRECTORY_SEPARATOR.$source, $temprep.$source) ) {
         error_log("Can't copy file $dir/$source to temp directory $temprep");
         internalServerError('Can\'t copy source file '
             . " (Dirparam: $dirparam) : "
             . '"'. $dir.DIRECTORY_SEPARATOR.$source.'" to temp directory "'.$temprep.$source.'"');
     }
-} else { // on copie tout le répertoire $_POST['dir']
+} else { // on copie tout le répertoire $_POST['dir'].
     if (preg_match('|/tmp/?$|', $dir) || false === recurse_copy($dir, $temprep, false) ) {
         error_log('Can\'t copy directory "'.$dir.'" to temp directory "'.$temprep." (source=$source)");
         internalServerError('Can\'t copy directory "'.$dir.'" to temp directory "'.$temprep.'"');
@@ -156,7 +156,7 @@ try {
         }
     }
 } catch (TexCompileException $e) {
-    // Recuperation des log en cas d'erreur!
+    // Recuperation des logs en cas d'erreurs !
     $logfile = $e -> logfile;
     error_log("$tempchrootrep ne compile pas. Logfile: $logfile . Et message: " . $e ->getMessage());
     if (isset($logfile) && file_exists($logfile)) {
