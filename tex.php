@@ -141,6 +141,10 @@ class Ccsd_Tex_Compile {
      * @return boolean
      * */
     function is_executable($cmd) {
+        $config = \Convert\Config::getConfig();
+        if ($config->get('use.docker')){
+            return true;
+        }
         if ( strpos($cmd, ' ') >0) {
             $binpath=$this ->chroot . substr($cmd, 0, strpos($cmd, ' '));
         } else {
@@ -154,10 +158,14 @@ class Ccsd_Tex_Compile {
      * @return mixed
      */
     function runCmd($cmd) {
+        $config = \Convert\Config::getConfig();
         $shellcmd = "cd  " . $this->get_compileDir() .";$cmd";
         $chrootcmd=$this -> get_chrootcmd();
         $chrootdir=$this -> get_chroot();
-        if ($this -> is_chrooted()) {
+        if ($config->get('use.docker')) {
+            $dockerService = $config->get('docker.service');
+            $chrootedcmd = "docker compose run --rm -u root $dockerService bash -c " . escapeshellarg($shellcmd);
+        } elseif ($this -> is_chrooted()) {
             $chrootedcmd = "sudo $chrootcmd $chrootdir bash -c " . escapeshellarg($shellcmd);
         } else {
             $chrootedcmd = $cmd;

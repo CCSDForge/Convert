@@ -9,7 +9,7 @@
 
 require_once "tex.php";
 
-class Ccsd_Tex_CompileTest extends PHPUnit_Framework_TestCase
+class Ccsd_Tex_CompileTest extends \PHPUnit\Framework\TestCase
 {
     /**
      * @dataProvider provide_testcheckTexBinForFile
