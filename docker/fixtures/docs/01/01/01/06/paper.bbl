@@ -1,0 +1,218 @@
+\begin{thebibliography}{26}
+\expandafter\ifx\csname natexlab\endcsname\relax\def\natexlab#1{#1}\fi
+\providecommand{\bibinfo}[2]{#2}
+\ifx\xfnm\relax \def\xfnm[#1]{\unskip,\space#1}\fi
+%Type = Article
+\bibitem[{Muller et~al.(2013)Muller, Mognol, and Hascoet}]{Muller2013}
+\bibinfo{author}{P.~Muller}, \bibinfo{author}{P.~Mognol},
+  \bibinfo{author}{J.~Hascoet},
+\newblock \bibinfo{title}{{Modeling and control of a direct laser powder
+  deposition process for Functionally Graded Materials (FGM) parts
+  manufacturing}},
+\newblock \bibinfo{journal}{Journal of Materials Processing Technology}
+  \bibinfo{volume}{213} (\bibinfo{year}{2013}) \bibinfo{pages}{685--692}.
+%Type = Article
+\bibitem[{Tomlin and Meyer(2011)}]{Tomlin2011}
+\bibinfo{author}{M.~Tomlin}, \bibinfo{author}{J.~Meyer},
+\newblock \bibinfo{title}{{Topology optimization of an additive layer
+  manufactured ( ALM ) aerospace part}},
+\newblock \bibinfo{journal}{Proceeding of the 7th Altair CAE technology
+  conference}  (\bibinfo{year}{2011}) \bibinfo{pages}{1--9}.
+%Type = Article
+\bibitem[{Yadroitsev et~al.(2007)Yadroitsev, Thivillon, Bertrand, and
+  Smurov}]{Yadroitsev2007}
+\bibinfo{author}{I.~Yadroitsev}, \bibinfo{author}{L.~Thivillon},
+  \bibinfo{author}{P.~Bertrand}, \bibinfo{author}{I.~Smurov},
+\newblock \bibinfo{title}{{Strategy of manufacturing components with designed
+  internal structure by selective laser melting of metallic powder}},
+\newblock \bibinfo{journal}{Applied Surface Science} \bibinfo{volume}{254}
+  (\bibinfo{year}{2007}) \bibinfo{pages}{980--983}.
+%Type = Article
+\bibitem[{Dubourg and Archambeault(2008)}]{Dubourg2008}
+\bibinfo{author}{L.~Dubourg}, \bibinfo{author}{J.~Archambeault},
+\newblock \bibinfo{title}{{Technological and scientific landscape of laser
+  cladding process in 2007}},
+\newblock \bibinfo{journal}{Surface and Coatings Technology}
+  \bibinfo{volume}{202} (\bibinfo{year}{2008}) \bibinfo{pages}{5863--5869}.
+%Type = Article
+\bibitem[{Kerbrat et~al.(2011)Kerbrat, Mognol, and Hascoet}]{Kerbrat2011a}
+\bibinfo{author}{O.~Kerbrat}, \bibinfo{author}{P.~Mognol},
+  \bibinfo{author}{J.~Hascoet},
+\newblock \bibinfo{title}{{A new DFM approach to combine machining and additive
+  manufacturing}},
+\newblock \bibinfo{journal}{Computers in Industry} \bibinfo{volume}{62}
+  (\bibinfo{year}{2011}) \bibinfo{pages}{684--692}.
+%Type = Article
+\bibitem[{Tang and Landers(2011)}]{Tang2011}
+\bibinfo{author}{L.~Tang}, \bibinfo{author}{R.~G. Landers},
+\newblock \bibinfo{title}{{Layer-to-layer height Control for laser metal
+  deposition Process}},
+\newblock \bibinfo{journal}{Journal of Manufacturing Science and Engineering}
+  \bibinfo{volume}{133} (\bibinfo{year}{2011}) \bibinfo{pages}{1--9}.
+%Type = Article
+\bibitem[{Salehi and Brandt(2005)}]{Salehi2005}
+\bibinfo{author}{D.~Salehi}, \bibinfo{author}{M.~Brandt},
+\newblock \bibinfo{title}{{Melt pool temperature control using LabVIEW in
+  Nd:YAG laser blown powder cladding process}},
+\newblock \bibinfo{journal}{The International Journal of Advanced Manufacturing
+  Technology} \bibinfo{volume}{29} (\bibinfo{year}{2005})
+  \bibinfo{pages}{273--278}.
+%Type = Article
+\bibitem[{Bi et~al.(2007)Bi, Schurmann, Gasser, Wissenbach, and
+  Poprawe}]{Bi2007}
+\bibinfo{author}{G.~Bi}, \bibinfo{author}{B.~Schurmann},
+  \bibinfo{author}{A.~Gasser}, \bibinfo{author}{K.~Wissenbach},
+  \bibinfo{author}{R.~Poprawe},
+\newblock \bibinfo{title}{{Development and qualification of a novel
+  laser-cladding head with integrated sensors}},
+\newblock \bibinfo{journal}{International Journal of Machine Tools and
+  Manufacture} \bibinfo{volume}{47} (\bibinfo{year}{2007})
+  \bibinfo{pages}{555--561}.
+%Type = Article
+\bibitem[{Boddu et~al.(2001)Boddu, Musti, Landers, Agarwal, and
+  Liou}]{Boddu2001a}
+\bibinfo{author}{M.~Boddu}, \bibinfo{author}{S.~Musti},
+  \bibinfo{author}{R.~Landers}, \bibinfo{author}{S.~Agarwal},
+  \bibinfo{author}{F.~Liou},
+\newblock \bibinfo{title}{{Empirical modeling and vision based control for
+  laser aided metal deposition process}},
+\newblock \bibinfo{journal}{Proceedings of the twelfth Annual International
+  Solid Freeform Fabrication Symposium}  (\bibinfo{year}{2001})
+  \bibinfo{pages}{452--459}.
+%Type = Article
+\bibitem[{Alimardani et~al.(2009)Alimardani, Toyserkani, Huissoon, and
+  Paul}]{Alimardani2009a}
+\bibinfo{author}{M.~Alimardani}, \bibinfo{author}{E.~Toyserkani},
+  \bibinfo{author}{J.~P. Huissoon}, \bibinfo{author}{C.~P. Paul},
+\newblock \bibinfo{title}{{On the delamination and crack formation in a thin
+  wall fabricated using laser solid freeform fabrication process: An
+  experimental-numerical investigation}},
+\newblock \bibinfo{journal}{Optics and Lasers in Engineering}
+  \bibinfo{volume}{47} (\bibinfo{year}{2009}) \bibinfo{pages}{1160--1168}.
+%Type = Article
+\bibitem[{Foroozmehr and Kovacevic(2010)}]{Foroozmehr2010}
+\bibinfo{author}{E.~Foroozmehr}, \bibinfo{author}{R.~Kovacevic},
+\newblock \bibinfo{title}{{Effect of path planning on the laser powder
+  deposition process: thermal and structural evaluation}},
+\newblock \bibinfo{journal}{The International Journal of Advanced Manufacturing
+  Technology} \bibinfo{volume}{51} (\bibinfo{year}{2010})
+  \bibinfo{pages}{659--669}.
+%Type = Article
+\bibitem[{Kao and Prinz(1998)}]{Kao1998}
+\bibinfo{author}{J.~Kao}, \bibinfo{author}{F.~B. Prinz},
+\newblock \bibinfo{title}{{Optimal motion planning for deposition in layered
+  manufacturing}},
+\newblock \bibinfo{journal}{Proceedings of Design Engineering Technical
+  Conferences}  (\bibinfo{year}{1998}) \bibinfo{pages}{13--16}.
+%Type = Inproceedings
+\bibitem[{Bonnard et~al.(2009)Bonnard, Mognol, and Hasco\"{e}t}]{Bonnard2009}
+\bibinfo{author}{R.~Bonnard}, \bibinfo{author}{P.~Mognol},
+  \bibinfo{author}{J.~Y. Hasco\"{e}t},
+\newblock \bibinfo{title}{{Integration of Rapid Manufacturing processes in a
+  high-level numerical chain}},
+\newblock in: \bibinfo{booktitle}{4th International Conference on Advanced
+  Research in Virtual and Rapid Prototyping}, \bibinfo{address}{Leiria,
+  Portugal}, pp. \bibinfo{pages}{595--601}.
+%Type = Article
+\bibitem[{Ponche et~al.(2012{\natexlab{a}})Ponche, Kerbrat, Mognol, and
+  Hasco\"{e}t}]{Ponche2012a}
+\bibinfo{author}{R.~Ponche}, \bibinfo{author}{O.~Kerbrat},
+  \bibinfo{author}{P.~Mognol}, \bibinfo{author}{J.~Y. Hasco\"{e}t},
+\newblock \bibinfo{title}{{Consideration of the manufacturing trajectories in a
+  global design for additive manufacturing methodology}},
+\newblock \bibinfo{journal}{Proceedings of ASME 2012, the 11th Biennial
+  Conference On Engineering Systems Design and Analysis}
+  (\bibinfo{year}{2012}{\natexlab{a}}).
+%Type = Article
+\bibitem[{Ponche et~al.(2012{\natexlab{b}})Ponche, Hascoet, Kerbrat, and
+  Mognol}]{Ponche2012}
+\bibinfo{author}{R.~Ponche}, \bibinfo{author}{J.~Y. Hascoet},
+  \bibinfo{author}{O.~Kerbrat}, \bibinfo{author}{P.~Mognol},
+\newblock \bibinfo{title}{{A new global approach to design for additive
+  manufacturing}},
+\newblock \bibinfo{journal}{Virtual and Physical Prototyping Journal}
+  \bibinfo{volume}{7} (\bibinfo{year}{2012}{\natexlab{b}})
+  \bibinfo{pages}{93--105}.
+%Type = Article
+\bibitem[{Byun and Lee(2005)}]{Byun2005a}
+\bibinfo{author}{H.~S. Byun}, \bibinfo{author}{K.~H. Lee},
+\newblock \bibinfo{title}{{Determination of optimal build direction in rapid
+  prototyping with variable slicing}},
+\newblock \bibinfo{journal}{The International Journal of Advanced Manufacturing
+  Technology} \bibinfo{volume}{28} (\bibinfo{year}{2005})
+  \bibinfo{pages}{307--313}.
+%Type = Article
+\bibitem[{Canellidis et~al.(2009)Canellidis, Giannatsis, and
+  Dedoussis}]{Canellidis2009}
+\bibinfo{author}{V.~Canellidis}, \bibinfo{author}{J.~Giannatsis},
+  \bibinfo{author}{V.~Dedoussis},
+\newblock \bibinfo{title}{{Genetic-algorithm-based multi-objective optimization
+  of the build orientation in stereolithography}},
+\newblock \bibinfo{journal}{The International Journal of Advanced Manufacturing
+  Technology} \bibinfo{volume}{45} (\bibinfo{year}{2009})
+  \bibinfo{pages}{714--730}.
+%Type = Article
+\bibitem[{Li et~al.(2006)Li, Wang, Li, and Zhao}]{Li2006}
+\bibinfo{author}{Y.~Li}, \bibinfo{author}{J.~Wang}, \bibinfo{author}{X.~Li},
+  \bibinfo{author}{W.~Zhao},
+\newblock \bibinfo{title}{{Design creativity in product innovation}},
+\newblock \bibinfo{journal}{The International Journal of Advanced Manufacturing
+  Technology} \bibinfo{volume}{33} (\bibinfo{year}{2006})
+  \bibinfo{pages}{213--222}.
+%Type = Article
+\bibitem[{nhsien Liao et~al.(2008)nhsien Liao, chen Fei, and Liu}]{Liao2008}
+\bibinfo{author}{S.~nhsien Liao}, \bibinfo{author}{W.~chen Fei},
+  \bibinfo{author}{C.~T. Liu},
+\newblock \bibinfo{title}{{Relationships between knowledge inertia ,
+  organizational learning and organization innovation}},
+\newblock \bibinfo{journal}{Technovation} \bibinfo{volume}{28}
+  (\bibinfo{year}{2008}) \bibinfo{pages}{183--195}.
+%Type = Book
+\bibitem[{Bendsoe and Sigmund(2003)}]{bendsoe2003topology}
+\bibinfo{author}{M.~P. Bendsoe}, \bibinfo{author}{O.~Sigmund},
+  \bibinfo{title}{{Topology optimization: theory, methods, and applications}},
+  \bibinfo{publisher}{Springer Verlag}, \bibinfo{year}{2003}.
+%Type = Misc
+\bibitem[{Topostruct(2003)}]{TOPSTRUC}
+\bibinfo{author}{Topostruct}, \bibinfo{title}{http://www.sawapan.eu/},
+  \bibinfo{year}{2003}.
+%Type = Article
+\bibitem[{{El Cheikh} et~al.(2012){El Cheikh}, Courant, Branchu, Hasco\"{e}t,
+  and Guill\'{e}n}]{ElCheikh2012}
+\bibinfo{author}{H.~{El Cheikh}}, \bibinfo{author}{B.~Courant},
+  \bibinfo{author}{S.~Branchu}, \bibinfo{author}{J.-Y. Hasco\"{e}t},
+  \bibinfo{author}{R.~Guill\'{e}n},
+\newblock \bibinfo{title}{{Analysis and prediction of single laser tracks
+  geometrical characteristics in coaxial laser cladding process}},
+\newblock \bibinfo{journal}{Optics and Lasers in Engineering}
+  \bibinfo{volume}{50} (\bibinfo{year}{2012}) \bibinfo{pages}{413--422}.
+%Type = Article
+\bibitem[{Karunakaran et~al.(2008)Karunakaran, Pushpa, {Babu Akula}, and
+  Suryakumar}]{Karunakaran2008}
+\bibinfo{author}{K.~Karunakaran}, \bibinfo{author}{V.~Pushpa},
+  \bibinfo{author}{S.~{Babu Akula}}, \bibinfo{author}{S.~Suryakumar},
+\newblock \bibinfo{title}{{Techno economic analysis of hybrid layered
+  manufacturing}},
+\newblock \bibinfo{journal}{International Journal of Intelligent Systems
+  Technologies and Applications} \bibinfo{volume}{4} (\bibinfo{year}{2008})
+  \bibinfo{pages}{161--176}.
+%Type = Book
+\bibitem[{Diestel(1997)}]{Diestel1997}
+\bibinfo{author}{R.~Diestel}, \bibinfo{title}{{Graph Theory}},
+  \bibinfo{edition}{springer-v} edition, \bibinfo{year}{1997}.
+%Type = Article
+\bibitem[{Alimardani et~al.(2007)Alimardani, Toyserkani, and
+  Huissoon}]{Alimardani2007}
+\bibinfo{author}{M.~Alimardani}, \bibinfo{author}{E.~Toyserkani},
+  \bibinfo{author}{J.~Huissoon},
+\newblock \bibinfo{title}{{A 3D dynamic numerical approach for temperature and
+  thermal stress distributions in multilayer laser solid freeform fabrication
+  process}},
+\newblock \bibinfo{journal}{Optics and Lasers in Engineering}
+  \bibinfo{volume}{45} (\bibinfo{year}{2007}) \bibinfo{pages}{1115--1130}.
+%Type = Misc
+\bibitem[{Morfeo(2012)}]{Cenaero2012}
+\bibinfo{author}{Morfeo}, \bibinfo{title}{http://www.cenaero.be/},
+  \bibinfo{year}{2012}.
+
+\end{thebibliography}

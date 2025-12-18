@@ -1,0 +1,703 @@
+
+We have argued that $\mu$-functors are closed under parameterized
+initial algebras: by the Beki\v{c} property, it becomes possible to
+construct initial solutions of systems of functorial equations by
+means of $\mu$-terms. The arising algebraic expressions representing
+the solution of a system are however large in the dimension of the
+system and are not unique.  Moreover, a large algebraic expression
+could be useless for understanding its denotation in concrete
+categories.  For this reason we would like to have some kind of
+``smooth'' terms for the theory of $\mu$-bicomplete categories. These
+terms should have a compact representation and possibly they should be
+suggestive of their semantics.  To achieve this goal, the central
+notion is that of parity game, cf.  for example \cite{zie,AN01}. We
+define it here in a slightly generalized way.
+\begin{dfntn}
+  A \emph{parity game} is a tuple $G = \langle S,\hg,\kappa
+  ,\epsilon\rangle$, where
+  \begin{itemize}
+  \item $S =\langle \dom,\cod : M \rTo P \rangle$ is a finite graph of
+    positions and moves.
+  \item $\hg: P \rTo \agset{n}$ is a function such that, if $\hg(p)
+    = \omega$, then $\{ \,m\,| \,\dom(m) = p \,\} = \emptyset$.  
+  \item $\kappa : \set{n} \rTo \{ \mu, \nu \}$.
+  \item $\epsilon: \{\, p \in P \,| \,\hg(p) \neq \omega \,\} \rTo \{
+    \sigma,\pi \}$.
+  \end{itemize}
+\end{dfntn}
+
+We fix some terminology and notation. If $\hg : P \rTo \agset{n}$,
+then we shall say that $n$ is the \emph{height} of $G$ and write
+$\height{G} = n$.  For each $p \in P$, we let $M_{p}$ be the set
+$\dom^{-1}(p)$. We let $P_{i} = \hg^{-1}(i)$, $P_{<i} = \bigcup_{j <
+  i} P_{j}$, $P_{\leq i} = \bigcup_{j \leq i} P_{j}$ for $i \in
+\agset{n}$. We shall also use the notation $P_{\geq i}$ for the set
+$\bigcup_{j \geq i} P_{j}$. Unless specified we will assume that the
+underlying structure of a given parity game $G$ is the tuple $\langle
+S,\hg,\kappa ,\epsilon\rangle$, $S$ being the graph $\langle
+P,M,\dom,\cod\rangle$. A pointed parity game is a pair $\langle G, p
+\rangle$ where $G$ is a parity game and $p \in P$.
+
+\vspace{0.5em}
+
+We interpret the above data as a two person game $G(E)$, parameterized
+in a choice of sets $E = \{ E_{x} \}_{x \in P_{\omega}}$.  The graph
+$S$ is a board with a set of positions $P$ and a set of allowed moves
+$M$. A move $m \in M$ is from position $\dom(m)$ to position
+$\cod(m)$; observe that we allow different moves relating the same
+pair of positions; also, the two players need not to alternate.  From
+a position $p$ the set of moves $M_{p}$ is available and player
+$\epsilon(p)$ among players $\sigma$ and $\pi$ must choose how to
+move.  The normal play condition holds: if a player cannot move, then
+he loses.  On an infinite play $\gamma = \gamma_{0} \rightarrow
+\gamma_{1}\rightarrow \ldots \gamma_{n} \rightarrow \ldots $ we will
+be able to find regions among $P_{1},\ldots ,P_{n}$ which are visited
+infinitely often, and among them we will be able to pick a region
+$P_{i}$ with $i$ maximal.  Then, this infinite path is a win for
+player $\sigma$ if and only if $i$ is colored by $\nu$. More formally,
+if we let
+\begin{eqnarray}
+  \label{eq:in}
+  \In \gamma & = & \{\, i \in \set{n} \,|\,\card \{\, l\,|\,\hg(
+  \gamma_{l} ) = i \,\} = \omega \,\}\,, 
+\end{eqnarray}
+then $\gamma$ is a  win for player $\sigma$ if and only if
+\begin{eqnarray*}
+\kappa(\, \max \In \gamma\,) & = & \nu\,.
+\end{eqnarray*}
+If a play ends in a position $x \in P_{\omega}$, then player $\sigma$
+must choose an element $e \in E_{x}$, and then he wins. If $E_{x} =
+\emptyset$, then he loses.
+
+We remark that if $P_{\omega} = \emptyset$, then the above data and
+game theoretic interpretation coincide with the usual one \cite[\S
+4]{AN01}.  From a game theoretic point of view, we are allowed to
+normalize the functions $\hg$ and $\kappa$, so that we can always
+suppose that $\kappa(i) = \nu$ if and only if $i$ is odd. In this case
+an infinite play $\gamma$ is a win for player $\sigma$ if and only if
+the region visited infinitely often in $\gamma$ of maximal height is
+odd, whence the name of ``parity game''.
+
+In the theory of automata recognizing infinite objects the way of
+specifying a set of infinite paths in a graph is called an acceptance
+condition.  The acceptance condition by which we specify the set of
+infinite winning plays for player $\sigma$ was introduced by Mostowski
+in \cite{MR827531} and is also known as a Rabin chain condition. Under
+the hypothesis that $\kappa(i) = \nu$ if and only if $i$ is odd and
+that $\height{G} = 2n$, we can let $F_{k} = P_{\geq 2k-1}$ and $E_{k}
+= P_{\geq 2k}$ for $k =1,\ldots ,n$. These sets form a decreasing
+chain and moreover the pairs $(F_{k},E_{k})_{k = 1,\ldots ,n}$ are
+Rabin pairs for the set of infinite winning plays for player $\sigma$,
+meaning that an infinite path $\gamma$ is a win for player $\sigma$ if
+and only if there exists $k \in \{1,\ldots ,n \}$ such that $\In
+\gamma \cap F_{k} \neq \emptyset$ and $\In \gamma \cap E_{k} =
+\emptyset$. There are other ways of characterizing this acceptance
+condition by means of Muller tables \cite{MR95a:90238}, but we won't
+investigate this subject further. On the other hand we recall that
+parity games are essential tools for model checking. For example, it
+is shown in \cite{MR1826118} that the problem of deciding whether
+player $\sigma$ has a winning strategy from a given position of a
+parity game is equivalent -- under linear reduction -- to the problem
+of deciding whether a $\mu$-calculus formula holds in a given model.
+
+The goal of adding positions at infinite height is to make it possible
+to analyze parity games inductively. The main tool for this is the
+predecessor game of a parity game, whose construction we illustrate in
+figure \ref{fig:P(G)}. The game on the right is obtained from the one
+on the left by erasing all the moves from the region of maximal finite
+height.
+\begin{figure}[h]
+  \centering
+  $$
+  \mygame[3em]{
+    []!E{1}([r]!E{2}="A") [d]!O{3}([r]!P{4}) [d]!P{5}([r]!P{6})
+    [d]!P{7}([r]!O{8}) "3"(:"1",:"5") "5"(:"7",:"6") "7"(:"6")
+    "4"(:"3",:@/^0.2em/"6") "6"(:"8",:@/^0.7em/"4")
+    "8"(:"7",:@/_2em/"2") "1"("2"!L{}{\omega}) "3"("4"!L{\nu}{3})
+    "5"("6"!L{\mu}{2}) "7"("8"!L{\nu}{1}) }
+  \hspace{4em}
+  \mygame[3em]{ []!E{1}([r]!E{2}="A") [d]!E{3}([r]!E{4})
+    [d]!P{5}([r]!P{6}) [d]!P{7}([r]!O{8}) 
+    "5"(:"7",:"6") "7"(:"6") 
+    "6"(:"8",:@/^0.7em/"4") "8"(:"7",:@/_2em/"2") "1"("4"!L{}{\omega})
+    "5"("6"!L{\mu}{2}) "7"("8"!L{\nu}{1}) }
+  $$
+  \vspace{-11mm}
+  \caption{On the left a parity game, on the right its 
+    predecessor game.}
+  \label{fig:P(G)}
+\end{figure}
+
+\begin{dfntn}
+  If $G = \langle S,\hg,\kappa ,\epsilon\rangle$ is a parity game of
+  height $n > 0$, then its \emph{predecessor game} $P(G)$, of height
+  $n-1$, is obtained from $G$ by erasing all the moves from $P_{n}$.
+  More precisely, $P(G) = \langle S',\hg',\kappa',\epsilon' \rangle$,
+  where:
+  \begin{itemize}
+  \item $S' = \langle \dom,\cod: \dom^{-1}(P_{< n})
+    \rTo P\rangle$.
+  \item $\hg'(p) = \hg(p)$ if $\hg(p) < n$, otherwise $\hg'(p) =
+    \omega$.
+  \item For $i \in \set{n-1}$, we let $\kappa'(i) = \kappa(i)$.
+  \item If $\hg'(p) < n$, then we let $\epsilon'(p) = \epsilon(p)$.
+  \end{itemize}
+\end{dfntn}
+
+In the following we shall endow the data defining a parity game with
+an algebraic meaning. We let $\Cat{C}$ be a fixed category with finite
+products and finite coproducts.  If $G$ is a parity game, then for
+each $p \in P_{< \omega}$ we let
+$$
+\begin{array}{cclcl}
+  \prj(\cod,p)
+  & = &  \ltuple \prj_{\cod(m)}
+  \rtuple_{ m \in M_{p} }
+  &:& \Cat{C}^{P} \rTo
+  \Cat{C}^{M_{p}} \\[2mm]
+  \EQ_{p} & = & 
+  \left \{
+    \begin{array}{@{\hspace{0.5em}}ll}
+      \prod \circ \prj(\cod,p)\,,&\epsilon(p) =
+      \pi\\[2mm]
+      \coprod \circ \prj(\cod,p) \,,&\epsilon(p) = \sigma
+    \end{array}\right.
+  &:& \Cat{C}^{P} \rTo
+  \Cat{C} \,.
+\end{array}
+$$
+For $k = 1,\ldots ,\height{G}$ we let
+$$
+\begin{array}{cclcl}
+  \EQ_{k} & = & 
+  \ltuple \EQ_{p}\rtuple_{p \in P_{k}}
+  &: & \Cat{C}^{P} \rTo
+  \Cat{C}^{P_{k}}
+\end{array}
+$$
+and finally we let $\EQ_{G} = \EQ_{\height{G}}$.
+
+
+
+\begin{dfntn}
+  We define a partial correspondence $\val{-}$,  mapping a parity
+  game $G$ to a functor $\val{G}:\Cat{C}^{P_{\omega}} \rTo
+  \Cat{C}^{P_{< \omega}}$, by induction on the height, as follows.  If
+  $\height{G} = 0$, then $P_{< \omega} = \emptyset$ so that there is a
+  unique choice of $\val{G}$.  Suppose that $\height{G} = n > 0$ and
+  that $\val{P(G)}$ is defined. Let
+    \begin{eqnarray*}
+      F & = &\val{P(G)}\circ \prj_{\Cat{C}^{P_{n}}\times \Cat{C}^{P_{\omega}}},
+    \end{eqnarray*}
+    and consider the functor
+    $$
+    \Cat{C}^{P_{< n }} \times \Cat{C}^{P_{n}}\times
+    \Cat{C}^{P_{\omega}} \rTo[l>=4em]^{\ltuple F,\, \EQ_{G} \rtuple }
+    \Cat{C}^{P_{< n}} \times \Cat{C}^{P_{n}}\,.
+    $$
+    If $\kappa(n) = \mu$, then we let $\val{G}$ be the
+    parameterized initial algebra of the above functor, otherwise, if
+    $\kappa(n ) = \nu$, we let $\val{G}$ be its parameterized final
+    coalgebra. If $\val{P(G)}$ is undefined or if the required initial
+    algebras or final coalgebras do not exist, then $\val{G}$ is
+    undefined. 
+    We say that $\Cat{C}$ is \emph{complete with respect
+      to parity games} if for each parity game $G$, the functor
+    $\val{G}:\Cat{C}^{P_{\omega}} \rTo \Cat{C}^{P_{< \omega}}$ is
+    defined. 
+\end{dfntn}
+
+Whenever the functor $\val{G}: \Cat{C}^{P_{\omega}} \rTo
+\Cat{C}^{P_{<\omega}}$ is defined, it is useful to extend it to a
+functor $\sval{G}:\Cat{C}^{P_{\omega}} \rTo \Cat{C}^{P}$, in the
+obvious way, by setting
+$$
+\sval{G} = \langle \val{G},\id_{\Cat{C}^{P_{\omega}}}\rangle
+: \Cat{C}^{P_{\omega}} \rTo \Cat{C}^{P_{<\omega}}\times \Cat{C}^{P_{\omega}}\,.
+$$
+Observe that, according to proposition \ref{prop:bekic3}, the
+functor $\prj_{\height{G}} \circ \val{G}$ is a parameterized initial
+algebra (or final coalgebra) of the functor $\EQ_{G}\circ
+\sval{P(G)}$. Moreover, according to the same proposition, the value
+of $\val{G}$ is completely determined up to natural isomorphism by
+$\prj_{\height{G}} \circ \val{G}$ and $\val{P(G)}$. Hence, in order to
+prove that $\val{G}$ and $\val{H}$ are naturally isomorphic, it is
+enough to prove that $\EQ_{G}$ and $\EQ_{H}$ are naturally isomorphic,
+that $\kappa(\height{G}) = \kappa(\height{H})$, and that $\val{P(G)}$
+is naturally isomorphic to $\val{P(H)}$.
+
+\begin{dfntn}
+  We say that a functor $F: \Cat{C}^{I} \rTo \Cat{C}^{J}$ is a
+  \emph{parity functor} if it is naturally isomorphic to a functor of
+  the form $\prj_{J} \circ \sval{G}$, where $G$ is a parity game such
+  that $P_{\omega} = I$ and $J \subseteq P$ is a subset of positions.
+\end{dfntn}
+If in the previous lemma $I = \{p \}$ is a singleton, we will use the
+notation $\sval{G}_{p}$ for the functor $\prj_{p} \circ \sval{G}$.
+
+In the following two lemmas, needed in the proof of proposition
+\ref{prop:termstogames}, we exemplify how game theoretical ideas lift
+to the algebra.  In \ref{def:suspension} we introduce two
+constructions which respectively introduce and eliminate holes in the
+height. The first construction is exemplified in figure
+\ref{fig:suspension}. In \ref{def:normalized} and
+\ref{lemma:normalized} we show that regions of contiguous heights can
+always be assumed to be non empty and have different colors $\{\mu,\nu
+\}$.  These constructions are shown to be algebraic invariants.
+\begin{figure}[h]
+  \centering
+  $$
+  \mygame[3em]{
+    []!E{1}([r]!E{2}="A") [d]!O{3}([r]!P{4}) [d]!P{5}([r]!P{6})
+    [d]!P{7}([r]!O{8}) "3"(:"1",:"5") "5"(:"7",:"6") "7"(:"6")
+    "4"(:"3",:@/^0.2em/"6") "6"(:"8",:@/^0.7em/"4")
+    "8"(:"7",:@/_2em/"2") "1"("2"!L{}{\omega}) "3"("4"!L{\nu}{3})
+    "5"("6"!L{\mu}{2}) "7"("8"!L{\nu}{1}) }
+  \hspace{4em}
+  \mygame[3em]{
+    []!E{1}([r]!E{2}="A") 
+    [d]!O{3}([r]!P{4}) [d(2)]!P{5}([r]!P{6})
+    [d]!P{7}([r]!O{8})
+    "3"[d]!I{9}([r]!I{10})
+    "3"(:"1",:"5") "5"(:"7",:"6") "7"(:"6")
+    "4"(:"3",:@/^0.2em/"6") "6"(:"8",:@/^0.7em/"4")
+    "8"(:"7",:@/_2em/"2") "1"("2"!L{}{\omega}) "3"("4"!L{\nu}{4})
+    "5"("6"!L{\mu}{2}) "7"("8"!L{\nu}{1})
+    "9"("10"!L{\mu}{3})
+  }
+  $$
+  \vspace{-11mm}
+  \caption{A game $G$ on the left and 
+    the game $G_{3,\mu}$ on the right.}
+  \label{fig:suspension}
+\end{figure}
+
+In the following definition, let $\hat{\imath} : \{1,\ldots ,n\} \rTo
+\{1,\ldots ,n + 1 \}$ be the unique order preserving injection which
+avoids $i \in \{1,\ldots ,n + 1\}$.
+\vfill\eject\noindent
+\begin{dfntn}
+  \label{def:suspension}
+  Let $G = \langle S,\hg,\kappa,\epsilon \rangle$ and suppose  that
+  $\height{G} = n$. 
+    \begin{itemize}
+  \item For $i = 1,\ldots,n + 1$ and $\theta \in \{\mu,\nu \}$, we
+    define $G_{i,\theta} = \langle
+    S,\hg_{i},\kappa_{i,\theta},\epsilon \rangle$ by letting
+    $\hg_{i} = \hg \comp \hat{\imath}$ and , $\kappa_{i,\theta}(j) =
+    \kappa(j)$ if $j < i$, $\kappa_{i,\theta}(i) = \theta$ and
+    $\kappa_{i,\theta}(j) = \kappa(j-1)$ if $j > i$.
+  \item We define $G_{\bullet} = \langle
+    S,\hg_{\bullet},\kappa_{\bullet},\epsilon \rangle$ as follows: we
+    let $\hg_{\bullet} \comp j$ be the unique factorization of $\hg$
+    such that $\hg_{\bullet}: P \setminus P_{\omega} \rOnto \{1,\ldots
+    ,k \}$ is surjective and $j :\{1,\ldots ,k \} \rInto \{1 ,\ldots
+    ,n \}$ is injective and order preserving; we let
+    $\kappa_{\bullet} = j \comp \kappa$.
+  \end{itemize}
+\end{dfntn}
+Observe that $\height{G_{i,\theta}} = n + 1$ and that, in the game
+$G_{\bullet}$, $P_{j} \neq \emptyset$ for $j = 1,\ldots ,
+\height{G_{\bullet}}$.
+\begin{lmm}
+  \label{lemma:suspensions}
+  There exist natural isomorphisms $\val{G} \iso
+  \val{G_{i,\theta}}$ and $\val{G} \iso \val{G_{\bullet}}$.
+\end{lmm}
+\begin{proof}
+  The isomorphism $\val{G_{n + 1,\mu}} \iso
+  \val{G}$
+  follows by observing that $P(G_{n+1,\mu}) 
+  \linebreak 
+  = G$ and by letting
+  $\Cat{C}$ be $\Cat{C}^{P_{\leq n}}$, $\Cat{D} = \Cat{C}^{P_{n + 1}}
+  = \Cat{C}^{\emptyset} = 1$, $\Cat{E} = \Cat{C}^{P_{\omega}}$ in
+  proposition \ref{prop:bekic2}: the left projection of $\val{G_{n +
+      1,\mu}}: \Cat{C}^{P_{\omega}} \rTo \Cat{C}^{P_{\leq n}} \times
+  1$ is computed as $\val{G}$. An analogous observation shows that
+  there is an isomorphism $\val{G_{n + 1,\nu}} \iso \val{G}$.
+  
+  If $i \leq n$, then we can reason by induction on the height,
+  observing that $P(G_{i,\theta}) = P(G)_{i,\theta}$ and
+  $\EQ_{G_{i,\theta}} = \EQ_{G}$, so that $\EQ_{G_{i,\theta}} \circ
+  \sval{P(G_{i,\theta})}$ and $\EQ_{G} \circ \sval{P(G)}$ are
+  naturally isomorphic.
+  
+  On the other hand, we argue that $\val{G}$ and $\val{G_{\bullet}}$
+  are naturally isomorphic as follows: $j$ can be factored by a
+  sequence of the functions $\hat{\imath}$, hence $G$ can be obtained
+  from $G_{\bullet}$ by a sequence of the operations
+  $(-)_{i,\theta}$ and the result follows from our previous
+  considerations.  
+\end{proof}
+
+
+
+
+\begin{dfntn}
+  \label{def:normalized}
+  We say that a parity game $G$ is \emph{normalized} if $\kappa(i)
+  \neq \kappa(i + 1)$ for $i = 1,\ldots ,\height{G}-1$ and $P_{i} \neq
+  \emptyset$ for $i = 1,\ldots ,\height{G}$.
+\end{dfntn}
+\begin{lmm}
+  \label{lemma:normalized}
+  For each parity game $G$ there exists a normalized parity game
+  $N(G)$ on the same set of positions of $G$ such that $\val{G} \iso
+  \val{N(G)}$.
+\end{lmm}
+\begin{proof}  
+  Let $G = \langle S,\hg,\kappa,\epsilon \rangle$ be a game with
+  $\height{G} = n + 1 > 1$. We first define a game $G_{N}$.  If
+  $\kappa(n + 1) = \kappa(n)$, then we let $G_{N} = \langle
+  S,\hg_{N},\kappa,\epsilon \rangle$, where $\hg_{N}(p) = n$ if
+  $\hg(p) = n + 1$ and otherwise $\hg_{N}(p) = \hg(p)$. To verify that
+  $\val{G}$ is isomorphic to $\val{G_{N}}$, observe that $P(G_{N}) =
+  P(P(G))$ and that $\EQ_{G_{N}} = \ltuple \EQ_{P(G)},\EQ_{G} \rtuple$
+  and therefore let $F = \ltuple \val{P(P(G))} \circ \prj_{P_{\geq
+      n}}, \EQ_{P(G)}\rtuple$ and $G = \EQ_{G}$ in the statement of
+  the Beki\v{c} property \ref{prop:bekic}.  Otherwise, if $\kappa(n +
+  1) \neq \kappa(n)$, then we let $G_{N} = G$.
+  
+  We define then $N(G)$ by induction on the height.  If $\height{G}
+  \leq 1$, then $N(G) = G$. Otherwise, in order to obtain $N(G)$, we
+  first construct $N(P(G))$, and then a game $G'$ by adding to the
+  region of maximal height of $G$ transitions so that $\EQ_{G'} =
+  \EQ_{G}$. As the last step, we let $N(G) = G'_{N}$. By induction, it
+  is shown that $\val{N(G)} = \val{G}$.  
+\end{proof}
+
+
+
+The following theorem is the main result of this section and
+generalizes to categories the well known fact that a vectorial
+$\mu$-calculus has no more expressive power of its scalar version
+\cite[\S 2.7]{AN01}.
+\begin{thrm}
+  \label{prop:iff}
+  A category is $\mu$-bicomplete with respect to parity games if and
+  only if it is $\mu$-bicomplete.
+\end{thrm}
+In order to prove the theorem we translate parity functors into
+collections of $\mu$-terms and vice-versa we represent $\mu$-terms
+by pointed parity games.  To show that this translation is sound the
+main tool is the Beki\v{c} property discussed in section
+\ref{sec:bekic}.
+
+\begin{prpstn}
+  \label{prop:gamestoterms}
+  For each parity game $G$ we can find a collection of $\mu$-terms $\{
+  s_{p} \}_{p \in P}$, such that $s_{p} \in
+  \mu\mathcal{T}(P_{\omega})$ and
+  \begin{eqnarray*}
+    \sval{G} & := & \ltuple \,\val{s_{p}} \,\rtuple_{p \in P}\,.
+  \end{eqnarray*}
+\end{prpstn}
+The meaning of the symbol $:=$ is that the functorial expression on
+the right determines the existence of the functorial expression on the
+left. That is, natural transformations (needed as projections,
+injections and as the structure part of initial algebras or final
+coalgebras) can be constructed out of the natural transformations
+given with the interpretations of the $\mu$-terms, so that the
+functorial expression on the right together with these new natural
+transformations have the universal property that determines the
+left-hand side of the equation up to canonical isomorphism. Thus it
+follows:
+\begin{crllr}
+  If $\Cat{C}$ is a $\mu$-bicomplete category, then
+  $\Cat{C}$ is  complete w.r.t. parity games.
+\end{crllr}
+\begin{proof}[Proof of proposition \ref{prop:gamestoterms}]
+  Clearly, it is enough to find a collection of $\mu$-terms indexed by
+  $P_{< \omega}$ such that $\val{G} := \ltuple \,\val{s_{p}}
+  \,\rtuple_{p \in P_{< \omega}}$, since then we can complete this
+  collection to a collection representing $\sval{G}$, by letting
+  $s_{p}$ be the $\mu$-term $p \in \mu\mathcal{T}(P_{\omega})$ if $p
+  \in P_{\omega}$.
+
+  If  $\height{G} = 0$, then the statement is true
+  since $P_{ < \omega} = \emptyset$ and the empty collection of terms
+  satisfies the requirements.
+  
+  Suppose that $\height{G} = n > 0$ and that that $\kappa(n) = \mu$.
+  An analogous argument works if $\kappa(n) = \nu$.
+  
+  By the induction hypothesis there are $\mu$-terms $\{ s_{p} \}_{p
+    \in P}$ with $s_{p} \in \mu\mathcal{T}(P_{n} \cup
+  P_{\omega})$ such that $\sval{P(G)} = \ltuple \,\val{s_{p}}
+  \,\rtuple_{p \in P}$.
+  According to proposition \ref{prop:bekic2}, we can construct the
+  functor $\val{G}$ by means of $\mu$-terms, provided we are able to
+  show that the functor $\EQ_{G} \circ \sval{P(G)}$
+  admits a parameterized initial algebra which is representable by
+  means of $\mu$-terms. 
+  We prove this by induction on the cardinality of $P_{n}$.
+  If $P_{n} = \emptyset$, then there is nothing to prove.
+  Otherwise, pick $p_{0} \in P$, let $P'_{n} = P_{n} \setminus \{
+  p_{0} \}$ and represent the functor $\EQ_{G}$ as $\langle \EQ_{P'_{n}}, \EQ_{p_{0}} \rangle$
+  where $\EQ_{P'_{n}} = \ltuple \, \EQ_{p} \, \rtuple_{p \in P'_{n}}$.
+  We claim that an initial algebra of the functor $\EQ_{P'_{n}} \circ
+  \sval{P(G)}$ exists and is constructible by means of $\mu$-terms.
+  Indeed a parity game $G'= \langle S' ,\hg',\kappa'
+  ,\epsilon'\rangle$ on the same set of positions and with the same
+  height as $G$, such that $\kappa'(i) = \kappa(i)$ for $i =1,\ldots
+  ,\height{G}$, $P(G') = P(G)$, $\hg'(p) = n $ if and only if $p \in
+  P'_{n}$ and $\EQ_{G'} = \EQ_{P'_{n}}$, is easily constructed out of
+  $G$.
+  Since $\card P'_{n} < \card P_{n}$ by the induction hypothesis we
+  have a desired representation of $\val{G'}$ by $\mu$-terms $t_{p}
+  \in \mu\mathcal{T}(\{ p_{0} \} \cup P_{\omega})$, for $p \in P_{\leq
+    n}\setminus \{p_{0}\}$. It follows that $\langle
+  \val{t_{p}}\rangle_{p \in P_{n}'}$ is the desired representation of
+  the initial algebra of $\EQ_{P'_{n}} \circ \sval{P(G)}$, since by
+  proposition \ref{prop:bekic3} $\prj_{P'_{n}} \circ \sval{G'}$ is an
+  initial algebra for $\EQ_{G'} \circ \sval{P(G')} = \EQ_{P'_{n}}
+  \circ \sval{P(G)}$.
+
+  Let
+  $s : M_{p_{0}} \rTo \mu\mathcal{T}(P_{n} \cup P_{\omega})$ be
+  the function defined by the relation
+  \begin{eqnarray*}
+    s(m) & = & s_{\cod m}
+  \end{eqnarray*}
+  and let $u \in \mu\mathcal{T}(P_{n} \cup
+  P_{\omega})$ be the $\mu$-term defined as
+  \begin{eqnarray*}
+    u & = & 
+    \left \{
+      \begin{array}{cc}
+        \Land[M_{p_{0}}] s\,, & \epsilon(p_{0}) = \pi \,\\
+        \Lor[M_{p_{0}}] s\,, & \epsilon(p_{0}) = \sigma \,,
+    \end{array}
+    \right .
+  \end{eqnarray*}
+  then 
+  \begin{eqnarray*}
+    \EQ_{p_{0}} \circ \sval{P(G)}
+    & = & \val{u} :
+  \Cat{C}^{P_{n}}\times \Cat{C}^{P_{\omega}} \rTo \Cat{C}\,.
+  \end{eqnarray*}
+
+  We can now construct an initial algebra of $\EQ_{G} \circ
+  \sval{P(G)}$ according to the Beki\v{c} property.  Let
+  \begin{eqnarray*}
+    v_{p_{0}} & = &  \mu_{p_{0}}.(\,u[
+    t_{p}/p]_{p \in P'_{n}}\,)
+  \end{eqnarray*}
+  and for $p \in P'_{n}$ let
+  \begin{eqnarray*}
+    v_{p} & = & t_{p}[v_{p_{0}}/p_{0}]
+  \end{eqnarray*}
+  then the functor $\langle \val{v_{p}}\rangle_{p \in
+    P_{n}}$  carries a canonical structure of an initial algebra for
+  the functor $\EQ_{P_{n}} \circ \sval{P(G)}$.  
+\end{proof}
+
+
+\begin{prpstn}
+  \label{prop:termstogames}
+  For each $\mu$-term $s \in\mu\mathcal{T}(X)$ there exists a
+  pointed parity game $\langle G,p\rangle$ such that $P_{\omega} = X$
+  and 
+  \begin{eqnarray*}
+    \val{s} & := & \sval{G}_{p}\,.
+  \end{eqnarray*}
+\end{prpstn}
+Again, the meaning of the symbol $:=$ is that the functorial
+expression on the right can be endowed with a structure so that it has
+the universal property which determines the left-hand side of the
+equation up to canonical isomorphism. Thus it follows:
+\begin{crllr}
+  If $\Cat{C}$ is a category complete w.r.t. parity games, then
+  $\Cat{C}$ is $\mu$-bicomplete.
+\end{crllr}
+\begin{lmm}
+  Let $G$ be a parity game, we define $G^{p_{0}}$ to be the game
+  obtained from $G$ by adding a new position $p_{0}$ to set of
+  position at infinity $P_{\omega}$. Then there exists a natural
+  isomorphism $\val{G^{p_{0}}} \iso \val{G}\circ
+  \prj_{\Cat{C}^{P_{\omega}}}$.
+\end{lmm}
+\begin{proof}
+  The observation is obvious if $\height{G} = 0$. On the other hand,
+  if $\height{G} > 0$, then $P(G^{p_{0}}) = P(G)^{p_{0}}$ and
+  $\val{P(G^{p_{0}})} \iso \val{P(G)} \circ \prj_{n,\omega}$, by
+  induction. Moreover $\EQ_{G^{p_{0}}} = \EQ_{G} \circ
+  \prj_{P}$, so that $\val{G^{p_{0}}}$ is the defined to be the
+  initial algebra of the functor $\langle \val{P(G)} \circ
+  \prj_{n,\omega} \circ \prj_{n,\omega,p_{0}}, \EQ_{G^{p_{0}}} \rangle
+  = \langle \val{P(G)} \circ \prj_{n,\omega}, \EQ_{G} \rangle \circ
+  \prj_{P}$.  In order to conclude the argument, observe that
+  the parameterized initial algebra of a functor of the form $F \circ
+  \prj_{\Cat{C}\times \Cat{D}}:\Cat{C}\times\Cat{D}\times\Cat{E} \rTo
+  \Cat{C}$ has the form $\dgmu{F} \circ \prj_{\Cat{D}}$, where $\dgmu{F} :
+  \Cat{D}\rTo \Cat{C}$ is the parameterized initial algebra of
+  $F:\Cat{C}\times \Cat{D}\rTo \Cat{C}$.  
+\end{proof}
+\begin{proof}[Proof of proposition \ref{prop:termstogames}]
+  By induction on the structure of $\mu$-terms.
+  
+  For the $\mu$-term $x$ in context $X$, we let $G$ be the parity game
+  of height $0$ on the set of positions $X$, with distinguished
+  position  $x \in X$.
+  
+  We analyze now the case of a term of the form $\Land[I] s$. By
+  duality, we implicitly analyze the case of a term of the form
+  $\Lor[I] s$.
+
+  
+  We first show that given a parity game $G = \langle S,\hg,\kappa,
+  \epsilon \rangle$ and a subset $I \subseteq P$ of positions, it is
+  possible to find a pointed parity game $\langle G', p_{0} \rangle$
+  such that $\sval{G'}_{p_{0}} \iso \prod_{i \in I} \sval{G}_{i}$.  We
+  define $G' = \langle S',\hg',\kappa', \epsilon' \rangle$ as follows:
+  $S'$ is obtained from $S$ by adding a new position $p_{0}$ and moves
+  $p_{0} \rightarrow i$ for each $i \in I$, $\hg'(p_{0}) = \height{G}
+  + 1$ and $\hg'(p) = \hg(p)$ otherwise, $\kappa'(\height{G} + 1) =
+  \mu$, and $\kappa'(j) = \kappa(j)$ if $j \leq \height{G}$,
+  $\epsilon'(p_{0}) = \pi$ and $\epsilon'(p) = \epsilon(p)$ otherwise.
+  We could also have set $\kappa'(\height{G} + 1) = \nu$,
+  leading to an equivalent construction.
+
+  Observe that $P(G') = G^{p_{0}}$, therefore
+  \begin{eqnarray*}
+    \val{P(G')} \circ \prj_{\Cat{C}^{P'_{\omega}}} 
+    & = &
+    \val{G^{p_{0}}} \circ \prj_{\Cat{C}^{\{ p_{0} \}}\times \Cat{C}^{P_{\omega}}} \\
+    & \iso &
+    \val{G} \circ \prj_{\Cat{C}^{P_{\omega}}} \circ \prj_{\Cat{C}^{\{ p_{0} \}}\times
+      \Cat{C}^{P_{\omega}}}  \\
+    & \iso & \val{G} \circ \prj_{\Cat{C}^{P_{\omega}}}\circ
+    \prj_{\Cat{C}^{P_{<\omega}}\times \Cat{C}^{P_{\omega}}}\,, 
+  \end{eqnarray*}
+  and remark that an initial algebra for $\val{G} \circ
+  \prj_{\Cat{C}^{P_{\omega}}}$ is exactly $\val{G}$.  Similarly
+  \begin{eqnarray*}
+    \mathcal{E}_{p_{0}}  & = &
+    \prod \circ \prj(\cod,p_{0}) \\
+    & \iso & (\prod_{i \in I}) \circ
+    \prj_{\Cat{C}^{P_{<\omega}} \times \Cat{C}^{P_{\omega}}}\,.
+  \end{eqnarray*}
+  Using proposition \ref{prop:bekic2} (switch the roles of $F$ and
+  $G$), compute an initial algebra of a functor of the form $\langle F
+  \circ \prj_{\Cat{C}\times\Cat{E}}, G \circ
+  \prj_{\Cat{C}\times\Cat{E}} \rangle: \Cat{C} \times \Cat{D} \times
+  \Cat{E}\rTo \Cat{C} \times \Cat{D}$ as $\langle \dgmu{F}, G\circ
+  \dgmu{F} \rangle$, $\dgmu{F}$ being the initial algebra of $F$.  In this
+  formula let $F$ be $\val{G} \circ \prj_{\Cat{C}^{P_{\omega}}}$ and
+  $G$ be $(\prod_{i \in I})$. It follows that $\sval{G'}_{p_{0}}$, the
+  right projection in this formula, is $\sval{G'}_{p_{0}} =
+  \prj_{p_{0}}\circ \val{G'} \iso \prod_{i \in I} \circ \prj_{i} \circ
+  \val{G} = \prod_{i \in I} \sval{G}_{i}$.
+  
+  We come back to the original problem of finding a representation of
+  the functor $\Land[I] s$ as a parity functor. Observing that we have
+  solved the case of representing $\Land[\emptyset]$ in the previous
+  discussion, we can suppose without loss of generality that $I =
+  \{l,r\}$. Let $\langle G^{l},p^{l}\rangle$, $\langle G^{r},p^{r}
+  \rangle$ be two pointed parity games representing $s_{l}$ and
+  $s_{r}$ respectively.  Hence $G^{l}$ and $G^{r}$ share the same set
+  of positions at infinity $P_{\omega} = X$.  Because of lemmas
+  \ref{lemma:normalized} and \ref{lemma:suspensions}, we can assume
+  that $\height{G^{l}} =\height{G^{r}} = n$ and that $\kappa(i) = \mu$
+  if and only if $i$ is odd for each $i = 1,\ldots ,n$. Given these
+  assumptions, we can construct a game $\lcotuple G^{l},
+  G^{r}\rcotuple$ of height $n$, having as set of positions the
+  disjoint union of the sets $P_{\omega}, P^{l}_{< \omega}, P^{r}_{<
+    \omega}$, by pasting together the local structures of $G^{l}$ and
+  $G^{r}$.  Recall that, for a pair of functors $F: \Cat{C}\times
+  \Cat{E} \rTo \Cat{C}$ and $G : \Cat{D}\times \Cat{E}\rTo \Cat{D}$, a
+  pair of initial algebras $(\dgmu{F},\struct{x})$ and
+  $(\dgmu{G},\struct{y})$ gives rise to the algebra
+  $(\langle\dgmu{F},\dgmu{G}\rangle, \langle
+  \struct{x},\struct{y}\rangle)$ of the functor $\langle F\circ
+  \prj_{\Cat{C}\times \Cat{E}},G \circ \prj_{\Cat{D}\times
+    \Cat{E}}\rangle: \Cat{C} \times \Cat{D} \times \Cat{E}\rTo \Cat{C}
+  \times \Cat{D}$, which is moreover an initial one.  Then it is easily
+  verified that the relation
+  \begin{eqnarray*}
+    \val{\lcotuple G^{l}, G^{r}\rcotuple}
+    & \iso & \ltuple \val{G^{l}} ,\val{G^{r}}\rtuple
+    : \Cat{C}^{P_{\omega}} \rTo 
+    \Cat{C}^{P^{l}_{< \omega}} \times \Cat{C}^{P^{r}_{< \omega}}
+  \end{eqnarray*}
+  holds. In this way we have reduced the problem of finding a
+  representation of the $\mu$-functor $\val{s_{l} \land s_{r}}$ to the
+  problem of finding a representation of the functor $\prod_{i \in
+    \{p^{l},p^{r}\}} \sval{\lcotuple G^{l}, G^{r}\rcotuple}_{i}$ by a
+  pointed parity game, which we have previously solved. Figure
+  \ref{fig:land} displays the construction of the pointed parity
+  game associated to $s_{l} \land s_{r}$.
+  \begin{figure}[h] 
+    $$
+    \mygame{
+      []!g{X}="X"
+      [d]!O{p_{0}}
+      (
+      :[ld]
+      [d(0.5)]!g{}="LGost1"
+      [d]!g{\vdots}="LGost2"
+      [d]!g{}="LGost3",
+      :[rd]
+      [d(0.5)]!g{}="RGost1"
+      [d]!g{\vdots}="RGost2"
+      [d]!g{}="RGost3"
+      )
+      "LGost2"[l(0.5)]="StartBackl"
+      "RGost2"[r(0.5)]="StartBackr"
+      "StartBackl":@`{"StartBackl"+(-1,1),"StartBackl"+(0,3)}"X"
+      "StartBackr":@`{"StartBackr"+(1,1),"StartBackr"+(0.5,4)}"X"
+      "X"("X"!L{}{\omega})
+      "p_{0}"("p_{0}"!L{\mu}{2k+1})
+      "LGost1"("LGost1"!L{\nu}{2k})
+      "LGost3"("LGost3"!L{\mu}{1})
+      "RGost1"("RGost1"!L{\nu}{2k})
+      "RGost3"("RGost3"!L{\mu}{1})
+    }
+    $$
+    \vspace{-5mm}
+    \caption{Pointed parity game for $s_{l} \land s_{r}$.}
+    \label{fig:land}
+  \end{figure}  
+
+  Finally, we analyze the case of a term $\mu_{x}.s$. By duality, we
+  implicitly analyze the case of a term of the form $\nu_{x}.s$.
+  
+  Let $\langle G,p_{0} \rangle$ be a parity game such that
+  $\sval{G}_{p_{0}} \iso \val{s}$.  Define the game $G' = \langle S' ,
+  \hg',\kappa',\epsilon' \rangle$ as follows:
+  \begin{itemize}
+  \item $S'$ is obtained from  $S$ by adding the move $x
+    \rightarrow p_{0}$.
+  \item $\hg'(x) = \height{G} + 1$ and $\kappa'(\height{G} +
+    1) = \mu$, otherwise $\hg'(p) = \hg(p)$ and $\kappa'(i) =
+    \kappa(i)$ if $p \neq x$ and $i \leq \height{G}$.
+  \item $\epsilon'(x) = \sigma$ and $\epsilon'(p) =
+    \epsilon(p)$ if $p \neq x$.
+  \end{itemize}
+  Observe that $P(G') = G$ and recall that $\sval{G'}_{x}$ is the
+  parameterized initial algebra of the functor in the top composite of
+  the diagram below:
+  $$
+  \mydiagram[6em]{ []( 
+    !S 
+    {\Cat{C}\times\Cat{C}^{X \setminus
+        \{x\}}}
+    {\Cat{C}^{P_{<\omega}}\times\Cat{C}^{X}}
+    {\Cat{C}^{P_{<\omega}}\times\Cat{C}^{X}}{\Cat{C}} {1}{1.7}, 
+    !A {\sval{G}}{ \sval{P(G')}}
+    {\prj_{p_{0}}}{\prj(\cod,x)} ) 
+    "4":[r]*+{\Cat{C}}^{\coprod}
+    "3" :@/^1em/"\Cat{C}"^{\mathcal{E}_{x}} 
+  }
+  $$
+  Thus deduce that $\sval{G'}_{x}$ is also the initial algebra of
+  the functor $\coprod \circ \sval{G}_{p_{0}}$. Since this functor is
+  naturally isomorphic to $\sval{G}_{p_{0}}$ and therefore to
+  $\val{s}$, we obtain the relation $\val{\mu_{x}.s} :=
+  \sval{G'}_{x}$.
+  \end{proof}
+
+
+
+

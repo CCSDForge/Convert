@@ -1,0 +1,94 @@
+\begin{thebibliography}{10}
+
+\bibitem{ada:ss:75}
+Robert~A. Adams.
+\newblock {\em Sobolev spaces}.
+\newblock Academic Press (A subsidiary of Harcourt Brace Jovanovich,
+  Publishers), New York-London, 1975.
+\newblock Pure and Applied Mathematics, Vol. 65.
+
+\bibitem{bol:tcm:14}
+Sylvie Boldo, Fran{\c{c}}ois Cl{\'e}ment, Jean-Christophe Filli{\^a}tre,
+  Micaela Mayero, Guillaume Melquiond, and Pierre Weis.
+\newblock Trusting computations: a mechanized proof from partial differential
+  equations to actual program.
+\newblock {\em Comput. Math. Appl.}, 68(3):325--352, 2014.
+
+\bibitem{bre:af:83}
+Ha{\"{\i}}m Brezis.
+\newblock {\em Analyse fonctionnelle [Functional analysis]}.
+\newblock Collection Math\'ematiques Appliqu\'ees pour la Ma\^\i trise
+  [Collection of Applied Mathematics for the Master's Degree]. Masson, Paris,
+  1983.
+\newblock Th{\'e}orie et applications [Theory and applications].
+
+\bibitem{cia:fem:02}
+Philippe~G. Ciarlet.
+\newblock {\em The finite element method for elliptic problems}, volume~40 of
+  {\em Classics in Applied Mathematics}.
+\newblock Society for Industrial and Applied Mathematics (SIAM), Philadelphia,
+  PA, 2002.
+\newblock Reprint of the 1978 original [North-Holland, Amsterdam; MR0520174 (58
+  \#25001)].
+
+\bibitem{eg:tpf:04}
+Alexandre Ern and Jean-Luc Guermond.
+\newblock {\em Theory and practice of finite elements}, volume 159 of {\em
+  Applied Mathematical Sciences}.
+\newblock Springer-Verlag, New York, 2004.
+
+\bibitem{gos:cms1:93}
+Bernard Gostiaux.
+\newblock {\em Cours de math\'ematiques sp\'eciales - {T}ome 1 [Lecture notes
+  in Special Mathematics - Tome 1]}.
+\newblock Math\'ematiques [Mathematics]. Presses Universitaires de France,
+  Paris, 1993.
+\newblock Alg{\`e}bre [Algebra], With a preface by Paul Deheuvels.
+
+\bibitem{gos:cms2:93}
+Bernard Gostiaux.
+\newblock {\em Cours de math\'ematiques sp\'eciales - {T}ome 2 [Lecture notes
+  in Special Mathematics - Tome 2]}.
+\newblock Math\'ematiques [Mathematics]. Presses Universitaires de France,
+  Paris, 1993.
+\newblock Topologie, analyse r{\'e}elle [Topology, real analysis].
+
+\bibitem{gos:cms3:93}
+Bernard Gostiaux.
+\newblock {\em Cours de math\'ematiques sp\'eciales - {T}ome 3 [Lecture notes
+  in Special Mathematics - Tome 3]}.
+\newblock Math\'ematiques [Mathematics]. Presses Universitaires de France,
+  Paris, 1993.
+\newblock Analyse fonctionnelle et calcul diff{\'e}rentiel [Functional analysis
+  and differential calculus].
+
+\bibitem{lm:pe:54}
+P.~D. Lax and A.~N. Milgram.
+\newblock Parabolic equations.
+\newblock In {\em Contributions to the theory of partial differential
+  equations}, Annals of Mathematics Studies, no. 33, pages 167--190. Princeton
+  University Press, Princeton, N. J., 1954.
+
+\bibitem{qv:nap:97}
+Alfio Quarteroni and Alberto Valli.
+\newblock {\em Numerical approximation of partial differential equations},
+  volume~23 of {\em Springer Series in Computational Mathematics}.
+\newblock Springer-Verlag, Berlin, 1994.
+
+\bibitem{rud:rca:87}
+Walter Rudin.
+\newblock {\em Real and complex analysis}.
+\newblock McGraw-Hill Book Co., New York, third edition, 1987.
+
+\bibitem{yos:fa:80}
+K{\=o}saku Yosida.
+\newblock {\em Functional analysis}.
+\newblock Classics in Mathematics. Springer-Verlag, Berlin, 1995.
+\newblock Reprint of the sixth (1980) edition.
+
+\bibitem{ztz:fem:13}
+O.~C. Zienkiewicz, R.~L. Taylor, and J.~Z. Zhu.
+\newblock {\em The finite element method: its basis and fundamentals}.
+\newblock Elsevier/Butterworth Heinemann, Amsterdam, seventh edition, 2013.
+
+\end{thebibliography}

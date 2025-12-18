@@ -1,0 +1,157 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+% Cyril Gavoille (c) 13 oct. 1996, modif. 27 avr. 2000
+%
+% Un style LaTeX Version 2.09 et 2e pour
+% les rapports de recherche du LaBRI (UMR 5800?)
+%
+%--------------------------------------------------------
+%
+% \titleLaBRI{TITRE} ........ défini le titre
+% \authorLaBRI{AUTEURS} ..... défini les auteurs
+% \dateLaBRI{DATE} .......... défini la date
+% \maketitleLaBRI{NUM} ...... affiche la page de garde
+% \LaBRIcolor................ utilise le logo couleur
+%
+% \titleLaBRI, \authorLaBRI, \dateLaBRI et \LaBRIcolor sont optionels.
+% Par défaut les valeurs données par \title, \author, \date et le
+% logo en noir et blanc sont utilisée.
+%
+% \maketitleLaBRI doit précéder la commande \maketitle.
+% La seconde page est blanche pour que la page 1 de l'article
+% commence sur une page "impaire". La taille du titre reste
+% indépendante de la taille spécifiée dans \documentstyle.
+%
+% Nécessite des 3 fichiers suivants :
+% 1. psfig.sty (ou epsfig.sty)
+% 2. labri-logo.ps
+% 3. labri-logo-big.ps
+%
+% Conseil : si vous mettez un \footenote dans le \title il est
+% préférable de mettre un \titleLaBRI, sinon le \footenote
+% apparaîtera sur la 1ère page. Pensez à mettre \LaBRIcolor AVANT
+% la commande \maketitleLaBRI.
+%
+% Exemple d'utilisation :
+%-------------------------
+%
+% \documentstyle[12pt,RR_LaBRI]{article}
+%
+% ou bien
+%
+% \documentclass[12pt]{article}
+% \usepackage{RR_LaBRI}
+%
+% \title{C'est le Titre !}
+% \author{Cyril Gavoille\\
+%        {\tt gavoille@labri.u-bordeaux.fr}}
+% \date{}
+%
+% \begin{document}
+%
+% %-------------------------- DEBUT
+% \authorLaBRI{by Cyril Gavoille} %\authorLaBRI{by\\Cyril\\[1ex]Gavoille}
+% \dateLaBRI{October, 1996}
+% \LaBRIcolor
+% \maketitleLaBRI{RR-1144-96}
+% %-------------------------- FIN
+%
+% \maketitle
+%
+% \begin{abstract}
+% Le résumé est ici.
+% \end{abstract}
+%
+% L'article est là.
+% Fin.
+% \end{document}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\def\titleLaBRI#1{\gdef\@titleLaBRI{#1}}
+  \gdef\@titleLaBRI{\@title} % valeur par défaut
+\def\authorLaBRI#1{\gdef\@authorLaBRI{#1}}
+  \gdef\@authorLaBRI{\@author} % valeur par défaut
+\def\dateLaBRI#1{\gdef\@dateLaBRI{#1}}
+  \gdef\@dateLaBRI{\@date} % valeur par défaut
+\def\colorlogo{0}
+\def\LaBRIcolor{\gdef\colorlogo{1}}
+
+\def\maketitleLaBRI#1{
+%\paperwidth 210mm
+%\paperheight 297mm
+{\input psfig.sty
+\lineskip 1pt
+\normallineskip 1pt
+\def\baselinestretch{1}
+\def\normalsize{\@setsize\normalsize{11pt}\xipt\@xipt}
+\def\Large{\@setsize\Large{18pt}\xivpt\@xivpt}
+\def\LARGE{\@setsize\LARGE{22pt}\xviipt\@xviipt}
+\def\Huge{\@setsize\Huge{30pt}\xxvpt\@xxvpt}
+\normalsize
+%%%%
+\hoffset -1in
+\voffset -1in
+\advance\hoffset by 20mm
+\advance\voffset by 26mm
+\textwidth 150mm
+%%%%
+\oddsidemargin 0pt
+\evensidemargin 0pt
+\marginparwidth 0pt
+\marginparsep 0pt
+\marginparpush 0pt
+\topmargin 0pt
+\headheight 0pt
+\headsep 0pt
+\textheight 297mm
+\columnsep 0pt
+\columnseprule 0pt
+\columnwidth \textwidth
+\linewidth \textwidth
+
+%--------------------------------------------------
+\thispagestyle{empty}
+\begin{minipage}{\textwidth}
+\ifnum\colorlogo = 1
+        \mbox{\psfig{file=labri-logo-big.ps,width=25mm}}
+\else
+        \mbox{\psfig{file=labri-logo.ps,width=25mm}}
+\fi
+
+\vspace{-20mm}
+\noindent
+\hspace{35mm}{\Large\it Laboratoire Bordelais de Recherche en Informatique}\\[-2mm]
+
+\noindent
+\hspace{40mm}UMR 5800 - Universit\'e Bordeaux I, 351, cours de la Lib\'eration,\\[-3mm]
+
+\noindent
+\hspace{40mm}33405 Talence {\sc cedex}, France
+\end{minipage}
+
+\vfill
+
+\begin{minipage}{\textwidth}
+\vspace{-5mm}
+\begin{center}
+{\Large Research Report~~{\tt{#1}}}\\[10ex]
+{\bf\Huge\@titleLaBRI}\\[5ex]
+{\LARGE\@authorLaBRI}
+\end{center}
+
+\vspace{2ex}
+{\hfill\Large\@dateLaBRI}
+\end{minipage}
+\vfill
+%--------------------------------------------------
+% Une page blanche pour le recto-verso
+% Attention ! la minipage est nécessaire pour
+% avoir le \thanks sur la page suivante. Si si.
+\newpage
+\begin{minipage}{\textwidth}
+\end{minipage}
+\setcounter{page}{0}
+%--------------------------------------------------
+}
+}

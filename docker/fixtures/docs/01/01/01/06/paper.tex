@@ -1,0 +1,666 @@
+%% This is file `elsarticle-template-1-num.tex',
+%%
+%% Copyright 2009 Elsevier Ltd
+%%
+%% This file is part of the 'Elsarticle Bundle'.
+%% ---------------------------------------------
+%%
+%% It may be distributed under the conditions of the LaTeX Project Public
+%% License, either version 1.2 of this license or (at your option) any
+%% later version.  The latest version of this license is in
+%%    http://www.latex-project.org/lppl.txt
+%% and version 1.2 or later is part of all distributions of LaTeX
+%% version 1999/12/01 or later.
+%%
+%% The list of all files belonging to the 'Elsarticle Bundle' is
+%% given in the file `manifest.txt'.
+%%
+%% Template article for Elsevier's document class `elsarticle'
+%% with numbered style bibliographic references
+%%
+%% $Id: elsarticle-template-1-num.tex 149 2009-10-08 05:01:15Z rishi $
+%% $URL: http://lenova.river-valley.com/svn/elsbst/trunk/elsarticle-template-1-num.tex $
+%%
+
+
+%% Use the option review to obtain double line spacing
+\documentclass[preprint,review,12pt]{elsarticle}
+
+%% Use the options 1p,twocolumn; 3p; 3p,twocolumn; 5p; or 5p,twocolumn
+%% for a journal layout:
+%%\documentclass[final,1p,times]{elsarticle}
+%%\documentclass[final,1p,times,twocolumn]{elsarticle}
+%% \documentclass[final,3p,times]{elsarticle}
+%% \documentclass[final,3p,times,twocolumn]{elsarticle}
+%% \documentclass[final,5p,times]{elsarticle}
+%\documentclass[final,5p,times,twocolumn]{elsarticle}
+
+%% if you use PostScript figures in your article
+%% use the graphics package for simple commands
+%% \usepackage{graphics}
+%% or use the graphicx package for more complicated commands
+%% \usepackage{graphicx}
+%% or use the epsfig package if you prefer to use the old commands
+%% \usepackage{epsfig}
+
+%% The amssymb package provides various useful mathematical symbols
+\usepackage[nodots]{numcompress}
+\usepackage{amssymb}
+\usepackage{subfigure}
+%% The amsthm package provides extended theorem environments
+%% \usepackage{amsthm}
+
+%% The lineno packages adds line numbers. Start line numbering with
+%% \begin{linenumbers}, end it with \end{linenumbers}. Or switch it on
+%% for the whole article with \linenumbers after \end{frontmatter}.
+%% \usepackage{lineno}
+
+%% natbib.sty is loaded by default. However, natbib options can be
+%% provided with \biboptions{...} command. Following options are
+%% valid:
+
+%%   round  -  round parentheses are used (default)
+%%   square -  square brackets are used   [option]
+%%   curly  -  curly braces are used      {option}
+%%   angle  -  angle brackets are used    <option>
+%%   semicolon  -  multiple citations separated by semi-colon
+%%   colon  - same as semicolon, an earlier confusion
+%%   comma  -  separated by comma
+%%   numbers-  selects numerical citations
+%%   super  -  numerical citations as superscripts
+%%   sort   -  sorts multiple citations according to order in ref. list
+%%   sort&compress   -  like sort, but also compresses numerical citations
+%%   compress - compresses without sorting
+%%
+%% \biboptions{comma,round}
+
+% \biboptions{}
+
+
+\journal{ Robotics and Computer-Integrated Manufacturing}
+
+\begin{document}
+
+\begin{frontmatter}
+
+%%% Title, authors and addresses
+%
+%%% use the tnoteref command within \title for footnotes;
+%%% use the tnotetext command for the associated footnote;
+%%% use the fnref command within \author or \address for footnotes;
+%%% use the fntext command for the associated footnote;
+%%% use the corref command within \author for corresponding author footnotes;
+%%% use the cortext command for the associated footnote;
+%%% use the ead command for the email address,
+%%% and the form \ead[url] for the home page:
+%%%
+%%% \title{Title\tnoteref{label1}}
+%%% \tnotetext[label1]{}
+%%% \author{Name\corref{cor1}\fnref{label2}}
+%%% \ead{email address}
+%%% \ead[url]{home page}
+%%% \fntext[label2]{}
+%%% \cortext[cor1]{}
+%%% \address{Address\fnref{label3}}
+%%% \fntext[label3]{}
+%
+\title{A novel methodology of design for Additive Manufacturing applied to Additive Laser Manufacturing process.}
+
+%% use optional labels to link authors explicitly to addresses:
+%% \author[label1,label2]{<author name>}
+%% \address[label1]{<address>}
+%% \address[label2]{<address>}
+
+\author{Remi Ponche \corref{cor1}}
+\ead{Remi.Ponche@irccyn.ec-nantes.fr}
+\author{Olivier Kerbrat }
+\ead{Olivier.Kerbrat@irccyn.ec-nantes.fr}
+\author{Pascal Mognol }
+\ead{Pascal.Mognol@irccyn.ec-nantes.fr}
+\author{Jean-Yves Hascoet}
+\ead{Jean-Yves.Hascoet@irccyn.ec-nantes.fr}
+\address{Institut de Recherche en Communications et Cybernetique de Nantes (UMR CNRS 6597), Nantes, France}
+
+\cortext[cor1]{Corresponding author at: IRCCyN/MO2P Team, 1 rue de la Noe, BP 92101, 44321 Nantes Cedex 03, France. Tel.: +33 (0)299059309}
+
+\begin{abstract}
+Nowadays, due to rapid prototyping processes improvements, a functional metal part can be built directly by Additive Manufacturing. It is now accepted that these new processes can increase productivity while enabling a mass and cost reduction and an increase of the parts functionality. However, the physical phenomena that occur during these processes have a strong impact on the quality of the produced parts. Especially, because the manufacturing paths used to produce the parts lead these physical phenomena, it is essential to considerate them right from the parts design stage.In this context, a new numerical chain based on a new design for Additive Manufacturing (DFAM) methodology is proposed in this paper, the new DFAM methodology being detailed; both design requirements and manufacturing specificities are taken into account. The corresponding numerical tools are detailed in the particular case of thin-walled metal parts manufactured by an Additive Laser Manufacturing (ALM) process.
+
+\end{abstract}
+
+\begin{keyword}
+
+Additive Manufacturing \sep Numerical chain \sep DFAM \sep Manufacturing path \sep Numerical modelling \sep Additive Laser Manufacturing (ALM) 
+
+\end{keyword}
+
+\end{frontmatter}
+
+%% Start line numbering here if you want
+%%
+% \linenumbers
+
+%% main text
+\section{Introduction}
+
+
+Additive Manufacturing is a new way to produce metal parts compared to the classical manufacturing processes such as milling or casting. They allow new design perspectives in terms of material \cite{Muller2013}, shape \cite{Tomlin2011} and internal structure \cite{Yadroitsev2007}. Indeed, inter alia because these manufacturing processes eliminate the need of tooling, many of the current restrictions of design for manufacturing and assembly are no longer valid. However, they have also their own characteristics and specificities which have to be considered during the design stage to ensure the manufactured parts quality. In this paper a new global numerical chain for metallic Additive Manufacturing is introduced based on a global design for Additive Manufacturing (DFAM) methodology. It is applied to the Additive Laser Manufacturing (ALM) technology to design and manufacture thin-walled metal parts. 
+
+In the last years, ALM has become an attractive research topic \cite{Dubourg2008}, it allows production of functional metal parts. In this process, a five-axis deposition head injects metal powder onto an underlying substrate locally melted with a laser beam to form a deposition bead. Parts are thus manufactured continuously with the deposition head motion along the designed manufacturing paths. This technology has broad applications in die mould industry, aviation industry and aerospace industry, however, the fabrication of thin-walled metal parts could be one of the important research topic for ALM.
+
+This type of structure is especially used in aviation and aerospace industry, where the most common features are rib structures with large pockets in order to strongly lighten the aircraft without damage the desired mechanical strength. Usually, this type of part is manufactured by milling with a long production sequence and a lot of wasted material. They are all the more difficult to machine in the case of a high ratio length/diameter of the tool \cite{Kerbrat2011a} whereas with the ALM process, only the useful material is used and high depth-to-diameter ratios can be easily fabricated. Nevertheless, for the use of the ALM processes to become a industrial reality, the control of the deposit geometry is a critical issue since it impacts the manufactured parts quality. 
+
+From this statement, without changing the usual numerical chain for Additive Manufacturing (Fig. \ref{fig:fig1}), several studies about the improvement of the ALM technology have been reported by proposing classical closed-loop controls on some manufacturing parameters to control the deposit height \cite{Tang2011}, the molten pool dimensions \cite{Salehi2005} or its temperature \cite{Bi2007}. However, these works are usually applied to simple wall and never to complex parts. Despite improving the geometry precision of the deposit and therefore of the thin-walled parts, a loop control is not always enough to ensure the desired quality. Indeed, in ALM, a large number of manufacturing parameters govern the physical phenomena that occur during the manufacturing process \cite{Boddu2001a}. These physical phenomena are sensitive to the environmental variations and interact with each other. It is therefore very difficult to ensure the quality of a complex part by controlling only few parameters. The process control is limited by its high complexity. In order to ensure the complex parts quality it is therefore also needed to choose the deposition head path regarding the physical phenomena that occur during the manufacturing process. 
+
+\begin{figure}[!h]
+\begin{center}
+\includegraphics[scale=1]{fig1.pdf}  
+\caption{The usual numerical chain for Additive Manufacturing.}
+\label{fig:fig1}
+\end{center}
+\end{figure}
+
+It is proved that, for all the metallic Additive Manufacturing processes, the shapes of the manufacturing paths have a strong impact on the manufactured part quality in terms of micro-structure \cite{Alimardani2009a} and of mechanical behaviour \cite{Foroozmehr2010}. Moreover, they have a direct impact on the part geometry \cite{Kao1998}. It is all the more true in the particular case of the thin-walled structures, where the parts thickness is close to one deposit width. A modification of the manufacturing path cannot be thus done without modifying the part geometry. Because unidirectional (without any possible feed-back from the floor-shop \cite{Bonnard2009}), the usual numerical chain for Additive Manufacturing presented in figure \ref{fig:fig1} cannot considerate this impact on the CAD model and is thus no longer suitable .
+
+From this statement, a new numerical chain is proposed, based on a global DFAM methodology. It allows to determine an optimized process planning regarding the process characteristics and constraints directly from the functional specifications of a part. The manufacturing program used to control the manufacturing process is then defined in parallel with the corresponding CAD model which is therefore as realistic as possible (Fig. \ref{fig:fig2}). As a result, the manufactured part  is not only close to the CAD model but it is also ensured to fulfil the initial functional specifications.
+
+\begin{figure}[ht]
+\begin{center}
+\includegraphics[scale=1]{fig2.pdf}  
+\caption{Concept of the proposed numerical chain for Additive Manufacturing.}
+\label{fig:fig2}
+\end{center}
+\end{figure}
+
+This paper's purpose is to present the proposed DFAM methodology and the associate numerical tools in the particular case of thin-walled parts manufactured by an ALM process. The global methodology is firstly presented in section 2, then in the section 3, each step is detailed in the case of using ALM process to manufacture thin-walled parts. An example is finally proposed in section 4.
+
+
+\section{A new general DFAM methodology}
+
+Organized into three main steps \cite{Ponche2012a,Ponche2012}, the proposed DFAM methodology (Fig. \ref{fig:fig3}) allows to balance the requirements from both the functional specifications and the chosen Additive Manufacturing process specificities.
+
+\begin{figure*}[ht]
+\begin{center}
+\includegraphics[scale=0.8]{fig3.pdf}  
+\caption{The proposed design for Additive Manufacturing (DFAM) methodology.}
+\label{fig:fig3}
+\end{center}
+\end{figure*}
+
+\subsection{Part orientation}
+
+The first step consists of determining the functional surfaces position of the studied design problem into the manufacturing machine to determine the "design area", that is to say the volume merging the functional surfaces which is also accessible by the manufacturing process. It has to be done according to the functional surfaces and the global process characteristics which are: the dimensions of the machine work area, the kinematics and the required accessibility. 
+
+The orientation problem is, in the case of the Additive Manufacturing processes, a multi-criteria problem since both the fabrication cost and quality for a given orientation needs to be assessed. In order to take into account the both, decision support tools have been developed in recent years, they provide estimations of surface roughness, accuracy, time, and cost in order to help the operator in the estimation of the quality-cost trade-offs in orientation selection \cite{Byun2005a, Canellidis2009}. These numerical tools have been developed to help the manufacturing operator in the pre-processing phase and are exclusively applied to the CAD model of the parts. In this paper, similar methods are applied but  directly to the functional surfaces to help the designer define the design space of the study and thus the future CAD model.
+
+\subsection{Functional optimization}
+From the design area, the second step is to define the optimal part geometry regarding the functional objectives of the design problem. This geometry is going to be the "initial part geometry" locally adapted to the chosen Additive Manufacturing process in the next methodology step.
+
+To ensure to get a real functional optimized geometry and to avoid the psychological inertia phenomena which may prevent the designers from innovating \cite{Li2006, Liao2008}, a numerical optimization approach is ideal. Among the different optimization methods, the topological optimization \cite{bendsoe2003topology} seems to be the most suitable one  for a the Additive Manufacturing. Indeed, in contrary to the others, it is not dependent on the initial geometry of the design area and thus allows a real optimization without any initial idea of the part geometry. The only known quantities in this case are the applied loads, the possible support conditions, the volume where there can be material and possibly some additional design restrictions such as the location and sizes of prescribed holes and solid area.
+
+Many commercial topological optimization softwares are available, in this paper TOPOSTRUCT$\textregistered$ \cite{TOPSTRUC} is used.
+
+\subsection{Manufacturing paths optimization}
+
+The last step of the methodology allows from the initial part geometry to determine the optimized manufacturing paths regarding the local manufacturing process characteristics. From these manufacturing paths, the manufacturing program, used to control the machine is generated in parallel with the final part CAD model. The proposed optimization method (Fig. \ref{fig:fig4}) is general and can be applied to all the metallic AM processes. 
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=1]{fig4.pdf}  
+\caption{Optimization method of the manufacturing paths.}
+\label{fig:fig4}
+\end{center}
+\end{figure}
+
+The manufacturing paths are firstly modelized. The point here is to set the manufacturing paths topology from the initial geometry according to the physics of the process and thus to the process technology. 
+
+The model parameters are then adapted to the process thanks to the consideration of global manufacturing rules which come basically from manufacturing experiences. These rules allow, with a high abstraction level, to define manufacturing path topologies (rather, spiral,...) suitable for the manufacturing process. The purpose is that the manufacturing paths topology is determined from, first of all, the manufacturing process constraints and just guided by the initial parts geometry. The result is the definition of the different set of the model parameters which are suitable for the manufacturing process and in accordance with the design area.
+
+Once the different adapted manufacturing paths topology are determined, their geometries must be accurately defined. It is done thanks to the consideration of local manufacturing rules. The abstraction level is, at this point, much lower. Indeed, the local rules concern the local geometric characteristics of the manufacturing paths as for example the radius of curvature or the space between two adjacent paths. The result is a series of manufacturing paths which have to be analysed and ranked against one another.
+
+Thus, for each one of them, the corresponding geometry is estimated by a numerical simulation. This geometry is then assessed in terms of functionality and manufacturability thanks to functional indicators ($I_{funct}$)linked to the study's functional objectives and manufacturing indicators ($I_{manuf}$) linked to the Additive Manufacturing process used. These indicators are used to compare and rank the different candidate manufacturing paths. Finally, at the end, the CAD model and the manufacturing program corresponding to the best manufacturing path are simultaneously generated.
+
+\section{Manufacturing paths optimization: case of the thin-walled parts produce by ALM}
+
+ALM is a recent process for rapidly forming complex metal components. A gas jet containing metal powder is directed via a moving nozzle, through the path of the laser beam (Fig. \ref{fig:fig5}), which is focused above the workpiece, to give a spot at the surface. This laser/powder stream is traversed across the workpiece. The laser forms a small melt pool on the workpiece into which the powder falls and melts, resulting in a new metal layer on cooling after the laser beam has moved on. The part is build continuously with the nozzle motion through the manufacturing paths.
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=1]{fig5.pdf}  
+\caption{Illustration of the ALM process.}
+\label{fig:fig5}
+\end{center}
+\end{figure}
+
+\subsection{Modelling of the manufacturing paths}
+
+\subsubsection{Principle}
+
+This manufacturing principle involves that the geometry of the manufacturing paths is constrained by the initial part geometry. It is all the more true in the case of a thin-walled part because the part thickness is very close to the minimal dimension manufacturable by the process. There is then only one possible manufacturing path geometry to build the part. In this case, the manufacturing paths modelling can thus be done directly from the initial part geometry and a graph modelling of the manufacturing path is appropriate (Fig. \ref{fig:fig6}). Indeed, if the graph nodes symbolize the intersection points of the manufacturing path and the graph edge the portion of path between these intersection points, the manufacturing path topology is modelled and each way of scan it can be described as a series of edges and nodes.
+This modelling is particularly suitable to take into consideration the ALM global manufacturing rules to adapt the manufacturing path in terms of topology. Indeed, the latter is directly defined by the edges and nodes of the graph and its adjacency matrix (the mathematical graph description). 
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=1]{fig6.pdf}  
+\caption{Principle of the graph modelling.}
+\label{fig:fig6}
+\end{center}
+\end{figure}
+
+Once the different suitable topologies are determined, the different ways to scan them are defined and one of them is randomly selected. The local manufacturing rules are then applied to precisely generate  the shapes of the corresponding manufacturing path. 
+
+\subsubsection{Implementation tools}
+
+In practice, the transition from the geometry of the initial part to the graph model of the topological skeleton from the part section is numerically done using MATLAB\textregistered     . Once the nodes and edges are determined, the adjacency matrix is then automatically generated.
+
+\subsection{The ALM process constraints}
+In the case of the ALM process, parts are manufactured layer by layer. A first layer is deposited onto a substrate then the next ones are successively added ones upon the others. As a result, the geometry of a given layer is directly linked to the above one. The variation of the deposit height in a same layer has a particularly strong impact on the physical quality and geometry accuracy of the upper layer and consequently on the final product quality (fig. \ref{fig:fig7}). Indeed, it is proved that the distance between the nozzle and top surface of the part (noted $ \Delta(t_{i})$) is a very influential manufacturing parameter because it controls both the energy and the material repartition added to the part during the manufacturing process \cite{ElCheikh2012}. It involves that if the height variation is too high, the part can no longer be manufacturable without a face milling which provides a scallop-free nascent surface \cite{Karunakaran2008}. This additional manufacturing operation increases manufacturing time and can also distort the part, therefore, controlling this parameter to minimize its variation is crucial. 
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=1]{fig7.pdf}  
+\caption{Illustration of manufacturing issues which may appear because of the deposit height variation.}
+\label{fig:fig7}
+\end{center}
+\end{figure}
+
+To this end, an experimentation is proposed to determine, in terms of manufacturing path, the different variation sources of the deposit height. The results of this experimentation will allow to define the manufacturing rules used to select the different possibilities of manufacturing paths (Fig. \ref{fig:fig4}).  
+
+Furthermore, a first manufacturing indicator, allowing to quantify the maximal variation of the deposit height in a layer, is also defined to classify the candidate manufacturing paths in terms of manufacturability:
+
+\begin{equation}
+I_{manuf}=\frac{MAX(|z(x,y)-\bar{z}(x,y)|)}{\bar{z}(x,y)} \label{eq1}
+\end{equation}
+Where $z(x,y)$ is the deposit height or build height and $\bar{z}(x,y)$, its moving average in the overall studied layer. Here, the lower $I_{manuf}$ is, the lower the height variability there is and thus the fewer face milling operation are needed. In other words, for a given manufacturing path, the lower $I_{manuf}$ is, the better its manufacturability is.
+
+\subsubsection{Design of experimentation}
+In order to analyse the different sources of geometrical variation, a benchmark part is defined (Fig. \ref{fig:fig8}). It contains the different features that can be found in a complex thin-walled part, which means in terms of manufacturing trajectory: 
+\begin{itemize}
+\item Two edge points: with and without an adjacent path.
+\item Three points of discontinuity: with an acute, an obtuse and a right angle.
+\item Different curvatures with four different radius from 0.4 mm to 10 mm.
+\item Two area of adjacency, with two different curvature radius.
+\end{itemize}
+The benchmark part is manufactured on a 3 mm thickness substrate plate with the CLAD$\textregistered$ machine, using the process parameters given in table \ref{tab:tab1}. The deposit geometry is measured with the InfiniteFocus$\textregistered$, an optical 3D micro coordinate system for form and roughness measurement. In order to take into account the variability of the CLAD$\textregistered$ process, this experimentation has been repeated three times.
+
+\begin{table}[!ht]
+\begin{center}
+\begin{tabular}{l c r}
+  \hline
+  Parameters & Symbol & Value \\
+    \hline
+      \hline
+Laser power (W) & P & 253 \\
+Scanning velocity ($mm.s^{-1}$)  & v & 12 \\
+Powder feeding rate ($g.min^{-1}$) &$ \dot{m}_{p}$ & 5 \\
+Gaz feeding rate ($L.min^{-1}$) & $\dot{m}_{g}$ & 5 \\
+Substrate material & & Low carbon steel\\
+Powder material & & 316 L \\
+  \hline
+\end{tabular}
+\end{center}
+\caption{Basic process parameters for the fabrication of thin-walled parts.}
+\label{tab:tab1}
+\end{table}
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=1]{fig8.pdf}  
+\caption{Definition of the benchmark part.}
+\label{fig:fig8}
+\end{center}
+\end{figure}
+
+The deposit height of the first manufactured part  is detailed along the manufacturing path (in red) in the figure \ref{fig:fig9}. Its high frequency variability (with a amplitude of $\pm$ 50 $\mu m$) is mainly due to metal powder grains which are, on the  upper surface of the deposit, not perfectly melted. Experience shows that it does not impact on the manufacturing process, it is thus smoothed with a moving average (in blue). However, these measurements allow to highlight eight zones of the manufacturing path where there is a particularly significant variation of the deposit height: at the path ends (zones 1 and 8), at the discontinuous points (zones 4, 5 and 6) and at the small radius (zones 2, 3 and 7). These height zones appear in the three manufactured benchmark parts. Moreover, the variation of $I_{manuf}$ between the three different manufactured benchmark parts is relatively low (Tab. \ref{tab:test}). 
+
+
+\begin{table}[!ht]
+\begin{center}
+\begin{tabular}{l c c c}
+\hline 
+ & part 1 & part 2 & part 3 \\ 
+    \hline
+      \hline
+$I_{manuf}$ & 0.99 & 1.21 & 1.13\\ 
+
+\hline 
+\end{tabular} 
+\end{center}
+\caption{Comparison of the three manufactured benchmark parts.}
+\label{tab:test}
+\end{table}
+
+To complete this analysis, a fourth benchmark part has been produced reversing  the order of the travel path. The results are broadly the same as the first ones, the corresponding $I_{manuf}$ is equal to 1.18.
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=1]{fig9.pdf}  
+\caption{The measured deposit height along the manufacturing path.}
+\label{fig:fig9}
+\end{center}
+\end{figure}
+
+\subsubsection{Manufacturing rules}
+\label{section}
+In order to ensure the physical quality and the geometrical accuracy of the final products, it has been proved in the section 3.2 that the deposit height variation in a same layer has to be minimized. 
+
+As it is shown by the experimentation (Fig. \ref{fig:fig9}), the manufacturing path has a significant impact on the deposit height. It is therefore needed to define rules in order to select suitable paths. From the experimentation, three rules can be easily defined:
+\begin{enumerate}
+\item To minimize the number of path ends
+\item To maximize the curvature radius
+\item To minimize the number of points of discontinuity
+\end{enumerate}
+
+The rule 1 is a global one and impacts on the manufacturing paths topology and thus on the graph model of the manufacturing paths. It corresponds in terms of graph to have a trail that visits each edge of the graph once. This is possible when the studied graph is an Eulerian Graph or a Semi-Eulerian graph \cite{Diestel1997}, which involves that the graph model of the manufacturing path must have zero or two nodes of odd degree. 
+
+The rules 2 and 3 are local rules and allow to define precisely the manufacturing paths geometry.
+
+\subsection{Modelling of the ALM process}
+
+During the manufacturing process, the local deposit geometry is controlled by the powder which falls and melts in the small melt pool formed on the workpiece by the laser beam. The thermal distribution is thus firstly determined then, secondly, the deposit geometry is  determined.
+
+
+\subsubsection{Thermal model}
+
+To calculate the temperature distribution, and thus to determinate the melt pool geometry, the finite element method was used to numerically solve the following heat transfer equation:
+
+\begin{equation}
+\frac{\partial}{\partial x}(k \frac{\partial T}{\partial x}) + \frac{\partial}{\partial y}(k \frac{\partial T}{\partial y})+ \frac{\partial}{\partial z}(k \frac{\partial T}{\partial z}) + Q = \frac{\partial \rho c_{p} T}{\partial t}
+\end{equation}
+
+Where $T$ ($K$) is temperature, $t$ ($s$) is time, $c_{p}$ ($J.kg^{-1}.K^{-1}$) is specific heat capacity, $\rho$ ($kg.m^{-3}$) is density, $k$ ($kg.m^{-1}.K^{-1}$) is thermal conductivity and Q ($W.m^{-3}$) is the power generated per volume within the workpiece. 
+
+The boundary conditions are:
+
+\begin{displaymath}
+k( \nabla T . n)=
+\end{displaymath}
+\begin{equation}
+\left\lbrace
+\begin{array}{l}
+ I(M,t)-h(T-T_{0})- \varepsilon_{R} \sigma_{R} (T^{4} - T_{0}^{4})   \textrm{ if }  M(x,y) \in S_{laser}\\
+-h(T-T_{0})- \varepsilon_{R} \sigma_{R} (T^{4} - T_{0}^{4}) \textrm{ if } M(x,y) \in S_{deposit}\\
+-h(T-T_{0}) \textrm{ if }  M(x,y) \notin S_{deposit} \cup S_{laser}
+\end{array}\right.
+\end{equation}
+
+Where $n$ is the normal vector of the surface , $\varepsilon_{R}$ is emissivity, $h$ ($W.m^{-2}.K^{-1}$) is the heat convection coefficient, $\sigma_{R}$ is the Stefan–Boltzman constant ($5.67 10^{8}W.m^{-2}.W^{-4}$), $S_{laser}$ ($mm^{2}$) is the area of the laser beam on the workpiece, $S_{deposit}$ ($mm^{2}$) is the surface of the previous deposits and $I(x,y,z,t)$ ($W.m^{-2}$) is the laser power distribution on the workpiece which is considered as a Gaussian. It can be computed according to the formula:
+\begin{equation}
+I(x,y,z,t)= \frac{\beta.P}{ 2.\pi.R_{l}^2 } exp(\frac{-r^2}{R_{l}^2})
+\end{equation}
+
+Where $R_{l}$ ($mm$) is laser beam radius, $\beta$ ($\%$) is the abortion factor, $P$ ($W$) is the laser power and $r$ ($mm$) is the distance from the
+point which is located inside the beam to the center of beam.
+
+The initial conditions are:
+
+\begin{equation}
+\left\lbrace
+\begin{array}{l}
+T(x,y,z,0)=T_{0}\\
+T(x,y,z,\infty)=T_{0}\\
+\end{array}\right.
+\end{equation}
+Where $T_{0}$ is the ambient temperature.
+
+\subsubsection{Geometric model}
+The manufacturing path is discretised in $n$ points $C_{i}(x_{i},y_{i})$. The length between two points $C_{i}$ and $C_{i-1}$ is given by:
+\begin{equation}
+dl_{i}=v(t_{i}).dt
+\end{equation}
+Where $v(t_{i})$ is the manufacturing head travel speed at $t=t_{i}$ determined from maximal jerk, acceleration and speed of the machine used, $dt$ is chosen equal to the time step of the thermal simulation.
+
+The powder flow is considered as an uniform distribution, the thickness $dh_{i}$ of the added material on the substrate during a period $dt$ can be thus mathematically modelled by the following expression \cite{Alimardani2007}:
+
+\begin{eqnarray}
+dh_{i}(x,y)&=& \frac{dt.\dot{m}_{p}}{\rho.S_{powder}} \textrm{ if } (x,y)\in S_{melt} \cap S_{powder} \\
+&=&0 \textrm{ if } (x,y)\notin S_{melt} \cap S_{powder}
+\end{eqnarray}
+
+Where $(x,y)$ are the elements coordinates of the workpiece top surface, $S_{melt}$ and $S_{powder}$ ($mm^{2}$) are the intersections of the melt pool and the powder stream projection with the workpiece top surface, $\rho$ ($g.mm^{-3}$) is the powder density and $\dot{m}_{p}$ ($kg.s^{-1}$)is the powder feed rate.
+
+The additive process can be then modelled at each point $M(x,y)$ of the wokpiece surface as:
+
+for $i$ from $1$ to $t_{total}/dt$
+\begin{equation}
+h_{i}(x,y)=h_{i-1}(x,y)+dh_{i}(x,y)
+\end{equation}
+
+where $t_{total}$ is the total manufacturing time. 
+
+The initial condition is defined by:
+\begin{equation}
+\forall (x,y) \textrm{, } h_{0}(x,y)=0
+\end{equation}
+
+\subsubsection{Implementation tools}
+
+To calculate the temperature distribution in the workpiece, Morfeo$\textregistered$ \cite{Cenaero2012} is
+employed to solve the governing equations and their
+corresponding boundary conditions introduced in the
+previous section.
+To implement the proposed method for simulating the additive process and finally the local deposit geometry, a code is developed using MATLAB$\textregistered$.
+
+\subsubsection{Application to the benchmark part}
+The ALM process modelling has been applied to estimate the geometry of the benchmark part, the model parameters used have been previously determined experimentally in the case of the CLAD$\textregistered$ machine, they are detailed in table \ref{tab:tab3}.
+
+\begin{table}[!ht]
+\begin{center}
+\begin{tabular}{l c r}
+  \hline
+  Parameters & Symbol & Value \\
+    \hline
+      \hline
+Absorption (\%) & $\nu$ & 30 \\
+Laser beam radius ($mm$) &  $R_{l}$ & 0.4 \\
+Powder stream projection ($mm^{2}$) &  $S_{powder}$ & 3 \\
+Initial temperature ($K$) &  $T_{0}$ & 293 \\
+Maximal Jerk ($m.s^{-3}$) &$J_{max}$ & 50 \\
+Maximal acceleration ($m.s^{-2}$) & $A_{max}$ & 100 \\
+Maximal speed ($m.s^{-1}$)& $V_{max}$& 10\\
+  \hline
+\end{tabular}
+\end{center}
+\caption{Simulation parameters.}
+\label{tab:tab3}
+\end{table}
+
+The results are showed in figure \ref{fig:fig10}. Along the manufacturing path, the simulated deposit height (in green) is compared with the experimental measurement (in red). The manufacturing indicator $I_{manuf}$ is here equal to 1.09.
+
+Figure \ref{fig:fig11} shows the manufactured part and allows to show the gaps between the measurements and the simulation in three different points of the manufacturing path. Table \ref{tab:tab4} gives the values of these gaps.   
+
+Although the variable gaps between the simulated and experimental results (between 0\% and 29\% for the deposit height), the eight particular zones with a significant variation of the deposit height are detected. Moreover, the manufacturing indicators of the manufacturing and the simulated geometries are relatively close (with a maximal gap of 15.6\%).
+
+The proposed model can thus be used to compare different manufacturing paths and to select the one which minimize the deposit height variations.
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=1]{fig10.pdf}  
+\caption{Comparison between the simulated and measured deposit height along the manufacturing path.}
+\label{fig:fig10}
+\end{center}
+\end{figure}
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=1]{fig11.pdf}  
+\caption{Comparison between the simulated and measured deposit section in 3 different points of the manufacturing path. }
+\label{fig:fig11}
+\end{center}
+\end{figure}
+
+\begin{table}[!ht]
+\begin{center}
+\begin{tabular}{c|c|c|c}
+\hline 
+ & (a) & (b) & (c) \\ 
+\hline \hline 
+measured width(mm) & 0.485 & 0.457 & 0.492 \\ 
+\hline 
+simulated width(mm) & 0.52 & 0.52 & 0.52 \\ 
+\hline 
+gap(\%)  & 7.2 & 13.7 & 5.6 \\ 
+\hline \hline 
+measured height (mm) & 0.199 & 0.176 & 0.182 \\ 
+\hline 
+simulated height(mm) & 0.164 & 0.164 & 0.164 \\ 
+\hline 
+gap(\%) & 18 & 6.8 & 9.8 \\ 
+\hline 
+\end{tabular}
+\end{center}
+\caption{Comparison of the deposit height and width in the 3 analysed points.}
+\label{tab:tab4}
+\end{table}
+
+\section{Example}
+The proposed methodology has been applied to the design of a turbine blade (Fig. \ref{fig:fig12a}) in stainless steel which is manufactured with the CLAD$\textregistered$ machine, using the manufacturing parameters given in table \ref{tab:tab3} directly onto the blade root previously obtained  by milling. Since the studied blade geometry is symmetric, the design problem is implied as a 2D study which the mechanical boundary conditions are described in figure \ref{fig:fig12b}, the maximal value of pressure ($p$) being 0.5 MPa. 
+The functional objective of the study is to minimize the blade mass while ensuring a minimal mechanical strength. That is to say to get mechanical stresses lower than $R$, the 316L Yield stress and a maximal displacement lower than $D_{max}$=0.5 mm. A functional indicator linked is thus defined, to optimize the blade geometry regarding its mass:
+
+\begin{equation}
+I_{funct}= \frac{M_{i}}{M_{full}} \label{eq2}
+\end{equation}
+
+
+Where $M_{i}$ is the mass of the blade geometry corresponding to the $i^{th}$ candidate manufacturing path and $M_{full}$ is the mass of the full blade which is entirely manufactured by milling. 
+Finally, the manufacturing paths used to obtain the optimal turbine blade are going to be optimized regarding $I_{funct}$, defined in equation \ref{eq2} and $I_{manuf}$ defined in equation \ref{eq1}.
+
+\begin{figure}[h]
+  \centering
+  \subfigure[The fonctional surface.]{\label{fig:fig12a}\includegraphics[scale=1] {fig12a.pdf}}                
+  \subfigure[The mechanical boundary conditions (MPa).]{\label{fig:fig12b}\includegraphics[scale=0.6]{fig12b.pdf}}
+  \caption{Functional specification of the analysed blade.}
+  \label{fig:fig12}
+\end{figure}
+
+\subsection{Part orientation}
+The manufacturing direction of the blade is defined normal to the upper surface of the blade root (Fig. \ref{fig:fig13}) to minimize the support volume needed to obtain the functional surface and therefore to minimize also the final part mass. With this manufacturing direction, the design area is the entire volume inside the functional surface of the blade (in green in figure \ref{fig:fig13}) .
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=1]{fig13.pdf}  
+\caption{Illustration of the first methodology step.}
+\label{fig:fig13}
+\end{center}
+\end{figure} 
+
+\subsection{Functional optimization}
+From the design area, the functional optimization is done with TOPOSTRUCT$\textregistered$. In order to both minimize the blade mass and to ensure its mechanical strength, the optimisation is done in several steps. The objective volume fraction is firstly chosen at 50\%, then it is reduced as long as the mechanical stress is lower than $R$ and the maximal displacement is lower than $D_{max}$. In order to carry out the optimization, the 316L properties are assumed isotropic. They are given in table \ref{tab:tab5}.
+
+\begin{table}[!ht]
+\begin{center}
+\begin{tabular}{l r}
+\hline
+Properties & Value\\
+\hline
+\hline
+Yield tensile ($MPa$) & 260 \\
+\hline
+Poisson's ratio & 0.31\\
+\hline
+Young modulus ($GPa$)& 192\\
+\hline
+Density ($kg.m^{-3}$)& 8000 \\
+ \hline
+\end{tabular}
+\end{center}
+\caption{The 316L stainless steel properties.}
+\label{tab:tab5}
+\end{table}
+
+Finally, the optimal geometry (Fig. \ref{fig:fig14}), corresponding to an objective volume fraction of 8\%, is a complex thin wall structure which the thickness varies from 0.23 mm to 0.8 mm. Its corresponding graph model is thus determined.  
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=1]{fig14.pdf}  
+\caption{Illustration of the second  step of the methodology.}
+\label{fig:fig14}
+\end{center}
+\end{figure}
+
+
+\subsection{Manufacturing path optimization}
+
+The third step of the methodology is described in figure \ref{fig:fig15}. Because the initial graph model is not Eulerian nor Semi-Eulerian, it has to be modified (rule 1). Moreover, to ensure the minimal required mechanical strength, the different analysed Eulerian possibilities are determined by only adding edges to connect the nodes of odd degree (the removal of edge is forbidden). 
+
+\begin{figure*}[!ht]
+\begin{center}
+\includegraphics[scale=0.8]{fig15.pdf}  
+\caption{Illustration of the third methodology step.}
+\label{fig:fig15}
+\end{center}
+\end{figure*}
+
+Once all the Eulerian solutions are determined, each one of their Eulerian trail are translated in manufacturing paths using the two local manufacturing rules (rules 2 $\&$ 3) defined in section \ref{section}. In order to achieve it, the local manufacturing paths geometry is defined using C-splines curves. Concerning the discontinuity, in each layer, the only points of discontinuity are, finally, the paths ends.
+
+The corresponding geometry of each manufacturing path is then simulated and quantified in terms of manufacturability (for a same graphe, just $I_{manuf}$ significantly varies). In order to minimize the simulation time, here only one layer of the blade is simulated. The best manufacturing path of each Eulerian solution can be then classified regarding the both functional and manufacturing indicators $I_{funct}$ and $I_{manuf}$.  
+ 
+
+
+\subsection{Final result}
+
+At the end of the methodology, the best manufacturing path, with $I_{funct}=0.138$ and $I_{manuf}=1.27$ is selected. Assuming that all the layers have the same behaviour as the first one, the overall optimized blade geometry, is presented in figure \ref{fig:fig16}, it is an optimized blade for both functionality and manufacturability. Indeed, firstly, it has a mass 85\% lower than a fully blade which would be manufactured by milling and secondly it allows to minimize the need of face milling operations. Moreover, as only the solutions which added material to the initial geometry (Fig. \ref{fig:fig14}) had been analysed, its mechanical strength is thus necessarily ensured. Figure \ref{fig:fig16} shows the blade geometry after a last face milling.
+
+The obtained geometry is not only optimized but also realistic regarding the manufacturing process. Indeed, because the geometry comes from the simulation of the CLAD$\textregistered$ process, the obtained CAD model includes nonfunctional characteristics directly linked to the physical phenomena that occur during the process. The figure \ref{fig:fig16} shows in particularly the area of the starting point of the manufacturing trajectory.  
+
+\begin{figure}[!ht]
+\begin{center}
+\includegraphics[scale=1]{fig16.pdf}  
+\caption{3D view of the optimized blade geometry.}
+\label{fig:fig16}
+\end{center}
+\end{figure}
+
+\section{Conclusion}
+Today, Additive Manufacturing processes and in particularity ALM can be used to manufacture very complex metal parts. However to benefit from this new design possibilities and meet at the best the functional specifications of a part, it is needed to help designers. Firstly to avoid the psychological inertia phenomena and find the optimal geometry in terms of functionality and secondly to considerate these manufacturing processes characteristics. These characteristics are, like all the manufacturing process dictated by the physical phenomena involved which have a direct and strong impact on the final quality of the manufactured part. 
+
+In this paper a new global numerical chain for the metallic  Additive Manufacturing processes has been introduced. It is based on a global DFAM methodology which allows to optimize the parts geometry regarding the specificities of the Additive Manufacturing processes in parallel with the initial functional specifications. This work purpose is to propose a methodology which allows to minimize the gap between a CAD model and the corresponding manufactured part. Based on the simulation of the physical phenomena that occur during the manufacturing process, the methodology allow to optimize the manufacturing paths to finally propose a realistic CAD model in parallel with the corresponding manufacturing program.
+
+The proposed methodology as well as the corresponding numerical tools as been detailed then illustrated for the designing and manufacturing of thin-walled metal parts  manufactured by an ALM process. However, this work is still limited to extruded parts and 2.5 axis manufacturing paths. It has thus to be continued.
+
+\section{Future work}
+
+Our future works should focus on two main points. Firstly, the methodology has to be extended to the design of not only extruded parts. It involves generating 5 axis manufacturing paths. Moreover, it would be interesting to generate continuous paths. Indeed, it would allow to further reduce the deposit height variation minimizing the paths ends number no more in only each layer but in the whole parts. 
+
+The second issue concerns the manufacturing process simulation. It has to be improved taking into account, in particularly, the thermomechanical phenomena which could involve parts distortions and thus involving gaps between the geometrical model and the manufactured geometry of the parts.
+
+%% The Appendices part is started with the command \appendix;
+% appendix sections are then done as normal sections
+% \appendix
+
+%% \section{}
+% \label{}
+
+%% References
+%
+% Following citation commands can be used in the body text:
+% Usage of \cite is as follows:
+%   \cite{key}          ==>>  [#]
+%   \cite[chap. 2]{key} ==>>  [#, chap. 2]
+%%   \citet{key}         ==>>  Author [#]
+
+%% References with bibTeX database:
+
+
+\bibliographystyle{model1-num-names}
+\bibliography{reference}
+%% Authors are advised to submit their bibtex database files. They are
+%% requested to list a bibtex style file in the manuscript if they do
+%% not want to use model1-num-names.bst.
+
+%% References without bibTeX database:
+
+% \begin{thebibliography}{00}
+
+%% \bibitem must have the following form:
+%%   \bibitem{key}...
+%%
+
+% \bibitem{}
+
+% \end{thebibliography}
+
+\end{document}
+
+%%
+%% End of file `elsarticle-template-1-num.tex'.

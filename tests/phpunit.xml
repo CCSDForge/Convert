@@ -1,14 +1,12 @@
 <!-- bootstrap="./bootstrap.php"  -->
 <phpunit
-         
-         display_errors="on"
-         error_reporting="E_ALL"
-	 
-         display_startup_errors= "On"
-         colors="true"
-         verbose="true"
+        colors="true"
+        bootstrap="bootstrap.php"
 >
     <php>
+        <ini name="display_errors" value="1"/>
+        <ini name="error_reporting" value="E_ALL" />
+
         <!-- -->
         <includePath>../</includePath>
     </php>

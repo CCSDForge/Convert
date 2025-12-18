@@ -1,0 +1,127 @@
+\newcommand{\keywords}[1]{\par\noindent\textbf{Keywords:} #1}
+
+\newcommand{\length}[1]{\# #1}
+\newcommand{\rise}[1]{{#1}^{\bullet}}
+\newcommand{\low}[1]{{#1}_{\bullet}}
+\newcommand{\tree}[1]{\tau{[#1]}}
+\newcommand{\lab}[1]{\ell{[#1]}}
+\newcommand{\sval}[1]{|\,#1 \,|}
+\newcommand{\dgmu}[1]{{#1}^{\mu}}
+\newcommand{\dgnu}[1]{{#1}^{\nu}}
+\newcommand{\dom}{\partial_{0}}
+\newcommand{\cod}{\partial_{1}}
+\newcommand{\un}[1]{{#1}^{!}}
+\newcommand{\EQ}{\mathcal{E}}
+\newcommand{\hg}{h}
+\newgraphescape{I}[1]{
+  []*{}*+[o]{}*+\frm{}="#1"
+}
+
+
+
+\renewcommand{\lefteqn}[2][0mm]{\makebox[#1][l]{$\displaystyle{#2}$}}
+\newcommand{\Cat}[1]{{\EuScript{#1}}}
+\newcommand{\Sets}{{\Cat{S}\mathrm{et}}}
+\newcommand{\dg}[2][]{{#2}^{\dag_{#1}}}
+\newcommand{\id}{\mathtt{id}}
+\newcommand{\Id}{\mathtt{id}}
+\newcommand{\comp}{\cdot}
+\newcommand{\compp}{\star}
+\newcommand{\ltuple}{\bigl \langle}
+\newcommand{\rtuple}{\bigr \rangle}
+\newcommand{\prj}{{\mathtt{pr}}}
+\newcommand{\inj}{{\mathtt{in}}} 
+\newcommand{\lcotuple}{\bigl\{}
+\newcommand{\rcotuple}{\bigr\}}
+\newcommand{\iso}{\cong}
+\newcommand{\nnumbers}{\mathbb{N}}
+\newcommand{\mygraph}[1]{\hat{n}}
+\newcommand{\set}[1]{\{1,\ldots ,#1\}}
+\newcommand{\agset}[1]{\{1,\ldots ,#1,\omega\}}
+\newcommand{\height}[1]{\mathrm{hg}(#1)}
+\newcommand{\In}{\mathrm{In}\,}
+\newcommand{\card}{\mathrm{card}\,}
+\newcommand{\res}{\setminus}
+\newcommand{\tiff}{\;\textrm{iff}\;}
+\newcommand{\colim}[1][]{\mathrm{colim}_{#1}\,}
+\newcommand{\dilim}[1][]{\mathrm{lim}_{#1}\,}
+\newcommand{\push}[1]{+\hspace{-0.35em}{}_{#1}\hspace{0.1em}}
+
+\newcommand{\val}[1]{\|\, #1 \,\|}
+\newcommand{\bd}[1]{{\mathbf{#1}}}
+\newcommand{\struct}[1]{{\if#1x\chi\else\if#1y\xi\else\if#1u\upsilon\else\if#1w\omega\else\if#1z\zeta\else\if#1a\alpha\else??\fi\fi\fi\fi\fi\fi}}
+\newenvironment{system}{
+    \left \{ \begin{array}{lcl}}{\end{array}\right\}
+  }
+\newcommand{\Land}[1][]{{\textstyle\bigwedge_{#1}}}
+\newcommand{\Lor}[1][]{{\textstyle\bigvee_{\!\!#1\,}}}
+\newcommand{\mydiagram}[2][6em]{\xy\xygraph{!{<#1,0cm>:<0cm,#1>::}#2}\endxy}
+\newcommand{\myspecialdiagram}[3][6em]{\xy *!C=(#2,#2)\xybox{
+    \xygraph{!{<#1,0cm>:<0cm,#1>::}#3}
+  }\endxy
+}
+
+\newcommand{\mydiagrambot}[2][3em]{
+  \begin{array}[b]{@{\hspace{0mm}}c@{\hspace{0mm}}}
+    \mbox{\xy\xygraph{!{<#1,0cm>:<0cm,#1>::}#2}\endxy}
+    \\[-1.3em]\hspace{2mm}
+  \end{array}
+  }
+
+\newgraphescape{s}[8]{
+  []
+  :@{{}{}{}}[]*+{#1}="1"
+  (
+  :@{{}{}{}}[d(#5)r(#6)]*+{#2}="2"
+  :@{{}{}{}}[d(#8)r(#7)]*+{#4}="4",
+  :@{{}{}{}}[d(#8)r(#7)]*+{#3}="3"
+  )
+  "4"
+}
+\newgraphescape{S}[6]{
+  []!s{#1}{#2}{#3}{#4}{#5}{0}{#6}{0}
+}
+\newgraphescape{a}[4]{
+  [](
+  "1":"2"#1,
+  "1":"3"#2,
+  "2":"4"#3,
+  "3":"4"#4,
+  )
+}
+\newgraphescape{A}[4]{
+  []!a{^{#1}}{^{#2}}{^{#3}}{^{#4}}
+}
+\newcommand{\mygame}[2][3em]{
+  \mbox{$\begin{array}{@{\hspace{0mm}}c@{\hspace{0mm}}}
+      \xy\xygraph{!{<#1,0cm>:<0cm,#1>::}#2}\endxy
+    \end{array}$}
+}
+\newgraphescape{p}[1]{
+  []*{#1}*+[o]{}*+\frm{o}
+}
+\newgraphescape{P}[1]{
+  []!p{#1}="#1"(
+  [d(0.23)r(0.23)]*{\sigma})
+}
+\newgraphescape{O}[1]{
+  []!p{#1}="#1"(
+  [d(0.23)r(0.23)]*{\pi})
+}
+\newgraphescape{E}[1]{
+  []!p{#1}="#1"
+}
+\newgraphescape{g}[1]{
+  []*{#1}*+[o]{}*+\frm{}
+}
+\newgraphescape{L}[2]{
+  []="Frame2"
+  ?="Frame1"
+  !{{{"Frame1"."Frame2"}*++\frm{--}}="Frame3"}
+  (
+  []!{"Frame3"!DL}[u(0.1)l(0.2)]*{#1},
+  []!{"Frame3"!UR}[d(0.1)r(0.2)]*[r]{#2}
+  )
+}
+
+

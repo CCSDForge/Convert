@@ -1,0 +1,206 @@
+\begin{thebibliography}{10}
+
+\bibitem{MR89j:03039}
+P.~Aczel.
+\newblock {\em Non-well-founded sets}.
+\newblock Stanford University Center for the Study of Language and Information,
+  Stanford, CA, 1988.
+
+\bibitem{itmo}
+P.~Aczel, J.~Ad\'amek, and J.~Velebil.
+\newblock A coalgebraic view of infinite trees and iteration.
+\newblock In Marina~Lenisa Andrea~Corradini and Ugo Montanari, editors, {\em
+  Electronic Notes in Theoretical Computer Science}, volume~44. Elsevier
+  Science Publishers, 2001.
+
+\bibitem{MR82d:18004}
+J.~Ad{\'a}mek and V.~Koubek.
+\newblock Least fixed point of a functor.
+\newblock {\em J. Comput. System Sci.}, 19(2):163--178, 1979.
+
+\bibitem{lpac}
+J.~Ad{\'a}mek and J.~Rosick{\'y}.
+\newblock {\em Locally presentable and accessible categories}.
+\newblock Cambridge University Press, Cambridge, 1994.
+
+\bibitem{AN01}
+A.~Arnold and D.~Niwinski.
+\newblock {\em Rudiments of mu-calculus}.
+\newblock Number 146 in Studies in Logic and the Foundations of Mathematics.
+  Elsevier (North-Holland), 2001.
+
+\bibitem{barr}
+M.~Barr.
+\newblock Terminal coalgebras in well-founded set theory.
+\newblock {\em Theoret. Comput. Sci.}, 114(2):299--315, 1993.
+
+\bibitem{MR95g:68065}
+S.~L. Bloom and Z.~{\'E}sik.
+\newblock {\em Iteration theories}.
+\newblock Springer-Verlag, Berlin, 1993.
+\newblock The equational logic of iterative processes.
+
+\bibitem{MR2001m:18006}
+S.~L. Bloom, Z.~{\'E}sik, A.~Labella, and E.~G. Manes.
+\newblock Iteration 2-theories.
+\newblock {\em Appl. Categ. Structures}, 9(2):173--216, 2001.
+
+\bibitem{MR94a:18008}
+J.~R.~B. Cockett and D.~Spencer.
+\newblock Strong categorical datatypes. {I}.
+\newblock In {\em Category theory 1991 (Montreal, PQ, 1991)}, pages 141--169.
+  Amer. Math. Soc., Providence, RI, 1992.
+
+\bibitem{MR96c:18005}
+J.~R.~B. Cockett and D.~Spencer.
+\newblock Strong categorical datatypes. {I}{I}. {A} term logic for categorical
+  programming.
+\newblock {\em Theoret. Comput. Sci.}, 139(1-2):69--113, 1995.
+
+\bibitem{CoFu92}
+R.~Cockett and T.~Fukushima.
+\newblock About {C}harity.
+\newblock Yellow Series Report No.\ 92/480/18, Department of Computer Science,
+  The University of Calgary, June 1992.
+
+\bibitem{emersonjutla}
+E.~A. Emerson and C.~S. Jutla.
+\newblock Tree automata, mu-calculus and determinacy (extended abstract).
+\newblock In {\em 32nd Annual Symposium on Foundations of Computer Science},
+  pages 368--377. IEEE, 1991.
+
+\bibitem{MR1826118}
+E.~A. Emerson, C.~S. Jutla, and A.~P. Sistla.
+\newblock On model checking for the $\mu$-calculus and its fragments.
+\newblock {\em Theoret. Comput. Sci.}, 258(1-2):491--522, 2001.
+
+\bibitem{MR98j:18007}
+Z.~{\'E}sik and A.~Labella.
+\newblock Equational properties of iteration in algebraically complete
+  categories.
+\newblock {\em Theoret. Comput. Sci.}, 195(1):61--89, 1998.
+\newblock Mathematical foundations of computer science (Cracow, 1996).
+
+\bibitem{MR93g:18005}
+P.~Freyd.
+\newblock Algebraically complete categories.
+\newblock In {\em Category theory (Como, 1990)}, pages 95--104. Springer,
+  Berlin, 1991.
+
+\bibitem{gimenez}
+E.~Gim\'enez.
+\newblock A tutorial on recursive types in {C}oq.
+\newblock Technical Report 0221, INRIA, May 1998.
+
+\bibitem{hyland}
+J.~M.~E. Hyland.
+\newblock The effective topos.
+\newblock In {\em The L.E.J. Brouwer Centenary Symposium (Noordwijkerhout,
+  1981)}, pages 165--216. North-Holland, Amsterdam, 1982.
+
+\bibitem{MR96k:18004a}
+A.~Joyal.
+\newblock Free bicomplete categories.
+\newblock {\em C. R. Math. Rep. Acad. Sci. Canada}, 17(5):219--224, 1995.
+
+\bibitem{MR1797101}
+A.~Joyal.
+\newblock Free lattices, communication and money games.
+\newblock In {\em Logic and scientific methods (Florence, 1995)}, pages 29--68.
+  Kluwer Acad. Publ., Dordrecht, 1997.
+
+\bibitem{kelly}
+G.~M. Kelly.
+\newblock Elementary observations on $2$-categorical limits.
+\newblock {\em Bull. Austral. Math. Soc.}, 39(2):301--317, 1989.
+
+\bibitem{lambek68}
+J.~Lambek.
+\newblock A fixpoint theorem for complete categories.
+\newblock {\em Math. Z.}, 103:151--161, 1968.
+
+\bibitem{lehmannsmyth}
+D.~J. Lehmann and M.~B. Smyth.
+\newblock Algebraic specification of data types: a synthetic approach.
+\newblock {\em Math. Systems Theory}, 14(2):97--139, 1981.
+
+\bibitem{makkaipare}
+M.~Makkai and R.~Par{\'e}.
+\newblock {\em Accessible categories: the foundations of categorical model
+  theory}.
+\newblock American Mathematical Society, Providence, RI, 1989.
+
+\bibitem{MR95a:90238}
+R.~McNaughton.
+\newblock Infinite games played on finite graphs.
+\newblock {\em Ann. Pure Appl. Logic}, 65(2):149--184, 1993.
+
+\bibitem{MR827531}
+A.~W. Mostowski.
+\newblock Regular expressions for infinite trees and a standard form of
+  automata.
+\newblock In {\em Computation theory (Zabor\'ow, 1984)}, volume 208 of {\em
+  Lect. Notes in Comput. Sci.}, pages 157--168. Springer, Berlin, 1985.
+
+\bibitem{MR87e:03079}
+D.~Niwi{\'n}ski.
+\newblock Equational $\mu$-calculus.
+\newblock In {\em Computation theory (Zabor\'ow, 1984)}, volume 208 of {\em
+  Lect. Notes in Comput. Sci.}, pages 169--176. Springer, Berlin, 1985.
+
+\bibitem{reutenauer}
+C.~Reutenauer.
+\newblock Ensembles libres de chemins dans un graphe.
+\newblock {\em Bull. Soc. Math. France}, 114(2):135--152, 1986.
+
+\bibitem{MR1791953}
+J.~J. M.~M. Rutten.
+\newblock Universal coalgebra: a theory of systems.
+\newblock {\em Theoret. Comput. Sci.}, 249(1):3--80, 2000.
+
+\bibitem{BRICS-RS-00-29}
+L.~Santocanale.
+\newblock The alternation hierarchy for the theory of $\mu$-lattices.
+\newblock {\em Theory and Applications of Categories}, 9:166--197, January
+  2002.
+\newblock A special volume of articles from the Category Theory 2000 Conference
+  (CT2000).
+
+\bibitem{sanlccp}
+L.~Santocanale.
+\newblock A calculus of circular proofs and its categorical semantics.
+\newblock In {\em FOSSACS02, Foundations of Software Science and Computation
+  Structures}, volume 2303 of {\em Lect. Notes Comput. Sci.}, pages 357--371,
+  2002.
+
+\bibitem{San99:Fml}
+L.~Santocanale.
+\newblock Free $\mu$-lattices.
+\newblock {\em J. Pure Appl. Algebra}, 168(2-3):227--264, 2002.
+\newblock Category theory 1999 (Coimbra).
+
+\bibitem{simpsonplotkin}
+A.K. Simpson and G.D. Plotkin.
+\newblock Complete axioms for categorical fixed-point operators.
+\newblock In {\em Proceedings of 15th Annual Symposium on Logic in Computer
+  Science}, pages 30--41, 2000.
+
+\bibitem{thomas}
+W.~Thomas.
+\newblock Languages, automata, and logic.
+\newblock In Rozenberg G. and Salomaa A., editors, {\em Handbook of Formal
+  Language Theory}, volume III. Springer-Verlag, New York, 1996.
+
+\bibitem{BRICS-RS-96-54}
+I.~Walukiewicz.
+\newblock Pushdown processes: games and model-checking.
+\newblock {\em Inform. and Comput.}, 164(2):234--263, 2001.
+\newblock FLOC '96 (New Brunswick, NJ).
+
+\bibitem{zie}
+W.~Zielonka.
+\newblock Infinite games on finitely coloured graphs with applications to
+  automata on infinite trees.
+\newblock {\em Theoret. Comput. Sci.}, 200(1-2):135--183, 1998.
+
+\end{thebibliography}

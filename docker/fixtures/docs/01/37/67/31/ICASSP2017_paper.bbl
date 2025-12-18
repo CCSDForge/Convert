@@ -1,0 +1,200 @@
+\begin{thebibliography}{10}
+
+\bibitem{Aloise2009}
+D.~Aloise, A.~Deshpande, P.~Hansen, and P.~Popat,
+\newblock ``{NP-hardness of Euclidean sum-of-squares clustering},''
+\newblock {\em Machine Learning}, vol. 75, no. 2, pp. 245--248, 2009.
+
+\bibitem{Lloyd1982}
+S.~Lloyd,
+\newblock ``{Least Squares Quantization in PCM},''
+\newblock {\em IEEE Transactions on Information Theory}, vol. 28, no. 2, pp.
+  129--137, 1982.
+
+\bibitem{Steinhaus1956}
+H.~Steinhaus,
+\newblock ``{Sur la division des corps materiels en parties},''
+\newblock {\em Bull. Acad. Polon. Sci. IV (C1.III)}, vol. IV, no. 12, pp.
+  801--804, 1956.
+
+\bibitem{Keriven2015}
+N.~Keriven, A.~Bourrier, R.~Gribonval, and P.~P{\'{e}}r{\`{e}}z,
+\newblock ``{Sketching for Large-Scale Learning of Mixture Models},''
+\newblock in {\em IEEE International Conference on Acoustic, Speech and Signal
+  Processing (ICASSP)}, 2015.
+
+\bibitem{Keriven2016}
+N.~Keriven, A.~Bourrier, R.~Gribonval, and P.~P{\'{e}}r{\`{e}}z,
+\newblock ``{Sketching for Large-Scale Learning of Mixture Models},''
+\newblock {\em arXiv preprint arXiv:1606.02838}, pp. 1--50, 2016.
+
+\bibitem{Do2011}
+T.~Do, L.~Gan, N.~Nguyen, and T.~Tran,
+\newblock ``{Fast and Efficient Compressive Sensing using Structurally Random
+  Matrices},''
+\newblock {\em IEEE Transactions on Signal Processing}, vol. 30, 2011.
+
+\bibitem{Lemagoarou2015}
+L.~{Le Magoarou} and R.~Gribonval,
+\newblock ``{Flexible Multi-layer Sparse Approximations of Matrices and
+  Applications},''
+\newblock {\em IEEE Journal of Selected Topics in Signal Processing}, vol. 10,
+  no. 4, pp. 688--700, 2016.
+
+\bibitem{Boutsidis2010}
+C.~Boutsidis, A.~Zouzias, and P.~Drineas,
+\newblock ``{Random Projections for k-means Clustering},''
+\newblock in {\em Advances in Neural Information and Processing Systems
+  (NIPS)}, 2010, pp. 298--306.
+
+\bibitem{Arthur2007}
+D.~Arthur and S.~Vassilvitskii,
+\newblock ``{k-means++: The Advantages of Careful Seeding},''
+\newblock in {\em ACM-SIAM symposium on Discrete algorithms}, 2007, pp.
+  1027--1035.
+
+\bibitem{Altschuler2016}
+J.~Altschuler, A.~Bhaskara, G.~Fu, V.~Mirrokni, A.~Rostamizadeh, and
+  M.~Zadimoghaddam,
+\newblock ``{Greedy Column Subset Selection: New Bounds and Distributed
+  Algorithms},''
+\newblock in {\em Proceedings of The 33rd International Conference on Machine
+  Learning}, 2016.
+
+\bibitem{Boutsidis2009}
+C.~Boutsidis, P.~Drineas, and M.~W. Mahoney,
+\newblock ``{Unsupervised feature selection for the k-means clustering
+  problem},''
+\newblock in {\em Advances in Neural Information and Processing Systems
+  (NIPS)}, 2009, pp. 153--161.
+
+\bibitem{Frahling2005}
+G.~Frahling and C.~Sohler,
+\newblock ``{A fast k -means implementation using coresets},''
+\newblock {\em Proceedings of the twenty-second annual symposium on
+  Computational geometry (SoCG)}, vol. 18, no. 6, pp. 605--625, 2005.
+
+\bibitem{Feldman2011}
+D.~Feldman and M.~Langberg,
+\newblock ``{A unified framework for approximating and clustering data},''
+\newblock {\em Proceedings of the forty-third annual ACM symposium on Theory of
+  computing}, , no. 46109, pp. 569--578, 2011.
+
+\bibitem{Candes2012}
+E.~Candes and C.~Fernandez-Granda,
+\newblock ``{Super-Resolution from Noisy Data},''
+\newblock , no. October 2012, pp. 1--22, 2012.
+
+\bibitem{Duval2015}
+V.~Duval and G.~Peyr{\'{e}},
+\newblock ``{Exact Support Recovery for Sparse Spikes Deconvolution},''
+\newblock {\em Foundations of Computational Mathematics}, vol. 15, no. 5, pp.
+  1315--1355, 2015.
+
+\bibitem{Castro2015}
+Y.~De~Castro, F.~Gamboa, D.~Henrion, and J.~Lasserre,
+\newblock ``{Exact solutions to Super Resolution on semi-algebraic domains in
+  higher dimensions},''
+\newblock {\em arXiv preprint arXiv:1502.02436}, pp. 1--22, 2015.
+
+\bibitem{Candes2006}
+E.~Candes, J.~K. Romberg, and T.~Tao,
+\newblock ``{Stable signal recovery from incomplete and inaccurate
+  measurements},''
+\newblock {\em Communications on Pure and Applied Mathematics}, vol. 59, no. 8,
+  pp. 1207--1223, 2006.
+
+\bibitem{Candes2006b}
+E.~Candes, J.K. Romberg, and T.~Tao,
+\newblock ``{Robust uncertainty principles: Exact signal reconstruction from
+  highly incomplete frequency information},''
+\newblock {\em IEEE Transactions on Information Theory}, vol. 52, no. 2, pp.
+  480--509, 2006.
+
+\bibitem{Zhang2015}
+P.~Zhang and Y.~Gao,
+\newblock ``{Matrix Multiplication on High-Density Multi-GPU Architectures:
+  Theoretical and Experimental Investigations Peng},''
+\newblock in {\em ISC High Performance}, vol.~1, pp. 17--30. Springer
+  International Publishing, 2015.
+
+\bibitem{Cormode2011}
+G.~Cormode, M.~Garofalakis, P.~J. Haas, and C.~Jermaine,
+\newblock ``{Synopses for Massive Data: Samples, Histograms, Wavelets,
+  Sketches},''
+\newblock {\em Foundations and Trends in Databases}, vol. 4, no. xx, pp.
+  1--294, 2011.
+
+\bibitem{Keriven2016toolbox}
+N.~Keriven, N.~Tremblay, and R.~Gribonval,
+\newblock ``{SketchMLbox : a Matlab toolbox for large-scale learning of mixture
+  models},'' \url{http://sketchml.gforge.inria.fr}, 2016.
+
+\bibitem{Uw2001}
+S.~Uw, A.~Ng, M.~Jordan, and Y.~Weiss,
+\newblock ``{On spectral clustering: Analysis and an algorithm},''
+\newblock {\em Advances in Neural Information Processing Systems 14}, pp.
+  849--856, 2001.
+
+\bibitem{Lecun1998}
+Y.~Lecun, C.~Cortes, and C.~Burges,
+\newblock ``{The MNIST database of handwritten digits},'' 1998.
+
+\bibitem{Loosli2007}
+G.~Loosli, S.~Canu, and L.~Bottou,
+\newblock ``{Training Invariant Support Vector Machines using Selective
+  Sampling},''
+\newblock {\em Large Scale Kernel Machines}, pp. 301--320, 2007.
+
+\bibitem{Vedaldi2010}
+A.~Vedaldi and B.~Fulkerson,
+\newblock ``{VLFeat - An open and portable library of computer vision
+  algorithms},''
+\newblock Tech. {R}ep., 2010.
+
+\bibitem{Muja2009}
+M.~Muja and D.~Lowe,
+\newblock ``{Fast Approximate Nearest Neighbors with Automatic Algorithm
+  Configuration},''
+\newblock {\em International Conference on Computer Vision Theory and
+  Applications (VISAPP '09)}, pp. 1--10, 2009.
+
+\bibitem{Tremblay2016}
+N.~Tremblay, G.~Puy, P.~Borgnat, R.~Gribonval, and P.~Vandergheynst,
+\newblock ``{Accelerated Spectral Clustering Using Graph Filtering Of Random
+  Signals},''
+\newblock in {\em IEEE International Conference on Acoustics, Speech and Signal
+  Processing (ICASSP)}, 2016, pp. 4094--4098.
+
+\bibitem{Tremblay2016a}
+N.~Tremblay, G.~Puy, R.~Gribonval, and P.~Vandergheynst,
+\newblock ``{Compressive Spectral Clustering},''
+\newblock {\em Proceedings of The 33rd International Conference on Machine
+  Learning}, pp. 1--15, 2016.
+
+\bibitem{Chitta2012}
+R.~Chitta, R.~Jin, and A.~K. Jain,
+\newblock ``{Efficient Kernel Clustering using Random Fourier Features},''
+\newblock {\em 2012 IEEE 12th International Conference on Data Mining}, pp.
+  161--170, 2012.
+
+\bibitem{Rand1971}
+William~M. Rand,
+\newblock ``{Objective Criteria for the Evaluation of Clustering Methods},''
+\newblock {\em Journal of American Statistical Association}, vol. 66, no. 336,
+  pp. 846--850, 1971.
+
+\bibitem{Sriperumbudur2010}
+B.~Sriperumbudur, A.~Gretton, K.~Fukumizu, B.~Sch{\"{o}}lkopf, and
+  G.~Lanckriet,
+\newblock ``{Hilbert space embeddings and metrics on probability measures},''
+\newblock {\em The Journal of Machine Learning Research}, vol. 11, pp.
+  1517--1561, 2010.
+
+\bibitem{Rahimi2007}
+A.~Rahimi and B.~Recht,
+\newblock ``{Random Features for Large Scale Kernel Machines},''
+\newblock {\em Advances in Neural Information Processing Systems (NIPS)}, , no.
+  1, pp. 1--8, 2007.
+
+\end{thebibliography}

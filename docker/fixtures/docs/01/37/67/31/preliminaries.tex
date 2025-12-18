@@ -1,0 +1,335 @@
+\subsection{Notation} 
+We will use different notations for the categorical composition.
+Given two arrows $f : A \rTo B$ and $g : B \rTo C$ of a category
+$\Cat{C}$, we  use the notation $f \comp g : A \rTo C$ for their
+composition. However, when dealing with functors $F:\Cat{C} \rTo
+\Cat{D}$ and $G : \Cat{D} \rTo \Cat{E}$, we  prefer the notation
+$G \circ F$, or simply $GF$. In a similar way, if $f: A \rTo B$ is a
+set-theoretic function, we  use $f(a)$, $fa$ and $f_{a}$ for
+evaluation at $a \in A$. 
+
+\begin{labripreprint}
+  If $w : I \rTo \Cat{W}$ is a functor, we use the notation
+  $(\inj_{i}: w_{i} \rTo\colim w)_{i \in I}$ for a chosen colimiting
+  cocone. If $(f_{i}:w_{i} \rTo c)_{i \in I}$ is another cocone, then
+  we let $\lcotuple f_{i}\rcotuple_{i \in I}:\colim w \rTo c$ be the
+  unique arrow such that $\inj_{i} \comp \lcotuple f_{i}\rcotuple_{i
+    \in I} = f_{i}$, for all objects $i$ of $I$. We use analogous
+  notations $\prj_{i}, \lim$, and $\ltuple f_{i} \rtuple_{i \in I}$
+  for chosen limiting cones.
+\end{labripreprint}
+
+We use the symbols $\dom,\cod$ for the domain and codomain functions
+of graphs and categories. Given a graph $S = \langle \dom,\cod: M\rTo
+P\rangle$, we write $m:p \rightarrow q$ to mean that $m \in M$, $\dom
+m = p$ and $\cod m = q$. The free category over the graph $S$ is
+described as follows: its set of objects is $P$ and an arrow from $p$
+to $q$ is a sequence of transitions $\gamma = \lcotuple m_{i}
+\rcotuple_{i =1,\ldots ,n}$ such that $\dom m_{1} = p$, $\dom m_{i +1}
+= \cod m_{i}$, $i =1,\ldots n -1$ and $\cod m_{n} = q$, that is, it is
+a path in $S$ from $p$ to $q$; we say in this case that $n =
+\length{\gamma}$ is the length of $\gamma$.  Given two paths $\delta$
+from $p$ to $q$ and $\gamma$ from $q$ to $r$ in $S$, we use the
+notation $\delta \compp\gamma$ for their composition.  The identity of
+a vertex $p$ is the path $1_{p}$ from $p$ to $p$ having null length. A
+path $\delta$ is a prefix of $\gamma$ if there exists a path $\gamma'$
+such that $\gamma = \delta \compp \gamma'$.
+
+A morphism of graphs $\Phi: \langle P_{1},M_{1},\dom,\cod\rangle \rTo
+\langle P_{2},M_{2},\dom,\cod\rangle$ is a pair of functions $\Phi :
+P_{1} \rTo P_{2}, \Phi: M_{1} \rTo M_{2}$ such that
+$\partial_{i}\Phi(m) = \Phi(\partial_{i}m)$, for $i =0,1$ and $m \in
+M_{1}$. We can describe a path in $S$ as a morphism of graphs $\gamma:
+\hat{n} \rTo S$, where $\hat{n}$ is the graph $0 \rightarrow 1
+\rightarrow \ldots \rightarrow n$.  An infinite path in $S$ is a
+morphism of graphs $\gamma : \hat{\omega} \rTo S$, where
+$\hat{\omega}$ is the graph $0 \rightarrow 1 \rightarrow \ldots
+\rightarrow n \rightarrow \ldots $. If $\delta$ is a finite path from
+$p$ to $q$ and $\gamma$ is an infinite path such that $\gamma_{0} =
+q$, then we write $\delta\compp \gamma$ for the resulting infinite
+path. A morphism of graphs $\Phi: S_{1} \rTo S_{2}$ induces a functor
+between the respective free categories, which we will denote by the
+same letter $\Phi$. Observe that if $\gamma$ is a path in $S_{1}$,
+then $\Phi(\gamma)$ is the morphism of graphs $\gamma \comp \Phi$,
+thus we extend the same notation to infinite paths, letting in this
+case $\Phi(\gamma) = \gamma \comp \Phi$.
+
+
+\subsection{Initial Algebras of Functors}
+
+Let $\Cat{C}$ be a category and $F:\Cat{C} \rTo \Cat{C}$ be an
+endofunctor, an \emph{$F$-algebra} is a pair $(c,\gamma)$, where $c$
+is an object of $\Cat{C}$ and $\gamma: Fc \rTo c$ is an arrow of
+$\Cat{C}$. A morphism of $F$-algebras $f:(c,\gamma) \rTo (d,\delta)$
+is an arrow $f:c \rTo d$ of $\Cat{C}$ such that $\gamma \comp f = Ff
+\comp \delta$. $F$-algebras and their morphisms form a category
+$\Cat{C}^{F}$ and we define an initial $F$-algebra to be an initial
+object in this category. More explicitly, an $F$-algebra
+$(\bd{x},\struct{x})$ is initial if for each $F$-algebra $(c,\gamma)$
+there exists a unique arrow $f: \bd{x} \rTo c$ such that $\struct{x}
+\comp f = Ff \comp \gamma$.  We remark that if an $F$-algebra
+$(\bd{x},\struct{x})$ is initial, then the arrow $\struct{x}$ is
+invertible \cite{lambek68}.
+
+$F$-coalgebras and their morphisms are
+defined dually and form a category $\Cat{C}_{F}$. We recall that a
+coalgebra $\struct{y}:\bd{y}\rTo F\bd{y}$ is final if for each
+coalgebra $\gamma: c \rTo Fc$ there exists a unique arrow $g: c \rTo
+\bd{y}$ such that $g\comp \struct{y} = \gamma \comp Fg$.  
+
+If $F: \Cat{C}\times \Cat{D} \rTo \Cat{C}$ is such that for every
+object $d$ of $\Cat{D}$ there exists an initial algebra
+$(\dgmu{F}(d),\struct{x}_{d})$ of the functor $F(-,d)$, then there
+exists a unique way to turn the collection of objects $\dgmu{F}(d)$
+into a functor so that $\struct{x}_{d}: F(\dgmu{F}(d),d) \rTo
+\dgmu{F}(d)$ is a natural isomorphism: for $f: d \rTo d'$,
+$\dgmu{F}(f)$ is the unique $F(-,d)$-algebra morphism from the initial
+one $(\dgmu{F}(d), \struct{x}_{d})$ to $(\dgmu{F}(d'),
+F(\dgmu{F}(d'),f)\comp\struct{x}_{d'})$. We call the arising functor
+$\dgmu{F}: \Cat{D} \rTo \Cat{C}$ a \emph{parameterized initial
+  algebra} of $F$.  A parameterized final coalgebra $\dgnu{F}$ of $F$
+is defined similarly.
+
+\subsection{The Beki\v{c} Property}
+\label{sec:bekic}
+
+
+We state here the Beki\v{c} property for initial algebras of functors,
+a proof of which is found in \cite[\S 4.2]{lehmannsmyth}.  This
+property will be a major tool in the proofs that follow.
+\begin{labripreprint}
+  Thus we add here a proof, with the aim of making this report self
+  contained.
+\end{labripreprint}
+\begin{prpstn}
+  \label{prop:bekic}
+  Consider two functors $F : \Cat{C} \times \Cat{D} \rTo \Cat{C}$, $G
+  : \Cat{C} \times \Cat{D} \rTo \ \Cat{D}$, and for each object $d$ of
+  $\Cat{D}$ let $(\dgmu{F}(d),\struct{x}_{d})$ be an initial
+  $F(-,d)$-algebra.  Suppose moreover that there exists an initial
+  algebra
+  \begin{align*}
+    \struct{y} &: \dgmu{F}(\bd{z}) \rTo  \bd{y}
+    &
+    \struct{z} & :  G(\bd{y},\bd{z})  \rTo^{}
+    \bd{z}
+  \end{align*}
+  of the functor $\ltuple \dgmu{F} \circ \prj_{\Cat{D}}, G \rtuple:
+    \Cat{C}\times \Cat{D} \rTo \Cat{C}\times \Cat{D}$.  Then the pair
+  \begin{align*}
+    \struct{x}_{\bd{z}}& : 
+    F(\dgmu{F}(\bd{z}),\bd{z})
+    \rTo \dgmu{F}(\bd{z}) &
+    G(\struct{y},\bd{z})\comp \struct{z} & 
+    : G(\dgmu{F}(\bd{z}),\bd{z})\rTo \bd{z}
+  \end{align*}
+  is an initial algebra of the functor $\ltuple F, G \rtuple : \Cat{C}
+  \times \Cat{D} \rTo \Cat{C} \times \Cat{D}$.
+\end{prpstn}
+\begin{labripreprint}
+  \begin{proof}
+    Given an $\ltuple F, G \rtuple$-algebra $(\langle c,d\rangle,
+    \langle\gamma,\delta\rangle)$, let $\un{\gamma}$ be the unique
+    arrow such that $\struct{x}_{d} \comp \un{\gamma} =
+    F(\un{\gamma},d) \comp \gamma$.  Then the pair $(\langle
+    c,d\rangle,\langle\un{\gamma},\delta\rangle)$ is an $\langle
+    \dgmu{F} \circ \prj_{\Cat{D}},G\rangle$-algebra and therefore we can
+    find a pair of arrows $f: \bd{y} \rTo c$ and $g: \bd{z} \rTo d$
+    satisfying the equations
+    \begin{eqnarray*}
+      \struct{y}\comp f
+      & = & \dgmu{F}(g) \comp \un{\gamma} \\
+      \struct{z} \comp g
+      & = & G(f,g) \comp \delta\
+    \end{eqnarray*}
+    and unique with this property.  By inspecting the two diagrams
+    $$
+    \mydiagram[6em]{
+      [](!S{F(\dgmu{F}(\bd{z}),\bd{z})}{\dgmu{F}(\bd{z})}
+      {F(\dgmu{F}(d),d)}{\dgmu{F}(d)}
+      {1}{1.7}
+      !A
+      {\struct{x}_{\bd{z}}}{F(\dgmu{F}(g),g)}
+      {\dgmu{F}(g)}{\struct{x}_{d}}
+      )
+      "3"
+      (
+      !S{F(\dgmu{F}(d),d)}{\dgmu{F}(d)}
+      {F(c,d)}{c}
+      {1}{1.5}
+      !A
+      {}{F(\un{\gamma},d)}
+      {\un{\gamma}}
+      {\gamma}
+      )
+    }
+    $$
+    $$
+    \mydiagram[6em]{
+      [](
+      !S
+      {G(\dgmu{F}(\bd{z}),\bd{z})}
+      {G(\dgmu{F}(d),\bd{z})}{G(\bd{y},\bd{z})}
+      {G(c,d)}
+      {1}{1.7},
+      !A
+      {G(\dgmu{F}(g),\bd{z})}{G(\struct{y},\bd{z})}
+      {G(\un{\gamma},g)}
+      {G(f,g)}
+      )
+      "3"
+      (
+      !S{G(\bd{y},\bd{z})}
+      {G(c,d)}{\bd{z}}{d}
+      {1}{1.5},
+      !A
+      {}{\struct{z}}
+      {\delta}
+      {g}
+      )   
+    }
+    $$
+    we deduce that the relations 
+    \begin{eqnarray*} 
+      \struct{x}_{\bd{z}} \comp \,( \,\dgmu{F}(g) \comp \un{\gamma}\,)\,
+      & = & F(\dgmu{F}(g)\comp \un{\gamma},g)\comp \gamma \\ 
+      (\,G(\struct{y},\bd{z})\comp \struct{z}\,)\,\comp g
+      & = & G(\dgmu{F}(g) \comp \un{\gamma},g)  \comp \delta 
+    \end{eqnarray*}
+    hold.   On the other hand, suppose that
+    \begin{eqnarray*} 
+      \struct{x}_{\bd{z}} \comp h
+      & = & F(h,k)\comp \gamma \\ 
+      (\,G(\struct{y},\bd{z})\comp \struct{z}\,)\,\comp k
+      & = & G(h,k)  \comp \delta 
+    \end{eqnarray*}
+    hold, then $h$ is the unique morphism of $F(-,\bd{z})$-algebras
+    from the initial one to $(c,F(c,k) \comp \gamma)$.  If we take $k$
+    in place of $g$ in the first diagram, we obtain that $\dgmu{F}(k)
+    \comp \un{\gamma}$ is also a morphism of $F(-,\bd{z})$-algebras
+    from the initial one to $(c,F(c,k) \comp \gamma)$ and therefore
+    \begin{eqnarray*}
+      h
+      & = & \dgmu{F}(k) \comp \un{\gamma}\,.
+    \end{eqnarray*}
+    The two equations
+    \begin{eqnarray*}
+      \struct{y} \comp (\struct{y}^{-1}\comp h) 
+      & = & \dgmu{F}(k) \comp \un{\gamma} \\
+      \struct{z} \comp k & = & 
+      G(\struct{y}^{-1}\comp h,k ) \comp \delta
+    \end{eqnarray*}
+    hold and show that $\struct{y}^{-1}\comp h = f$ and $k = g$, since
+    a pair satisfying the above relations is unique.
+  \end{proof}
+\end{labripreprint}
+
+The following proposition is needed to obtain the Beki\v{c} lemma in
+its usual form, see \cite{lehmannsmyth} or the pairing identity in
+\cite[\S 5.3.9]{MR95g:68065}.
+\begin{prpstn}
+  \label{prop:bekic2}
+  \label{prop:bekic3}
+  Consider two functors $F: \Cat{D} \rTo \Cat{C}$, $G :
+  \Cat{C}\times \Cat{D} \rTo \Cat{D}$, and let
+  $(\bd{y},\struct{y})$ be an initial algebra of the functor
+  $G(F-,-):\Cat{D} \rTo \Cat{D}$. Then the pair
+  \begin{align*}
+    \id_{F(\bd{y})}
+    & :  F(\bd{y})  \rTo F(\bd{y})
+    &
+    \struct{y} & :  G(F(\bd{y}),\bd{y})
+    \rTo \bd{y} 
+  \end{align*}
+  is an initial algebra of the functor $\langle F \circ\prj_{\Cat{D}
+  }, G\rangle: \Cat{C} \times \Cat{D} \rTo \Cat{C} \times \Cat{D}$.
+  Conversely, if
+  \begin{align*}
+    \struct{x} & : F(\bd{y}) \rTo \bd{x} 
+    & 
+    \struct{y} & :
+    G(\bd{x},\bd{y}) \rTo \bd{y}
+  \end{align*}
+  is an initial algebra of the functor $\langle F \circ\prj_{\Cat{D}},
+  G\rangle$, then
+  \begin{align*}
+    G(\struct{x},\bd{y})\comp \struct{y}
+    & :  G(F(\bd{y}),\bd{y})
+    \rTo \bd{y}
+  \end{align*}
+  is an initial algebra of the functor $G(F-,-):\Cat{D} \rTo \Cat{D}$.
+\end{prpstn}
+\begin{labripreprint}
+\begin{proof}
+ Let $(\langle c,d \rangle,\langle \gamma,\delta
+  \rangle)$ be an $\langle F\circ\prj_{\Cat{D}},G\rangle$-algebra and
+  observe that if the relations
+  \begin{eqnarray*} 
+    \id_{F(\bd{y})} \comp f & = & Fg \comp \gamma \\
+    \struct{y} \comp g & = & G(f,g) \comp \delta 
+  \end{eqnarray*}
+  hold, then the relation
+  \begin{eqnarray*}
+    \struct{y} \comp g & = & G(Fg \comp \gamma,g) \comp \delta \\
+    & = & G(Fg,g) \comp G(\gamma,d) \comp \delta
+  \end{eqnarray*}
+  shows that $g$ is the unique morphism of $G(F-,-)$-algebras from the
+  initial one to $(d,G(\gamma,d) \comp \delta)$. Since moreover $f =
+  Fg \comp \gamma$, then a pair $(f,g)$ with these properties is
+  uniquely determined. Hence let $g$ be this unique morphism and let
+  $f = Fg \comp \gamma$, then
+  \begin{eqnarray*}
+    \struct{y} \comp g & = & 
+    G(Fg,g) \comp G(\gamma,d) \comp \delta \\
+    & = & 
+    G(Fg \comp\gamma,g) \comp \delta \\
+    & = & 
+    G(f,g) \comp \delta 
+  \end{eqnarray*}
+  so that the pair $(f,g)$ is the required morphism of $\langle
+  F\circ\prj_{\Cat{D}},G\rangle$-algebras.
+
+  
+  For the converse, let $\delta : G(Fd,d) \rTo d$ be a
+  $G(F-,-)$-algebra and suppose that we can find an arrow $g$ such
+  that
+  \begin{eqnarray*}
+    G(\struct{x},\bd{y})\comp \struct{y} \comp g
+    & = & G(Fg, g) \comp \delta\,.
+  \end{eqnarray*}
+  Let $f = \struct{x}^{-1} \comp Fg$, then the two  relations 
+  \begin{eqnarray*}
+    \struct{x} \comp f & = & Fg \\
+    \struct{y} \comp g & = & G(f,g) \comp \delta
+  \end{eqnarray*}
+  hold, so that the pair $(f,g)$ is a morphism of $\langle F \circ
+  \prj_{\Cat{D}},G \rangle$-algebras from an initial one to $(\langle
+  Fd,d\rangle,\langle\id_{Fd}, \delta\rangle)$. It follows that such a
+  $g$ is uniquely determined. On the other hand, if  $(f,g)$ is 
+  this unique morphism of $\langle F \circ
+  \prj_{\Cat{D}},G \rangle$-algebras, then
+  \begin{eqnarray*}
+    G(\struct{x},\bd{y}) \comp \struct{y} \comp 
+    g & = & G(\struct{x},\bd{y}) \comp G(f, g) \comp \delta \\
+    & = & G(\struct{x}\comp f, g) \comp \delta \\
+    & = & G(Fg, g) \comp \delta\,, 
+  \end{eqnarray*}
+  i.e. $g$ is the required $G(F-,-)$-algebra morphism.
+\end{proof}  
+\end{labripreprint}
+The reader will have no difficulties to adapt the statements
+\begin{labripreprint}
+  and the proofs
+\end{labripreprint}
+of propositions \ref{prop:bekic} and
+\ref{prop:bekic3} to construct a \emph{parameterized} initial algebra
+of a functor $\ltuple F, G \rtuple : 
+\Cat{C} \times \Cat{D}\times \Cat{E} \rTo \Cat{C} \times
+\Cat{D}$, given a parameterized initial algebra $\dgmu{F}:
+\Cat{D}\times \Cat{E} \rTo \Cat{C}$ of the functor $F : \Cat{C}\times
+\Cat{D}\times \Cat{E} \rTo \Cat{C}$ and a parameterized initial
+algebra of the functor $G \circ \langle \dgmu{F}, \id_{\Cat{D}\times
+  \Cat{E}}\rangle : \Cat{D}\times \Cat{E} \rTo \Cat{D}$.
+
+
+

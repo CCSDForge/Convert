@@ -1,0 +1,32 @@
+services:
+  latex:
+    build: docker/latex
+    volumes:
+      - ./tmp/ccsdtex:/tmp/ccsdtex
+      - ./docker/fixtures/docs:/docs
+    deploy:
+      resources:
+        limits:
+          memory: 512m
+
+  convert:
+    container_name: convert-php
+    build: docker/php
+    #ports:
+    #  - "9000:9000" # Port Xdebug
+    volumes:
+      - .:/srv/app/convert
+      - ./docker/php/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./docker/php/fastcgi_params_symfony:/etc/nginx/fastcgi_params_symfony
+      - ./docker/php/convert.conf:/etc/nginx/conf.d/convert.conf:ro
+      - ./docker/php/certs:/etc/nginx/certs:ro
+      - ./tmp/ccsdtex:/tmp/ccsdtex
+      - ./docker/fixtures/docs:/docs
+      
+    working_dir: /srv/app/convert
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    deploy:
+      resources:
+        limits:
+          memory: 256m

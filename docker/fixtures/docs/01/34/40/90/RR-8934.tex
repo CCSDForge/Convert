@@ -1,0 +1,140 @@
+\documentclass[twoside]{article}
+
+\pdfoutput=1
+\input{command}
+
+%
+% Preamble.
+%
+\usepackage[a4paper]{geometry}
+\usepackage[T1]{fontenc} % ou \usepackage[OT1]{fontenc}
+\usepackage{RR}
+
+\usepackage{a4wide}
+
+% Put RRNo command after the begin document.
+%\RRNo{8934}
+
+\RRdate{July 2016}
+
+%\RRversion{}
+%\RRdater{}
+
+\RRauthor{
+  François Clément%
+  \thanks[serena]{Équipe Serena.
+    {\tt Francois.Clement@inria.fr}.}
+  \and
+  Vincent Martin%
+  \thanks[lmac]{LMAC, UTC, BP 20529, FR-60205 Compiègne, France.
+    {\tt Vincent.Martin@utc.fr}}
+}
+\authorhead{%
+  F. Clément, \& V. Martin}
+
+\RRtitle{%
+  Le théorème de Lax-Milgram. \\
+  Une preuve détaillée en vue d'une formalisation en Coq}
+\RRetitle{%
+  The Lax-Milgram Theorem. \\
+  A detailed proof to be formalized in Coq}
+\titlehead{%
+  A detailed proof of the Lax-Milgram Theorem to be formalized in Coq}
+
+\RRnote{%
+  This research was partly supported by GT ELFIC from Labex DigiCosme -
+  Paris-Saclay.}
+
+\RRresume{%
+  Pour garantir la correction de programmes de simulation numérique
+  implémentant la méthode des éléments finis, il est nécessaire de formaliser
+  les notions et résultats mathématiques qui permettent d'établir la justesse
+  de la méthode.
+  Le théorème de Lax-Milgram est l'un de ces fondements théoriques~:
+  sous des hypothèses de complétude et de coercivité, il énonce l'existence et
+  l'unicité de la solution de problèmes aux limites posés sous forme faible.
+  L'objetif de ce document est de fournir à la communauté preuve formelle une
+  preuve papier très détaillée du théorème de Lax-Milgram.}
+\RRabstract{%
+  To guarantee the correction of numerical simulation programs implementing the
+  finite element method, it is necessary to formalize the mathematical
+  notions and results that allow to establish the soundness of the method.
+  The Lax-Milgram theorem is one of those theoretical cornerstones:
+  under some completeness and coercivity assumptions, it states existence and
+  uniqueness of the solution to the weak formulation of boundary value
+  problems.
+  The purpose of this document is to provide the formal proof community with a
+  very detailed pen-and-paper proof of the Lax-Milgram theorem.}
+
+\RRmotcle{%
+  théorème de Lax-Milgram,
+  méthode des éléments finis,
+  preuve mathématique détaillée,
+  preuve formelle en analyse réelle}
+\RRkeyword{%
+  Lax-Milgram theorem,
+  finite element method,
+  detailed mathematical proof,
+  formal proof in real analysis}
+
+\RRprojet{Serena}
+
+\RCParis
+
+\begin{document}
+
+\RRNo{8934}
+\makeRR
+
+\clearpage
+\tableofcontents
+
+\clearpage
+\input{lax_milgram}
+
+\clearpage
+\nocite{*}
+\bibliography{biblio}
+\bibliographystyle{plain}
+\phantomsection \label{references}
+\addcontentsline{toc}{section}{References}
+
+\clearpage
+\appendix
+
+\section{Lists of statements}
+\label{s:lists-of-statements}
+
+\renewcommand{\listtheoremname}{List of Definitions}
+\phantomsection \label{listofdef}
+\addcontentsline{toc}{subsection}{\listtheoremname}
+\listoftheorems[ignoreall,show=definition]
+
+\renewcommand{\listtheoremname}{List of Lemmas}
+\phantomsection \label{listoflem}
+\addcontentsline{toc}{subsection}{\listtheoremname}
+\listoftheorems[ignoreall,show=lemma]
+
+\renewcommand{\listtheoremname}{List of Theorems}
+\phantomsection \label{listofthm}
+\addcontentsline{toc}{subsection}{\listtheoremname}
+\listoftheorems[ignoreall,show=theorem]
+
+\clearpage
+\begin{sidewaysfigure}
+  \centering
+  \includegraphics[width=\textheight]{tree1_lm}
+  \\[2cm]
+  \includegraphics[width=\textheight]{tree2_lm}
+  \caption{%
+    Dependency graph (both ways).
+    All dependencies are detailed in Appendices~\ref{s:depends-directly-from}
+    and~\ref{s:is-a-direct-dependency-of}.}
+  \label{f:depend:graph}
+\end{sidewaysfigure}
+
+\clearpage
+\input{tree_lm}
+
+\end{document}
+\endinput

@@ -1,0 +1,8 @@
+use:
+   docker: True 
+test:
+   latexRoot: "/tmp/latexRoot" 
+   docroot: "../docker/fixtures"
+   compilationDir: "./tmp/ccsdtex"
+docker:
+   service: "latex"

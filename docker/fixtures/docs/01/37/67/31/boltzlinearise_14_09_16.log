@@ -1,0 +1,740 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.6.19)  20 OCT 2016 13:07
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**boltzlinearise_14_09_16
+(./boltzlinearise_14_09_16.tex
+LaTeX2e <2015/01/01>
+Babel <3.9l> and hyphenation patterns for 79 languages loaded.
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amscls/amsart.cls
+Document Class: amsart 2015/03/04 v2.20.2
+\linespacing=\dimen102
+\normalparindent=\dimen103
+\normaltopskip=\skip41
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2013/01/14 v2.14 AMS math features
+\@mathmargin=\skip42
+
+For additional information on amsmath, use the `?' option.
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2000/06/29 v2.01
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0
+\@emptytoks=\toks14
+\ex@=\dimen104
+))
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d
+\pmbraise@=\dimen105
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 1999/12/14 v2.01 operator names
+)
+\inf@bad=\count79
+LaTeX Info: Redefining \frac on input line 210.
+\uproot@=\count80
+\leftroot@=\count81
+LaTeX Info: Redefining \overline on input line 306.
+\classnum@=\count82
+\DOTSCASE@=\count83
+LaTeX Info: Redefining \ldots on input line 378.
+LaTeX Info: Redefining \dots on input line 381.
+LaTeX Info: Redefining \cdots on input line 466.
+\Mathstrutbox@=\box26
+\strutbox@=\box27
+\big@size=\dimen106
+LaTeX Font Info:    Redeclaring font encoding OML on input line 566.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 567.
+\macc@depth=\count84
+\c@MaxMatrixCols=\count85
+\dotsspace@=\muskip10
+\c@parentequation=\count86
+\dspbrk@lvl=\count87
+\tag@help=\toks15
+\row@=\count88
+\column@=\count89
+\maxfields@=\count90
+\andhelp@=\toks16
+\eqnshift@=\dimen107
+\alignsep@=\dimen108
+\tagshift@=\dimen109
+\tagwidth@=\dimen110
+\totwidth@=\dimen111
+\lineht@=\dimen112
+\@envbody=\toks17
+\multlinegap=\skip43
+\multlinetaggap=\skip44
+\mathdisplay@stack=\toks18
+LaTeX Info: Redefining \[ on input line 2665.
+LaTeX Info: Redefining \] on input line 2666.
+)
+LaTeX Font Info:    Try loading font information for U+msa on input line 388.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)
+\copyins=\insert233
+\abstractbox=\box28
+\listisep=\skip45
+\c@part=\count91
+\c@section=\count92
+\c@subsection=\count93
+\c@subsubsection=\count94
+\c@paragraph=\count95
+\c@subparagraph=\count96
+\c@figure=\count97
+\c@table=\count98
+\abovecaptionskip=\skip46
+\belowcaptionskip=\skip47
+\captionindent=\dimen113
+\thm@style=\toks19
+\thm@bodyfont=\toks20
+\thm@headfont=\toks21
+\thm@notefont=\toks22
+\thm@headpunct=\toks23
+\thm@preskip=\skip48
+\thm@postskip=\skip49
+\thm@headsep=\skip50
+\dth@everypar=\toks24
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2007/01/21 v2.11 LaTeX color extensions (UK)
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/latexconfig/color.cfg
+File: color.cfg 2007/01/18 v1.5 color configuration of teTeX/TeXLive
+)
+Package xcolor Info: Package option `usenames' ignored on input line 216.
+Package xcolor Info: Driver file: pdftex.def on input line 225.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/pdftex-def/pdftex.def
+File: pdftex.def 2011/05/27 v0.06d Graphics/color for pdfTeX
+
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/infwarerr.sty
+Package: infwarerr 2010/04/08 v1.3 Providing info/warning/error messages (HO)
+)
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/ltxcmds.sty
+Package: ltxcmds 2011/11/09 v1.22 LaTeX kernel commands for general use (HO)
+)
+\Gread@gobject=\count99
+)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1337.
+Package xcolor Info: Model `hsb' substituted by `rgb' on input line 1341.
+Package xcolor Info: Model `RGB' extended on input line 1353.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1355.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1356.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1357.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1358.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1359.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1360.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/dvipsnam.def
+File: dvipsnam.def 2014/10/14 v3.0j Driver-dependent file (DPC,SPQR)
+))
+(/usr/local/texlive/2014/texmf-dist/tex/generic/ulem/ulem.sty
+\UL@box=\box29
+\UL@hyphenbox=\box30
+\UL@skip=\skip51
+\UL@hook=\toks25
+\UL@height=\dimen114
+\UL@pe=\count100
+\UL@pixel=\dimen115
+\ULC@box=\box31
+Package: ulem 2012/05/18
+\ULdepth=\dimen116
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/base/textcomp.sty
+Package: textcomp 2005/09/27 v1.99g Standard LaTeX package
+Package textcomp Info: Sub-encoding information:
+(textcomp)               5 = only ISO-Adobe without \textcurrency
+(textcomp)               4 = 5 + \texteuro
+(textcomp)               3 = 4 + \textohm
+(textcomp)               2 = 3 + \textestimated + \textcurrency
+(textcomp)               1 = TS1 - \textcircled - \t
+(textcomp)               0 = TS1 (full)
+(textcomp)             Font families with sub-encoding setting implement
+(textcomp)             only a restricted character set as indicated.
+(textcomp)             Family '?' is the default used for unknown fonts.
+(textcomp)             See the documentation for details.
+Package textcomp Info: Setting ? sub-encoding to TS1/1 on input line 79.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/base/ts1enc.def
+File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
+)
+LaTeX Info: Redefining \oldstylenums on input line 334.
+Package textcomp Info: Setting cmr sub-encoding to TS1/0 on input line 349.
+Package textcomp Info: Setting cmss sub-encoding to TS1/0 on input line 350.
+Package textcomp Info: Setting cmtt sub-encoding to TS1/0 on input line 351.
+Package textcomp Info: Setting cmvtt sub-encoding to TS1/0 on input line 352.
+Package textcomp Info: Setting cmbr sub-encoding to TS1/0 on input line 353.
+Package textcomp Info: Setting cmtl sub-encoding to TS1/0 on input line 354.
+Package textcomp Info: Setting ccr sub-encoding to TS1/0 on input line 355.
+Package textcomp Info: Setting ptm sub-encoding to TS1/4 on input line 356.
+Package textcomp Info: Setting pcr sub-encoding to TS1/4 on input line 357.
+Package textcomp Info: Setting phv sub-encoding to TS1/4 on input line 358.
+Package textcomp Info: Setting ppl sub-encoding to TS1/3 on input line 359.
+Package textcomp Info: Setting pag sub-encoding to TS1/4 on input line 360.
+Package textcomp Info: Setting pbk sub-encoding to TS1/4 on input line 361.
+Package textcomp Info: Setting pnc sub-encoding to TS1/4 on input line 362.
+Package textcomp Info: Setting pzc sub-encoding to TS1/4 on input line 363.
+Package textcomp Info: Setting bch sub-encoding to TS1/4 on input line 364.
+Package textcomp Info: Setting put sub-encoding to TS1/5 on input line 365.
+Package textcomp Info: Setting uag sub-encoding to TS1/5 on input line 366.
+Package textcomp Info: Setting ugq sub-encoding to TS1/5 on input line 367.
+Package textcomp Info: Setting ul8 sub-encoding to TS1/4 on input line 368.
+Package textcomp Info: Setting ul9 sub-encoding to TS1/4 on input line 369.
+Package textcomp Info: Setting augie sub-encoding to TS1/5 on input line 370.
+Package textcomp Info: Setting dayrom sub-encoding to TS1/3 on input line 371.
+Package textcomp Info: Setting dayroms sub-encoding to TS1/3 on input line 372.
+
+Package textcomp Info: Setting pxr sub-encoding to TS1/0 on input line 373.
+Package textcomp Info: Setting pxss sub-encoding to TS1/0 on input line 374.
+Package textcomp Info: Setting pxtt sub-encoding to TS1/0 on input line 375.
+Package textcomp Info: Setting txr sub-encoding to TS1/0 on input line 376.
+Package textcomp Info: Setting txss sub-encoding to TS1/0 on input line 377.
+Package textcomp Info: Setting txtt sub-encoding to TS1/0 on input line 378.
+Package textcomp Info: Setting lmr sub-encoding to TS1/0 on input line 379.
+Package textcomp Info: Setting lmdh sub-encoding to TS1/0 on input line 380.
+Package textcomp Info: Setting lmss sub-encoding to TS1/0 on input line 381.
+Package textcomp Info: Setting lmssq sub-encoding to TS1/0 on input line 382.
+Package textcomp Info: Setting lmvtt sub-encoding to TS1/0 on input line 383.
+Package textcomp Info: Setting lmtt sub-encoding to TS1/0 on input line 384.
+Package textcomp Info: Setting qhv sub-encoding to TS1/0 on input line 385.
+Package textcomp Info: Setting qag sub-encoding to TS1/0 on input line 386.
+Package textcomp Info: Setting qbk sub-encoding to TS1/0 on input line 387.
+Package textcomp Info: Setting qcr sub-encoding to TS1/0 on input line 388.
+Package textcomp Info: Setting qcs sub-encoding to TS1/0 on input line 389.
+Package textcomp Info: Setting qpl sub-encoding to TS1/0 on input line 390.
+Package textcomp Info: Setting qtm sub-encoding to TS1/0 on input line 391.
+Package textcomp Info: Setting qzc sub-encoding to TS1/0 on input line 392.
+Package textcomp Info: Setting qhvc sub-encoding to TS1/0 on input line 393.
+Package textcomp Info: Setting futs sub-encoding to TS1/4 on input line 394.
+Package textcomp Info: Setting futx sub-encoding to TS1/4 on input line 395.
+Package textcomp Info: Setting futj sub-encoding to TS1/4 on input line 396.
+Package textcomp Info: Setting hlh sub-encoding to TS1/3 on input line 397.
+Package textcomp Info: Setting hls sub-encoding to TS1/3 on input line 398.
+Package textcomp Info: Setting hlst sub-encoding to TS1/3 on input line 399.
+Package textcomp Info: Setting hlct sub-encoding to TS1/5 on input line 400.
+Package textcomp Info: Setting hlx sub-encoding to TS1/5 on input line 401.
+Package textcomp Info: Setting hlce sub-encoding to TS1/5 on input line 402.
+Package textcomp Info: Setting hlcn sub-encoding to TS1/5 on input line 403.
+Package textcomp Info: Setting hlcw sub-encoding to TS1/5 on input line 404.
+Package textcomp Info: Setting hlcf sub-encoding to TS1/5 on input line 405.
+Package textcomp Info: Setting pplx sub-encoding to TS1/3 on input line 406.
+Package textcomp Info: Setting pplj sub-encoding to TS1/3 on input line 407.
+Package textcomp Info: Setting ptmx sub-encoding to TS1/4 on input line 408.
+Package textcomp Info: Setting ptmj sub-encoding to TS1/4 on input line 409.
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsmath/amscd.sty
+Package: amscd 1999/11/29 v2.0
+\athelp@=\toks26
+\minaw@=\dimen117
+\bigaw@=\dimen118
+\minCDarrowwidth=\dimen119
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2014/10/28 v1.0g Enhanced LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2014/10/28 v1.15 key=value parser (DPC)
+\KV@toks@=\toks27
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2014/10/28 v1.0p Standard LaTeX Graphics (DPC,SPQR)
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 1999/03/16 v1.09 sin cos tan (DPC)
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/latexconfig/graphics.cfg
+File: graphics.cfg 2010/04/23 v1.9 graphics configuration of TeX Live
+)
+Package graphics Info: Driver file: pdftex.def on input line 94.
+)
+\Gin@req@height=\dimen120
+\Gin@req@width=\dimen121
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/tools/enumerate.sty
+Package: enumerate 2014/10/28 v3.00 enumerate extensions (DPC)
+\@enLab=\toks28
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/cancel/cancel.sty
+Package: cancel 2013/04/12 v2.2 Cancel math terms
+)
+\c@thm=\count101
+\c@Thm=\count102
+
+(./boltzlinearise_14_09_16.aux)
+\openout1 = `boltzlinearise_14_09_16.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 199.
+LaTeX Font Info:    ... okay on input line 199.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 199.
+LaTeX Font Info:    ... okay on input line 199.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 199.
+LaTeX Font Info:    ... okay on input line 199.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 199.
+LaTeX Font Info:    ... okay on input line 199.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 199.
+LaTeX Font Info:    ... okay on input line 199.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 199.
+LaTeX Font Info:    ... okay on input line 199.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 199.
+LaTeX Font Info:    Try loading font information for TS1+cmr on input line 199.
+
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/base/ts1cmr.fd
+File: ts1cmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    ... okay on input line 199.
+LaTeX Font Info:    Try loading font information for U+msa on input line 199.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+)
+LaTeX Font Info:    Try loading font information for U+msb on input line 199.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+)
+(/usr/local/texlive/2014/texmf-dist/tex/context/base/supp-pdf.mkii
+[Loading MPS to PDF converter (version 2006.09.02).]
+\scratchcounter=\count103
+\scratchdimen=\dimen122
+\scratchbox=\box32
+\nofMPsegments=\count104
+\nofMParguments=\count105
+\everyMPshowfont=\toks29
+\MPscratchCnt=\count106
+\MPscratchDim=\dimen123
+\MPnumerator=\count107
+\makeMPintoPDFobject=\count108
+\everyMPtoPDFconversion=\toks30
+) (/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/pdftexcmds.sty
+Package: pdftexcmds 2011/11/29 v0.20 Utility functions of pdfTeX for LuaTeX (HO
+)
+
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/ifluatex.sty
+Package: ifluatex 2010/03/01 v1.3 Provides the ifluatex switch (HO)
+Package ifluatex Info: LuaTeX not detected.
+)
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/ifpdf.sty
+Package: ifpdf 2011/01/30 v2.3 Provides the ifpdf switch (HO)
+Package ifpdf Info: pdfTeX in PDF mode is detected.
+)
+Package pdftexcmds Info: LuaTeX not detected.
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode found.
+)
+(/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/epstopdf-base.sty
+Package: epstopdf-base 2010/02/09 v2.5 Base part for package epstopdf
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/grfext.sty
+Package: grfext 2010/08/19 v1.1 Manage graphics extensions (HO)
+
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/kvdefinekeys.sty
+Package: kvdefinekeys 2011/04/07 v1.3 Define keys (HO)
+))
+(/usr/local/texlive/2014/texmf-dist/tex/latex/oberdiek/kvoptions.sty
+Package: kvoptions 2011/06/30 v3.11 Key value format for package options (HO)
+
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/kvsetkeys.sty
+Package: kvsetkeys 2012/04/25 v1.16 Key value parser (HO)
+
+(/usr/local/texlive/2014/texmf-dist/tex/generic/oberdiek/etexcmds.sty
+Package: etexcmds 2011/02/16 v1.5 Avoid name clashes with e-TeX commands (HO)
+Package etexcmds Info: Could not find \expanded.
+(etexcmds)             That can mean that you are not using pdfTeX 1.50 or
+(etexcmds)             that some package has redefined \expanded.
+(etexcmds)             In the latter case, load this package earlier.
+)))
+Package grfext Info: Graphics extension search list:
+(grfext)             [.png,.pdf,.jpg,.mps,.jpeg,.jbig2,.jb2,.PNG,.PDF,.JPG,.JPE
+G,.JBIG2,.JB2,.eps]
+(grfext)             \AppendGraphicsExtensions on input line 452.
+
+(/usr/local/texlive/2014/texmf-dist/tex/latex/latexconfig/epstopdf-sys.cfg
+File: epstopdf-sys.cfg 2010/07/13 v1.3 Configuration of (r)epstopdf for TeX Liv
+e
+))
+[1{/usr/local/texlive/2014/texmf-var/fonts/map/pdftex/updmap/pdftex.map}]
+
+Package amsmath Warning: Foreign command \over;
+(amsmath)                \frac or \genfrac should be used instead
+(amsmath)                 on input line 294.
+
+[2]
+Overfull \hbox (7.74342pt too wide) detected at line 398
+[] []
+ []
+
+[3] [4] [5] [6] [7] [8] [9]
+Overfull \hbox (4.34296pt too wide) detected at line 845
+[] []
+ []
+
+[10] [11]
+Overfull \hbox (1.64278pt too wide) detected at line 931
+\OMS/cmsy/m/n/10.95 8\OML/cmm/m/it/10.95 z[] \OMS/cmsy/m/n/10.95 2 \U/msb/m/n/1
+0.95 D \OML/cmm/m/it/10.95 ;  [] []
+ []
+
+[12] [13] [14] [15] [16] [17] [18]
+<pseudoparticle.pdf, id=77, 552.85231pt x 638.96909pt>
+File: pseudoparticle.pdf Graphic file (type pdf)
+
+<use pseudoparticle.pdf>
+Package pdftex.def Info: pseudoparticle.pdf used on input line 1474.
+(pdftex.def)             Requested size: 156.49014pt x 180.86009pt.
+ <parent.pdf, id=78, 572.30003pt x 710.42532pt>
+File: parent.pdf Graphic file (type pdf)
+
+<use parent.pdf>
+Package pdftex.def Info: parent.pdf used on input line 1487.
+(pdftex.def)             Requested size: 170.71652pt x 211.91513pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[19 <./pseudoparticle.pdf>]
+Missing character: There is no Â in font cmr10!
+Missing character: There is no   in font cmr10!
+ [20 <./parent.pdf>]
+<coccinellesecond.pdf, id=164, 597.23125pt x 845.1575pt>
+File: coccinellesecond.pdf Graphic file (type pdf)
+
+<use coccinellesecond.pdf>
+Package pdftex.def Info: coccinellesecond.pdf used on input line 1549.
+(pdftex.def)             Requested size: 170.71652pt x 241.58167pt.
+
+<coccinellefirst.pdf, id=165, 597.23125pt x 845.1575pt>
+File: coccinellefirst.pdf Graphic file (type pdf)
+
+<use coccinellefirst.pdf>
+Package pdftex.def Info: coccinellefirst.pdf used on input line 1549.
+(pdftex.def)             Requested size: 170.71652pt x 241.58167pt.
+ [21 <./coccinellesecond.pdf> <./coccinellefirst.pdf
+
+pdfTeX warning: /usr/local/texlive/2014/bin/i386-linux/pdflatex (file ./coccine
+llefirst.pdf): PDF inclusion: multiple pdfs with page group included in a singl
+e page
+>] <fig1.pdf, id=209, 557.26419pt x 695.5745pt>
+File: fig1.pdf Graphic file (type pdf)
+ <use fig1.pdf>
+Package pdftex.def Info: fig1.pdf used on input line 1615.
+(pdftex.def)             Requested size: 162.18062pt x 202.43317pt.
+
+<fig22.pdf, id=210, 597.23125pt x 845.1575pt>
+File: fig22.pdf Graphic file (type pdf)
+ <use fig22.pdf>
+Package pdftex.def Info: fig22.pdf used on input line 1615.
+(pdftex.def)             Requested size: 142.26378pt x 201.3202pt.
+
+<fig32.pdf, id=211, 597.23125pt x 845.1575pt>
+File: fig32.pdf Graphic file (type pdf)
+ <use fig32.pdf>
+Package pdftex.def Info: fig32.pdf used on input line 1616.
+(pdftex.def)             Requested size: 142.26378pt x 201.3202pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[22] [23 <./fig1.pdf> <./fig22.pdf> <./fig32.pdf
+
+pdfTeX warning: /usr/local/texlive/2014/bin/i386-linux/pdflatex (file ./fig32.p
+df): PDF inclusion: multiple pdfs with page group included in a single page
+>] [24]
+Overfull \hbox (7.5931pt too wide) in paragraph at lines 1775--1777
+[]\OT1/cmr/m/n/10.95 The bad set as-so-ci-ated with the pre-vi-ous sce-nario (l
+a-belled $\OML/cmm/m/it/10.95 p \OT1/cmr/m/n/10.95 = 1$) is de-noted $\OMS/cmsy
+/m/n/10.95 P[]\OT1/cmr/m/n/10.95 (\OML/cmm/m/it/10.95 a; \OT1/cmr/m/n/10.95 1\O
+ML/cmm/m/it/10.95 ; \OMS/cmsy/m/n/10.95 f\OT1/cmr/m/n/10.95 1[]\OML/cmm/m/it/10
+.95 ; \OT1/cmr/m/n/10.95 2[]\OMS/cmsy/m/n/10.95 g\OT1/cmr/m/n/10.95 )$
+ []
+
+[25]
+
+Package amsmath Warning: Foreign command \atop;
+(amsmath)                \frac or \genfrac should be used instead
+(amsmath)                 on input line 1898.
+
+[26] [27]
+Overfull \hbox (1.95595pt too wide) in paragraph at lines 2058--2062
+\OT1/cmr/m/n/10.95 Once rec-ol-li-sions and over-laps have been ex-cluded, the 
+only dis-crep-an-cies be-tween the BBGKY
+ []
+
+[28] [29]
+LaTeX Font Info:    Try loading font information for U+euf on input line 2208.
+ (/usr/local/texlive/2014/texmf-dist/tex/latex/amsfonts/ueuf.fd
+File: ueuf.fd 2013/01/14 v3.01 Euler Fraktur
+)
+[30] [31] [32] [33] [34] [35]
+Overfull \hbox (19.18489pt too wide) detected at line 2716
+[] []
+ []
+
+[36] [37]
+Overfull \hbox (28.04807pt too wide) in paragraph at lines 2857--2857
+[] 
+ []
+
+[38]
+Overfull \hbox (1.0015pt too wide) in paragraph at lines 2966--2966
+[] 
+ []
+
+
+Underfull \vbox (badness 1635) has occurred while \output is active []
+
+ [39]
+[40] [41] [42] [43] [44] [45] [46] [47] [48] [49]
+<whereistreca1.pdf, id=398, 437.33278pt x 514.15758pt>
+File: whereistreca1.pdf Graphic file (type pdf)
+ <use whereistreca1.pdf>
+Package pdftex.def Info: whereistreca1.pdf used on input line 3788.
+(pdftex.def)             Requested size: 162.18062pt x 190.66681pt.
+
+<whereistreca2.pdf, id=399, 474.17268pt x 525.401pt>
+File: whereistreca2.pdf Graphic file (type pdf)
+ <use whereistreca2.pdf>
+Package pdftex.def Info: whereistreca2.pdf used on input line 3789.
+(pdftex.def)             Requested size: 167.87108pt x 186.00957pt.
+
+<whereistrecb.pdf, id=400, 511.99898pt x 612.27672pt>
+File: whereistrecb.pdf Graphic file (type pdf)
+ <use whereistrecb.pdf>
+Package pdftex.def Info: whereistrecb.pdf used on input line 3789.
+(pdftex.def)             Requested size: 170.71652pt x 204.15402pt.
+
+<whereistrecc.pdf, id=401, 445.17256pt x 613.64548pt>
+File: whereistrecc.pdf Graphic file (type pdf)
+ <use whereistrecc.pdf>
+Package pdftex.def Info: whereistrecc.pdf used on input line 3789.
+(pdftex.def)             Requested size: 150.79968pt x 207.8689pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<cherries.pdf, id=402, 577.17818pt x 642.63918pt>
+File: cherries.pdf Graphic file (type pdf)
+ <use cherries.pdf>
+Package pdftex.def Info: cherries.pdf used on input line 3913.
+(pdftex.def)             Requested size: 142.26378pt x 158.39424pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<murphy2-last.pdf, id=403, 597.23125pt x 845.1575pt>
+File: murphy2-last.pdf Graphic file (type pdf)
+ <use murphy2-last.pdf>
+Package pdftex.def Info: murphy2-last.pdf used on input line 3925.
+(pdftex.def)             Requested size: 162.18062pt x 229.49808pt.
+
+[50]
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[51 <./whereistreca1.pdf> <./whereistreca2.pdf> <./whereistrecb.pdf> <./whereis
+trecc.pdf>] [52 <./cherries.pdf> <./murphy2-last.pdf>] [53] [54]
+Missing character: There is no Ã in font cmr10!
+Missing character: There is no ƒ in font cmr10!
+Missing character: There is no Â in font cmr10!
+Missing character: There is no Š in font cmr10!
+ [55] [56]
+[57] [58] [59] [60] [61] <vfig.pdf, id=714, 437.10252pt x 361.61601pt>
+File: vfig.pdf Graphic file (type pdf)
+
+<use vfig.pdf>
+Package pdftex.def Info: vfig.pdf used on input line 4887.
+(pdftex.def)             Requested size: 142.26378pt x 117.69485pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[62] [63 <./vfig.pdf>]
+Overfull \hbox (14.61101pt too wide) in paragraph at lines 4998--5004
+\OT1/cmr/m/n/10.95 4\OML/cmm/m/it/10.95 R"[] [] []$\OT1/cmr/m/n/10.95 , re-call
+-ing again (3.10[]). We thus con-clude by in-te-grat-ing in $(\OML/cmm/m/it/10.
+95 t[]; v[]; ^^W[]\OT1/cmr/m/n/10.95 )$
+ []
+
+<lemmeB1_scattering0.pdf, id=736, 360.67197pt x 301.66902pt>
+File: lemmeB1_scattering0.pdf Graphic file (type pdf)
+
+<use lemmeB1_scattering0.pdf>
+Package pdftex.def Info: lemmeB1_scattering0.pdf used on input line 5033.
+(pdftex.def)             Requested size: 113.81102pt x 95.19196pt.
+
+<lemmeB1_scattering1.pdf, id=737, 309.84848pt x 303.09737pt>
+File: lemmeB1_scattering1.pdf Graphic file (type pdf)
+
+<use lemmeB1_scattering1.pdf>
+Package pdftex.def Info: lemmeB1_scattering1.pdf used on input line 5035.
+(pdftex.def)             Requested size: 91.04872pt x 89.06145pt.
+
+<lemmeB1_scattering2.pdf, id=738, 387.56847pt x 303.6364pt>
+File: lemmeB1_scattering2.pdf Graphic file (type pdf)
+
+<use lemmeB1_scattering2.pdf>
+Package pdftex.def Info: lemmeB1_scattering2.pdf used on input line 5037.
+(pdftex.def)             Requested size: 113.81102pt x 89.16425pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[64] [65 <./lemmeB1_scattering0.pdf> <./lemmeB1_scattering1.pdf> <./lemmeB1_sca
+ttering2.pdf>] [66]
+<carleman_variables.pdf, id=775, 233.44415pt x 342.65314pt>
+File: carleman_variables.pdf Graphic file (type pdf)
+
+<use carleman_variables.pdf>
+Package pdftex.def Info: carleman_variables.pdf used on input line 5217.
+(pdftex.def)             Requested size: 113.81102pt x 167.05449pt.
+ [67 <./carleman_variables.pdf>]
+Missing character: There is no Â in font cmr10!
+Missing character: There is no   in font cmr10!
+ [68]
+<lemmeB1_cas3.pdf, id=792, 496.73581pt x 465.48404pt>
+File: lemmeB1_cas3.pdf Graphic file (type pdf)
+ <use lemmeB1_cas3.pdf>
+Package pdftex.def Info: lemmeB1_cas3.pdf used on input line 5411.
+(pdftex.def)             Requested size: 199.16928pt x 186.63779pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[69] [70 <./lemmeB1_cas3.pdf>]
+File: cherries.pdf Graphic file (type pdf)
+ <use cherries.pdf>
+Package pdftex.def Info: cherries.pdf used on input line 5562.
+(pdftex.def)             Requested size: 142.26378pt x 158.39424pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[71] [72] <angle.pdf, id=814, 546.44153pt x 182.45364pt>
+File: angle.pdf Graphic file (type pdf)
+ <use angle.pdf>
+Package pdftex.def Info: angle.pdf used on input line 5650.
+(pdftex.def)             Requested size: 289.07999pt x 96.52177pt.
+
+[73 <./angle.pdf>] [74]
+File: murphy2-last.pdf Graphic file (type pdf)
+ <use murphy2-last.pdf>
+Package pdftex.def Info: murphy2-last.pdf used on input line 5830.
+(pdftex.def)             Requested size: 142.26378pt x 201.3202pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[75] [76] [77] <lemmeB3_cas1.pdf, id=846, 405.57823pt x 282.46127pt>
+File: lemmeB3_cas1.pdf Graphic file (type pdf)
+
+<use lemmeB3_cas1.pdf>
+Package pdftex.def Info: lemmeB3_cas1.pdf used on input line 6014.
+(pdftex.def)             Requested size: 170.71652pt x 118.89583pt.
+ [78 <./lemmeB3_cas1.pdf>] [79] [80]
+<LemmeB3_cas3.pdf, id=868, 456.39006pt x 425.73055pt>
+File: LemmeB3_cas3.pdf Graphic file (type pdf)
+ <use LemmeB3_cas3.pdf>
+Package pdftex.def Info: LemmeB3_cas3.pdf used on input line 6225.
+(pdftex.def)             Requested size: 170.71652pt x 159.25229pt.
+
+[81 <./LemmeB3_cas3.pdf>] <coccinelle.pdf, id=881, 480.18094pt x 659.51399pt>
+File: coccinelle.pdf Graphic file (type pdf)
+
+<use coccinelle.pdf>
+Package pdftex.def Info: coccinelle.pdf used on input line 6316.
+(pdftex.def)             Requested size: 170.71652pt x 234.47629pt.
+ <symetrie_axiale.pdf, id=882, 348.61995pt x 226.0445pt>
+File: symetrie_axiale.pdf Graphic file (type pdf)
+
+<use symetrie_axiale.pdf>
+Package pdftex.def Info: symetrie_axiale.pdf used on input line 6317.
+(pdftex.def)             Requested size: 170.71652pt x 110.69379pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[82] [83 <./coccinelle.pdf> <./symetrie_axiale.pdf>]
+<carlemanpic.pdf, id=939, 793.69601pt x 512.48782pt>
+File: carlemanpic.pdf Graphic file (type pdf)
+ <use carlemanpic.pdf>
+Package pdftex.def Info: carlemanpic.pdf used on input line 6441.
+(pdftex.def)             Requested size: 227.62204pt x 146.97548pt.
+
+[84 <./carlemanpic.pdf>] <carleman0.pdf, id=969, 354.54128pt x 192.91774pt>
+File: carleman0.pdf Graphic file (type pdf)
+
+<use carleman0.pdf>
+Package pdftex.def Info: carleman0.pdf used on input line 6521.
+(pdftex.def)             Requested size: 216.81pt x 117.97401pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[85] [86 <./carleman0.pdf>] [87] [88]
+Overfull \hbox (13.97899pt too wide) in paragraph at lines 6787--6787
+[] 
+ []
+
+[89] [90] (./boltzlinearise_14_09_16.aux) )
+(\end occurred inside a group at level 1)
+
+### simple group (level 1) entered at line 3683 ({)
+### bottom level 
+Here is how much of TeX's memory you used:
+ 4645 strings out of 493089
+ 61035 string characters out of 6134848
+ 133174 words of memory out of 5000000
+ 7868 multiletter control sequences out of 15000+600000
+ 17212 words of font info for 66 fonts, out of 8000000 for 9000
+ 1302 hyphenation exceptions out of 8191
+ 37i,18n,35p,1163b,398s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts
+/cm/cmbx10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmbx9.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmcsc10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmex10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmmi10.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mmi12.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cm
+mi6.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi
+7.pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi8.
+pfb></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi9.pf
+b></usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb>
+</usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr12.pfb></
+usr/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr17.pfb></us
+r/local/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr6.pfb></usr/l
+ocal/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.pfb></usr/loca
+l/texlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb></usr/local/t
+exlive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmr9.pfb></usr/local/texl
+ive/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb></usr/local/texli
+ve/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.pfb></usr/local/texlive
+/2014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></usr/local/texlive/2
+014/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr/local/texlive/201
+4/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/local/texlive/2014/
+texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb></usr/local/texlive/2014/te
+xmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/2014/tex
+mf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb></usr/local/texlive/2014/texmf
+-dist/fonts/type1/public/amsfonts/euler/eufm10.pfb></usr/local/texlive/2014/tex
+mf-dist/fonts/type1/public/amsfonts/euler/eufm7.pfb></usr/local/texlive/2014/te
+xmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/201
+4/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb>
+Output written on boltzlinearise_14_09_16.pdf (90 pages, 1002049 bytes).
+PDF statistics:
+ 1087 PDF objects out of 1200 (max. 8388607)
+ 725 compressed objects within 8 object streams
+ 0 named destinations out of 1000 (max. 500000)
+ 131 words of extra memory for PDF output out of 10000 (max. 10000000)
+

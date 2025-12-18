@@ -1,0 +1,12 @@
+# Mitigate https://httpoxy.org/ vulnerabilities
+fastcgi_param HTTP_PROXY "";
+# This version, even though is not officially the best way works also when one
+# uses sub-location mapping as we do.
+fastcgi_param SCRIPT_FILENAME $realpath_root/index.php;
+fastcgi_param DOCUMENT_ROOT $realpath_root;
+fastcgi_param PATH_INFO $fastcgi_path_info;
+# include the fastcgi_param settings
+include fastcgi_params;
+
+#fastcgi_param PORTAIL $halPortail;
+# fastcgi_param APP_ENV dev;

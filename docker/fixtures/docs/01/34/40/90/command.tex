@@ -1,0 +1,368 @@
+\usepackage[english]{babel}
+\usepackage[utf8]{inputenc} % or \usepackage[latin1]{inputenc}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\usepackage{titlesec}
+\setcounter{secnumdepth}{4}
+\setcounter{tocdepth}{4}
+
+\usepackage{color}
+
+\definecolor{rouge}{rgb}{1,0,0}
+\definecolor{vert}{rgb}{0,1,0}
+\definecolor{bleu}{rgb}{0,0,1}
+\definecolor{rougeclair}{RGB}{255,224,224}
+\definecolor{vertclair}{RGB}{224,255,224}
+\definecolor{bleuclair}{RGB}{224,248,255}
+\definecolor{grisclair}{gray}{0.8}
+\newcommand{\assume}[1]{\textcolor{rouge}{\bf\boldmath{#1}}}
+\newcommand{\todo}[1]{\textcolor{bleu}{{\bf To Do:} #1}}
+\newcommand{\comment}[1]{\textcolor{rouge}{\bf{#1}}}
+\newcommand{\defcolor}{vertclair}
+\newcommand{\lemcolor}{bleuclair}
+\newcommand{\thmcolor}{rougeclair}
+\newcommand{\rmkcolor}{grisclair}
+
+\newcommand{\coloredbox}[2]{\fcolorbox{black}{#1}{#2}}
+\newcommand{\defbox}[1]{\coloredbox{\defcolor}{#1}}
+\newcommand{\lembox}[1]{\coloredbox{\lemcolor}{#1}}
+\newcommand{\thmbox}[1]{\coloredbox{\thmcolor}{#1}}
+\newcommand{\rmkbox}[1]{\coloredbox{\rmkcolor}{#1}}
+
+\usepackage{amsthm, thmtools}
+\usepackage{nameref, hyperref}
+\usepackage[normalem]{ulem}
+
+\declaretheoremstyle[
+  headfont=\normalfont\bfseries,
+  notefont=\normalfont\bfseries\itshape,
+  bodyfont=\normalfont]{mydef}
+\declaretheoremstyle[
+  headfont=\normalfont\bfseries,
+  notefont=\normalfont\bfseries\itshape,
+  bodyfont=\normalfont\itshape]{mythm}
+\declaretheoremstyle[
+  headfont=\normalfont\itshape,
+  notefont=\normalfont\itshape,
+  bodyfont=\normalfont]{myrmk}
+
+\newcommand{\mydeclaretheoremshaded}[3]{
+  \declaretheorem[
+    #1,
+    shaded={
+      textwidth=0.99\textwidth,
+      bgcolor=#2,
+      rulecolor=black,
+      rulewidth=0.5pt}]{#3}
+}
+
+\newcommand{\mydeclaretheoremstyle}[3]{
+  \mydeclaretheoremshaded{numberlike=theorem, style=#1}{#2}{#3}
+}
+
+\mydeclaretheoremshaded{style=mythm}{\thmcolor}{theorem}
+\mydeclaretheoremstyle{mythm}{\lemcolor}{lemma}
+\mydeclaretheoremstyle{mydef}{\defcolor}{definition}
+\mydeclaretheoremstyle{myrmk}{\rmkcolor}{remark}
+\mydeclaretheoremshaded{%
+  numbered=no, name=Lax--Milgram theorem}{rougeclair}{laxmilgramthm}
+
+\usepackage{rotating}
+\usepackage{graphicx}
+
+\graphicspath{{./}}
+
+\newcommand{\thref}[1]{\ref{#1} ({\em \nameref{#1}})}
+\newcommand{\threfc}[2]{\ref{#1} ({\em \nameref{#1}}, \uline{#2})}
+
+\newcommand{\Admitted}{\noindent\comment{Admitted.}}
+
+\newcommand{\proofpar}[1]{{\bf\boldmath{#1}.}}
+\newcommand{\proofparskip}[1]{\medskip\noindent\proofpar{#1}}
+
+\newcommand{\BLM}{Babu\v{s}ka--Lax--Milgram}
+\newcommand{\BNB}{Banach--Ne\v{c}as--Babu\v{s}ka}
+\newcommand{\CS}{Cauchy--Schwarz}
+\newcommand{\HB}{Hahn--Banach}
+\newcommand{\LM}{Lax--Milgram}
+\newcommand{\LMC}{Lax--Milgram--C\'ea}
+\newcommand{\MP}{Milman--Pettis}
+\newcommand{\RF}{Riesz--Fr\'echet}
+
+\newcommand{\Vectorspace}{Space}
+\newcommand{\vectorspace}{space}
+\newcommand{\Normedvectorspace}{Normed \vectorspace}
+\newcommand{\normedvectorspace}{normed \vectorspace}
+
+\newcommand{\software}[1]{{\sf #1}}
+\newcommand{\coq}{\software{Coq}}
+\newcommand{\felisce}{\software{Felisce}}
+
+\newcommand{\st}{{\,|\,}}
+\newcommand{\ie}{i.e.}
+\newcommand{\eg}{e.g.}
+\newcommand{\half}{{\frac{1}{2}}}
+\newcommand{\p}{\partial}
+
+\renewcommand{\equiv}{\Leftrightarrow}
+\newcommand{\Equiv}{\quad\Longleftrightarrow\quad}
+\renewcommand{\implies}{\Rightarrow}
+\newcommand{\Implies}{\quad\Longrightarrow\quad}
+\newcommand{\conj}{\land}
+\newcommand{\Conj}{\quad\conj\quad}
+\newcommand{\disj}{\lor}
+\newcommand{\Disj}{\quad\disj\quad}
+
+\newcommand{\dps}{\displaystyle}
+
+\newcommand{\calB}{\mathcal{B}}
+\newcommand{\calC}{\mathcal{C}}
+\newcommand{\calF}{\mathcal{F}}
+\newcommand{\calL}{\mathcal{L}}
+\newcommand{\calM}{\mathcal{M}}
+\newcommand{\calP}{\mathcal{P}}
+\newcommand{\calQ}{\mathcal{Q}}
+\newcommand{\calS}{\mathcal{S}}
+\newcommand{\calT}{\mathcal{T}}
+\newcommand{\calV}{\mathcal{V}}
+
+\newcommand{\matC}{{\mathbb C}}
+\newcommand{\matK}{{\mathbb K}}
+\newcommand{\matN}{{\mathbb N}}
+\newcommand{\matP}{{\mathbb P}}
+\newcommand{\matR}{{\mathbb R}}
+\newcommand{\matRbar}{\overline{\matR}}
+\newcommand{\matRplus}{{\matR^+}}
+\newcommand{\eps}{\varepsilon}
+\newcommand{\fhi}{\varphi}
+
+\newcommand{\Interior}[1]{\stackrel{\circ}{#1}}
+\newcommand{\Closure}[1]{\overline{#1}}
+\newcommand{\diam}{{\mathrm{diam}}}
+\newcommand{\ovOmega}{\Closure{\Omega}}
+\newcommand{\pOmega}{\p\Omega}
+
+\newcommand{\Ball}{\calB}
+\newcommand{\OpenBall}{\Ball^o}
+\newcommand{\ClosedBall}{\Ball^c}
+\newcommand{\PuncturedOpenBall}{\Ball^{o\star}}
+\newcommand{\PuncturedClosedBall}{\Ball^{c\star}}
+\newcommand{\Sphere}{\calS}
+
+\newcommand{\oball}[3]{\OpenBall_{#1} (#2, #3)}
+\newcommand{\cball}[3]{\ClosedBall_{#1} (#2, #3)}
+\newcommand{\poball}[3]{\PuncturedOpenBall_{#1} (#2, #3)}
+\newcommand{\pcball}[3]{\PuncturedClosedBall_{#1} (#2, #3)}
+\newcommand{\sphere}[3]{\Sphere_{#1} (#2, #3)}
+
+\newcommand{\unitoB}{\OpenBall_1}
+\newcommand{\unitcB}{\ClosedBall_1}
+\newcommand{\unitpoB}{\PuncturedOpenBall_1}
+\newcommand{\unitpcB}{\PuncturedClosedBall_1}
+\newcommand{\unitS}{\Sphere_1}
+
+\newcommand{\Ep}{{E^\prime}}
+\newcommand{\Fp}{{F^\prime}}
+\newcommand{\Hp}{{H^\prime}}
+\newcommand{\Np}{{N^\prime}}
+\newcommand{\Npp}{{N^{\prime\prime}}}
+\newcommand{\ap}{{a^\prime}}
+\newcommand{\lp}{{l^\prime}}
+\newcommand{\np}{{n^\prime}}
+\newcommand{\pp}{{p^\prime}}
+\newcommand{\qp}{{q^\prime}}
+\newcommand{\up}{u^\prime}
+%\newcommand{\upo}{{u^\prime_1}}
+%\newcommand{\upt}{{u^\prime_2}}
+\newcommand{\upp}{{u^{\prime\prime}}}
+\newcommand{\vp}{{v^\prime}}
+\newcommand{\vpp}{{v^{\prime\prime}}}
+\newcommand{\wpr}{w^\prime}
+\newcommand{\wpp}{w^{\prime\prime}}
+\newcommand{\xp}{{x^\prime}}
+\newcommand{\lambdap}{{\lambda^\prime}}
+\newcommand{\lambdapp}{{\lambda^{\prime\prime}}}
+\newcommand{\xip}{{\xi^\prime}}
+\newcommand{\fhip}{{\fhi^\prime}}
+\newcommand{\fhipp}{{\fhi^{\prime\prime}}}
+\newcommand{\epsp}{\eps^\prime}
+
+\newcommand{\Hh}{H_h}
+\newcommand{\uh}{u_h}
+\newcommand{\vh}{v_h}
+
+\newcommand{\XxX}{{X \times X}}
+\newcommand{\YxY}{{Y \times Y}}
+\newcommand{\ExE}{{E \times E}}
+\newcommand{\EpxE}{{\Ep \times E}}
+\newcommand{\matKxE}{{\matK \times E}}
+\newcommand{\FxF}{{F \times F}}
+\newcommand{\matKxF}{{\matK \times F}}
+\newcommand{\ExF}{{E \times F}}
+\newcommand{\ExFxExF}{{(\ExF)\times(\ExF)}}
+\newcommand{\matKxExF}{{\matK\times(\ExF)}}
+\newcommand{\GxG}{{G \times G}}
+\newcommand{\HxH}{{H \times H}}
+
+\newcommand{\supX}[1]{{\sup (#1 (X))}}
+\newcommand{\supXf}{\supX{f}}
+\newcommand{\supXmf}{\supX{(- f)}}
+\newcommand{\supXlambdaf}{\supX{(\lambda f)}}
+\newcommand{\maxX}[1]{{\max (#1 (X))}}
+\newcommand{\maxXf}{\maxX{f}}
+\newcommand{\maxXmf}{\maxX{(- f)}}
+\newcommand{\infX}[1]{{\inf (#1 (X))}}
+\newcommand{\infXf}{\infX{f}}
+\newcommand{\infXlambdaf}{\infX{(\lambda f)}}
+\newcommand{\minX}[1]{{\min (#1 (X))}}
+\newcommand{\minXf}{\minX{f}}
+
+\newcommand{\floor}[1]{\left\lfloor #1 \right\rfloor}
+\newcommand{\ceil}[1]{\left\lceil #1 \right\rceil}
+
+\newcommand{\Span}[1]{{{\rm span} (#1)}}
+\newcommand{\Line}[1]{\Span{\{#1\}}}
+\newcommand{\Ker}[1]{{\ker (#1)}}
+
+%\newcommand{\proj}[2]{p_{#1 /\!/ #2}}
+%\newcommand{\pFFp}{\proj{F}{\Fp}}
+
+\newcommand{\FSp}[2]{{\calF \left(#1, #2\right)}}
+\newcommand{\LSp}[2]{{\calL \left(#1, #2\right)}}
+\newcommand{\LcSp}[2]{{\calL_c \left(#1, #2\right)}}
+\newcommand{\Ld}[1]{{\calL_2 \left(#1\right)}}
+\newcommand{\LdSp}[3]{\Ld{#1, #2; #3}}
+\newcommand{\Ldc}[1]{{\calL_{2c} \left(#1\right)}}
+\newcommand{\LdcSp}[3]{\Ldc{#1, #2; #3}}
+
+\newcommand{\FXE}{\FSp{X}{E}}
+\newcommand{\FXExFXE}{{\FXE \times \FXE}}
+\newcommand{\matKxFXE}{{\matK \times \FXE}}
+\newcommand{\FEF}{\FSp{E}{F}}
+\newcommand{\LEE}{\LSp{E}{E}}
+\newcommand{\LEF}{\LSp{E}{F}}
+\newcommand{\LFG}{\LSp{F}{G}}
+\newcommand{\LEG}{\LSp{E}{G}}
+\newcommand{\LEFxLFG}{{\LEF \times \LFG}}
+\newcommand{\LHH}{\LSp{H}{H}}
+\newcommand{\LEmatK}{\LSp{E}{\matK}}
+\newcommand{\LExEmatK}{\LSp{\ExE}{\matK}}
+\newcommand{\Es}{{E^\star}}
+\newcommand{\LcEE}{\LcSp{E}{E}}
+\newcommand{\LcEF}{\LcSp{E}{F}}
+\newcommand{\LcFG}{\LcSp{F}{G}}
+\newcommand{\LcEG}{\LcSp{E}{G}}
+\newcommand{\LcEmatK}{\LcSp{E}{\matK}}
+\newcommand{\Lcp}[1]{\LcSp{#1}{#1^\prime}}
+\newcommand{\LcEEp}{\Lcp{E}}
+\newcommand{\LcHH}{\LcSp{H}{H}}
+\newcommand{\LcHHp}{\Lcp{H}}
+\newcommand{\LcHpH}{\LcSp{H^\prime}{H}}
+\newcommand{\LdEFG}{\LdSp{E}{F}{G}}
+\newcommand{\LdEEmatK}{\LdSp{E}{E}{\matK}}
+\newcommand{\LdE}{\Ld{E}}
+\newcommand{\LdcEFG}{\LdcSp{E}{F}{G}}
+\newcommand{\LdcEEmatK}{\LdcSp{E}{E}{\matK}}
+\newcommand{\LdcE}{\Ldc{E}}
+\newcommand{\LdcH}{\Ldc{H}}
+
+\newcommand{\Identity}{{\rm Id}}
+\newcommand{\identity}[1]{\Identity_{#1}}
+
+\newcommand{\idE}{\identity{E}}
+\newcommand{\idH}{\identity{H}}
+
+\newcommand{\vertiii}[1]{
+  {\left\vert\kern-0.25ex\left\vert\kern-0.25ex\left\vert #1
+    \right\vert\kern-0.25ex\right\vert\kern-0.25ex\right\vert}}
+
+\newcommand{\innerprod}[3]{\left(#2, #3\right)_{#1}}
+\newcommand{\bra}[1]{\left< #1 \right|}
+\newcommand{\ket}[1]{\left| #1 \right>}
+\newcommand{\braket}[2]{\left< #1 | #2 \right>}
+\newcommand{\dualprod}[3]{\braket{#2}{#3}_{#1^\prime,#1}}
+\newcommand{\norm}[2]{\left\|#2\right\|_{#1}}
+\newcommand{\tnorm}[2]{\vertiii{#2}_{#1}}
+
+\newcommand{\psG}[2]{\innerprod{G}{#1}{#2}}
+\newcommand{\psGdotdot}{\psG{\cdot}{\cdot}}
+\newcommand{\psH}[2]{\innerprod{H}{#1}{#2}}
+\newcommand{\psHdotdot}{\psH{\cdot}{\cdot}}
+\newcommand{\pdE}[2]{\dualprod{E}{#1}{#2}}
+\newcommand{\pdEdotdot}{\pdE{\cdot}{\cdot}}
+\newcommand{\pdG}[2]{\dualprod{G}{#1}{#2}}
+\newcommand{\pdH}[2]{\dualprod{H}{#1}{#2}}
+
+\newcommand{\PrenG}{N_G}
+\newcommand{\prenG}[1]{\PrenG (#1)}
+\newcommand{\PrenEF}{N_{E, F}}
+\newcommand{\prenEF}[1]{\PrenEF (#1)}
+
+\newcommand{\nrm}[1]{\norm{}{#1}}
+\newcommand{\nrmdot}{\nrm{\cdot}}
+\newcommand{\nE}[1]{\norm{E}{#1}}
+\newcommand{\nEdot}{\nE{\cdot}}
+\newcommand{\nExE}[2]{\norm{\ExE}{(#1, #2)}}
+\newcommand{\nExEdotdot}{\nExE{\cdot}{\cdot}}
+\newcommand{\nF}[1]{\norm{F}{#1}}
+\newcommand{\nFdot}{\nF{\cdot}}
+\newcommand{\nExF}[2]{\norm{\ExF}{(#1, #2)}}
+\newcommand{\nExFdotdot}{\nExF{\cdot}{\cdot}}
+\newcommand{\nG}[1]{\norm{G}{#1}}
+\newcommand{\nGdot}{\nG{\cdot}}
+\newcommand{\nH}[1]{\norm{H}{#1}}
+\newcommand{\nHdot}{\nH{\cdot}}
+
+\newcommand{\tnEF}[1]{\tnorm{F, E}{#1}}
+\newcommand{\tnEFdot}{\tnEF{\cdot}}
+\newcommand{\tnFG}[1]{\tnorm{G, F}{#1}}
+\newcommand{\tnEG}[1]{\tnorm{G, E}{#1}}
+\newcommand{\tnEEmatK}[1]{\tnorm{\matK, \ExE}{#1}}
+\newcommand{\tnEEmatKdot}{\tnEEmatK{\cdot}}
+\newcommand{\tnEmatK}[1]{\tnorm{\matK, E}{#1}}
+\newcommand{\tnEmatKdot}{\tnEmatK{\cdot}}
+\newcommand{\tnHH}[1]{\tnorm{H, H}{#1}}
+\newcommand{\tnHHdot}{\tnHH{\cdot}}
+\newcommand{\tnp}[2]{\tnorm{#1^\prime, #1}{#2}}
+\newcommand{\tnEEp}[1]{\tnp{E}{#1}}
+\newcommand{\tnHHp}[1]{\tnp{H}{#1}}
+\newcommand{\tnHHpdot}{\tnHHp{\cdot}}
+
+\newcommand{\dist}[1]{d_{#1}}
+\newcommand{\dst}{\dist{}}
+\newcommand{\dE}{\dist{E}}
+\newcommand{\dExE}{\dist{\ExE}}
+\newcommand{\dEF}{\dist{F, E}}
+
+\newcommand{\nEp}[1]{\norm{E^\prime}{#1}}
+\newcommand{\nEpdot}{\nEp{\cdot}}
+\newcommand{\nHp}[1]{\norm{H^\prime}{#1}}
+\newcommand{\nHpdot}{\nHp{\cdot}}
+
+\newcommand{\Blf}{{\fhi}}
+\newcommand{\blfE}[2]{{\Blf (#1, #2)}}
+\newcommand{\BlfH}{a}
+\newcommand{\blfH}[2]{{\BlfH (#1, #2)}}
+\newcommand{\LfH}{f}
+\newcommand{\lfH}[1]{{\LfH (#1)}}
+
+\newcommand{\hatC}{\hat{C}}
+\newcommand{\hatK}{\hat{K}}
+\newcommand{\hatT}{\hat{T}}
+\newcommand{\hatom}{\hat{\omega}}
+\newcommand{\hatx}{\hat{x}}
+\newcommand{\xx}{{\bf x}}
+\newcommand{\xixi}{{\boldsymbol{\xi}}}
+\newcommand{\VV}{{\bf V}}
+\newcommand{\hatxx}{\hat{\xx}}
+\newcommand{\hatxixi}{{\hat{\xixi}}}
+\newcommand{\hatVV}{\hat{\VV}}
+\newcommand{\hatcalL}{\hat{\calL}}
+\newcommand{\hatphi}{\hat{\phi}}
+
+\newcommand{\phigeo}{\boldsymbol{\varphi}^{\mathrm{geo}}}
+\newcommand{\jacphigeo}{\boldsymbol{J}^{\mathrm{geo}}}
+\newcommand{\diff}{\mathrm{d}}
+\newcommand{\degq}{{\deg_q}}
+\newcommand{\meas}{\mathrm{meas}}

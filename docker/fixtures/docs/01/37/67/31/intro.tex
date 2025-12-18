@@ -1,0 +1,184 @@
+Several set-theoretic structures of relevance to computer science can
+be described either by using the language of initial algebras or by
+using the language of final coalgebras.  For example, sets of finite
+trees, the set of terms over a signature and, more in general,
+inductively defined sets are initial algebras of some functor and this
+property characterizes these sets up to canonical isomorphism.
+Similarly, sets of trees with possibly infinite branches, sets of
+objects which are canonical solutions of systems of equations,
+coinductively defined sets or coinductive types, can be characterized
+up to isomorphism by the property of being final coalgebras of some
+functor.  Thus the study of initial algebras in connection with data
+structures is a well developed subject and dates back at least twenty
+five years \cite{MR82d:18004,lehmannsmyth}. The interest in final
+coalgebras is more recent, but is nowadays grown up to a well
+established discipline \cite{MR89j:03039,barr,MR1791953}.  Despite the
+existence of programming languages and proof assistants that implement
+both inductive and coinductive types \cite{CoFu92,gimenez}, it appears
+to us that initial algebras and final coalgebras are not often studied
+simultaneously in the literature. Thus we are led to the problem of
+understanding what kind of structures arise from both initial algebras
+and final coalgebras and whether these structures are of any interest
+in computer science.
+
+This paper is therefore meant to be an introduction to the theory of
+categories having the following completeness properties: they have
+finite \emph{sums}, finite \emph{products} and all the \emph{initial
+  algebras} and \emph{final coalgebras} of the functors which can be
+constructed out of these four operations, using projection functors as
+building blocks.  These categories generalize $\mu$-lattices
+\cite{San99:Fml,BRICS-RS-00-29} and $\mu$-algebras \cite{MR87e:03079}
+on one side, on the other side they partially generalize bicomplete
+categories \cite{MR96k:18004a}.  For this reason we call them
+\emph{$\mu$-bicomplete}.
+
+A first concern is to show that many common categories are
+$\mu$-bicomplete. It is well known that an accessible unary
+endofunctor of a locally presentable category has both an initial
+algebra and a final coalgebra. We adapt ideas existing in the
+literature to prove that locally presentable categories are
+$\mu$-bicomplete.  Among the locally presentable categories is the
+category of sets and functions, which is therefore $\mu$-bicomplete.
+
+ As it is often the case for
+existence theorems, the mere knowledge that a category is
+$\mu$-bicomplete is unsatisfactory. The principal goal of this paper
+is that of giving an explicit description of the functors on the
+category of sets that arise out of those four operations, i.e. of the
+functors that are definable by $\mu$-terms.   We achieve this goal by translating the algebraic
+language of $\mu$-bicomplete categories into the combinatorial
+language of \emph{parity games}, cf. \cite[\S 4]{AN01}.  These games
+are a standard tool in the theory of automata recognizing infinite
+objects \cite{thomas}. A central notion in this theory is that of an
+acceptance condition, essentially a method for specifying a set of
+infinite paths in a graph. The acceptance condition by which the set
+of infinite winning plays in a parity game is defined was introduced
+in \cite{MR827531} to construct automata in normal form.  Thus it
+should not come as a surprise that several combinatorial problems of
+the theory can be reduced to the problem of finding winning strategies
+in a parity game.  For example, the properties of transition systems
+that are definable by alternating fixed point expressions can be
+checked using algorithms designed and proved correct by means of
+game-theoretic ideas and analogies \cite{emersonjutla}.
+
+Generalizing ideas that relate the theory of two persons games with
+the theory of bicomplete categories \cite{MR96k:18004a,MR1797101}, we
+show that it is possible to endow parity games with an algebraic
+meaning, so that they can be considered to be terms of a categorical
+theory.  We show then the equivalence of this meaning to the one of
+$\mu$-terms defining $\mu$-bicomplete categories.  On the
+combinatorial side, parity games can be considered as recognizers of
+infinite objects in a natural way: they recognize the set of
+deterministic winning strategies for a chosen player. The two
+different meanings of parity games, the algebraic one and the
+combinatorial one, are then shown to coincide if the category of sets
+and functions is being considered.  This leads to the characterization
+of functors denoted by $\mu$-terms in the category of sets: a
+$\mu$-term is translated into a parity game and its denotation in this
+category is the set of deterministic winning strategies for the chosen
+player.
+
+
+This result
+supports the claim that the algebra of parity games is the one of
+$\mu$-bicomplete categories and that the combinatorics of
+$\mu$-bicomplete categories is the one of parity games, a claim which
+is meant to emphasize two possible directions of research. One goes
+from the algebra to the combinatorics: for example, this work should
+provide a starting point for elaborating game semantics of programming
+languages that implement both inductive and coinductive types.  The
+other direction goes from the combinatorics to the algebra: we are
+proposing an alternative algebraic interpretation of the alternation
+between ``finitely many times'' and ``infinitely often'' which occurs
+so often in the theory of automata recognizing infinite objects. The
+alternation is usually analyzed by means of complete lattices, of
+ordinals and of approximants of least fixed points that occur nested
+within greatest fixed points.  Our interpretation requires induction
+and coinduction, that is, initial algebras and final coalgebras of
+functors which are natural generalizations of least and greatest fixed
+points.  A particular motivation for developing this work has been the
+possibility of describing transformations of winning strategies by
+means of arrows definable in every $\mu$-bicomplete category.  We have
+reported partial results on the structure of arrows of
+$\mu$-bicomplete categories in \cite{sanlccp}.
+
+On several occasions categories with similar completeness properties
+have been proposed. For example, in \cite{MR93g:18005} a category
+$\Cat{C}$ is defined to be algebraically complete if every unary
+endofunctor has an initial algebra.  This requirement appears to be
+too strong, since the only complete categories with this property turn
+out to be the complete quasi-orders. It is possible to relax the
+requirement and ask only a given class of functors of the form
+$F:\prod_{i \in I}\Cat{C} \rTo \Cat{C}$ to be closed under
+parameterized initial algebras.  This approach is the one proposed in
+\cite{MR98j:18007} and leads to define $2$-iteration theories
+\cite{MR2001m:18006}.  This is also our approach with the proviso that
+we are interested in a specific class which is required to be closed
+under parameterized final coalgebras as well. In \cite{MR93g:18005}
+final coalgebras are considered too, but they are flattened into
+initial algebras: an algebraically compact category is defined there
+to be an algebraically complete category such that the inverse of
+every initial algebra is also a final coalgebra of the same functor.
+
+In these and other contexts the equational properties of categorical
+fixed points have been studied. Our aim here is to see these
+properties at work.  Our starting point will be the Beki\v{c}
+property. In its simplest form it is an inductive method for showing
+that a system of equations admits a unique solution: a sufficient
+condition for the system of equations
+$$
+\begin{system}
+  x & = & f(x,y) \\
+  y & = & g(x,y)
+\end{system}
+$$
+\vfill\eject\noindent
+to admit a unique solution is that
+the system
+$$
+\begin{system}
+  x & = & f(x,y)
+\end{system}
+$$
+admits a unique solution $x = \dg{f}(y)$ for each choice of $y$ and
+that either of the two equivalent systems
+$$
+\begin{system}
+  x & = & \dg{f}(y) \\
+  y & = & g(x,y)
+\end{system}
+\;\;\;\;
+\begin{system}
+  y & = & g(\dg{f}(y),y)
+\end{system}
+$$
+admits a unique solution. The analogy of the Beki\v{c} property
+with Gaussian elimination has been pointed in
+\cite{simpsonplotkin,AN01}. The equivalence between the last two
+systems is moreover the root of our algebraic interpretation of parity
+games.  We shall state a categorical version of the Beki\v{c}
+property; the property stated above is recovered when considering that
+a set is a poset with a discrete order, and that a poset is a category
+with at most one arrow between any two objects: an initial algebra of
+an endofunctor of a discrete category is nothing else but a unique
+fixed point.  The Beki\v{c} property allows to prove the equivalence
+between $\mu$-terms and systems of functorial equations. These seem to
+be better suited than $\mu$-terms for an analysis that emphasizes the
+operational aspects.  \vspace{2mm}
+
+The paper is structured as follows. In section \ref{sec:notation} we
+explain the notation, introduce the principal concepts and state the
+Beki\v{c} property.  In section \ref{sec:mubicomplete} we define
+categorical $\mu$-terms and $\mu$-bicomplete categories. We prove that
+locally presentable categories are $\mu$-bicomplete. In section
+\ref{sec:paritygames} we define parity games and their algebraic
+interpretation. We show that it is possible to interpret every parity
+game on a category if and only if the category is $\mu$-bicomplete, by
+giving a translation of parity games into $\mu$-terms and vice-versa.
+In section \ref{sec:inset} we prove that the algebraic interpretation
+of a parity game in the category of sets is the set of winning
+strategies for a chosen player.  We add some examples and applications
+of the theory so far developed.  Finally, in section
+\ref{sec:conclusions}, we add concluding remarks.
+
+

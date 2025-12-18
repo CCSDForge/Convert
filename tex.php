@@ -11,7 +11,7 @@ class TexCompileException extends Exception {
 
     public $logfile;
 
-    function __construct($msg, $file = null) {
+    public function __construct($msg, $file = null) {
         parent::__construct($msg);
         $this->logfile =  $file;
     }
@@ -55,6 +55,12 @@ class Ccsd_Tex_Compile {
         $this -> withLogFile = $withLogFile;
         $this -> stopOnError = $stopOnError;
         $this -> debug       = $debug;
+
+        $config = \Convert\Config::getConfig();
+
+        if ($config->get('use.docker')){
+            self::$ChrootCMD = 'docker exec -i convert-latex-1';
+        }
 
         $arch = php_uname('m');
         /** Bon ce serait bien d'avoir ca en config globale...  */

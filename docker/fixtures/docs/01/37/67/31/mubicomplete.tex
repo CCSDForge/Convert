@@ -1,0 +1,771 @@
+
+We define $\mu$-bicomplete categories by mimicking the definition of
+$\mu$-algebras \cite{MR87e:03079} at the level of categories:
+$\mu$-terms are defined and an algebra is a $\mu$-algebra if it is
+possible to interpret all the $\mu$-terms as expected.  In a
+categorical context a $\mu$-term is to be interpreted as a functor,
+which generalizes the usual interpretation of a $\mu$-term as an order
+preserving function.
+
+In the following definition we explicitly keep track of free variables
+in a $\mu$-term by means of a context $X$: this is simply a finite set
+(of variables). Later we shall use the notation $\Cat{C}^{X}$ to
+denote the $X$-fold product of a category $\Cat{C}$ with itself.
+
+\begin{dfntn}
+  The set $\mu\mathcal{T}(X)$ of $\mu$-terms over a context $X$ is
+  defined as follows:
+  \begin{enumerate} 
+  \item For each pair $(X,x)$, where $X$ is a finite set and $x \in
+    X$, $x \in \mu\mathcal{T}(X)$.
+  \item If $I$ is a finite set and $s : I \rTo \mu\mathcal{T}(X)$,
+    then $\Land[I] s, \Lor[I] s \in  \mu\mathcal{T}(X)$.
+  \item If $s \in \mu\mathcal{T}(X)$ and $x \in X$, then $\mu_{x}.s,
+    \nu_{x}.s \in \mu\mathcal{T}(X \setminus \{ x \})$.
+  \end{enumerate}
+\end{dfntn}
+
+\begin{dfntn}
+  Let $\Cat{C}$ be a category with finite products and finite
+  coproducts. We define a partial interpretation of $\mu$-terms $s \in
+  \mu\mathcal{T}(X)$ over a context $X$ as functors of the form
+  $\val{s}: \Cat{C}^{X} \rTo \Cat{C}$.
+  \begin{enumerate}
+  \item For $x \in X$, we let $\val{x} = \prj_{x}:
+    \Cat{C}^{X} \rTo \Cat{C}$.
+  \item We let $\val{\Land[I] s} = \prod_{i \in I} \val{s_{i}}$ and
+    $\val{\Lor[I] s} = \coprod_{i \in I} \val{s_{i}}$, given that all
+    the $\val{s_{i}}$ are defined.
+  \item We let $\val{\mu_{x}.s}$ be the parameterized initial algebra
+    of
+    $$
+    \val{s}: \Cat{C}^{\{x\}} \times \Cat{C}^{X \setminus \{x\}}
+    \rTo \Cat{C}\,,
+    $$
+    given that $\val{s}$ is defined. Similarly we let
+    $\val{\nu_{x}.s}$ be the parameterized final coalgebra of
+    $\val{s}$. If $\val{s}$ is not defined or if the desired initial
+    algebras (final coalgebras) do not exist, then we leave
+    $\val{\mu_{x}.s}$ ($\val{\nu_{x}.s}$) undefined.
+  \end{enumerate}
+\end{dfntn}
+
+\begin{dfntn}
+  A category with finite products and finite coproducts $\Cat{C}$ is
+  said to be \emph{$\mu$-bicomplete} if for each finite set of
+  variables $X$ and $\mu$-term $s \in \mu\mathcal{T}(X)$ the
+  interpretation $\val{s}$ is defined.
+\end{dfntn}
+
+An alternative point of view emphasizes the class of functors which
+are definable by means of $\mu$-terms in a $\mu$-bicomplete category.
+Thus we are lead to give the following definition.
+
+\begin{dfntn}
+  We say that a functor $F : \Cat{C}^{X} \rTo \Cat{C}^{Y}$ is a
+  \emph{$\mu$-functor} if there exist a collection of $\mu$-terms $\{
+  s_{y} \in \mu\mathcal{T}(X) \}_{y \in Y}$
+  and a natural isomorphism $F \iso \ltuple \val{s_{y}} \rtuple_{y \in
+    Y}$.
+\end{dfntn}
+
+\begin{prpstn}
+  $\mu$-functors are closed under composition.
+\end{prpstn}
+\begin{proof}
+  Let $s \in \mu\mathcal{T}(X)$ and $z \not\in X$, we first define
+  $s^{z} \in \mu\mathcal{T}(\{z \} \cup X)$ with the property that
+  $\val{s^{z}} = \val{s}\circ \prj_{X}$, by induction on the structure
+  of $s$.  We let $x^{z} = x$, $(\Land[I] s)^{z} = \Land[I] s^{z}$ and
+  $(\Lor[I] s)^{z} = \Lor[I] s^{z}$, where $(s^{z})_{i} =
+  (s_{i})^{z}$, $(\mu_{x}.s)^{z} = \mu_{x}.(s^{z})$ and
+  $(\nu_{x}.s)^{z} = \nu_{x}.(s^{z})$. In the last two cases we have
+  supposed that the variable $x \not\in \{z\} \cup X$, otherwise we
+  can rename $x$ in $s$ to a variable $x' \not\in \{z\}\cup X $ and
+  obtain a $\mu$-term $t \in \mu\mathcal{T}(\{x'\} \cup X)$ such that
+  $\val{t} = \val{s}$ and $\val{\mu_{x'}.t} = \val{\mu_{x}.s}$ and
+  then we can define $(\mu_{x}.s)^{z} = \mu_{x'}.(t^{z})$.
+  
+  Let $s : Y \rTo \mu\mathcal{T}(X)$ be a collection of $\mu$-terms
+  and let $t \in \mu\mathcal{T}(Y)$. We define now a $\mu$-term $t[s]
+  \in \mu\mathcal{T}(X)$ with the property that $\val{t[s]} \iso
+  \val{t} \circ \ltuple \val{s_{y}}\rtuple_{y \in Y}$, by induction of
+  the structure of $t$.  We let $y[s] = s_{y}$, $(\Land[I] t)[s] =
+  \Land[I] (t[s])$, $(\Lor[I] t)[s] = \Lor[I] (t[s])$ where $t[s]_{i}
+  = t_{i}[s]$.  Eventually, we let $(\mu_{x}.t)[s] =
+  \mu_{x}.(t[x,s^{x}])$ and $(\nu_{x}.t)[s] 
+    = \nu_{x}.(t[x,s^{x}])$, where $(x,s^{x}): \{x\}\cup Y \rTo
+  \mu\mathcal{T}(\{x \} \cup X)$ is such that $(x,s^{x})_{y} =
+  s_{y}^{x}$ if $y \in Y$ and $(x,s^{x})_{x} = x$.  We have supposed
+  again and without loss of generality that $x \not\in X$. The desired
+  statement follows.
+\end{proof}
+
+Let $Y$ be a set of variables and suppose that it is the disjoint
+union of $X$ and $Z$.  We can extend every collection $s : Z \rTo
+\mu\mathcal{T}(X)$ indexed by $Z$ to a collection $s' : Y \rTo
+\mu\mathcal{T}(X)$ by letting $s'_{y} = s_{y}$ if $y \in Z$ and
+$s'_{y} = y$ if $y \in X$. Thus if $t \in \mu\mathcal{T}(Y)$ then we
+let
+\begin{eqnarray*}
+  t[s_{z}/z]_{z\in Z} & = & t[s']
+\end{eqnarray*}
+where $t[s']$ has been defined in the proof of the above proposition.
+We observe that the interpretation of $\val{t[s_{z}/z]_{z\in Z}}$ is
+$$
+\Cat{C}^{X} \rTo[l>=8em]^{\ltuple \,\ltuple \val{s_{z}} \rtuple_{z
+    \in Z}\,,\,\Id_{\Cat{C}^{X}}\,\rtuple} \Cat{C}^{Z} \times
+\Cat{C}^{X} \rTo[l>=4em]^{\val{t}} \Cat{C}
+$$
+according to the previous proposition.
+
+
+\begin{prpstn}
+  $\mu$-functors are closed under parameterized initial algebras and
+  parameterized final coalgebras.
+\end{prpstn}
+
+By this property we mean that if $F: \Cat{C}^{Y} \rTo \Cat{C}^{X}$ is
+a $\mu$-functor and $X \subseteq Y$, so that we can represent
+$\Cat{C}^{Y}$ as the product $\Cat{C}^{X} \times \Cat{C}^{Y \setminus
+  X}$, then we can find a collection of $\mu$-terms $\{ t_{x} \in
+\mu\mathcal{T}(Y \setminus X)\}_{x \in X}$ so that $\ltuple
+\val{t_{x}}\rtuple_{x \in X}: \Cat{C}^{Y \setminus X} \rTo
+\Cat{C}^{X}$ is a parameterized initial algebra of $F$ and, similarly,
+it is possible to find an analogous representation for a parameterized
+final coalgebra of $F$.  The proposition is an immediate consequence
+of the Beki\v{c} property and its dual for final coalgebras. It will
+also be evident from the representation of $\mu$-functors by means of
+parity functors that we describe in the next section.
+
+
+
+We want to find concrete examples of $\mu$-bicomplete categories.  To
+achieve this goal, we shall look at locally presentable categories
+which, in some sense, generalize complete lattices. We briefly recall
+the principal concepts that define these categories, their properties
+being described in the monographs \cite{makkaipare,lpac}.
+
+Let $\lambda$ be a regular cardinal. A poset is $\lambda$-directed if
+every subset of cardinality less than $\lambda$ has an upper bound. If
+$D : J \rTo \Cat{C}$ is a diagram whose index $J$ is a
+$\lambda$-directed poset, then we say that $D$ is $\lambda$-directed
+and that its colimit, whenever it exists, is $\lambda$-directed.  A
+functor $T: \Cat{C} \rTo \Cat{D}$ is said to be $\lambda$-accessible
+if it preserves $\lambda$-directed colimits.  An object $c$ of a
+category $\Cat{C}$ is $\lambda$-presentable if the hom-functor
+$\Cat{C}(c,-):\Cat{C} \rTo \Sets$ is $\lambda$-accessible.  Thus: a
+category $\Cat{C}$ is locally $\lambda$-presentable if (1) it is
+cocomplete and (2) it has a set $\mathcal{A}$ of $\lambda$-presentable
+objects such that every object of $\Cat{C}$ is the $\lambda$-directed
+colimit of objects from $\mathcal{A}$. We can relax condition (1) to:
+(1') it has all the $\lambda$-directed colimits, in which case
+conditions (1') and (2) define a $\lambda$-accessible category.
+Finally: a functor is said to be \emph{accessible} if it is
+$\lambda$-accessible for some regular cardinal $\lambda$.  A category
+is said to be \emph{locally presentable} (\emph{accessible}) if it is
+locally $\lambda$-presentable ($\lambda$-accessible) for some regular
+cardinal $\lambda$.
+
+
+
+  
+
+Most of the common
+categories are locally presentable: the category of sets and
+functions, categories of presheaves and sheaves, varieties and
+quasivarieties of algebras. Thus, in the rest of this section, we
+shall prove:
+\begin{thrm}
+  \label{theo:lpc}
+  Every locally presentable category is $\mu$-bicomplete.
+\end{thrm}
+
+In order to show that a category $\Cat{C}$ is $\mu$-bicomplete, it
+suffices to find a class of functors of the form $\Cat{C}^{J} \rTo
+\Cat{C}$, where $J$ ranges on finite sets, that contains the
+projections and is closed under finite products, finite coproducts,
+and formation of parameterized initial algebras and parameterized
+final coalgebras. We recall the following facts about accessible
+functors:
+\begin{itemize}
+\item Left and right adjoints 
+  between accessible categories are accessible \cite[\S 2.23]{lpac}.
+\item If $\Cat{D}$ has an initial and a final object, then a
+  projection $\prj_{\Cat{C}}: \Cat{C}\times \Cat{D} \rTo \Cat{C}$ is
+  both a left and a right adjoint.
+\item Coproducts, diagonals and products are adjoints, since $\coprod
+  \dashv \Delta \dashv \prod: \Cat{C}^{J} \rTo \Cat{C}$.
+\end{itemize}
+Knowing that locally presentable categories are closed under finite
+products, we conclude that if $\Cat{C}$ is such a
+category, then the class of accessible functors $F: \Cat{C}^{J} \rTo
+\Cat{C}$ contains the projections and is closed under finite products
+and finite coproducts.
+It is well known that initial algebras and final coalgebras of
+$\lambda$-accessible unary functors exist in locally presentable
+categories \cite{MR82d:18004,barr}; moreover if $F: \Cat{C}\times
+\Cat{D} \rTo \Cat{C}$ is $\lambda$-accessible, so is the unary functor
+$F(-,d):\Cat{C} \rTo \Cat{C}$ for each object $d$ of $\Cat{D}$. Thus,
+in order to conclude that locally presentable categories are
+$\mu$-bicomplete, we need the following proposition:
+\begin{prpstn}
+  \label{lemma:closed}
+  If $\Cat{C}$ and $\Cat{D}$ are locally presentable categories and $F
+  :
+  \Cat{C}\times \Cat{D} \rTo \Cat{C}$ is an accessible functor, then
+  both the parameterized initial algebra $\dgmu{F} : \Cat{D} \rTo
+  \Cat{C}$ and the parameterized final coalgebra $\dgnu{F} : \Cat{D}
+  \rTo \Cat{C}$ are accessible.
+\end{prpstn}
+We are thankful to Alex Simpson for pointing out the following short
+proof that relies on general properties of locally presentable
+categories and accessible functors.
+\begin{proof}
+  We only prove that $\dgnu{F}$ is accessible, since the proof for
+  $\dgmu{F}$ is dual.  Consider the category $\Cat{E}$ with objects
+  $(c,d,\zeta)$, where $c \in \Cat{C}$, $d \in \Cat{D}$, and $\zeta: c
+  \rTo F(c,d)$, and with morphisms $(f,g):(c,d,\zeta) \rTo
+  (c',d',\zeta')$ being maps $f:c \rTo c'$ and $g:d \rTo d'$ such that
+  $\zeta \comp F(f,g) = f \comp \zeta'$. Observe that there is an
+  obvious forgetful functor $\Cat{E} \rTo \Cat{C}\times\Cat{D}$ as
+  well as a natural transformation
+  $$
+  \myspecialdiagram{25}{
+    []*+{\Cat{E}}="E"
+    ([r(1.5)u(0.4)]*+{\Cat{C}\times\Cat{D}}="P1",
+     [r(1.5)d(0.4)]*+{\Cat{C}\times\Cat{D}}="P2")
+    [r(3)]*+{\Cat{C}}="C"
+    "E":@/^0.5em/"P1"
+    "E":@/_0.5em/"P2"
+    "P2":@/_0.5em/"C"_{F}_{}="A"
+    "P1":@/^0.5em/"C"^{\prj_{\Cat{C}}}_{}="B"
+    "P1"[d(0.2)]="P1"
+    "P2"[u(0.2)]="P2"
+    "P1":@2"P2"_{\zeta}
+  }
+  $$
+  The 2-categorical diagram above is the inserter -- cf. \cite[\S
+  4]{kelly} -- of $\prj_{\Cat{C}}$ and $F$ and this implies that
+  $\Cat{E}$ is accessible, since accessible categories are closed
+  under lax limits \cite[\S 5.1.8]{makkaipare}. Also, it is easily
+  verified that the forgetful functor $\Cat{E} \rTo
+  \Cat{C}\times\Cat{D}$ creates colimits, so that $\Cat{E}$ is
+  cocomplete, hence locally presentable.
+  
+  There is a functor $G: \Cat{D} \rTo \Cat{E}$ mapping an object $d$
+  of $\Cat{D}$ to $(\dgnu{F}d,d,\zeta_{d})$ where $\zeta_{d}:\dgnu{F}d
+  \rTo F(\dgnu{F}d,d)$ is a final coalgebra. Then $G$ is right adjoint
+  to the accessible functor $\Cat{E} \rTo \Cat{C}\times \Cat{D} \rTo
+  \Cat{D}$, hence $G$ is accessible. But $\dgnu{F}$ is simply
+  $$
+  \mydiagram[6em]{
+    []*+{\Cat{D}}
+    :[r]*+{\Cat{E}}^{G}
+    :[r]*+{\Cat{C}\times\Cat{D}}
+    :[r]*+{\Cat{C}}^{\prj_{\Cat{C}}}
+  }
+  $$
+  which, as a composite of accessible functors, is accessible. 
+\end{proof}
+
+\begin{finalita}
+  It is possible to directly prove proposition \ref{lemma:closed}
+  along the lines of \cite{barr}. Such a proof also shows that if
+  $\Cat{C}$ is a locally $\lambda$-presentable category with
+  $\lambda > \omega$, then the class of
+  $\lambda$-accessible functors of the form $\Cat{C}^{J} \rTo \Cat{C}$
+  is closed under formation of parameterized final coalgebras.  The
+  condition $\lambda > \omega$ is necessary, cf. \cite{itmo}: the
+  interpretation of the $\mu$-term $\nu_{y}.(x \vee (y \land y))$ in
+  the category of sets is the functor that associates to each set $X$
+  the set of infinite binary trees with leaves labeled in $X$. Letting
+  $X$ be the set $\nnumbers$ of natural numbers, we observe that there
+  are infinitely many binary trees whose leaves are labeled by an
+  infinite subset of $\nnumbers$, thus the set of this infinite binary
+  tree is not the inductive limit of the sets of infinite trees whose
+  leaves are labeled by a finite subset of $\nnumbers$.  Since
+  $\nnumbers$ is the inductive limit of its finite subsets, we see
+  that this functor is not $\omega$-accessible.  Finally, since finite
+  products are $\lambda$-accessible in locally $\lambda$-presentable
+  categories \cite[\S1.59]{lpac}, we can infer:
+  \begin{prpstn}
+    If $\lambda > \omega$, then every $\mu$-functor on a locally
+    $\lambda$-presentable category is $\lambda$-accessible.
+  \end{prpstn}
+\end{finalita}
+
+\begin{labripreprint} 
+  We are going to give an alternative proof of proposition
+  \ref{lemma:closed}, along the lines of \cite{barr}.  The proof that
+  follows will show in particular that if $\Cat{C}$ is a locally
+  $\lambda$-presentable category, where $\lambda > \omega$ is a
+  regular cardinal, then the class of $\lambda$-accessible functors of
+  the form $\Cat{C}^{J} \rTo \Cat{C}$ is closed under formation of
+  parameterized final coalgebras.  The condition $\lambda > \omega$ is
+  necessary, cf. \cite{itmo}: the interpretation of the $\mu$-term
+  $\nu_{y}.(x \vee (y \land y))$ in the category of sets is the
+  functor that associates to each set $X$ the set of infinite binary
+  trees with leaves labeled in $X$. Letting $X$ be the set $\nnumbers$
+  of natural numbers, we observe that there are infinitely many binary
+  trees whose leaves are labeled by an infinite subset of $\nnumbers$,
+  thus the set of this infinite binary tree is not the inductive limit
+  of the sets of infinite trees whose leaves are labeled by a finite
+  subset of $\nnumbers$.  Since $\nnumbers$ is the inductive limit of
+  its finite subsets, we see that this functor is not
+  $\omega$-accessible.
+  
+  Since it is well known that finite products are $\lambda$-accessible
+  in locally $\lambda$-presentable categories, cf. for example
+  \cite[\S1.59]{lpac}, this result will also imply the following fact:
+  \begin{prpstn}
+    If $\lambda > \omega$, then every $\mu$-functor on a locally
+    $\lambda$-presentable category is $\lambda$-accessible.
+  \end{prpstn}
+
+  To prove proposition
+  \ref{lemma:closed}, we rely on standard properties and
+  language of locally presentable categories, cf.  \cite{lpac}.
+  We begin from initial algebras.
+  \begin{prpstn}
+    Let $\Cat{C},\Cat{W}$ be a locally $\lambda$-presentable categories
+    and $T: \Cat{C} \times \Cat{W} \rTo \Cat{C}$ be a
+    $\lambda$-accessible functor. Then, for each object $w$ of $\Cat{W}$
+    an initial $T(-,w)$-algebra $(\bd{x}_{w},\struct{x}_{w})$ exists and
+    the induced functor $\bd{x} : \Cat{W} \rTo \Cat{C}$ is again
+    $\lambda$-accessible.
+  \end{prpstn}
+  \begin{proof}
+    It is well known that such an initial algebra exists, see for
+    example \cite{MR82d:18004}.  Let $I$ be a $\lambda$-directed poset,
+    $w: I \rTo \Cat{W}$ a functor with colimiting cocone
+    $$
+    (\inj_{w_{i}}:w_{i} \rTo w)_{i \in I}\,.
+    $$
+    We shall show first that $\colim \bd{x}_{w_{i}}$ has a
+    $T(-,w)$-algebra structure which is moreover initial.  Recall that
+    the arrow
+    $$
+    \lcotuple T(\inj_{\bd{x}_{w_{i}}},\inj_{w_{i}})\rcotuple : \colim
+    T(\bd{x}_{w_{i}},w_{i}) \rTo T(\colim \bd{x}_{w_{i}},w)
+    $$
+    is invertible, since $T$ is $\lambda$-accessible, and thus
+    construct a $T(-,w)$-algebra as follows:
+    $$
+    T(\colim \bd{x}_{w_{i}},w) \iso \colim T(\bd{x}_{w_{i}},w_{i})
+    \rTo[l>=4em]^{\colim \struct{x}_{w_{i}}} \colim \bd{x}_{w_{i}}\,.
+    $$
+    Let $\alpha: T(a,w) \rTo a$ be a $T(-,w)$-algebra, and, for each
+    $i \in I$, form the $T(-,w_{i})$-algebra
+    $$
+    T(a,\inj_{w_{i}}) \comp \alpha : T(a,w_{i}) \rTo T(a,w) \rTo a\,.
+    $$
+    Let $f_{i}: \bd{x}_{w_{i}} \rTo a$ be such that
+    \begin{eqnarray*}
+      \struct{x}_{w_{i}} \comp f_{i} 
+      & = & 
+      T(f_{i},w_{i}) \comp T(a,\inj_{w_{i}}) \comp \alpha\,,
+    \end{eqnarray*}
+    and argue that $f_{i} = \bd{x}_{w_{ij}}\comp f_{j}$ -- i.e.
+    $(f_{i}:\bd{x}_{w_{i}} \rTo a)_{i \in I}$ is a cocone -- by means
+    of the following diagram
+    $$
+    \mydiagrambot[6em]{ []( !S
+      {T(\bd{x}_{w_{i}},w_{i})}{\bd{x}_{w_{i}}}
+      {T(\bd{x}_{w_{j}},w_{j})}{\bd{x}_{w_{j}}} {1}{1.5}, !A
+      {\struct{x}_{w_{i}}}{T(\bd{x}_{w_{ij}},w_{ij})}
+      {\bd{x}_{w_{ij}}}{} "1"="Start" ) "3" ( !S
+      {T(\bd{x}_{w_{j}},w_{j})}{\bd{x}_{w_{j}}} {T(a,w_{j})}{a}
+      {1}{1.5}, !A {\struct{x}_{w_{j}}}{T(f_{j,w_{j}})}
+      {f_{j}}{T(a,\inj_{w_{j}})\comp \alpha} "3"="T(a,w_{j})" ) "Start"
+      :[ru]*+{T(a,w_{i})}^{T(\bd{x}_{w_{ij}} \comp f_{j},w_{i})}
+      :"T(a,w_{j})"^{T(a,w_{ij})} }\,.
+    $$
+    The relation
+    \begin{eqnarray*}
+      \colim \struct{x}_{w_{i}} \comp \lcotuple f_{i}
+      \rcotuple
+      & = & \lcotuple T(\inj_{\bd{x}_{w_{i}}},\inj_{w_{i}})  \rcotuple
+      \comp 
+      T(\lcotuple f_{i} \rcotuple, a) \comp \alpha\,,
+    \end{eqnarray*}
+    is easily deduced as follows:
+    \begin{eqnarray*}
+      \lefteqn[3cm]{\inj_{T(\bd{x}_{w_{i}},w_{i})} \comp \colim \struct{x}_{w_{i}} \comp \lcotuple f_{i}
+        \rcotuple}\\
+      & = & \struct{x}_{w_{i}} \comp f_{i} \\
+      & = & T(f_{i},w_{i})\comp T(a,\inj_{w_{i}}) \comp \alpha \\
+      & = & 
+      T(\inj_{\bd{x}_{w_{i}}} \comp \lcotuple f_{i} \rcotuple,\inj_{w_{i}}) \comp \alpha \\
+      & = & 
+      T(\inj_{\bd{x}_{w_{i}}},\inj_{w_{i}}) \comp 
+      T(\lcotuple f_{i} \rcotuple, w) \comp \alpha \\
+      & = & \inj_{T(\bd{x}_{w_{i}},w_{i})} \comp 
+      \lcotuple T(\inj_{\bd{x}_{w_{i}}},\inj_{w_{i}})  \rcotuple
+      \comp 
+      T(\lcotuple f_{i} \rcotuple, w) \comp \alpha
+    \end{eqnarray*}
+    and hence we obtain
+    \begin{eqnarray}
+      \label{eq:goal}
+      \lcotuple T(\inj_{\bd{x}_{w_{i}}},\inj_{w_{i}})  \rcotuple^{-1}
+      \comp \colim \struct{x}_{w_{i}} \comp \lcotuple f_{i}
+      \rcotuple
+      & = & 
+      T(\lcotuple f_{i} \rcotuple, w) \comp \alpha\,.
+    \end{eqnarray}
+    On the other hand, if a relation like $(\ref{eq:goal})$ with $g$ in
+    place of $\lcotuple f_{i} \rcotuple$ holds, then we obtain
+    \begin{eqnarray*}
+      \struct{x}_{w_{i}}\comp \inj_{\bd{x}_{w_{i}}} \comp g
+      & = & 
+      T(\inj_{\bd{x}_{w_{i}}},\inj_{w_{i}}) \comp  
+      T(g, w) \comp \alpha \\
+      & = & 
+      T(\inj_{\bd{x}_{w_{i}}} \comp g,w_{i}) \comp  
+      T(a,\inj_{w_{i}}) \comp \alpha
+    \end{eqnarray*}
+    for each $i\in I$. Therefore $\inj_{\bd{x}_{w_{i}}} \comp g =
+    f_{i}$ and $g = \lcotuple f_{i} \rcotuple$.
+    
+    In order to conclude the argument, observe that for the particular
+    case of the given initial algebra $\struct{x}_{w}:T(\bd{x}_{w},w)
+    \rTo w$, the $f_{i}$'s are the $\bd{x}_{\inj_{w_{i}}}$'s, since
+    $\struct{x}_{w_{i}} \comp \bd{x}_{\inj_{w_{i}}} =
+    T(\bd{x}_{\inj_{w_{i}}},w_{i}) \comp T(\bd{x}_{w},\inj_{w_{i}})
+    \comp \struct{x}_{w}$. It follows that $\lcotuple
+    \bd{x}_{\inj_{w_{i}}} \rcotuple$ is a morphism of
+    $T(-,w)$-algebras between two initial ones, and henceforth it is
+    invertible.
+  \end{proof}
+  
+  We analyze next parameterized final coalgebras. 
+  \begin{prpstn}
+    Let $\lambda > \omega$ be a regular cardinal and $T: \Cat{C} \rTo
+    \Cat{C}$ be a $\lambda$-accessible functor of a locally
+    $\lambda$-presentable category.  Call $\mathcal{A}_{T}$ the class of
+    $T$-coalgebras $(a,\alpha)$ such that $a$ is $\lambda$-presentable
+    as an object of $\Cat{C}$. Then, up to isomorphism,
+    $\mathcal{A}_{T}$ is a set and moreover it is a strong generator for
+    the category of $T$-coalgebras $\Cat{C}_{T}$.
+  \end{prpstn}
+  We observe that the above proposition does not imply that
+  $\Cat{C}_{T}$ is locally $\lambda$-presentable since a coalgebra
+  $(a,\alpha) \in \mathcal{A}_{T}$ need not be $\lambda$-presentable in
+  the category $\Cat{C}_{T}$.
+  
+  \begin{proof}
+    It is easily shown that $\mathcal{A}_{T}$ is, up to isomorphism, a
+    set, so that we will show that each coalgebra $(c,\gamma)$ is the
+    colimit of the canonical diagram $\dom: \mathcal{A}_{T}/(c,\gamma)
+    \rTo \Cat{C}_{T}$.
+    
+    To this end, fix the coalgebra $\gamma : c \rTo Tc$, let
+    $\mathcal{A}$ be the class of $\lambda$-presentable objects in
+    $\Cat{C}$ and call $U_{c}$ the lifting of the forgetful functor $U :
+    \Cat{C}_{T} \rTo \Cat{C}$ to the comma categories:
+    $$
+    \mydiagrambot[7em]{ []( !S
+      {\mathcal{A}_{T}/(c,\gamma)}{\Cat{C}_{T}} {\mathcal{A}/c}{\Cat{C}}
+      {1}{1}, !A {\dom}{U_{c}} {U}{\dom} ) [] }\,.
+    $$
+    We shall show that the functor $U_{c}$ is cofinal, from which it
+    follows
+    $$
+    \renewcommand{\arraystretch}{1.3}
+    \begin{array}[b]{rcl@{\hspace{7mm}}l}
+      c & = & \colim \dom \\
+      & = & \colim (\dom \circ U_{c})
+      & \textrm{since $U_{c}$ is cofinal} \\
+      & = & \colim (U \circ \dom)\,,
+    \end{array}
+    \renewcommand{\arraystretch}{1}
+    $$
+    and
+    \begin{eqnarray*}
+      (c,\gamma) & = & \colim \dom\,,
+    \end{eqnarray*}
+    since the functor $U : \Cat{C}_{T} \rTo \Cat{C}$ creates colimits.
+    Recall that an object of $\mathcal{A}_{T}/(c,\gamma)$ is a triple
+    $(a,\alpha,f)$ such that $(a,\alpha)$ is a coalgebra in
+    $\mathcal{A}_{T}$ and $f: (a,\alpha) \rTo (c,\gamma)$ is a
+    coalgebra morphism; an arrow $h:(a,\alpha,f) \rTo (b,\beta,g)$ of
+    $\mathcal{A}_{T}/(c,\gamma)$ is a coalgebra morphism $h:(a,\alpha)
+    \rTo (b,\beta)$ such that $h \comp g = f$.  The explicit
+    description of the functor $U_{c}$ is as follows: the triple
+    $(a,\alpha,f)$ is sent to the pair $(a,f)$ and the arrow
+    $h:(a,\alpha,f) \rTo (b,\beta,g)$ is sent to $h:(a,f) \rTo (b,g)$.
+    
+    We begin by showing that for a given object $(a,f)$ of
+    $\mathcal{A}/c$, we can find an object $(b,\beta,g)$ of
+    $\mathcal{A}_{T}/(c,\gamma)$ and an arrow $h: (a,f) \rTo (b,g)$ in
+    $\mathcal{A}/c$.
+    
+    Recall that $c = \colim b_{j}$ where $b : J \rTo \Cat{C}$ is a
+    $\lambda$-directed diagram taking image in $\mathcal{A}$.  Let
+    $(b_{0},g_{0}) = (a,f)$.  Suppose that we have constructed an
+    object $(b_{n},g_{n})$ of $\mathcal{A}/c$, then we can construct a
+    new object $(g_{n +1},b_{n+ 1})$ of $\mathcal{A}/c$ and an arrow
+    $\beta_{n} : b_{n} \rTo Tb_{n +1}$ such that the diagram
+    $$
+    \mydiagram[6em]{ [] ( !S {b_{n}}{c} {Tb_{n + 1}}{Tc} {1}{1}, !A
+      {g_{n}}{\beta_{n}} {\gamma}{Tg_{n + 1}} ) }
+    $$
+    is commutative. This is possible, since $b_{n}$ is
+    $\lambda$-presentable, $T$ is $\lambda$-accessible, so that
+    $(T\inj_{j}:Tb_{j} \rTo Tc)_{j \in J}$ is a colimiting cocone.
+  
+    Consider now the coalgebra
+    $$
+    \coprod_{n \geq 0} b_{n} \rTo[l>=4em]^{\coprod_{n \geq 0}
+      \beta_{n}} \coprod_{n \geq 0} Tb_{n + 1} \rTo[l>=4em]^{\lcotuple
+      T\inj_{b_{n + 1}}\rcotuple} T(\coprod_{n \geq 0} b_{n})\,.
+    $$
+    Its carrier $\coprod_{n \geq 0} b_{n}$ is a $\lambda$-small
+    colimit of $\lambda$-presentable objects, hence it is again
+    $\lambda$-presentable.  We are using here the fact that $\lambda >
+    \omega$, so that a countable colimit of $\lambda$-presentable
+    objects is again $\lambda$-presentable, cf. \cite[\S 1.16]{lpac}.
+    
+    Moreover $\lcotuple g_{n} \rcotuple$ is a morphism of coalgebras to
+    $(c,\gamma)$, by virtue of the following calculations:
+    \begin{eqnarray*}
+      \lefteqn[3cm]{\inj_{b_{n}} \comp 
+        (\coprod_{n \geq 0} \beta_{n}  
+        \comp \lcotuple T\inj_{b_{n+ 1}} \rcotuple)
+        \comp T\lcotuple g_{n} \rcotuple} \\[-0.8em]
+      & = & \beta_{n} \comp \inj_{Tb_{n + 1}} \comp \lcotuple T\inj_{b_{n
+          + 1}} \rcotuple \comp T\lcotuple g_{n} \rcotuple \\
+      & = & \beta_{n} \comp  T\inj_{b_{n
+          + 1}} \comp T\lcotuple g_{n} \rcotuple \\
+      & = & \beta_{n} \comp  Tg_{n + 1} \\ 
+      & = & g_{n} \comp \gamma \\
+      & = & \inj_{b_{n}} \comp \lcotuple g_{n} \rcotuple \comp \gamma\,.
+    \end{eqnarray*}
+    Summarizing, let $b = \coprod_{n \geq 0} b_{n}$, $\beta =
+    \coprod_{n \geq 0} \beta_{n} \comp \lcotuple T\inj_{b_{n+ 1}}
+    \rcotuple$, $g = \{g_{n} \}$, $h = \inj_{b_{0}}$, then
+    $(b,\beta,g)$ is the desired object of
+    $\mathcal{A}_{T}/(c,\gamma)$ and $h: (a,f) \rTo (b,g)$ is the
+    desired arrow of $\mathcal{A}/c$, since $\inj_{b_{0}} \comp
+    \lcotuple g_{n} \rcotuple = g_{0} = f$.
+  
+    We show now that given two arrows $h_{i} : (a,f) \rTo
+    U_{c}(b_{i},\beta_{i},g_{i})$, $i = 1,2$, we can find an object
+    $(d,\delta,k)$ and two arrows $l_{i}:(b_{i},\beta_{i},g_{i}) \rTo
+    (d,\delta,k)$ such that $h_{1} \comp l_{1} = h_{2} \comp l_{2}$.
+    We are given the diagram
+    $$
+    \mydiagram[6em]{ [] ( []*+{a}="1"
+      ([dl]*+{b_{1}}="2",[d]*+{c}="4",[dr]*+{b_{2}}="3") !a
+      {_{h_{1}}}{^{h_{2}}} {^{g_{1}}}{_{g_{2}}}, "2"="b1", "3"="b2" )
+      "b1" ( !S {b_{1}}{Tb_{1}} {c}{Tc} {1}{1}, !A {\beta_{1}}{}
+      {Tg_{1}}{\gamma} ) "b2" ( !S {b_{2}}{Tb_{2}} {c}{Tc} {1}{-1}, !a
+      {^{\beta_{2}}}{} {_{Tg_{2}}}{} ) }
+    $$
+    where $f = h_{1} \comp g_{1} = h_{2} \comp g_{2}$.
+    Form the pushouts from  $a$ 
+    to obtain the diagram:
+    $$
+    \mydiagrambot[5.5em]{ []( !S {b_{1}}{Tb_{1}} {b_{1} \push{a}
+        b_{2}} {Tb_{1} \push{a} Tb_{2}} {2}{1}, !a
+      {^{\beta_{1}}}{^/-2mm/{\inj_{b_{1}}}}
+      {^/-3mm/{\inj_{Tb_{1}}}}{^{\beta_{1} \push{a} \beta_{2}}}, !s
+      {b_{1}}{Tb_{1}} {c}{Tc} {2}{0}{2}{1}, !a {}{_/-5mm/{g_{1}}}
+      {}{^/-10mm/{\gamma}} "3"="c" "4"="Tc" ) [rrr] ( !S
+      {b_{2}}{Tb_{2}} {b_{1} \push{a} b_{2}} {Tb_{1} \push{a} Tb_{2}}
+      {2}{-2}, !a {^{\beta_{2}}}{_{\inj_{b_{2}}}}
+      {_/-5mm/{\inj_{Tb_{2}}}}{} "3"="b_{1} \push{a} b_{2}"
+      "4"="Tb_{1} \push{a} Tb_{2}" , !s {b_{2}}{Tb_{2}} {c} {Tc}
+      {2}{0}{-1}{1}, !A {}{g_{2}} {}{} ) "Tb_{1} \push{a} Tb_{2}" (
+      :[d]*+{T(b_{1}\push{a} b_{2})}_/3mm/{\lcotuple
+        T\inj_{b_{1}},T\inj_{b_{2}} \rcotuple} :"Tc"_/2mm/{T\lcotuple
+        g_{1},g_{2} \rcotuple}, :"Tc"|/-2.5mm/{\lcotuple Tg_{1},Tg_{2}
+        \rcotuple} ) "b_{1} \push{a} b_{2}":"c"|/-2.5mm/{\lcotuple
+        g_{1},g_{2} \rcotuple} }\,.
+    $$
+    We let $d = b_{1}\push{a} b_{2}$, $\delta = \beta_{1} \push{a}
+    \beta_{2} \comp \lcotuple T\inj_{b_{1}},T\inj_{b_{2}} \rcotuple$,
+    $k =\lcotuple g_{1},g_{2} \rcotuple$, then $(d,\delta,k)$ is an
+    object of $\mathcal{A}_{T}/(c,\gamma)$:
+    \begin{eqnarray*}
+      \delta \comp Tk & = & 
+      \beta_{1} \push{a} \beta_{2} \comp 
+      \lcotuple T\inj_{b_{1}},T\inj_{b_{2}} \rcotuple \comp
+      T \lcotuple g_{1},g_{2} \rcotuple \\ 
+      & = & 
+      \beta_{1} \push{a} \beta_{2} \comp 
+      \lcotuple Tg_{1},Tg_{2} \rcotuple \\
+      & = & \lcotuple g_{1},g_{2} \rcotuple \comp \gamma \\
+      & = & k \comp \gamma \,.
+    \end{eqnarray*}
+    On the other hand, for $i = 1,2$, we let $l_{i} = \inj_{b_{i}}$.
+    Then $l_{i}:(b_{i},\beta_{i},g_{i}) \rTo (d,\delta,k)$ is a
+    morphism in $\mathcal{A}_{T}/(c,\gamma)$:
+    \begin{eqnarray*}
+      \inj_{b_{i}} \comp \delta & = & 
+      \inj_{b_{i}} \comp (\beta_{1} \push{a} \beta_{2} \comp 
+      \lcotuple T\inj_{b_{1}},T\inj_{b_{2}} \rcotuple) \\
+      & = & \beta_{i} \comp \inj_{Tb_{i}}\comp 
+      \lcotuple T\inj_{b_{1}},T\inj_{b_{2}} \rcotuple \\
+      & = & \beta_{i} \comp T\inj_{b_{i}}\,, \\
+      \inj_{i} \comp k & = & \inj_{i} \comp \lcotuple g_{1},g_{2} \rcotuple \\
+      & = & g_{i}\,.
+    \end{eqnarray*}
+    Finally $h_{1} \comp l_{1} = h_{2} \comp l_{2}: (a,f) \rTo (d,k)$ is
+    a commutative diagram in $\mathcal{A}/c$.
+  \end{proof}
+  
+  
+  \begin{prpstn}
+    Let $\Cat{C},\Cat{W}$ be locally $\lambda$-presentable categories
+    and $T: \Cat{C} \times \Cat{W} \rTo \Cat{C}$ be a
+    $\lambda$-accessible functor, $\lambda$ being a regular cardinal
+    strictly greater than $\omega$.  Then for each object $w$ of
+    $\Cat{W}$ a final $T(-,w)$-coalgebra $(\bd{x}_{w},\struct{x}_{w})$
+    exists and the induced functor $\bd{x}:\Cat{W} \rTo \Cat{C}$ is
+    again $\lambda$-accessible.
+  \end{prpstn}
+  \begin{proof}
+    The existence of the final coalgebras
+    $(\bd{x}_{w},\struct{x}_{w})$ has been proved for example in
+    \cite{barr}.  Let $J$ be a $\lambda$-directed poset and $w : J
+    \rTo \Cat{W}$ be functor with limiting cocone
+    $$
+    (\inj_{w_{j}}:w_{j}\rTo w)_{j \in J}\,.
+    $$
+    The arrows $\struct{x}_{w_{j}}:\bd{x}_{w_{j}} \rTo^{}
+    T(\bd{x}_{w_{j}},w_{j})$ are natural in $j$, so that we can take
+    their colimit to construct the $T(-, w)$-coalgebra
+    $$
+    \colim \bd{x}_{w_{j}} \rTo[l>=4em]^{\colim\struct{x}_{w_{j}}}
+    \colim T(\bd{x}_{w_{j}} , w_{j}) \rTo[l>=4em]^{\lcotuple
+      T(\inj_{\bd{x}_{w_{j}}},\inj_{w_{j}}) \rcotuple} T(\colim
+    \bd{x}_{w_{j}} ,w)\,.
+    $$
+    We claim that this is a final $T(-, w)$-coalgebra. To prove the
+    claim it is enough to show that if a the carrier of a $T(-,
+    w)$-coalgebra $(a,\alpha)$ is $\lambda$-presentable in $\Cat{C}$,
+    then there exists a unique coalgebra morphism into the coalgebra
+    defined above.  Indeed, we have shown that $\mathcal{A}_{T(-,w)}$
+    is a strong generator for the category of $T(-,w)$-coalgebras, so
+    that the claim follows by considering that every object of
+    $\Cat{C}_{T(-,w)}$ is a colimit of objects from
+    $\mathcal{A}_{T(-,w)}$.
+  
+    Consider therefore a coalgebra $(a,\alpha)$ in
+    $\mathcal{A}_{T(-,w)}$. Then we can factor $\alpha$ as $\alpha_{j}
+    \comp T(a,\inj_{w_{j}})$ for some $j \in J$, since
+    $(T(a,\inj_{w_{j}}):T(a,w_{j})\rTo T(a,w))_{j \in J}$ is a
+    colimiting cone, the functor $T(a, -)$ being $\lambda$-accessible.
+    Let $f_{j}$ be such that $f_{j} \comp \struct{x}_{w_{j}} =
+    \alpha_{j} \comp T(f_{j},w_{j})$, then $f_{j} \comp
+    \inj_{\bd{x}_{w_{j}}}$ is a morphism of coalgebras, as shown in
+    the next diagram:
+    $$
+    \mydiagrambot[7em]{ [] ( !S {a}{T(a,w_{j})}
+      {\bd{x}_{w_{j}}}{T(\bd{x}_{w_{j}},w_{j})} {1}{1.4}, !a
+      {^{\alpha_{j}}}{^{f_{j}}}
+      {^/-1.5mm/{T(f_{j},w_{j})}}{^{\struct{x}_{w_{j}}}} "1"="a"
+      "2"="T(a,w_{j})" "3"="\bd{x}_{w_{j}}" ) "T(a,w_{j})" ( !S
+      {T(a,w_{j})}{T(a,w)}
+      {T(\bd{x}_{w_{j}},w_{j})}{T(\bd{x}_{w_{j}},w)} {1}{1.4}, !A
+      {T(a,\inj_{w_{j}})}{}
+      {T(f_{j},w)}{T(\bd{x}_{w_{j}},\inj_{w_{j}})} "2"="T(a,w)"
+      "4"="T(\bd{x}_{w_{j}},w)" ) "\bd{x}_{w_{j}}"="1" (
+      !S{\bd{x}_{w_{j}}}{T(\bd{x}_{w_{j}},w_{j})} {\colim
+        \bd{x}_{w_{j}}}{\colim T(\bd{x}_{w_{j}},w_{j})} {1}{1.4} !a
+      {}{^{\inj_{\bd{x}_{w_{j}}}}}
+      {^/-2mm/{\inj_{T(\bd{x}_{w_{j}},w_{j})}}}{|{\colim
+          \struct{x}_{w_{j}}}} ) "2" (
+      !S{T(\bd{x}_{w_{j}},w_{j})}{T(\bd{x}_{w_{j}},w)} {\colim
+        T(\bd{x}_{w_{j}},w_{j})} {T(\colim \bd{x}_{w_{j}},w)} {1}{1.4}
+      !a{}{} {^/-0.9em/{T(\inj_{\bd{x}_{w_{j}}},w)}} {|{\lcotuple
+          T(\inj_{\bd{x}_{w_{j}}},\inj_{w_{j}}) \rcotuple}} )
+      "a":@/_3em/"T(a,w)"_{\alpha} }
+    $$
+    
+    On the other hand, suppose that $\alpha \comp T(f,w) = f \comp
+    \colim \struct{x}_{w_{j}} \comp \lcotuple
+    T(\inj_{\bd{x}_{w_{j}}},\inj_{w_{j}}) \rcotuple$ and choose
+    liftings $\alpha_{i}$ and $f_{j}$ of $\alpha$ and $f$
+    respectively, as usual, since $a$ is $\lambda$-presentable.
+    Moreover, since $J$ is directed, we can assume that $i = j$.
+  
+    Recall that
+    $$
+    (T(\inj_{\bd{x}_{w_{j}}},\inj_{w_{j}}): T(\bd{x}_{w_{j}},w_{j})
+    \rTo[l>=4em]^{} T(\colim \bd{x}_{w_{j}}, w))_{j \in J}
+    $$
+    is a colimiting cocone, hence $f_{j} \comp \struct{x}_{w_{j}}$
+    and $\alpha_{j} \comp T(f_{j},w_{j})$ are two different liftings of
+    the same arrow to this colimit:
+    \begin{eqnarray*}
+      \alpha \comp T(f,w) 
+      & = & \alpha_{j} \comp T(a, \inj_{w_{j}}) \comp
+      T(f_{j},w) \comp T(\inj_{\bd{x}_{w_{j}}},w)  \\
+      & = &
+      \alpha_{j} \comp T(f_{j},w_{j}) \comp
+      T(\inj_{\bd{x}_{w_{j}}},\inj_{w_{j}}) \\[2mm]
+      \alpha \comp T(f,w) & = & f \comp \colim
+      \struct{x}_{w_{j}} \comp \lcotuple T(\inj_{\bd{x}_{w_{j}}},\inj_{w_{j}})\rcotuple
+      \\
+      & = & f_{j}\comp \inj_{\bd{x}_{w_{j}}}\comp \colim
+      \struct{x}_{w_{j}} \comp \lcotuple T(\inj_{\bd{x}_{w_{j}}},\inj_{w_{j}}) \rcotuple
+      \\
+      & = & f_{j}\comp
+      \struct{x}_{w_{j}} \comp  T(\inj_{\bd{x}_{w_{j}}},\inj_{w_{j}})\,.
+    \end{eqnarray*}
+  
+    Therefore there exists a $k \in J$ such that $j \leq k$ and
+    moreover such that
+    \begin{eqnarray*}
+      f_{j} \comp \struct{x}_{w_{j}} \comp T(\bd{x}_{w_{jk}},w_{jk})
+      & = & \alpha_{j} \comp T(f_{j},w_{j})\comp T(\bd{x}_{w_{jk}},w_{jk})\,.
+    \end{eqnarray*}
+    By naturality of $\struct{x}$, we have
+    \begin{eqnarray*}
+      \struct{x}_{w_{j}} \comp T(\bd{x}_{w_{jk}},w_{jk})
+      & = & \bd{x}_{w_{jk}} \comp \struct{x}_{w_{k}}\,,
+    \end{eqnarray*}
+    and therefore we obtain the relation
+    \begin{eqnarray*}
+      f_{j} \comp \bd{x}_{w_{jk}} \comp \struct{x}_{w_{k}}
+      & = & \alpha_{j} \comp T(a,w_{jk}) \comp T(f_{j}\comp \bd{x}_{w_{jk}},w_{k})\,.
+    \end{eqnarray*}
+    We conclude that $f_{j} \comp \bd{x}_{w_{jk}}$ is uniquely
+    determined as the unique $T(-,w_{k})$-coalgebra morphism from
+    $\alpha_{j} \comp T(a,w_{jk})$ to the final one, and consequently
+    also $f$ is uniquely determined, because of
+    \begin{eqnarray*}
+      f & = & f_{j} \comp \inj_{\bd{x}_{w_{j}}} \\
+      & = & f_{j} \comp \bd{x}_{w_{jk}}\comp \inj_{\bd{x}_{w_{k}}}\,.
+    \end{eqnarray*}
+    In order to conclude the argument it is enough to show $\lcotuple
+    \bd{x}_{\inj_{w_{j}}} \rcotuple$ is a morphism of $T(-,w)$-algebras
+    between two initial ones:
+    \begin{eqnarray*}
+      \lefteqn[2cm]{\inj_{\bd{x}_{w_{i}}} \comp\lcotuple
+        \bd{x}_{\inj_{w_{j}}} \rcotuple \comp \struct{x}_{w}} \\
+      & = & \bd{x}_{\inj_{w_{j}}} \comp \struct{x}_{w} \\
+      & = & \struct{x}_{w_{j}} \comp  
+      T(\bd{x}_{\inj_{w_{j}}},\inj_{w_{j}})  \\
+      & = & \struct{x}_{w_{j}} \comp  
+      T(\inj_{\bd{x}_{w_{i}}} \comp \lcotuple
+      \bd{x}_{\inj_{w_{j}}} \rcotuple,\inj_{w_{j}})  \\
+      & = &  \struct{x}_{w_{j}} \comp T(\inj_{\bd{x}_{w_{i}}},\inj_{w_{i}}) 
+      \comp T(\lcotuple
+      \bd{x}_{\inj_{w_{j}}} \rcotuple,w) \\
+      & = &  \struct{x}_{w_{j}} \comp \inj_{T(\bd{x}_{w_{i}},w_{i})} 
+      \comp \lcotuple T(\inj_{\bd{x}_{w_{j}}},\inj_{w_{j}}) \rcotuple 
+      \comp T(\lcotuple
+      \bd{x}_{\inj_{w_{j}}} \rcotuple,w) \\
+      & = &  \inj_{\bd{x}_{w_{i}}} \comp
+      \colim \struct{x}_{w_{j}}  
+      \comp  \lcotuple T(\inj_{\bd{x}_{w_{j}}},\inj_{w_{j}}) \rcotuple \comp T(\lcotuple
+      \bd{x}_{\inj_{w_{j}}} \rcotuple,w) \,,
+    \end{eqnarray*}
+    so that $\lcotuple \bd{x}_{\inj_{w_{j}}} \rcotuple$ is invertible.
+  \end{proof}
+\end{labripreprint}
+

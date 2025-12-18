@@ -1,0 +1,46 @@
+\newtheorem{thrm}{Theorem}[section]
+\newtheorem{lmm}[thrm]{Lemma}
+\newtheorem{crllr}[thrm]{Corollary}
+\newtheorem{prpstn}[thrm]{Proposition}
+\newtheorem{crtrn}[thrm]{Criterion}
+\newtheorem{lgrthm}[thrm]{Algorithm}
+
+\theoremstyle{definition}
+
+\newtheorem{dfntn}[thrm]{Definition}
+\newtheorem{cnjctr}[thrm]{Conjecture}
+\newtheorem{xmpl}[thrm]{Example}
+\newtheorem{prblm}[thrm]{Problem}
+\newtheorem{rmrk}[thrm]{Remark}
+\newtheorem{nt}[thrm]{Note}
+\newtheorem{clm}[thrm]{Claim}
+\newtheorem{smmr}[thrm]{Summary}
+\newtheorem{cs}[thrm]{Case}
+\newtheorem{bsrvtn}[thrm]{Observation}
+%
+
+%\newenvironment{proof}[1][Proof]{{\it #1.}~}{\qed}
+% \newcommand{\qed}{\parag@pushright{$\Box$}\vspace{2mm}}
+% \def\parag@pushright#1{{% set up
+%     \parfillskip=0pt            % so \par doesnt push \square to left
+%     \widowpenalty=10000         % so we dont break the page before \square
+%     \displaywidowpenalty=10000  % ditto
+%     \finalhyphendemerits=0      % TeXbook exercise 14.32
+%     %
+%     %                   horizontal
+%     %\leavevmode                % not needed since we now only use it in hmode
+%     \hboxpushright             % this used to be incorporated
+%     #1%                         % the end-of-proof mark (or whatever)
+%     %
+%     %                     vertical
+%     \par}}%                     % build paragraph with the above parameters
+
+% \def\hboxpushright{% horizontal
+%     \unskip                     % remove previous space or glue
+%     \nobreak                    % don't break lines
+%     \hfil                       % ragged right if we spill over
+%     \penalty50                  % discouragement to do so
+%     \hskip.2em                  % ensure some space
+%     \null                       % anchor the following \hfill
+%     \hfill                      % push \square to right
+% }%

@@ -1,0 +1,966 @@
+We recall the game-theoretic interpretation of a parity game $G =
+\langle S,\hg,\kappa, \epsilon \rangle$, as a two person game $G(E)$,
+parameterized in a choice of sets $E = \{ E_{x} \}_{x \in
+  P_{\omega}}$.  The graph $S = \langle P,M,\dom,\cod \rangle$ is a
+board with a set of positions $P$ and a set of allowed moves $M$. A
+move $m \in M$ is from position $\dom(m)$ to position $\cod(m)$; the
+graph $S$ has multiple edges, hence distinct moves relating the same
+pair of positions are allowed.  From a position $p$, the set of moves
+$M_{p} = \dom^{-1}(p)$ is available, and player $\epsilon(p)$ among
+players $\sigma$ and $\pi$ must choose how to move.  If he cannot
+move, then he loses.  An infinite play $\gamma_{0} \rightarrow
+\gamma_{1}\rightarrow \ldots \gamma_{n} \rightarrow \ldots $ is a win
+for player $\sigma$ if and only if $\kappa(\, \max \In \gamma\,) =
+\nu$, the set $\In \gamma$ being defined by equation (\ref{eq:in}).
+If a play ends in a position $x \in P_{\omega}$, then player $\sigma$
+must choose an element $e \in E_{x}$ and then he wins; if $E_{x} =
+\emptyset$, then he loses.
+
+A typical element of an inductively defined set is a kind of finite
+tree; on the other hand, a typical element of a coinductively defined
+set is a kind of infinite tree. We shall see that a similar tree-like
+representation is available for parity functors on the category of
+sets.
+
+\begin{dfntn}
+  Let $\langle S,s_{0} \rangle$ be a pointed graph, a \emph{tree} $T$
+  over $\langle S,s_{0} \rangle$ is a non-empty collection of finite
+  paths $\gamma$ in $S$ such that $\dom \gamma = s_{0}$, which is
+  moreover closed under prefixes: if $\gamma_{1}
+  \compp \gamma_{2} \in T$, then $\gamma_{1} \in T$.
+\end{dfntn}
+
+Observe that a tree $T$ over $\langle S, s_{0} \rangle$ is itself a
+graph if we set $\gamma \rightarrow \gamma'$ if and only if $\gamma' =
+\gamma \compp m$ for some $m \in M_{\cod \gamma}$; moreover $\cod: T
+\rTo S$ is a morphism of graphs. In particular it makes sense to talk
+about an infinite path in $T$.
+\begin{dfntn}
+  Let $G$ be a parity game and let $E = \{ E_{x} \}_{x \in
+    P_{\omega}}$ be a collection of sets. A \emph{deterministic winning
+  strategy} for player $\sigma$ from position $p \in P$ in the
+  game $G(E)$ is a pair $\langle T, \lambda \rangle$ where $T$ is a
+  tree over $\langle S,p \rangle$ with the following properties:
+  \begin{itemize}
+  \item If $\gamma \in T$, $\epsilon( \cod\gamma ) = \pi$ and $m \in
+    M_{\cod \gamma}$, then $\gamma \compp m \in T$.
+  \item If $\gamma \in T$ and $\epsilon( \cod\gamma )= \sigma$, then
+    there exists a unique $m \in M_{\cod \gamma}$ such that $\gamma
+    \compp m \in T$.
+  \item Every infinite path in the tree $T$ is a win for player
+    $\sigma$, that is, if $\gamma: \hat{\omega} \rTo T$, then
+    $\kappa(\, \max \In (\gamma \comp \cod)\,) = \nu$.
+  \end{itemize}
+  On the other hand, $\lambda$ is a labeling of paths $\gamma \in T$
+  such that $\cod \gamma \in P_{\omega}$ by an element $e =
+  \lambda(\gamma) \in E_{\cod \gamma}$.  We let $\mathcal{S}_{G,p}(E)$
+  be the set of deterministic winning strategies for player $\sigma$
+  in the game $G(E)$ from position $p$.
+\end{dfntn}
+
+We shall often use $\tree{S},\lab{S}$ for the tree and the label of a
+strategy $S$, so that $S = \langle\tree{S},\lab{S} \rangle$.  If
+$\langle T,\lambda\rangle, \langle R,\rho\rangle \in
+\mathcal{S}_{G,p}(E)$, then we shall write $\langle T,\lambda\rangle
+\subseteq \langle R,\rho\rangle$ to mean that $T \subseteq R$ and
+$\lambda(\gamma) = \rho(\gamma)$ for all $\gamma \in T$ such that
+$\cod \gamma \in P_{ \omega}$.
+\begin{lmm}
+  \label{lem:subset}
+  If $\langle T,\lambda\rangle \subseteq \langle
+  R,\rho\rangle$, then $T = R$ and $\lambda =
+  \rho$.
+\end{lmm}
+\begin{proof}
+  By induction on the length of $\gamma \in R$. If $\length{\gamma} =
+  0$, then $\gamma = 1_{p}$. Since $T$ is non empty, $1_{p} \compp
+  \gamma' \in T$, hence $1_{p} \in T$ ($1_{p}$ belongs always to a
+  winning strategy from position $p$).  If $\length{\gamma} = n + 1$,
+  then we can write $\gamma = \gamma' \compp m$ where
+  $\length{\gamma'} = n$.  Since $\gamma' \in R$, by the induction
+  hypothesis $\gamma' \in T$ as well. If $\epsilon(\cod \gamma' ) =
+  \pi$, then $\gamma' \compp m' \in T$ for each $m' \in M_{\cod
+    \gamma'}$, in particular $\gamma = \gamma' \compp m \in T$.  If
+  $\epsilon(\cod \gamma') = \sigma$, then there exists $m' \in M_{\cod
+    \gamma'}$ such that $\gamma' \compp m' \in T$.  This implies that
+  $\gamma' \compp m',\gamma' \compp m \in R$ and $m = m'$, since $R$
+  is deterministic. Therefore $\gamma' \compp m \in T$.  Finally, let
+  $\gamma \in R$ be such that $\cod \gamma \in P_{\omega}$.  Since we
+  have seen that $\gamma \in T$, it follows that $\rho(\gamma) =
+  \lambda(\gamma)$.
+\end{proof}
+
+Observe that $\mathcal{S}_{G,p}$ is a functor from the category
+$\Sets^{P_{\omega}}$ to $\Sets$, the category of sets and functions.
+Given a collection of functions $\{ f_{x} : E_{x} \rTo F_{x} \}_{x \in
+  P_{\omega}}$, we can transform a strategy $\langle T, \lambda
+\rangle \in \mathcal{S}_{G,p}(E)$ into the strategy $\langle T,
+f_{\cod}\circ \lambda\rangle \in \mathcal{S}_{G,p}(F)$, where
+\begin{eqnarray*}
+  (\,f_{\cod}\circ \lambda\,)(\,\gamma\,) & = & f_{\cod \gamma}(\,\lambda(\gamma)\,)\,.
+\end{eqnarray*}
+Thus, we denote by $\mathcal{S}_{G} : \Sets^{P_{\omega}} \rTo
+\Sets^{P_{\leq n}}$ the functor whose $p$-projection is
+$\mathcal{S}_{G,p}$, i.e. $\mathcal{S}_{G}(E) = \ltuple
+\mathcal{S}_{G,p}(E) \rtuple_{p \in P_{\leq n}}$.  The following
+theorem is the main result of this section.
+\begin{thrm}
+  \label{theo:mainresult}\label{prop:strategies}
+  The equality
+  \begin{eqnarray*}
+    \val{G}(E) & := & 
+    \mathcal{S}_{G}(E)
+  \end{eqnarray*}
+  holds.
+\end{thrm}
+The equality above means that the collection of sets of deterministic
+winning strategies satisfies the universal property involved in the
+definition of the parity functor, so that it can be taken to be a
+concrete representation of the functor. This equality is reminiscent
+of the formula of the Propositional Modal $\mu$-Calculus which
+describes the set of winning position for player $\sigma$ in a parity
+game, cf. \cite{emersonjutla,BRICS-RS-96-54}.
+
+In the rest of this section we prove theorem \ref{theo:mainresult}.
+This is done by induction on the height, observing that it holds in an
+obvious way if the height of $G$ is $0$.  Thus we shall suppose in the
+following that $\height{G} = n > 0$ and that the statement holds for
+the predecessor game $P(G)$. To develop the proof, we shall need a
+modified version of the predecessor game that does not completely
+forget about the structure in the region of maximal finite height. The
+delooping game, displayed on the left in figure \ref{fig:D(L)}, is
+devised to detect first passages through the region of maximal finite
+height in a parity game.
+\begin{figure}[h]
+  \centering
+  \vspace{-3mm}
+  $$    
+  \mygame[3em]{
+    []
+    ([d]!O{30}([r]!P{40})
+    [d]!P{50}([r]!P{60})
+    [d]!P{70}([r]!O{80})
+    )
+    [r(3)]!E{11}([r]!E{21}="A")
+    [d]!E{31}([r]!E{41})
+    [d]!E{51}([r]!E{61})
+    [d]!E{71}([r]!E{81})
+    "30"(:@/^0.5em/"11",:@/_0.5em/"51")
+    "40"(:@/_0.0em/"31",:@/_0.1em/"61")
+    "60"(:"80",:@/_0.4em/"41")
+    "80"(:"70",:@`{"61"+(1,-1),"41"+(0.5,-0.5)}"21"))
+    "50"(:"70",:"60")
+    "70"(:"60")
+    "11"("81"!L{}{\omega})
+    "30"("40"!L{\mu}{3})
+    "50"("60"!L{\nu}{2})
+    "70"("80"!L{\mu}{1})
+  }
+  \hspace{-5mm}\rTo[l>=4em]^{\Phi}\hspace{-5mm}
+  \mygame[3em]{ 
+    []!E{1}([r]!E{2}="A") [d]!O{3}([r]!P{4})
+    [d]!P{5}([r]!P{6}) [d]!P{7}([r]!O{8}) "3"(:"1",:"5")
+    "5"(:"7",:"6") "7"(:"6") "4"(:"3",:@/^0.2em/"6")
+    "6"(:"8",:@/^0.7em/"4") "8"(:"7",:@/_2em/"2") "1"("2"!L{}{\omega})
+    "3"("4"!L{\mu}{3}) "5"("6"!L{\nu}{2}) "7"("8"!L{\mu}{1}) 
+  }
+  $$
+  \vspace{-12mm}
+  \caption{The delooping game of a parity game.}
+  \label{fig:D(L)}
+\end{figure}
+
+\begin{dfntn}
+  The \emph{delooping game} $D(G) = \langle S',\hg',\kappa',\epsilon'
+  \rangle$ of a parity game $G$ is defined as follows:
+  \begin{itemize}
+  \item $S'$ is the graph whose set of positions is $P_{\leq
+      n}\times\{0\} + P\times\{1\}$. For each move $m: p \rightarrow
+    p'$ there is a move $(m,0): (p ,0) \rightarrow (p' ,i)$, where $i
+    = 1$ if and only if $p' = \cod m \in P_{n} \cup P_{\omega}$ or $p
+    = \dom m \in P_{n}$.
+  \item $\hg'(p,0) = \hg(p)$ and $\hg(p,1) = \omega$.
+  \item $\kappa'(i) = \kappa(i)$ for $i = 1,\ldots ,n = \height{D(G)}=
+    \height{G}$.
+  \item $\epsilon'(p,0) = \epsilon(p)$.
+  \end{itemize}
+  The delooping game $D(G)$ comes with a morphism of graphs $\Phi : S'
+  \rTo S$, defined by $\Phi(p,i)= p$ and $\Phi(m,0) = m$.
+\end{dfntn}
+
+
+The domain of the functor $\mathcal{S}_{D(G)}$ is the category
+$\Sets^{P_{\leq n}\times \{1 \}} \times \Sets^{P_{\omega}\times
+  \{1\}}$ and its codomain is the category $\Sets^{P_{\leq n}\times \{
+  0 \}}$. Under the obvious isomorphisms $P \iso P \times \{1 \}$ and
+$ P_{\leq n} \iso P_{\leq n} \times \{ 0 \}$ we shall look at this
+functor as having the shape
+$$
+\mathcal{S}_{D(G)} : \Sets^{P_{\leq n}} \times \Sets^{P_{\omega}}
+\rTo \Sets^{P_{\leq n}}\,.
+$$
+\begin{lmm}
+  There is a natural isomorphism
+  \begin{eqnarray*}
+    \mathcal{S}_{D(G)}
+    &\iso & \langle 
+    \mathcal{S}_{P(G)} \circ \prj_{P_{n} \cup P_{\omega}},
+    \EQ_{G} \rangle\,.
+  \end{eqnarray*}
+\end{lmm}
+\begin{proof}
+  Let $\{ E_{x} \}_{x \in P}$ be a collection of sets.  Observe that
+  from a position $(p,0)$ with $p \in P_{< n}$ the game $D(G)(E)$ is
+  exactly as the game $P(G)(E')$, $E'$ being the collection $\{ E_{x}
+  \}_{x \in P_{n} \cup P_{\omega}}$.  On the other hand, if $p \in
+  P_{n}$ then a strategy from position $(p,0)$ in $D(G)(E)$ is given by
+  the choice of a tuple $\{ e_{m} \in E_{\cod m}\}_{m \in M_{p}}$
+  if $\epsilon(p) = \pi$, or by the choice of a pair $(e,m)$ with $m
+  \in M_{p}$ and $e \in E_{\cod m}$ if $\epsilon(p ) = \sigma$.  
+\end{proof}
+
+Therefore, by the previous lemma and by the induction hypothesis
+$\val{P(G)}
+\linebreak
+\iso \mathcal{S}_{P(G)}$, in order to prove theorem
+\ref{theo:mainresult} it is enough to show that the collection of sets
+$\mathcal{S}_{G}(E)$ carries an invertible algebra structure for the
+functor $\mathcal{S}_{D(G)}(-,E)$, and that this structure leads to an
+initial algebra if $\kappa(n) = \mu$ and to a final coalgebra if
+$\kappa(m) = \nu$.
+
+Observe that an infinite play $\delta$ is a win for player $\sigma$
+in $D(G)$ if and only if $\Phi \delta$ is an infinite winning play for
+player $\sigma$ in $G$. Then, it is informally seen that a winning
+strategy $\langle R,\rho \rangle$ for player $\sigma$ from a position
+$(p,0)$ in $D(G)(\mathcal{S}_{G}(E),E)$ gives rise to a strategy from
+position $p$ in $G(E)$ as follows: player $\sigma$ uses $\langle R,
+\rho \rangle$ as far as he can, by identifying a position $p$ to the
+position $(p,0)$; if this is not anymore possible, since a position of
+the form $(p',1)$ with $p' \in P_{\leq n}$ has been reached by means of
+a play $\delta \in R$, then player $\sigma$ continues according to the
+strategy $\rho(\delta) \in \mathcal{S}_{G,p'}(E)$. Moreover, every
+winning strategy from $p$ in $G(E)$ arises in this way. We formalize
+these ideas next.
+
+
+\begin{dfntn} \hspace{2mm}
+  \begin{itemize}
+  \item A path $\delta$ of $D(G)$ is called an \emph{atom} if
+    $\length{\delta} > 0$, $\cod \delta \in P'_{\omega}$ and $\cod
+    \Phi\delta \in P_{\leq n}$. If $R$ is a set of paths in $D(G)$,
+    then we shall write $A(R)$ for the set of atoms of $R$.
+  \item Let $\delta$ be a path of $G$ and let $T$ be a collection of
+    paths of $G$ with domain $\cod \delta$. By $\delta \compp T$ we
+    mean the set $\{ \,\delta \compp \gamma \, |\, \gamma \in T \,\}$.
+  \item Let $\langle T ,\lambda \rangle \in \mathcal{S}_{G,p}(E) $ and
+    $\delta \in T$.  By $\delta \res \langle T ,\lambda \rangle$ we
+    denote the winning strategy $\langle T', \lambda' \rangle \in
+    \mathcal{S}_{G, \cod \delta}(E)$ where $T'$ is the set $\{
+    \,\gamma\,| \,\delta \compp \gamma \in T \,\}$ and
+    $\lambda'(\gamma) = \lambda( \delta \compp \gamma )$ if $\gamma
+    \in T'$ and $\cod \gamma \in P_{\omega}$. We call this strategy
+    \emph{the residual strategy} of $\langle T,\lambda\rangle$ after
+    the path $\delta$.
+\end{itemize}
+\end{dfntn}
+
+\begin{lmm}
+  The pair $\langle T' ,\lambda' \rangle = \delta \res \langle
+  T,\lambda\rangle$ is a winning strategy for player $\sigma$ in
+  the game $G(E)$ from position $\cod \delta$.
+\end{lmm}
+\begin{proof}
+  Let $\gamma \in T'$. If $\cod \gamma \in P_{\leq n}$, then
+  $\cod(\delta \compp \gamma) = \cod \gamma \in P_{\leq n}$ as
+  well.  If $\epsilon(\cod \gamma) = \pi$, then $\delta \compp
+  \gamma \compp m \in T$ and $\gamma \compp m \in T'$ for all $m
+  \in M_{\cod \gamma}$. If $\epsilon(\cod \gamma) = \sigma$, then
+  there exists an $m \in M_{\cod \gamma}$ such that $\delta \compp
+  \gamma \compp m \in T$, and henceforth $\gamma \compp m \in T'$.
+  If $\gamma \compp m' \in T'$, then $\delta \compp \gamma \compp
+  m' \in T$ and therefore $m = m'$.  Let $\gamma$ be an infinite
+  path in $T'$, then $\delta \compp \gamma$ is an infinite path in
+  $T$ and since $ \In( \gamma ) = \In( \delta \compp\gamma )$ we
+  see that
+  \begin{eqnarray*}
+    \kappa(\max \In( \gamma )) 
+    & = & \kappa(\max\In( \delta \compp\gamma )) \\
+    & = & \nu\,.
+  \end{eqnarray*}
+\end{proof}
+
+\begin{dfntn}
+  We define an algebra
+  $$
+  \struct{x} : 
+  \mathcal{S}_{D(G)}(\mathcal{S}_{G}(E),E)
+  \rTo 
+  \mathcal{S}_{G}(E)
+  $$
+  in the following way. If $\langle R, \rho \rangle \in
+  \mathcal{S}_{D(G)}(\mathcal{S}_{G}(E),E)$, then we let
+  $\struct{x}_{p}(R,\rho) = \langle \low{R},\low{\rho} \rangle$ where
+  \begin{eqnarray*}
+    \low{R} & = & 
+    \Phi R \cup 
+    \bigcup_{\delta \in A(R)} 
+    \Phi\delta \compp \tree{\rho(\delta)}\,, \\
+    \low{\rho}(\gamma)
+    & = & \left \{ 
+      \begin{array}{ll}
+        \rho(\delta), & \gamma = \Phi\delta,\, \delta\in R, \\
+        \lab{\rho(\delta)}(\gamma'), 
+        & \gamma = (\Phi\delta) 
+        \compp \gamma', \,\delta \in A(R),
+      \end{array}
+    \right .
+  \end{eqnarray*}
+  if $\gamma \in \low{R}$ and $\cod \gamma \in P_{\omega}$.
+\end{dfntn}
+\begin{lmm}
+  $\chi_{p}( R, \rho )$ is a winning strategy for player $\sigma$
+  in the game $G(E)$ from position $p$.
+\end{lmm}
+\begin{proof}
+  Let $\gamma \in \low{R}$ be such that $\cod \gamma \in P_{\leq
+    n}$. Either $\gamma =\Phi\delta$ where $\delta \in R$ is not
+  an atom, or $\gamma = \Phi\delta \compp \gamma'$ where $\delta
+  \in A(R)$ and $\gamma' \in \tree{\rho(\delta)}$.  Similarly, an
+  infinite path $\gamma$ in $\low{R}$ is either the image of
+  infinite path in $R$ or it is of the form $\gamma = \Phi\delta
+  \compp \gamma'$ where $\delta \in A(R)$ and $\gamma'$ is an
+  infinite path in $\tree{\rho(\delta)}$. The desired properties of
+  $\low{R}$ follow then from the properties of $R$ and from the
+  properties of $\rho(\delta)$, respectively. For example, let
+  $\gamma =\Phi\delta$ where $\delta \in R$ is not an atom.
+  Suppose that $\epsilon(\cod \Phi\delta) = \sigma$ and observe
+  that $\epsilon(\cod \delta) = \sigma$ as well, since $\delta$ is
+  not an atom. Hence we can find $m \in M_{\cod \delta}$ such that
+  $\delta \compp m \in R$ and therefore $\Phi\delta \compp \Phi m
+  \in \low{R}$. If $\Phi\delta \compp m' \in \low{R}$, then we can
+  find $\delta'$ such that $\Phi \delta' = \Phi\delta \compp m'$.
+  It follows that $\delta' = \delta \compp m''$, where $\Phi m'' =
+  m'$. Since $R$ is deterministic, $m'' = m$ and hence $m' = \Phi m$.
+\end{proof}   
+ 
+\newpage
+\begin{dfntn}
+  We define a coalgebra
+  $$
+  \struct{y} : 
+  \mathcal{S}_{G}(E)\rTo
+  \mathcal{S}_{D(G)}(\mathcal{S}_{G}(E),E)
+  $$
+  in the following way. If $\langle T, \lambda \rangle
+  \in\mathcal{S}_{G}(E)$, then we let $\struct{y}_{p}(T,\lambda)
+  = \langle \rise{T},\rise{\lambda} \rangle$ where
+  \begin{eqnarray*}
+    \rise{T} & = & \{ \, \delta \,|\, \Phi\delta \in T\, \} \\
+    \rise{\lambda}(\delta) & = & 
+    \left \{
+      \begin{array}{ll}
+        \lambda(\Phi\delta),& \cod \Phi\delta \in P_{\omega}, \\
+        \Phi\delta \res \langle T,\lambda\rangle, 
+        & \cod \Phi\delta \in P_{\leq n},
+      \end{array}
+    \right .
+  \end{eqnarray*}
+  if $\delta \in \rise{T}$ and $\cod \delta \in P'_{\omega}$.
+\end{dfntn}
+
+\begin{lmm}
+  $\struct{y}_{p}(T,\lambda)$ is a winning strategy for player
+  $\sigma$ from position $p$ in the game $D(G)(\mathcal{S}_{G}(E),E)$.
+\end{lmm}
+\begin{proof}
+  Let $\delta \in \rise{T}$ and suppose that $m \in M_{\cod \delta}$
+  and $\epsilon(\cod \delta) = \pi$. Then $\epsilon(\cod \Phi \delta)
+  = \pi$, so that $\Phi\delta \compp \Phi m \in T$ and thus $\delta
+  \compp m \in \rise{T}$. If $\epsilon(\cod \delta) = \sigma$, then
+  $\delta$ is not an atom.  Since $\epsilon(\cod \Phi \delta) =
+  \sigma$, there exists an $m$ such that $\Phi \delta \compp m \in T$.
+  Since $\delta$ is not an atom, the move $m$ can be lifted to a move
+  $m'\in M_{\cod \delta}$ such that $\Phi m' = m$. It follows that
+  $\delta \compp m' \in \rise{T}$.  If $\delta \compp m'' \in
+  \rise{T}$, then $\Phi m'' = m$, since $T$ is deterministic, and
+  therefore $m'' = m'$ since a lifting of $m$ is unique. Finally, an
+  infinite path $\delta$ in $\rise{T}$ gives rise to an infinite path
+  $\Phi \delta$ in $T$, which is a win for player $\sigma$ in the game
+  $G$.  From this it follows that $\delta$ is win for player $\sigma$
+  in $D(G)$.
+\end{proof}
+
+
+\begin{prpstn}
+  The functions $\struct{x}_{p}$ and $\struct{y}_{p}$ are
+  inverse to each other.
+\end{prpstn}
+\begin{proof}
+  Let $\langle R,\rho\rangle \in
+  \mathcal{S}_{D(G),p}(\mathcal{S}_{G}(E),E)$ and $\langle
+  T,\lambda \rangle \in \mathcal{S}_{G,p}(E)$.  We shall
+  show that
+  \begin{eqnarray*}
+    \langle R,\rho\rangle \subseteq 
+    \struct{y}_{p}(T,\lambda)
+    & \tiff &
+    \struct{x}_{p}(R,\rho)
+    \subseteq \langle T,\lambda\rangle\,.
+  \end{eqnarray*}
+  The desired result will follow from lemma \ref{lem:subset}.  
+  
+  Suppose first that $\langle R,\rho\rangle \subseteq
+  \struct{y}_{p}(T,\lambda)$. Thus $R \subseteq \Phi^{-1}T$ and $\Phi R
+  \subseteq T$, and if $\delta \in R$ is an atom, then
+  $\rho(\delta) = \rise{\lambda}(\delta) = \Phi\delta \res \langle
+  T,\lambda \rangle$. Hence
+  \begin{eqnarray*}
+    \low{R} & = & 
+    \Phi R \cup \bigcup_{\delta \in A(R)}
+    \Phi\delta \compp 
+    \tree{\Phi\delta \res \langle T, \lambda \rangle } \\
+    & \subseteq & T\,.
+  \end{eqnarray*}
+  Consider a path $\gamma \in \low{R}$ such that $\cod \gamma \in
+  P_{\omega}$. If $\gamma = \Phi\delta$, then $\low{\rho}(\gamma) =
+  \rho(\delta) = \rise{\lambda}(\delta) = \lambda(\Phi\delta)$, 
+  and if $\gamma =
+  \Phi\delta \compp \gamma'$, then $\low{\rho}(\gamma) =
+  \lab{\rho(\delta)}(\gamma') =  \lab{\Phi\delta \res \langle
+  T,\lambda \rangle}(\gamma') = \lambda(\Phi\delta\compp
+  \gamma') = \lambda(\gamma)$.
+  
+  Suppose now that $\struct{x}_{p}(R,\rho) \subseteq \langle
+  T,\lambda\rangle$. Then $\Phi R \subseteq T$ and therefore $R
+  \subseteq \Phi^{-1}R = \rise{T}$. Consider a path $\delta \in R$
+  such that $\cod \delta \in P'_{\omega}$. If $\cod \Phi\delta \in
+  P_{\omega}$ then $\rise{\lambda}(\delta) = \lambda(\Phi\delta) =
+  \low{\rho}(\Phi\delta) = \rho(\delta)$; on the other hand, if $\cod
+  \Phi\delta \in P_{\leq n}$, then $\rise{\lambda}(\delta) =
+  \Phi\delta \res \langle T,\lambda\rangle = \rho(\delta)$, since
+  $\rho(\delta) \subseteq \Phi\delta \res \langle T, \lambda \rangle$.
+  This can be seen as follows: if $\gamma \in \tree{\rho(\delta)}$ then
+  $\Phi\delta \compp \gamma \in \low{R} \subseteq T$, so that $ \gamma
+  \in \tree{\Phi\delta \res \langle T,\lambda\rangle}$; if moreover
+  $\cod \gamma \in P_{\omega}$, then $\lab{\rho(\delta)}(\gamma) =
+  \low{\rho}(\Phi\delta \compp \gamma) = \lambda(\Phi\delta \compp
+  \gamma) = \lab{\Phi\delta \res \langle T,\lambda\rangle}(\gamma)$.
+\end{proof}
+
+
+   
+\begin{prpstn} 
+  \label{prop:initialalgebra}
+  If  $\kappa(n) = \mu$, then
+  $$
+  \struct{x} : 
+  \mathcal{S}_{D(G)}(\mathcal{S}_{G}(E),E) \rTo \mathcal{S}_{G}(E)
+  $$
+  is an initial $\mathcal{S}_{D(G)}(-,E)$-algebra.
+\end{prpstn}
+\begin{proof}
+  First we construct a graph $\mathcal{G}$ as follows: its vertices
+  are pairs $(S,p)$ with $p \in P_{\leq n}$ and $S \in
+  \mathcal{S}_{G,p}(E)$. A transition of this graph is of the form
+  $$
+  \delta : (S,p) \rightarrow (\Phi\delta \res S,p')
+  $$
+  where $\delta$ is an atom such that $\Phi\delta \in S$, $\dom
+  \Phi\delta = p$ and $\cod \Phi\delta = p'$. Observe that the graph
+  $\mathcal{G}$ is well founded: given an infinite sequence
+  $\delta_{i} : (S_{i-1},p_{i-1}) \rightarrow (S_{i},p_{i})$, $i \geq
+  1$, we can construct the infinite path $\Phi\delta_{1} \compp
+  \Phi\delta_{2}\compp \ldots $ which belongs to $S_{0}$ and
+  contradicts the condition on infinite paths for a winning strategy.
+  Observe moreover that if $\langle \rise{T},\rise{\lambda}\rangle =
+  \struct{y}_{p}(T,\lambda)$ and $\delta \in A(\rise{T})$, then
+  $\rise{\lambda}(\delta) = \Phi\delta \res \langle T,\lambda\rangle$,
+  hence $\delta : (\langle T,\lambda\rangle,p) \rightarrow \langle
+  \rise{\lambda}(\Phi\delta), \cod \Phi\delta\rangle$.
+  
+  Thus, if $\beta : \mathcal{S}_{D(G)}(B,E)\rTo B$ is another algebra,
+  then we can define $f : \mathcal{S}_{G}(E) \rTo B$, by the formula:
+    \begin{eqnarray*}
+      f_{p}(T,\lambda)
+      & = & 
+      \beta_{p}(\,\mathcal{\mathcal{S}}_{D(G),p}(f,E)(\,\struct{y}_{p}(T,\lambda)\,)\,)\ \\
+      & = & 
+      \beta_{p}(\,\mathcal{\mathcal{S}}_{D(G),p}(f,E)(\,\rise{T},\rise{\lambda}\,)\,)\\
+      & = & 
+      \beta_{p}(\,\rise{T},\lambda'\,)
+    \end{eqnarray*} 
+    where 
+    \begin{eqnarray*}
+      \lambda'(\delta)
+      & = & 
+      \left \{
+        \begin{array}{ll}
+          \lambda(\delta) , & \cod \Phi\delta \in P_{\omega} \\
+          f_{\cod \Phi \delta}(\rise{\lambda}(\delta)), 
+          & \delta \textrm{ an atom}
+        \end{array}
+      \right .
+      \end{eqnarray*}
+      using the induction hypothesis (on the well founded graph
+      $\mathcal{G}$) that we have previously defined $f_{p'}(S')$ for
+      each pair $(S',p')$ such that $(\langle T,\lambda \rangle,p)
+      \rightarrow (S',p')$.  This is also the unique way to define $f$
+      so that $\struct{x} \comp f = \mathcal{S}_{D(G)}(f,E) \comp
+      \beta$.  
+  \end{proof}
+  
+  \begin{prpstn}
+    \label{prop:finalcolagebra}
+    If  $\kappa(n) = \nu$, then
+    $$
+    \struct{y} 
+    : \mathcal{S}_{G}(E) \rTo \mathcal{S}_{D(G)}(\mathcal{S}_{G}(E),E) 
+    $$
+    is a final $\mathcal{S}_{D(G)}(-,E)$-coalgebra.
+  \end{prpstn}
+  \begin{proof}
+    Consider a coalgebra 
+    $$
+    \beta : B \rTo
+    \mathcal{S}_{D(G)}(B,E)\,,
+    $$
+    we first define a graph $\mathcal{G}_{\beta}$ as follows: a
+    state of $\mathcal{G}_{\beta}$ is a pair $(b,p)$ such that $p \in
+    P_{\leq n}$ and $b \in B_{p}$, and a transition $(b,p) \rightarrow
+    (b',p')$ of $\mathcal{G}_{\beta}$ is an atom $\delta \in
+    \tree{\beta_{p}(b)}$ such that $\cod \Phi\delta = p'$ and
+    $\lab{\beta_{p}(b)}(\delta) = b'$. Observe that in the proof of
+    proposition \ref{prop:initialalgebra} the graph $\mathcal{G}$
+    coincides with the graph $\mathcal{G}_{\struct{y}}$ defined here.
+    
+    We now define a collection of functions $\{ f_{p} : B_{p} \rTo
+    \mathcal{S}_{G,p}(E) \}_{ p \in P_{\leq n}}$ and then split the
+    proof of proposition \ref{prop:finalcolagebra} in a sequence of
+    lemmas: in \ref{lem:welldefined} we show that these functions are
+    well defined, in \ref{lem:morphism} we show that this defines a
+    morphism of coalgebras, and finally in \ref{lem:unique} we show
+    that this is the unique such morphism.
+    \begin{dfntn}
+      For each $p \in P_{\leq n}$ and $b \in B_{p}$ we define
+      $f_{p}(b) = \langle T_{b}, \lambda_{b} \rangle \in
+      \mathcal{S}_{G,p}(E)$ as follows.  We say that $\gamma \in
+      T_{b}$ if and only if $\gamma$ has a factorization of the form
+      \begin{eqnarray}
+        \label{eq:factorization}
+        \gamma  & = & 
+        \Phi\delta_{1} \compp \ldots 
+        \compp \Phi\delta_{k} \compp \Phi\delta_{k
+          + 1}
+      \end{eqnarray}
+      such that
+      \begin{itemize}
+      \item[1.] $\Delta = (\delta_{1},\ldots ,\delta_{k})$ is a path in
+        $\mathcal{G}_{\beta}$ such that $\dom \Delta = (b,p)$ and
+        $\cod \Delta = (b',p')$,
+      \item[2.] $\delta_{k + 1} \in \tree{\beta_{p'}(b')}$ is not an
+        atom.
+      \end{itemize}
+      If $\cod \gamma \in P_{\omega}$, then we let
+      $\lambda_{b}(\gamma) = \lab{\beta_{p'}(b')}(\delta_{k + 1})$.
+    \end{dfntn}
+    We remark that a factorization of the form
+    (\ref{eq:factorization}), without the additional requirements $1.$
+    and $2.$, exists for any path $\gamma$ and is unique. This follows
+    from the observation that the set of paths
+    $\{\,\Phi\delta\,|\,\textrm{$\delta$ is an atom}\,\}$ does not
+    contain comparable elements with respect to the prefix order.
+    Using the language of the theory of codes \cite{reutenauer}, this
+    set is a prefix code. Recall also that $\delta_{k + 1}$ is not an
+    atom if either $\length{\delta_{k + 1}} = 0$ or $\cod \delta_{k +
+      1} \in P'_{\omega}$ implies $\cod \Phi\delta_{k + 1} \in
+    P_{\omega}$.
+  
+  The game-theoretic interpretation of the strategy $f_{p}(b)$ is as
+  follows.  From position $p$, player $\sigma$ uses the strategy
+  $\beta_{p}(b)$ as long as he can.  As soon as the play reaches a
+  position $p'$ such that either $p'$ in $P_{n}$ or after one move if
+  $p \in P_{n}$, this strategy becomes unavailable.  However, if one
+  of these two cases happens, the strategy $\beta_{p}(b)$ gives player
+  $\sigma$ the choice of an element $b' = \lab{\beta_{p}(b)}(\delta)$
+  in $B_{p'}$ and therefore the choice of a new strategy
+  $\beta_{p'}(b')$.  Thus player $\sigma$ iterates this process.
+  Iteration of this process is expressed by saying that the residual
+  strategy of $f_{p}(b)$ after the image of an atom $\delta$ is the
+  strategy $f_{p'}(b')$. This is the content of the next lemma.
+  \begin{lmm}
+    \label{lemma:iteration}
+    Let $\langle R, \rho \rangle = \beta_{p}(b)$ and let $\delta
+    \in A(R)$. Then
+    \begin{eqnarray*}
+      \Phi\delta \res f_{p}(b) & =  & f_{\cod
+        \Phi\delta}( \rho(\delta)) \,.
+    \end{eqnarray*}
+  \end{lmm}
+  \begin{proof}
+    Let $\gamma \in \tree{f_{\cod \Phi\delta}(\rho(\delta))}$, then we
+    can write $\gamma = \Phi\delta_{1} \compp \ldots \compp \Phi
+    \delta_{k+1}$ and thus $\Phi\delta \compp \gamma = \Phi\delta
+    \compp\Phi\delta_{1} \compp \ldots\compp \Phi \delta_{k+1}$ shows
+    that $\Phi\delta \compp \gamma \in \tree{f_{p}(b)}$ and $\gamma
+    \in \tree{\Phi\delta \res f_{p}(b)}$. If $\cod \gamma \in
+    P_{\omega}$ then $\lab{\Phi\delta \res f_{p}(b)}(\gamma) =
+    \lab{f_{p}(b)}(\Phi\delta \compp \gamma) =
+    \lab{\beta_{p'}(b')}(\delta_{k + 1})$ and similarly $\lab{f_{\cod
+        \Phi\delta}(\rho(\delta))}( \gamma) =
+    \lab{\beta_{p'}(b')}(\delta_{k + 1})$. 
+  \end{proof}
+  \begin{lmm}
+    \label{lem:welldefined}
+    The pair $f_{p}(b) = \langle T_{b},\lambda_{b} \rangle$ is a
+    winning strategy for player $\sigma$ in the game $G(E)$ from
+    position $p$.
+  \end{lmm}
+  \begin{proof}
+    Let $\gamma \in T_{b}$ have a factorization $\Phi\delta_{1}\compp
+    \ldots \compp \Phi\delta_{k+1}$. Observe that $\delta_{1} \in
+    \beta_{p}(b)\in \mathcal{S}_{D(G),p}(B,E)$ implies that $\dom
+    \delta_{1} = (p,0)$, hence $\dom \gamma = \dom \Phi \delta_{1} =
+    p$.  From the definition it is clear that $T_{b}$ is closed under
+    prefixes.
+    
+    Let $\gamma \in T_{b}$ and suppose first that $\epsilon(\cod
+    \gamma) = \pi$. If $m \in M_{\cod \gamma}$, then $(m,0) \in
+    M_{\cod \delta_{k + 1}}$, since $\delta_{k + 1}$ is not an atom,
+    hence $ \delta'_{k + 1} = \delta_{k+1} \compp m \in
+    \beta_{p'}(b')$. If $\delta'_{k + 1}$ is not an atom, then we can
+    write
+    \begin{eqnarray*}
+      \gamma  \compp m& = & 
+      \Phi\delta_{1} \compp \ldots \compp \Phi\delta_{k} 
+      \compp \Phi\delta'_{k
+        + 1}
+    \end{eqnarray*}
+    and if $\delta'_{k + 1}$ is an atom we can write
+    \begin{eqnarray*}
+      \gamma  \compp m& = & 
+      \Phi\delta_{1} \compp \ldots \compp \Phi\delta_{k} 
+      \compp \Phi\delta'_{k
+        + 1} \compp \Phi 1_{(\cod \Phi \delta'_{k + 1},0)}\,,
+    \end{eqnarray*}
+    If we let $p'' = \cod \Phi \delta_{k + 1}'$ and $b'' =
+    \lab{\beta_{p'}(b')}(\delta_{k +1}')$, then we observe $1_{
+      (\cod \delta'_{k + 1},0)} = 1_{(p'',0)}\in
+    \tree{\beta_{p''}(b'')}$.  In both cases we conclude that
+    $\gamma \compp m \in T_{b}$.
+    
+    If $\epsilon(\cod \gamma) = \sigma$, then $\epsilon'(\cod
+    \delta_{k + 1}) = \sigma$ so that $\delta_{k + 1} \compp (m,0) \in
+    \beta_{p'}(b')$ for a unique $m \in M_{\cod \gamma}$. As before,
+    we conclude that $\gamma \compp m \in T_{b}$. On the other hand,
+    if $\gamma \compp m' \in T_{b}$, then $\delta_{k + 1} \compp
+    (m',0) \in \beta_{p'}(b')$, since such a factorization for
+    $\gamma$ is unique. Thus $m = m'$, since $\beta_{p'}(b')$ is
+    deterministic.
+    
+    Consider now an infinite path $\gamma$ in $T_{b}$.  Either this
+    infinite path visits the region $P_{n}$ infinitely often, in which
+    case it is a win for player $\sigma$, or we can write $\gamma =
+    \gamma'\compp \Phi\delta$, where $\delta$ is an infinite play in
+    $D(G)(B,E)$, played according to a given winning strategy for this
+    game.  This infinite play is a win for player $\sigma$ in
+    $D(G)(B,E)$ which implies that $\gamma$ is a win for player
+    $\sigma$ in $G(E)$.
+  \end{proof}
+  
+  \begin{lmm}
+    \label{lem:morphism}
+    The  diagram
+    $$
+    \mydiagram[6em]{ [](!S{B}
+      {\mathcal{S}_{D(G)}(B,E)}{\mathcal{S}_{G}(E)}
+      {\mathcal{S}_{D(G)}(\mathcal{S}_{G}(E),E)}{1}{2},
+      !a{^{\beta}}{^{f}}{^/-0.6em/{\mathcal{S}_{D(G)}(f,E)}}{^{\struct{y}}}
+    }
+    $$
+    commutes.
+  \end{lmm}
+  \begin{proof}
+    It is enough to show that for all $p \in P_{\leq n}$ and $b \in
+    B_{p}$
+    \begin{eqnarray*}
+      \mathcal{S}_{D(G),p}(f,E)(\, \beta_{p}(b)\,)
+      & \subseteq & \struct{y}_{p}(\,f_{p}(b)\,)\,.
+    \end{eqnarray*}
+    Let $\langle T_{b},\lambda_{b}\rangle = f_{p}(b)$ and $\langle R,
+    \rho\rangle = \beta_{p}(b)$. If $\delta \in R$, then $\Phi\delta
+    \in T_{b}$ so that $\delta \in \rise{T_{b}}$.  Suppose now that
+    $\cod \delta \in P'_{\omega}$. If $\cod \Phi\delta \in
+    P_{\omega}$, then $\rise{ \lambda_{b}}(\delta)= \lambda_{b}(\Phi
+    \delta) = \rho(\delta)$.  If $\cod \Phi \delta \in P_{\leq n}$,
+    that is, if $\delta$ is an atom, then $\rise{\lambda_{b}}(\delta)
+    = \Phi\delta \res f_{p}(b) = f_{\cod\Phi \delta}( \rho(\delta))$,
+    by lemma \ref{lemma:iteration}.
+  \end{proof}
+  
+  \begin{lmm}
+    \label{lem:unique}
+    If a collection of functions $g: B \rTo \mathcal{S}_{G}(E)$
+    satisfies the relation $g \comp \struct{y} = \beta \comp
+    \mathcal{S}_{D(G)}(g,E)$, then $g = f$.
+  \end{lmm}
+  \begin{proof}
+    We will prove that $g_{p}(b) \subseteq f_{p}(b)$ for all $p \in
+    P_{\leq n}$ and $b \in B_{p}$. In the following let $\beta_{p}(b)
+    = \langle R ,\rho\rangle$ and recall that
+    $\mathcal{S}_{D(G)}(g,E)(R,\rho) = \langle R ,\rho' \rangle$ where
+    $\rho'(\delta) = \rho(\delta)$ if $\cod \Phi \delta \in
+    P_{\omega}$ and $\rho'(\delta) = g_{\cod \Phi \delta}(
+    \rho(\delta))$ if $\delta$ is an atom. Thus we have reduced the
+    relation $g_{p}(b) = \struct{x}_{p}(\,\mathcal{S}_{D(G),p}(g,E)(
+    \beta_{p}(b))\,)$ to the relation $g_{p}(b) =
+    \struct{x}_{p}(R,\rho')$.
+    
+    As a first part, we  prove by induction on the length of
+    $\gamma$ the following statement: \emph{for each $p \in P_{\leq
+        n}$ and $b \in B_{p}$, if $\gamma \in \tree{g_{p}(b)}$,
+      then $\gamma \in \tree{f_{p}(b)}$}.
+    
+    The statement is trivial if $\length{\gamma} = 0$, since if
+    $\gamma \in \tree{g_{p}(b)}$, then $\gamma = 1_{p}$ and $1_{p}$
+    belongs to any winning strategy from position $p$.  If
+    $\length{\gamma} > 0$, we argue using the equality $g_{p}(b) =
+    \struct{x}_{p}(R,\rho')$. If $\gamma = \Phi\delta$, then $\gamma
+    \in T_{b}$ by its definition. If $\gamma = \Phi\delta \compp
+    \gamma'$, where $\delta$ is an atom of $R$ and $\gamma ' \in
+    \tree{\rho'(\delta)} = \tree{g_{\cod \Phi\delta}(\rho(\delta))}$,
+    then $\gamma' \in \tree{f_{\cod \delta}(\rho(\delta))}$, since
+    $\length{\gamma '}< \length{\gamma}$ and using the induction
+    hypothesis. Then it is easily seen that $\gamma = \Phi\delta \compp
+    \gamma' \in \tree{f_{p}(b)}$ as well.
+    
+    We now prove again by induction on the length the following
+    statement: \emph{for each $p \in P_{\leq n}$ and $b \in B_{p}$, if
+      $\gamma \in g_{p}(b)$ and $\cod \gamma \in P_{\omega}$, then
+      $\lab{g_{p}(b)}(\gamma) = \lab{f_{p}(b)}(\gamma)$}.
+    
+    The statement is again obvious if $\length{\gamma} = 0$, since
+    there is no such $\gamma$ with $\dom \gamma \in P_{\leq n}$ and
+    $\cod \gamma \in P_{\omega}$.  If
+    $\length{\gamma} > 0$, then two cases. Either $\gamma = \Phi\delta$ with $\delta
+    \in R$, in which case $\lab{g_{p}(b)}(\gamma) =
+    \low{\rho'}(\Phi\delta) = \rho'(\delta) = \rho(\delta) =
+    \lambda_{b}(\gamma)$ by the definition of $f$.  Or $\gamma =
+    \Phi\delta \compp \gamma'$ where $\delta$ is an atom of $R$ and
+    $\gamma' \in \tree{\rho'(\delta)} = \tree{g_{\cod \delta}(
+      \rho(\delta))}$.  In this case
+    $$
+    \renewcommand{\arraystretch}{1.3}
+    \begin{array}[b]{rcl@{\hspace{7mm}}l}
+      \lab{g_{p}(b)}(\gamma) 
+      & = &  \low{\rho'}(\Phi\delta \compp \gamma')
+      & g_{p}(b) = \struct{x}_{p}(R,\rho')\\
+      & = & \lab{\rho'(\delta)}(\gamma') 
+      & \textrm{def. of $\struct{x}_{p}$}\\
+      & = &
+      \lab{g_{\cod
+          \Phi\delta}( \rho(\delta))}(\gamma')
+      & \textrm{def. of $\rho'$} \\
+      & = & \lab{f_{\cod
+          \Phi\delta}(\rho(\delta))}(\gamma')  
+      & \textrm{induction hypothesis on $\gamma'$}\\
+      & = & \lambda_{b}(\Phi\delta \compp \gamma') 
+      & \Phi\delta \res f_{p}(b) 
+      = f_{\cod \Phi\delta}(\rho(\delta))\\
+      & = & \lambda_{b}(\gamma)\,.
+    \end{array}
+    \renewcommand{\arraystretch}{1}
+    $$
+  \end{proof}
+  This ends the proof of proposition \ref{prop:finalcolagebra} too.
+\end{proof}
+  
+Thus we have completed the proof of theorem \ref{theo:mainresult}. We
+end this section with some examples illustrating the theory so far
+developed.
+
+\newcommand{\cons}{\textrm{cons}}
+\newcommand{\nil}{\textrm{nil}}
+
+\begin{xmpl}
+  We consider the set of finite lists over a set of symbols $E$. This
+  is initial algebra of the functor $1 + (Y \times E)$ and therefore
+  it is the denotation of the $\mu$-term $\mu_{y}.(\top \vee (y \land
+  E))$.
+  \begin{figure}[h]
+    $$
+    \mygame[3em]{
+      [d(6)] []!E{\mu} 
+      :[d]!E{\vee} 
+      ( :[ld]!E{\top}
+      [ll]="I1", 
+      :[rd]!E{\land} 
+      ( :[ld]!E{y}:@`{"I1"}"\mu",
+      :[rd]!E{E}
+      ) 
+      "\land"[r(2)]*+{\leadsto} 
+    } 
+    \hspace{-0mm} 
+    \mygame[3em]{
+      []="S"([r]!E{E}) [d(1.5)] [l] :[r]!E{\sigma}="A" (
+      :[ld]!E{\pi}|{\makebox[8mm][l]{\nil}} [rr]="I1",
+      [rrd]="I2", :[d]!E{\pi}="B"|{\makebox[8mm][l]{\textrm{cons}}} (
+      :@`{"I1"}"\sigma", :@`{"I2"}"E" ) "S"
+      [l(1.5)u(0.4)]("S"[r(1.5)d(0.2)]!L{}{\omega}) "A"
+      [l(1.5)u(0.6)]("B"[r(1.5)d(0.2)]!L{\mu}{1}) "S" [u(7)]
+      !E{\sigma} :[d]!E{\pi}|{\makebox[8mm][l]{\cons}}
+      (:[r]!E{1}) :[d] !E{\sigma}
+      :[d]!E{\pi}|{\makebox[8mm][l]{\cons}} (:[r]!E{0}) :[d]
+      !E{\sigma} (:[dl]!E{\pi}|{\makebox[4mm][l]{\nil}})
+      [d]:@{{.}{.}{>}}[d] }
+    $$\centering\vspace{-8mm}
+    \caption{Lists as winning strategies.}
+    \label{fig:lists}
+  \end{figure}
+  In figure \ref{fig:lists} we have translated this $\mu$-term
+  into a pointed parity game, according to proposition
+  \ref{prop:termstogames} and to a well established practice in the
+  model checking community.  The conventions are the ones followed
+  until now: positions of the games, labeled by $\sigma$ or $\pi$, are
+  grouped within boxes according to their height.  The height is on
+  the right of the boxes, the color is on the left. For convenience of
+  exposition, we have labeled transitions in the figure, even if this
+  is not strictly necessary.
+  
+  It is immediate to realize that there is a bijection between lists
+  and deterministic winning strategies in the parity game. If we let
+  $E = \{ 0,1 \}$, we have represented in figure \ref{fig:lists} the
+  list $\cons(\cons(\nil,0),1)$ in the form of a winning strategy, the
+  tree over the game.  Observe that we cannot obtain infinite lists
+  since every infinite path on the corresponding tree would be a loss
+  for player $\sigma$.
+\end{xmpl}
+
+\begin{xmpl}  
+  We want to calculate an algebraic expression describing the set of
+  infinite trees with the following properties: 1) every node is
+  labeled by an element of a given set $E$, 2) every node has a finite
+  (possibly empty) list of sons.  According to experience, this set
+  could be expressed as the greatest solution of the equation
+  \begin{eqnarray*}
+    X & = & E \times X^{*}\,,
+  \end{eqnarray*}
+  that is, the final coalgebra of the functorial expression on the
+  right.  On the other hand, we know that $X^{*}$ is the least
+  solution of
+  \begin{eqnarray*}
+    Y & = & 1 + (Y \times X)\,,
+  \end{eqnarray*}
+  hence we guess that the desired algebraic expression is given by the
+  $\mu$-term $\nu_{x}. (E \land \mu_{y}.  (\top \lor (y \land x ))$.
+  We can verify that this guess is correct by transforming the
+  $\mu$-term into a pointed parity game, according to proposition
+  \ref{prop:termstogames}, the result being the game on the right of
+  figure \ref{fig:unica}.
+  \begin{figure}[h]
+    $$
+    \mygame[3em]{
+      []!E{\nu}
+      :[d]!E{\land}
+      (:[ld]!E{E})
+      :[rd]!E{\mu}
+      :[d]!E{\vee}
+      (
+      [rrr]="I2",
+      :[ld]!E{\top}
+      [ll]="I1",,
+      :[rd]!E{\land}
+      (
+      :[ld]!E{y}:@`{"I1"}"\mu",
+      :[rd]!E{x}:@`{"I2"}"\nu"
+      )
+      )
+    }
+    \hspace{-0.3cm}
+    \leadsto
+    \hspace{0.0cm}
+    \mygame[3em]{
+      []
+      :[r]!E{\pi}("\pi"="\nu")
+      (:@/^2em/[u(1.8)]!E{E}|{\textrm{What label ?}})
+      :[d(1.8)]!E{\sigma}="A"|{\makebox[8mm][r]{\textrm{What list is down ?}}}
+      ("\sigma"="\mu",
+      [rr]="I2", 
+      :[ld]!E{\pi}="B"
+      |{\makebox[4mm][l]{\nil}}
+      ([ddll]="I1",[uull]="II1"), 
+      :[rd]!E{\pi}="C"
+      |{\makebox[4mm][l]{\cons}}(
+      :@`{"I1","II1"}"\mu"|{
+        \makebox[15mm][r]{\textrm{What tail ?}}
+      }, 
+      :@`{"I2"}"\nu"|{\makebox[8mm][l]{\textrm{What subtree ?}}}
+      ) 
+      )
+      "E"
+      [l(1.5)u(0.3)]("E"[r(1.5)d(0.2)]!L{}{\omega})
+      "\nu"
+      [l(1.5)u(0.3)]("\nu"[r(1.5)d(0.2)]!L{\nu}{2})
+      "A"
+      [l(1.5)u(0.6)]("C"[r(0.5)d(0.2)]!L{\mu}{1})
+    }
+    $$\vspace{-10mm}
+    \caption{Infinite trees as winning strategies.}
+    \label{fig:unica}
+  \end{figure}
+  It is possible to convince ourself that a labeled tree with those
+  properties gives rise to a deterministic winning strategy for player
+  $\sigma$ by interpreting a move by $\pi$ as a question about the
+  tree. Conversely, every such strategy comes from a unique tree of
+  this kind.
+  
+  It is worth examining infinite paths in this game.  Player $\sigma$
+  cannot answer that a node has an infinite list of sons: this would
+  be done by answering infinitely often ``cons'' to the question
+  ``What tail ?'', without being asked the question ``What list is
+  down ?''. The region visited infinitely often of maximal height  in
+  such a play is colored by $\mu$, hence it is a loss for player
+  $\sigma$.  On the other hand, player $\sigma$ can answer infinitely
+  often ``cons'' provided the play is going down in examining the
+  tree, that is, provided this answer is alternating with the question
+  ``What list is down ?''. The maximal region visited infinitely often
+  in such a play is colored by $\nu$, hence it is a win for player
+  $\sigma$.
+\end{xmpl}
+
+
+\begin{xmpl}
+  It is well known that infinite finitely branching trees can be
+  encoded as infinite binary trees. Proposition \ref{prop:strategies}
+  can be taken to be a generalization of this fact, in that it shows
+  that the elements of every nullary parity functor can be encoded as
+  infinite
+  trees with a bounded out-degree.  
+\end{xmpl}
+
+\begin{xmpl}
+  Charity \cite{MR96c:18005} is a programming language designed out of
+  categorical principles, thus recursion and corecursion are in this
+  context synonymous for the universal properties of initial and final
+  coalgebras. An important principle of this programming language
+  states that it is possible to define an arrow $f:\mu_{x}.T(x) \times
+  B \rTo C$ from an algebra in context $g:T(C) \times B \rTo C$,
+  provided $T$ is a strong categorical datatype \cite{MR94a:18008}.
+  This means that $T$ comes with a natural transformation (a strength)
+  $$
+  \theta^{T}_{A,B} : T(A) \times B \rTo T(A \times B)
+  $$
+  satisfying associativity and unitary constrains.  The explicit
+  characterization of set-theoretic parity functors allows the direct
+  computation of a strength. If $A$ and $B$ are two collections of
+  sets indexed by $P_{\omega}$, then we can associate to a strategy
+  $\langle T,\lambda\rangle \in \mathcal{S}_{G,p}(A)$ and to a
+  collection $b = \{ b_{x} \in B_{x}\}_{x \in P_{\omega}}$ the
+  strategy $\langle T,\lambda^{b}\rangle \in \mathcal{S}_{G,p}(A
+  \times B)$, where if $\gamma \in T$ and $\cod \gamma \in P_{\omega}$
+  then $\lambda^{b}(\cod \gamma) = (\lambda(\cod \gamma),b_{\cod
+    \gamma})$.
+\end{xmpl}
+
+
+
