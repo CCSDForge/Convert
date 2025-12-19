@@ -9,15 +9,16 @@ $options = getopt("D:");
 
 $directory=$options['D'];
 /** Bon ce serait bien d'avoir ca en config globale...  */
-define('TEXLIVEVERSION', '2020');
+define('TEXLIVEVERSION', '2023');
 define('BASETEMPREP', '/tmp/ccsdtex');
 define('CHROOT', '');
 define('LATEX2020', '/usr/local/texlive/2020'); # Latex version fixe 2020
 define('LATEX2016', '/usr/local/texlive/2016'); # Latex version fixe 2016
 define('LATEX2014', '/usr/local/texlive/2014'); # Latex version fixe 2014
+define('LATEX2023', '/usr/local/texlive/2023'); # Latex version fixe 2014
 
 define('ARCH', 'x86_64-linux');
-define('LATEX', LATEX2020);     # Latex courant
+define('LATEX', LATEX2023);     # Latex courant
 
 require __DIR__ . "/tex.php";
 $GLOBALS['texlive']   = LATEX;
@@ -39,7 +40,7 @@ $stopOnError = true;
 
 chdir($temprep);
 #                                    texlive,             cmd_paths, compile dir  , chroot dir
-$compilateur =  new Ccsd_Tex_Compile($GLOBALS['texlive'], $GLOBALS, $tempchrootrep, CHROOT, $withLogFile, $stopOnError);
+$compilateur =  new CcsdTexCompile($GLOBALS['texlive'], $GLOBALS, $tempchrootrep, CHROOT, $withLogFile, $stopOnError);
 
 $tex_files = $compilateur -> mainTexFile();
 $bin = $compilateur -> checkTexBin();

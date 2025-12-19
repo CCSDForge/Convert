@@ -2,7 +2,7 @@
 
 define('BASETEMPREP', '/tmp/ccsdtex');
 define('CHROOT', '/latexRoot');
-define('LATEX', '/usr/local/texlive/2020');     # Latex courant
+define('LATEX', '/usr/local/texlive/2023');     # Latex courant
 define('LATEX2020', '/usr/local/texlive/2020'); # Latex version
 define('LATEX2016', '/usr/local/texlive/2016'); # Latex version fixe 2016
 define('LATEX2014', '/usr/local/texlive/2014'); # Latex version fixe 2014
@@ -14,7 +14,7 @@ class Ccsd_Compile_Test2 extends \PHPUnit\Framework\TestCase {
     private $tempchrootrep ='';
     private $temprep = '';
     /**
-     * @var Ccsd_Tex_Compile
+     * @var CcsdTexCompile
      */
     private $compilateur = null;
     private $Conf = [];
@@ -36,7 +36,7 @@ class Ccsd_Compile_Test2 extends \PHPUnit\Framework\TestCase {
         $this -> Conf['dvips']     = "dvips -q -Ptype1";
         $this -> Conf['ps2pdf']    = "/usr/bin/ps2pdf14";
         $this -> Conf['chroot']    = "/usr/sbin/chroot";
-        $this -> compilateur = new Ccsd_Tex_Compile(LATEX, $this -> Conf, $this -> tempchrootrep, CHROOT, true, false, true);
+        $this -> compilateur = new CcsdTexCompile(LATEX, $this -> Conf, $this -> tempchrootrep, CHROOT, true, false, true);
 
         $config= \Convert\Config::getConfig();
         if ($testDocRoot = $config->get('test.docroot')) {
@@ -47,13 +47,13 @@ class Ccsd_Compile_Test2 extends \PHPUnit\Framework\TestCase {
 
     private function copyDocuments($fromDir, $toDir): void {
         mkdir($toDir, 0777, true) || exit;
-        recurse_copy($this->testDocRoot . $fromDir, $toDir, false);
+        recurseCopy($this->testDocRoot . $fromDir, $toDir, false);
     }
     public function testCompileArxiv() {
 
         foreach (array('/docs/01/38/07/39') as $dir) {
             $this->copyDocuments($dir, $this -> temprep);
-            recurse_unzip($this -> temprep);
+            recurseUnzip($this -> temprep);
             chdir($this -> temprep);
             $bin = $this -> compilateur -> checkTexBin();
             $tex_files = $this -> compilateur -> mainTexFile();
@@ -67,7 +67,7 @@ class Ccsd_Compile_Test2 extends \PHPUnit\Framework\TestCase {
                     $this -> assertTrue(false);
                 }
             }
-            recurse_rmdir($this -> temprep);
+            recurseRmdir($this -> temprep);
         }
     }
     

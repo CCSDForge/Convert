@@ -23,7 +23,7 @@ set_time_limit(0);
 $arch = php_uname('m');
 
 define('ARCH', 'x86_64-linux');
-define('TEXLIVEVERSION', '2020');
+define('TEXLIVEVERSION', '2023');
 
 /** Default configuration */
 
@@ -112,20 +112,20 @@ if ( ($source != '') && is_file($dir.DIRECTORY_SEPARATOR.$source) ) { // un fich
         internalServerError('Can\'t copy source file "'.$dir.DIRECTORY_SEPARATOR.$source.'" to temp directory "'.$temprep.$source.'"');
     }
 } else { // on copie tout le répertoire $_POST['dir']
-    if ( in_array($dir, array('/docs/tmp/', '/docs/preprod/tmp/', '/docs/test/tmp/')) || false === recurse_copy($dir, $temprep, false) ) {
+    if ( in_array($dir, array('/docs/tmp/', '/docs/preprod/tmp/', '/docs/test/tmp/')) || false === recurseCopy($dir, $temprep, false) ) {
         internalServerError('Can\'t copy directory "'.$dir.'" to temp directory "'.$temprep.'"');
     }
 }
 // unzip du répertoire $temprep
-recurse_unzip($temprep);
+recurseUnzip($temprep);
 // on se place dans le répertoire de travail tempo privé
 chdir($temprep);
 // recherche des fichiers à compiler
 
-$compilateur =  new Ccsd_Tex_Compile($GLOBALS['texlive'], $GLOBALS, $tempchrootrep, CHROOT, $withLogFile, $stopOnError);
+$compilateur =  new CcsdTexCompile($GLOBALS['texlive'], $GLOBALS, $tempchrootrep, CHROOT, $withLogFile, $stopOnError);
 
 $tex_files = $compilateur -> mainTexFile();
 if ( count($tex_files) == 0 ) {
-    recurse_rmdir($temprep);
+    recurseRmdir($temprep);
     internalServerError('No TeX, LaTeX or PdfLaTeX primary source file found');
 }

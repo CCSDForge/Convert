@@ -37,7 +37,7 @@ try {
     if (isset($logfile) && file_exists($logfile)) {
         copy("$temprep/$logfile", "$dir/$logfile");
     }
-    recurse_rmdir($temprep);
+    recurseRmdir($temprep);
     internalServerError($e -> getMessage());
 }
                                                    
@@ -54,10 +54,10 @@ if ( count($fileCreated) ) {
     }
     echo '</files>';
 } else {
-    recurse_rmdir($temprep);
+    recurseRmdir($temprep);
     internalServerError('No pdf created');
 }
 if (! file_exists(BASETEMPREP . DIRECTORY_SEPARATOR. "NO_RM")) {
-    recurse_rmdir($temprep);
+    recurseRmdir($temprep);
 }
 exit;

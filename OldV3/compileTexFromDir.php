@@ -47,14 +47,14 @@ if ( $_SERVER['REQUEST_METHOD'] == "POST" ) {
 			exit;
 		}
 	} else { // on copie tout le répertoire $_POST['dir']
-		if ( in_array($dir, array('/docs/tmp/', '/docs/preprod/tmp/', '/docs/test/tmp/')) || false === recurse_copy($dir, $temprep, false) ) {
+		if ( in_array($dir, array('/docs/tmp/', '/docs/preprod/tmp/', '/docs/test/tmp/')) || false === recurseCopy($dir, $temprep, false) ) {
 			header('HTTP/1.1 500 Internal Server Error');
 			echo 'Can\'t copy directory "'.$dir.'" to temp directory "'.$temprep.'"';
 			exit;
 		}
 	}
 	// unzip du répertoire $temprep
-	recurse_unzip($temprep);
+	recurseUnzip($temprep);
 	// on se place dans le répertoire de travail tempo privé
 	chdir($temprep);
 	// recherche des fichiers à compiler
@@ -165,7 +165,7 @@ if ( $_SERVER['REQUEST_METHOD'] == "POST" ) {
 			exit;
 		}
 	}
-	recurse_rmdir($temprep);
+	recurseRmdir($temprep);
 	if ( count($pdfCreated) ) {
 		header('HTTP/1.1 200 OK');
 		echo '<files><pdf>'.implode('</pdf><pdf>', $pdfCreated).'</pdf></files>';
@@ -189,7 +189,7 @@ function recurse_copy($src, $dst, $create=true) {
     while(false !== ( $file = readdir($dir) ) ) {
         if ( ( $file != '.' ) && ( $file != '..' ) ) {
             if ( is_dir($src . DIRECTORY_SEPARATOR . $file) ) {
-                $copy = $copy && recurse_copy($src . DIRECTORY_SEPARATOR . $file, $dst . DIRECTORY_SEPARATOR . $file);
+                $copy = $copy && recurseCopy($src . DIRECTORY_SEPARATOR . $file, $dst . DIRECTORY_SEPARATOR . $file);
             } else {
                 $copy = $copy && copy($src . DIRECTORY_SEPARATOR . $file, $dst . DIRECTORY_SEPARATOR . $file);
             }
@@ -202,7 +202,7 @@ function recurse_copy($src, $dst, $create=true) {
 function recurse_rmdir($dir) {
 	$files = array_diff(scandir($dir), array('.','..'));
 	foreach ($files as $file) {
-		(is_dir($dir.DIRECTORY_SEPARATOR.$file)) ? recurse_rmdir($dir.DIRECTORY_SEPARATOR.$file) : unlink($dir.DIRECTORY_SEPARATOR.$file);
+		(is_dir($dir.DIRECTORY_SEPARATOR.$file)) ? recurseRmdir($dir.DIRECTORY_SEPARATOR.$file) : unlink($dir.DIRECTORY_SEPARATOR.$file);
 	}
 	return rmdir($dir);
 }

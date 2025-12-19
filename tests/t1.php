@@ -1,7 +1,7 @@
 <?php
 
 
-define('LATEX', '/usr/local/texlive/2020');     # Latex courant
+define('LATEX', '/usr/local/texlive/2023');     # Latex courant
 define('LATEX2020', '/usr/local/texlive/2020'); # Latex version
 define('LATEX2016', '/usr/local/texlive/2016'); # Latex version fixe 2016
 define('LATEX2014', '/usr/local/texlive/2014'); # Latex version fixe 2014
@@ -13,7 +13,7 @@ class Ccsd_Compile_Test1 extends \PHPUnit\Framework\TestCase {
     private $tempchrootrep ='';
     private $temprep = '';
     /**
-     * @var Ccsd_Tex_Compile
+     * @var CcsdTexCompile
      */
     private $compilateur = null;
     private $Conf = array();
@@ -37,7 +37,7 @@ class Ccsd_Compile_Test1 extends \PHPUnit\Framework\TestCase {
         $this->Conf['dvips'] = "dvips -q -Ptype1";
         $this->Conf['ps2pdf'] = "/usr/bin/ps2pdf14";
         $this->Conf['chroot'] = "/usr/sbin/chroot";
-        $this->compilateur = new Ccsd_Tex_Compile(LATEX, $this->Conf, $this->tempchrootrep, CHROOT);
+        $this->compilateur = new CcsdTexCompile(LATEX, $this->Conf, $this->tempchrootrep, CHROOT);
 
         $config = \Convert\Config::getConfig();
         if ($testDocRoot = $config->get('test.docroot')) {
@@ -54,41 +54,46 @@ class Ccsd_Compile_Test1 extends \PHPUnit\Framework\TestCase {
             print "Error in mkdir $toDir\n";
             exit;
         }
-        recurse_copy($this->testDocRoot . $fromDir, $toDir, false);
+        recurseCopy($this->testDocRoot . $fromDir, $toDir, false);
     }
 
     public function testValues1() {
-        $compil = new Ccsd_Tex_Compile(LATEX, $this -> Conf, '.', '');
-        $this -> assertNotEmpty($compil -> check_for_compilation_error('f1'));
-        $this -> assertTrue($compil -> check_for_bad_citation('f1'));
-        $this -> assertFalse($compil -> check_for_bad_natbib('f1'));
+        $compil = new CcsdTexCompile(LATEX, $this -> Conf, '.', '');
+        $this -> assertNotEmpty($compil -> checkForCompilationError('f1'));
+        $this -> assertTrue((bool) $compil -> checkForBadCitation('f1'));
+        $this -> assertFalse((bool) $compil -> checkForBadNatbib('f1'));
 
     }
 
     public function testValues2() {
-        $compil = new Ccsd_Tex_Compile(LATEX, $this -> Conf, __DIR__.'/exemple1', '');
-        $this -> assertEquals( __DIR__.'/exemple1', $compil -> chrootedcompileDir());
+        $compil = new CcsdTexCompile(LATEX, $this -> Conf, __DIR__.'/exemple1', '');
+        $this -> assertEquals( __DIR__.'/exemple1', $compil -> chrootedCompileDir());
         $this -> assertEquals('latex',$compil -> checkTexBin(), "Pb pour determiner le type du fichier tex 1");
-        $this -> assertEquals(__DIR__.'/exemple1', $compil -> get_compileDir());
+        $this -> assertEquals(__DIR__.'/exemple1', $compil -> getCompileDir());
     }
 
     public function testValues3() {
-        $compil = new Ccsd_Tex_Compile(LATEX, $this -> Conf, BASETEMPREP, CHROOT);
+        $compil = new CcsdTexCompile(LATEX, $this -> Conf, BASETEMPREP, CHROOT);
 
-        
-        $this -> assertTrue($compil -> is_chrooted());
-        $this -> assertTrue($compil -> is_executable(LATEX . '/bin/' . $compil -> Arch . '/pdflatex'), "Pb d'exe latex");
-        $this -> assertFalse($compil -> is_executable(LATEX . '/bin/' . $compil -> Arch . '/Fooprgm'), "Pb d'exe autre");
-        $this -> assertEquals('/tmp/ccsdtex'          , $compil -> get_compileDir());
-        $this -> assertEquals('/latexRoot'            , $compil -> get_chroot());
-        $this -> assertEquals('/latexRoot/tmp/ccsdtex', $compil -> chrootedcompileDir());
-        $this -> assertEquals('/usr/sbin/chroot'      , $compil -> get_chrootcmd());
+        $config= \Convert\Config::getConfig();
+        if (! $config->get('use.docker')) {
+            $this->assertTrue($compil->isChrooted());
+            $this->assertTrue($compil->isExecutable(LATEX . '/bin/' . $compil->arch . '/pdflatex'), "Pb d'exe latex");
+            $this->assertFalse($compil->isExecutable(LATEX . '/bin/' . $compil->arch . '/Fooprgm'), "Pb d'exe autre");
+            $this -> assertEquals('/usr/sbin/chroot'      , $compil -> getChrootCmd());
+        } else {
+            $this -> assertEquals('docker run --rm -u root -v convert_tmpCompil:/tmp/ccsdtex   convert-latex', $compil -> getChrootCmd());
+        }
+        $this -> assertEquals('/tmp/ccsdtex'          , $compil -> getCompileDir());
+        $this -> assertEquals('/latexRoot'            , $compil -> getChroot());
+        $this -> assertEquals('/latexRoot/tmp/ccsdtex', $compil -> chrootedCompileDir());
+
     }
     
     public function testCompile() {
         foreach (array('/docs/01/01/01/06', '/docs/01/02/01/61', '/docs/01/02/01/56') as $dir) {
             $this->copyDocuments($dir, $this -> temprep);
-            recurse_unzip($this -> temprep);
+            recurseUnzip($this -> temprep);
             chdir($this -> temprep);
             $bin = $this -> compilateur -> checkTexBin();
             $tex_files = $this -> compilateur -> mainTexFile();
@@ -98,7 +103,7 @@ class Ccsd_Compile_Test1 extends \PHPUnit\Framework\TestCase {
             }  catch (TexCompileException $e) {
                 $this -> assertTrue(false);
             }
-            recurse_rmdir($this -> temprep);
+            recurseRmdir($this -> temprep);
         }
     }
 
@@ -106,7 +111,7 @@ class Ccsd_Compile_Test1 extends \PHPUnit\Framework\TestCase {
         # Tests devant echouer... normalement
         foreach (array('/docs/01/10/08/11') as $dir) {
             $this->copyDocuments($dir, $this -> temprep);
-            recurse_unzip($this -> temprep);
+            recurseUnzip($this -> temprep);
             chdir($this -> temprep);
             $bin = $this -> compilateur -> checkTexBin();
             $tex_files = $this -> compilateur -> mainTexFile();
@@ -116,13 +121,13 @@ class Ccsd_Compile_Test1 extends \PHPUnit\Framework\TestCase {
             }  catch (TexCompileException $e) {
                 $this -> assertTrue(true);
             }
-            recurse_rmdir($this -> temprep);
+            recurseRmdir($this -> temprep);
         }
     }
     public function testCompile3() {
         foreach (array('/docs/preprod/01/00/04/28', '/docs/preprod/01/00/07/98', '/docs/preprod/01/00/19/84') as $dir) {
             $this->copyDocuments($dir, $this -> temprep);
-            recurse_unzip($this -> temprep);
+            recurseUnzip($this -> temprep);
             chdir($this -> temprep);
             $bin = $this -> compilateur -> checkTexBin();
             $tex_files = $this -> compilateur -> mainTexFile();
@@ -132,13 +137,13 @@ class Ccsd_Compile_Test1 extends \PHPUnit\Framework\TestCase {
             }  catch (TexCompileException $e) {
                 $this -> assertTrue(false);
             }
-            recurse_rmdir($this -> temprep);
+            recurseRmdir($this -> temprep);
         }
     }
     public function testCompile4() {
         foreach (array('/docs/01/34/40/90') as $dir) {
             $this->copyDocuments($dir, $this -> temprep);
-            recurse_unzip($this -> temprep);
+            recurseUnzip($this -> temprep);
             chdir($this -> temprep);
             $bin = $this -> compilateur -> checkTexBin();
             $tex_files = $this -> compilateur -> mainTexFile();
@@ -148,13 +153,13 @@ class Ccsd_Compile_Test1 extends \PHPUnit\Framework\TestCase {
             }  catch (TexCompileException $e) {
                 $this -> assertTrue(false);
             }
-            recurse_rmdir($this -> temprep);
+            recurseRmdir($this -> temprep);
         }
     }
     public function testCompile5() {
         foreach (array('/docs/01/37/67/31') as $dir) {
             $this->copyDocuments($dir, $this -> temprep);
-            recurse_unzip($this -> temprep);
+            recurseUnzip($this -> temprep);
             chdir($this -> temprep);
             $bin = $this -> compilateur -> checkTexBin();
             $tex_files = $this -> compilateur -> mainTexFile();
@@ -164,7 +169,7 @@ class Ccsd_Compile_Test1 extends \PHPUnit\Framework\TestCase {
             }  catch (TexCompileException $e) {
                 $this -> assertTrue(false);
             }
-            recurse_rmdir($this -> temprep);
+            recurseRmdir($this -> temprep);
         }
     }
 }

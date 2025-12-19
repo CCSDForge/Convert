@@ -2,8 +2,7 @@ services:
   latex:
     build: docker/latex
     volumes:
-      - ./tmp/ccsdtex:/tmp/ccsdtex
-      - ./docker/fixtures/docs:/docs
+      - tmpCompil:/tmp/ccsdtex
     deploy:
       resources:
         limits:
@@ -20,8 +19,12 @@ services:
       - ./docker/php/fastcgi_params_symfony:/etc/nginx/fastcgi_params_symfony
       - ./docker/php/convert.conf:/etc/nginx/conf.d/convert.conf:ro
       - ./docker/php/certs:/etc/nginx/certs:ro
-      - ./tmp/ccsdtex:/tmp/ccsdtex
+      # Partage de la zone de compilation, les fichiers tex seront posé la
+      - tmpCompil:/latexRoot/tmp/ccsdtex
+      # Partage des documents sources, pour copier les résultats dans le dossier docs
       - ./docker/fixtures/docs:/docs
+      # partage du socket docker pour pouvoir utiliser docker dans le container
+      - /var/run/docker.sock:/var/run/docker.sock
       
     working_dir: /srv/app/convert
     extra_hosts:
@@ -30,3 +33,6 @@ services:
       resources:
         limits:
           memory: 256m
+
+volumes:
+  tmpCompil: ~

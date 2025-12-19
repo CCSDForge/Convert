@@ -1,8 +1,8 @@
 use:
    docker: True 
 test:
-   latexRoot: "/tmp/latexRoot" 
-   docroot: "../docker/fixtures"
-   compilationDir: "./tmp/ccsdtex"
+   latexRoot: "/latexRoot" 
+   compilationDir: "/tmp/ccsdtex"
 docker:
-   service: "latex"
+  latex:
+    image: "convert-latex"

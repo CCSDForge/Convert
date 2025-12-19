@@ -17,7 +17,7 @@ class Ccsd_Tex_CompileTest extends \PHPUnit\Framework\TestCase
      * @param $result
      */
     public function testcheckTexBinForFile($file, $result) {
-        $compiler = new Ccsd_Tex_compile('',[]);
+        $compiler = new CcsdTexCompile('',[]);
         $file_obj = new SplFileObject($file);
         $this -> assertEquals($result, $compiler->checkTexBinForFile($file_obj));
     }
@@ -37,7 +37,7 @@ class Ccsd_Tex_CompileTest extends \PHPUnit\Framework\TestCase
      * @dataProvider provide_checklogs
      */
     public function test_checklogs($checkFunction, $file, $result) {
-        $compiler = new Ccsd_Tex_compile('',[]);
+        $compiler = new CcsdTexCompile('',[]);
         $this->assertEquals($result, $compiler -> $checkFunction($file));
     }
 

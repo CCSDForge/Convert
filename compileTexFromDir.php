@@ -125,22 +125,22 @@ if ( ($source != '') && is_file($dir.DIRECTORY_SEPARATOR.$source) ) { // un fich
             . '"'. $dir.DIRECTORY_SEPARATOR.$source.'" to temp directory "'.$temprep.$source.'"');
     }
 } else { // on copie tout le répertoire $_POST['dir'].
-    if (preg_match('|/tmp/?$|', $dir) || false === recurse_copy($dir, $temprep, false) ) {
+    if (preg_match('|/tmp/?$|', $dir) || false === recurseCopy($dir, $temprep, false) ) {
         error_log('Can\'t copy directory "'.$dir.'" to temp directory "'.$temprep." (source=$source)");
         internalServerError('Can\'t copy directory "'.$dir.'" to temp directory "'.$temprep.'"');
     }
 }
 // unzip du répertoire $temprep
-recurse_unzip($temprep);
+recurseUnzip($temprep);
 // on se place dans le répertoire de travail tempo privé
 chdir($temprep);
 // recherche des fichiers à compiler
 
-$compilateur =  new Ccsd_Tex_Compile($GLOBALS['texlive'], $GLOBALS, $tempchrootrep, CHROOT, $withLogFile, $stopOnError);
+$compilateur =  new CcsdTexCompile($GLOBALS['texlive'], $GLOBALS, $tempchrootrep, CHROOT, $withLogFile, $stopOnError);
 
 $tex_files = $compilateur -> mainTexFile();
 if ( count($tex_files) == 0 ) {
-    recurse_rmdir($temprep);
+    recurseRmdir($temprep);
     internalServerError('No TeX, LaTeX or PdfLaTeX primary source file found');
 }
 $pdfCreated = array();
@@ -162,7 +162,7 @@ try {
     if (isset($logfile) && file_exists($logfile)) {
         copy("$temprep/$logfile", "$dir/$logfile");
     }
-    recurse_rmdir($temprep);
+    recurseRmdir($temprep);
     internalServerError($e -> getMessage());
 }
                                                    
@@ -170,10 +170,10 @@ if ( count($pdfCreated) ) {
     header('HTTP/1.1 200 OK');
     echo '<files><pdf>'.implode('</pdf><pdf>', $pdfCreated).'</pdf></files>';
 } else {
-    recurse_rmdir($temprep);
+    recurseRmdir($temprep);
     internalServerError('No pdf created');
 }
 if (! file_exists(BASETEMPREP . DIRECTORY_SEPARATOR. "NO_RM")) {
-    recurse_rmdir($temprep);
+    recurseRmdir($temprep);
 }
 exit;
