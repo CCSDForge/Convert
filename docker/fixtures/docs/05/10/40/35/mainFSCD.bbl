@@ -1,0 +1,348 @@
+\begin{thebibliography}{10}
+
+\bibitem{bauer2024countablereals}
+Andrej Bauer and James~E. Hanson.
+\newblock {The Countable Reals}, 2024.
+\newblock URL: \url{https://arxiv.org/abs/2404.01256}, \href
+  {https://arxiv.org/abs/2404.01256} {\path{arXiv:2404.01256}}.
+
+\bibitem{BerBezCoq98}
+Stefano Berardi, Marc Bezem, and Thierry Coquand.
+\newblock {On the Computational Content of the Axiom of Choice}.
+\newblock {\em The Journal of Symbolic Logic}, 63(2):600--622, 1998.
+\newblock \href {https://doi.org/10.2307/2586854} {\path{doi:10.2307/2586854}}.
+
+\bibitem{Boulier+Pedrot+Tabareau:cpp:2017}
+Simon Boulier, Pierre-Marie P\'{e}drot, and Nicolas Tabareau.
+\newblock {The Next 700 Syntactical Models of Type Theory}.
+\newblock In {\em Proceedings of the 6th ACM SIGPLAN Conference on Certified
+  Programs and Proofs}, CPP 2017, page 182–194, New York, NY, USA, 2017.
+  Association for Computing Machinery.
+\newblock \href {https://doi.org/10.1145/3018610.3018620}
+  {\path{doi:10.1145/3018610.3018620}}.
+
+\bibitem{CarFreSce90assemblies}
+Aurelio Carboni, Peter~J. Freyd, and Andre Scedrov.
+\newblock {A Categorical Approach to Realizability and Polymorphic Types}.
+\newblock In M.~Main, A.~Melton, M.~Mislove, and D.~Schmidt, editors, {\em
+  Mathematical Foundations of Programming Language Semantics}, pages 23--42,
+  Berlin, Heidelberg, 1988. Springer Berlin Heidelberg.
+\newblock \href {https://doi.org/10.1007/3-540-19020-1_2}
+  {\path{doi:10.1007/3-540-19020-1_2}}.
+
+\bibitem{CasMiqKrz23}
+Félix Castro, Alexandre Miquel, and Krzysztof Worytkiewicz.
+\newblock {Implicative Assemblies}, 2023.
+\newblock URL: \url{https://arxiv.org/abs/2304.10429}, \href
+  {https://arxiv.org/abs/2304.10429} {\path{arXiv:2304.10429}}.
+
+\bibitem{COCKETT2008}
+J.R.B. Cockett and P.J.W. Hofstra.
+\newblock {Introduction to Turing Categories}.
+\newblock {\em Annals of Pure and Applied Logic}, 156(2):183--209, 2008.
+\newblock \href {https://doi.org/10.1016/j.apal.2008.04.005}
+  {\path{doi:10.1016/j.apal.2008.04.005}}.
+
+\bibitem{cockett2007restriction}
+Robin Cockett and Stephen Lack.
+\newblock {Restriction Categories III: Colimits, Partial Limits and
+  Extensivity}.
+\newblock {\em Mathematical Structures in Computer Science}, 17(4):775--817,
+  2007.
+\newblock \href {https://doi.org/10.1017/S0960129507006056}
+  {\path{doi:10.1017/S0960129507006056}}.
+
+\bibitem{cohen2019effects}
+Liron Cohen, Sofia~Abreu Faro, and Ross Tate.
+\newblock {The Effects of Effects on Constructivism}.
+\newblock {\em Electronic Notes in Theoretical Computer Science}, 347:87--120,
+  2019.
+\newblock \href {https://doi.org/10.1016/j.entcs.2019.09.006}
+  {\path{doi:10.1016/j.entcs.2019.09.006}}.
+
+\bibitem{Coqproofs}
+Liron Cohen, Ariel Grunfeld, Dominik Kirst, Étienne Miquey, and Ross Tate.
+\newblock {Coq Formalization, \url{https://github.com/dominik-kirst/mca}}.
+\newblock {Supplementary Material}, 2025.
+
+\bibitem{CohMiqTat21}
+Liron Cohen, {\'E}tienne Miquey, and Ross Tate.
+\newblock {Evidenced Frames: A Unifying Framework Broadening Realizability
+  Models}.
+\newblock In {\em 2021 36th Annual ACM/IEEE Symposium on Logic in Computer
+  Science (LICS)}, pages 1--13, 2021.
+\newblock \href {https://doi.org/10.1109/LICS52264.2021.9470514}
+  {\path{doi:10.1109/LICS52264.2021.9470514}}.
+
+\bibitem{danvy2004evaluation}
+Olivier Danvy.
+\newblock {On Evaluation Contexts, Continuations, and the Rest of the
+  Computation}.
+\newblock In {\em Proceedings of the Fourth ACM SIGPLAN Workshop on
+  Continuations, Technical report CSR-04-1, Department of Computer Science,
+  Queen Mary’s College}, pages 13--23, 2004.
+
+\bibitem{feferman1975language}
+Solomon Feferman.
+\newblock {A Language and Axioms for Explicit Mathematics}.
+\newblock In {\em Algebra and logic}, pages 87--139. Springer, 1975.
+\newblock \href {https://doi.org/10.1007/BFb0062852}
+  {\path{doi:10.1007/BFb0062852}}.
+
+\bibitem{FREY20192000}
+Jonas Frey.
+\newblock {Characterizing Partitioned Assemblies and Realizability Toposes}.
+\newblock {\em Journal of Pure and Applied Algebra}, 223(5):2000--2014, 2019.
+\newblock \href {https://doi.org/10.1016/j.jpaa.2018.08.012}
+  {\path{doi:10.1016/j.jpaa.2018.08.012}}.
+
+\bibitem{GardelleMiquey23}
+Samuel Gardelle and {\'E}tienne Miquey.
+\newblock {Do CPS Translations Also Translate Realizers?}
+\newblock In Timothy Bourke and Delphine Demange, editors, {\em {JFLA 2023 -
+  34{\`e}mes Journ{\'e}es Francophones des Langages Applicatifs}}, pages
+  103--120, Praz-sur-Arly, France, January 2023.
+\newblock URL: \url{https://hal.inria.fr/hal-03910311}.
+
+\bibitem{giry2006categorical}
+Michele Giry.
+\newblock {A Categorical Approach to Probability Theory}.
+\newblock In {\em Categorical Aspects of Topology and Analysis: Proceedings of
+  an International Conference Held at Carleton University, Ottawa, August
+  11--15, 1981}, pages 68--85. Springer, 2006.
+\newblock \href {https://doi.org/10.1007/BFb0092872}
+  {\path{doi:10.1007/BFb0092872}}.
+
+\bibitem{godel1933intuitionistic}
+Kurt G{\"o}del.
+\newblock {On Intuitionistic Arithmetic and Number Theory}.
+\newblock {\em Collected Works}, 1:287--295, 1933.
+
+\bibitem{Goldberg-Mayer:2015}
+Mayer Goldberg.
+\newblock {Ellipses and Lambda Definability}.
+\newblock {\em Logical Methods in Computer Science}, Volume 11, Issue 3,
+  October 2015.
+\newblock \href {https://doi.org/10.2168/lmcs-11(3:25)2015}
+  {\path{doi:10.2168/lmcs-11(3:25)2015}}.
+
+\bibitem{Hofstra06relative}
+Pieter J.~W. Hofstra.
+\newblock {All Realizability is Relative}.
+\newblock {\em Mathematical Proceedings of the Cambridge Philosophical
+  Society}, 141:239 -- 264, 2006.
+\newblock \href {https://doi.org/10.1017/S0305004106009352}
+  {\path{doi:10.1017/S0305004106009352}}.
+
+\bibitem{hofstra2004partial}
+Pieter~JW Hofstra.
+\newblock {Partial Combinatory Algebras and Realizability Toposes}.
+\newblock {\em University of Ottowa}, 2004.
+
+\bibitem{hyland1980tripos}
+J.~M.~E. Hyland, P.~T. Johnstone, and A.~M. Pitts.
+\newblock Tripos theory.
+\newblock {\em Mathematical Proceedings of the Cambridge Philosophical
+  Society}, 88(2):205–232, 1980.
+\newblock \href {https://doi.org/10.1017/S0305004100057534}
+  {\path{doi:10.1017/S0305004100057534}}.
+
+\bibitem{kleene1945interpretation}
+Stephen~Cole Kleene.
+\newblock {On the Interpretation of Intuitionistic Number Theory}.
+\newblock {\em The journal of symbolic logic}, 10(4):109--124, 1945.
+\newblock \href {https://doi.org/10.2307/2269016} {\path{doi:10.2307/2269016}}.
+
+\bibitem{Krivine09}
+Jean-Louis Krivine.
+\newblock {Realizability in Classical Logic. {I}n {I}nteractive Models of
+  Computation and Program Behaviour}.
+\newblock {\em Panoramas et synth{\`e}ses}, 27, 2009.
+\newblock URL: \url{https://hal.science/hal-00154500}.
+
+\bibitem{krivine2011realizability}
+Jean-Louis Krivine.
+\newblock {Realizability Algebras: A Program to Well Order R}.
+\newblock {\em Logical methods in computer science}, 7, 2011.
+\newblock \href {https://doi.org/10.2168/LMCS-7(3:2)2011}
+  {\path{doi:10.2168/LMCS-7(3:2)2011}}.
+
+\bibitem{LEVY2003Freyd}
+Paul~Blain Levy, John Power, and Hayo Thielecke.
+\newblock {Modelling Environments in Call-by-Value Programming Languages}.
+\newblock {\em Information and Computation}, 185(2):182--210, 2003.
+\newblock \href {https://doi.org/10.1016/S0890-5401(03)00088-9}
+  {\path{doi:10.1016/S0890-5401(03)00088-9}}.
+
+\bibitem{LONGO1990193}
+Giuseppe Longo and Eugenio Moggi.
+\newblock {A Category-theoretic Characterization of Functional Completeness}.
+\newblock {\em Theoretical Computer Science}, 70(2):193--211, 1990.
+\newblock \href {https://doi.org/10.1016/0304-3975(90)90122-X}
+  {\path{doi:10.1016/0304-3975(90)90122-X}}.
+
+\bibitem{Menni2000completions}
+M.~Menni.
+\newblock {\em {Exact Completions and Toposes}}.
+\newblock PhD thesis, University of Edinburgh, 2000.
+
+\bibitem{moggi1989computationallamdba}
+Eugenio Moggi.
+\newblock {Computational Lambda-calculus and Monads}.
+\newblock {\em [1989] Proceedings. Fourth Annual Symposium on Logic in Computer
+  Science}, pages 14--23, 1989.
+\newblock \href {https://doi.org/10.1109/LICS.1989.39155}
+  {\path{doi:10.1109/LICS.1989.39155}}.
+
+\bibitem{moggi1991notions}
+Eugenio Moggi.
+\newblock {Notions of Computation and Monads}.
+\newblock {\em Information and computation}, 93(1):55--92, 1991.
+\newblock \href {https://doi.org/10.1016/0890-5401(91)90052-4}
+  {\path{doi:10.1016/0890-5401(91)90052-4}}.
+
+\bibitem{Munch09focalisation}
+Guillaume Munch-Maccagnoni.
+\newblock {F}ocalisation and {C}lassical {R}ealisability.
+\newblock In Erich Gr{\"a}del and Reinhard Kahle, editors, {\em Computer
+  Science Logic '09}, volume 5771 of {\em Lecture Notes in Computer Science},
+  pages 409--423. Springer, Heidelberg, 2009.
+\newblock \href {https://doi.org/10.1007/978-3-642-04027-6_30}
+  {\path{doi:10.1007/978-3-642-04027-6_30}}.
+
+\bibitem{OlivaStreicher08}
+P.~Oliva and T.~Streicher.
+\newblock {On Krivine's Realizability Interpretation of Classical Second-Order
+  Arithmetic}.
+\newblock {\em Fundam. Inform.}, 84(2):207--220, 2008.
+\newblock \href {https://doi.org/10.5555/1402673.1402677}
+  {\path{doi:10.5555/1402673.1402677}}.
+
+\bibitem{Pedrot+al:lics:2020}
+Pierre{-}Marie P{\'{e}}drot.
+\newblock {Russian Constructivism in a Prefascist Theory}.
+\newblock In Holger Hermanns, Lijun Zhang, Naoki Kobayashi, and Dale Miller,
+  editors, {\em 35th Annual {ACM/IEEE} Symposium on Logic in Computer Science,
+  Saarbr{\"{u}}cken, Germany}, pages 782--794. {ACM}, 2020.
+\newblock \href {https://doi.org/10.1145/3373718.3394740}
+  {\path{doi:10.1145/3373718.3394740}}.
+
+\bibitem{Pedrot+Tabareau:esop:2018}
+Pierre{-}Marie P{\'{e}}drot and Nicolas Tabareau.
+\newblock {Failure is Not an Option - An Exceptional Type Theory}.
+\newblock In {\em {27th European Symposium on Programming}}, volume 10801 of
+  {\em LNCS}, pages 245--271, Thessaloniki, Greece, April 2018. {Springer}.
+\newblock \href {https://doi.org/10.1007/978-3-319-89884-1\_9}
+  {\path{doi:10.1007/978-3-319-89884-1\_9}}.
+
+\bibitem{Pedrot+Tabareau:popl:2020}
+Pierre{-}Marie P{\'{e}}drot and Nicolas Tabareau.
+\newblock {The Fire Triangle: How to Mix Substitution, Dependent Elimination,
+  and Effects}.
+\newblock {\em Proc. {ACM} Program. Lang.}, 4({POPL}):58:1--58:28, 2020.
+\newblock \href {https://doi.org/10.1145/3371126} {\path{doi:10.1145/3371126}}.
+
+\bibitem{Pedrot+Tabareau+Fehrmann+Tanter:icfp:2019}
+Pierre{-}Marie P{\'{e}}drot, Nicolas Tabareau, Hans~Jacob Fehrmann, and
+  {\'{E}}ric Tanter.
+\newblock {A Reasonably Exceptional Type Theory}.
+\newblock {\em Proc. {ACM} Program. Lang.}, 3({ICFP}):108:1--108:29, 2019.
+\newblock \href {https://doi.org/10.1145/3341712} {\path{doi:10.1145/3341712}}.
+
+\bibitem{pitts1991evaluation}
+Andrew~M Pitts.
+\newblock {Evaluation logic}.
+\newblock In {\em IV Higher Order Workshop, Banff 1990: Proceedings of the IV
+  Higher Order Workshop, Banff, Alberta, Canada 10--14 September 1990}, pages
+  162--189. Springer, 1991.
+\newblock \href {https://doi.org/10.1007/978-1-4471-3182-3_11}
+  {\path{doi:10.1007/978-1-4471-3182-3_11}}.
+
+\bibitem{pitts2002tripos}
+Andrew~M Pitts.
+\newblock {Tripos Theory in Retrospect}.
+\newblock {\em Mathematical structures in computer science}, 12(3):265--279,
+  2002.
+\newblock \href {https://doi.org/10.1016/S1571-0661(04)00107-0}
+  {\path{doi:10.1016/S1571-0661(04)00107-0}}.
+
+\bibitem{POWER2002Premonoidal}
+John Power.
+\newblock {Premonoidal Categories as Categories with Algebraic Structure}.
+\newblock {\em Theoretical Computer Science}, 278(1):303--321, 2002.
+\newblock Mathematical Foundations of Programming Semantics 1996.
+\newblock \href {https://doi.org/10.1016/S0304-3975(00)00340-6}
+  {\path{doi:10.1016/S0304-3975(00)00340-6}}.
+
+\bibitem{power1997premonoidal}
+John Power and Edmund Robinson.
+\newblock {Premonoidal Categories and Notions of Computation}.
+\newblock {\em Mathematical structures in computer science}, 7(5):453--468,
+  1997.
+\newblock \href {https://doi.org/10.1017/S0960129597002375}
+  {\path{doi:10.1017/S0960129597002375}}.
+
+\bibitem{Power1997Enviroments}
+John Power and Hayo Thielecke.
+\newblock {Environments, Continuation Semantics and Indexed Categories}.
+\newblock In Mart{\'i}n Abadi and Takayasu Ito, editors, {\em Theoretical
+  Aspects of Computer Software}, pages 391--414, Berlin, Heidelberg, 1997.
+  Springer Berlin Heidelberg.
+\newblock \href {https://doi.org/10.1007/BFb0014560}
+  {\path{doi:10.1007/BFb0014560}}.
+
+\bibitem{RobinsonRosolini90completions}
+Edmund Robinson and Giuseppe Rosolini.
+\newblock {Colimit Completions and the Effective Topos}.
+\newblock {\em Journal of Symbolic Logic}, 55(2):678–699, 1990.
+\newblock \href {https://doi.org/10.2307/2274658} {\path{doi:10.2307/2274658}}.
+
+\bibitem{FerEtAl17ordered}
+Walter~Ferrer Santos, Jonas Frey, Mauricio Guillermo, Octavio Malherbe, and
+  Alexandre Miquel.
+\newblock {Ordered Combinatory Algebras and Realizability}.
+\newblock {\em Mathematical Structures in Computer Science}, 27(3):428--458,
+  2017.
+\newblock \href {https://doi.org/10.1017/S0960129515000432}
+  {\path{doi:10.1017/S0960129515000432}}.
+
+\bibitem{Speight24}
+Samuel~L. Speight.
+\newblock {Groupoidal Realizability for Intensional Type Theory}.
+\newblock {\em Mathematical Structures in Computer Science}, page 1–34, 2024.
+\newblock \href {https://doi.org/10.1017/S0960129524000343}
+  {\path{doi:10.1017/S0960129524000343}}.
+
+\bibitem{Streicher13krivine}
+Thomas Streicher.
+\newblock {Krivine's Classical Realisability from a Categorical Perspective}.
+\newblock {\em Mathematical Structures in Computer Science}, 23(6):1234--1256,
+  2013.
+\newblock \href {https://doi.org/10.1017/S0960129512000989}
+  {\path{doi:10.1017/S0960129512000989}}.
+
+\bibitem{van2008realizability}
+Jaap Van~Oosten.
+\newblock {\em {Realizability: an {Introduction}} to its {Categorical} {Side}},
+  volume 152.
+\newblock Elsevier, Amsterdam, 2008.
+\newblock \href {https://doi.org/doi:10.1017/S1079898600000858}
+  {\path{doi:doi:10.1017/S1079898600000858}}.
+
+\bibitem{wadler1990comprehending}
+Philip Wadler.
+\newblock {Comprehending Monads}.
+\newblock In {\em Proceedings of the 1990 ACM Conference on LISP and Functional
+  Programming}, pages 61--78, 1990.
+\newblock \href {https://doi.org/10.1145/91556.91592}
+  {\path{doi:10.1145/91556.91592}}.
+
+\bibitem{wadler1995monads}
+Philip Wadler.
+\newblock {Monads for FunctionalDOI:10.1017/S0960129597002375 Programming}.
+\newblock In {\em International School on Advanced Functional Programming},
+  pages 24--52. Springer, 1995.
+\newblock \href {https://doi.org/10.1007/3-540-59451-5_2}
+  {\path{doi:10.1007/3-540-59451-5_2}}.
+
+\end{thebibliography}

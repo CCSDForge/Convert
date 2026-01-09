@@ -1,0 +1,1578 @@
+\documentclass[a4paper,USenglish,cleveref, autoref, thm-restate,authorcolumns]{lipics-v2021}
+\newcommand{\vlong}[1]{#1}
+\newcommand{\vshort}[1]{}
+% \newcommand{\vlong}[1]{}
+% \newcommand{\vshort}[1]{#1}
+
+\def\BaseUrl{https://dominik-kirst.github.io/mca/MCA.html\#}
+\newcommand{\coqdoc}[1]{\href{\BaseUrl#1}{\raisebox{-.9mm}{\includegraphics[height=1em]{coql.png}}}}
+
+\pdfoutput=1 %uncomment to ensure pdflatex processing (mandatatory e.g. to submit to arXiv
+\hideLIPIcs  %uncomment to remove references to LIPIcs series (logo, DOI, ...), e.g. when preparing a pre-final version to be uploaded to arXiv or another public repository
+% \hideLIPIcs  %uncomment to remove references to LIPIcs series (logo, DOI, ...), e.g. when preparing a pre-final version to be uploaded to arXiv or another public repository
+  
+%\graphicspath{{./graphics/}}%helpful if your graphic files are in another directory
+
+\bibliographystyle{plainurl}% the mandatory bibstyle
+%\title{Internalizing Computational Effects via Monadic Combinatory Algebras} %TODO Please add
+
+%\titlerunning{Dummy short title} %TODO optional, please use if title is longer than one line
+
+\title{From Partial to Monadic: Combinatory Algebra with Effects
+}
+
+\authorrunning{Cohen, Grunfeld, Kirst, Miquey}
+
+\Copyright{Cohen, Grunfeld, Kirst and Miquey} %TODO mandatory, please use full first names. LIPIcs license is "CC-BY";  http://creativecommons.org/licenses/by/3.0/
+
+
+\author{Liron Cohen}{Ben-Gurion University,  Israel}{cliron@bgu.ac.il}{0000-0002-6608-3000}{}
+\author{Ariel Grunfeld}{Ben-Gurion University,  Israel}{arielgru@post.bgu.ac.il}{0009-0008-1142-282X}{}
+\author{Dominik Kirst}{Ben-Gurion University,  Israel / Inria Paris, France}{dominik.kirst@inria.fr	}{0000-0003-4126-6975}{}
+\author{\'{E}tienne Miquey}{Aix Marseille University, CNRS, I2M, Marseille, France}{etienne.miquey@univ-amu.fr	}{0000-0002-5987-6547}{}
+%\author{Ross Tate}{Independent Researcher, USA}{ross.tate@gmail.com}{}{}
+
+
+
+%{(Optional) author-specific funding acknowledgements}%TODO mandatory, please use full name; only 1 author per \author macro; first two parameters are mandatory, other parameters can be empty. Please provide at least the name of the affiliation and the country. The full address is optional. Use additional curly braces to indicate the correct name splitting when the last name consists of multiple name parts.
+
+%\author{Joan R. Public\footnote{Optional footnote, e.g. to mark corresponding author}}{Department of Informatics, Dummy College, [optional: Address], Country}{joanrpublic@dummycollege.org}{[orcid]}{[funding]}
+
+
+\ccsdesc[500]{Theory of computation}
+%\ccsdesc[500]{Theory of computation~Proof theory}
+% \ccsdesc[300]{Theory of computation~Linear logic}
+
+
+\keywords{Combinatory algebras, Monads, Effects, Realizability, Evidenced frames} %TODO mandatory; please add comma-separated list of keywords
+
+%\category{} %optional, e.g. invited paper
+
+% \relatedversion{https://hal.inria.fr/hal-04083002v1} %optional, e.g. full version hosted on arXiv, HAL, or other respository/website
+%\relatedversion{link to Coq ??} %linktext and cite are optional
+
+\supplement{Rocq Formalization}
+
+\supplementdetails[subcategory={Source Code}, cite={}, swhid={}]{Other}{https://github.com/dominik-kirst/mca}
+
+
+
+% \supplement{\url{https://github.com/dominik-kirst/mca}}%optional, e.g. related research data, source code, ... hosted on a repository like zenodo, figshare, GitHub, ...
+%\supplementdetails[linktext={opt. text shown instead of the URL}, cite=DBLP:books/mk/GrayR93, subcategory={Description, Subcategory}, swhid={Software Heritage Identifier}]{General Classification (e.g. Software, Dataset, Model, ...)}{URL to related version} %linktext, cite, and subcategory are optional
+
+\funding{This work was partially supported by Grant No. 2020145 from the United States-Israel Binational Science Foundation (BSF). Dominik Kirst received funding from the European Union’s Horizon research and innovation programme under the Marie Skłodowska-Curie grant agreement No.101152583 and a Minerva
+Fellowship of the Minerva Stiftung Gesellschaft für die Forschung mbH. }
+
+\acknowledgements{We are deeply grateful to Ross Tate for his valuable ideas and insights, which significantly shaped the direction of this work.} 
+
+\nolinenumbers %uncomment to disable line numbering
+
+
+
+\EventEditors{Maribel Fern\'{a}ndez}
+\EventNoEds{1}
+\EventLongTitle{10th International Conference on Formal Structures for Computation and Deduction (FSCD 2025)}
+\EventShortTitle{FSCD 2025}
+\EventAcronym{FSCD}
+\EventYear{2025}
+\EventDate{July 14--20, 2025}
+\EventLocation{Birmingham, UK}
+\EventLogo{}
+\SeriesVolume{337}
+\ArticleNo{11}
+
+\usepackage{cite}
+\usepackage{amsmath,amssymb,amsfonts}
+\usepackage{algorithmic}
+\usepackage{graphicx}
+\usepackage{textcomp}
+\usepackage{xcolor}
+\usepackage{makecell}
+
+\usepackage{soul}
+\usepackage{tikz-cd}
+% \usepackage{tikz}
+\usepackage{xspace}
+% \usepackage[normalem]{ulem}
+\usepackage{xcolor}
+\usepackage{perfectcut}
+\let\cut\perfectcut
+\usepackage[final,inline,nomargin]{fixme}
+\fxusetheme{color}
+\fxuseenvlayout{color}
+\FXRegisterAuthor{lc}{alc}{\color{purple}[L]}
+\FXRegisterAuthor{ag}{aag}{\color{teal}[A]}
+\FXRegisterAuthor{dk}{adk}{\color{magenta}[D]}
+\FXRegisterAuthor{em}{aem}{\color{blue}[E]}
+\FXRegisterAuthor{rt}{art}{\color{orange}[R]}
+\FXRegisterAuthor{rev}{arev}{\color{red}[Reviewer]}
+
+
+\RequirePackage{xparse}
+
+\usepackage[colorinlistoftodos,prependcaption,textsize=scriptsize,textwidth=2cm]{todonotes}
+\setlength {\marginparwidth }{2cm}
+\newcommand{\inline}[1]{\todo[inline,color=blue!15]{#1}}
+% \usepackage{proof}
+\usepackage[inline]{enumitem}
+\usepackage{multicol}
+\usepackage{mathpartir}
+\usepackage{marvosym}
+\usepackage{float}
+\usepackage{mathbbol}
+\usepackage{mathtools}
+\usepackage{mathrsfs}
+\usepackage{amsmath}
+% \usepackage{amssymb}
+%\usepackage{latexsym}
+\usepackage{amsthm}
+\usepackage{thmtools}
+\usepackage[notext,nomath]{stix}
+\usepackage{stmaryrd}
+% \usepackage{arydshln} % horizontal lines
+\usepackage{proof}
+% \usepackage{prooftree}
+\usepackage{hyperref}
+
+\usepackage{stix}
+\usepackage{array}
+\usepackage{arydshln}
+\usepackage{upgreek}
+\usepackage{empheq}
+\usepackage{perfectcut}
+\let\cut\perfectcut
+\usepackage{flafter} % ensures floats never drawn before their reference
+\usetikzlibrary{matrix, positioning, fit, arrows, chains,shapes}
+
+
+%%%% PACKAGES
+
+%\usepackage[usenames,dvipsnames,table]{xcolor}
+%\usepackage[obeyFinal]{todonotes}
+\usepackage{mathtools}
+\usepackage[bb=boondox]{mathalfa}
+\usepackage{proof}
+\hypersetup{colorlinks=true}
+
+
+%%%% REFS
+\Crefname{equation}{Eq.}{Eqs.}
+\Crefname{figure}{Fig.}{Figs.}
+\Crefname{tabular}{Tab.}{Tabs.}
+\Crefname{section}{Sec.}{Secs.}
+\Crefname{definition}{Def.}{Defs.}
+\Crefname{defi}{Def.}{Defs.}
+\Crefname{lemma}{Lem.}{Lems.}
+\Crefname{lem}{Lem.}{Lems.}
+\Crefname{theorem}{Thm.}{Thms.}
+\Crefname{thm}{Thm.}{Thms.}
+\Crefname{paragraph}{Sec.}{Secs.}
+\Crefname{appendix}{Appx.}{Appxs.}
+\Crefname{corollary}{Cor.}{Cors.}
+\Crefname{example}{Ex.}{Exs.}
+\Crefname{proposition}{Prop.}{Props.}
+\Crefname{remark}{Rem.}{Rems.}
+
+\input{def}
+
+\newcommand{\negspace}{\vspace{-0.5em}}
+\begin{document}
+
+
+\maketitle
+
+
+\begin{abstract}
+Partial Combinatory Algebras (PCAs) provide a foundational model of the untyped $\lambda$-calculus and serve as the basis for many notions of computability, such as realizability theory. 
+%
+However, PCAs support a very limited notion of computation by only incorporating non-termination as a computational effect. 
+%
+To provide a framework that better internalizes a wide range of computational effects, this paper puts forward the notion of Monadic Combinatory Algebras (MCAs). 
+%
+MCAs generalize the notion of PCAs by structuring the combinatory algebra over an underlying computational effect, embodied by a monad. 
+%
+We show that MCAs can support various side effects through the underlying monad, such as non-determinism, stateful computation and continuations. 
+%
+%Furthermore, we show that MCAs can parameterized by the underlying evaluation strategy, and provide an illustrative example allowing both Call by Value and Call by Name for CPS.
+%
+We further obtain a categorical characterization of MCAs within Freyd Categories, following a similar connection for PCAs.
+%
+Moreover, we explore the application of MCAs in realizability theory, presenting constructions of effectful realizability triposes and assemblies derived through evidenced frames, thereby generalizing traditional PCA-based realizability semantics.
+  %
+The monadic generalization of the foundational notion of PCAs provides a comprehensive and powerful framework for \emph{internally} reasoning about effectful computations, 
+paving the path to a more encompassing study of computation and its relationship with realizability models and programming languages.
+\end{abstract}
+
+
+\lcnote{cite and connect to Paul Levy}
+
+\input{intro}
+
+
+
+
+\section{Background}\label{sec:background}
+
+This section briefly overviews PCAs and monads, establishing key notations and conventions.
+
+\subsection{Partial Combinatory Algebras}\label{subsection:PCA}
+
+Partial Combinatory Algebras (PCAs) provide a foundational model for the untyped $\lambda$-calculus and underlie many frameworks in computability, such as realizability theory. 
+%
+They are a generalization of combinatory algebras that allows for partial functions.
+That is, PCAs extend combinatory algebras by incorporating the computational effect of non-termination. 
+% In this work we aim to take this further, providing a unified framework for a combinatory algebra that offers support for various computational effects. 
+% %
+% But first, this section provides a brief overview of partial combinatory algebras, which we generalize in this paper, as well as establishes some key notations and conventions. 
+
+
+The definition of partial combinatory algebra is based on  \emph{partial applicative structures}.
+%
+\begin{definition}[Partial Applicative Structure]
+A partial applicative structure is a set $\mca$ of ``codes'' equipped with a partial binary ``application'' operator on $\mca$:
+$ \left(-\right) \app \left(-\right) : \mca \times \mca \rightharpoonup \mca. $
+%
+%For any two codes $c_{f}$ and $c_{a}$, the expression $c_{f} \app c_{a} \downarrow$ is used to say the application $c_{f} \app c_{a}$ is defined, and $c_{f} \app c_{a} \downarrow c_{r}$ is used to say $c_{f} \app c_{a}$ is defined and equal to $c_{r}$.
+\end{definition}
+
+We use~$c_f \app c_a \downarrow c_r$ to denote $c_r$ being the (successful) result of the application~$c_f \app c_a$, and  $c_{f} \app c_{a} \downarrow$ to denote that there is a code $c_{r} \in \mca$ such that $c_{f} \app c_{a} \downarrow c_{r}$.
+
+%From now on, for any two codes $c_{f} , c_{a} \in \mca$ and any set $S$, the notation $c_{f} \app c_{a} \in S$ will be used to denote that there is a code $c_{r} \in \mca$ such that $c_{f} \app c_{a} \downarrow c_{r}$ and $c_{r} \in S$.
+
+%Semantically, the application operator takes a code $c_{f}$, denoting some program, and a code $c_{a}$, and then runs the program represented by $c_{f}$ on $c_{a}$ as an input, yielding $c_{f} \app c_{a}$ as a result.
+%The partiality of the application operator allows this execution to never terminate. If the execution does terminate, and yields the code $c_{r}$ as a result, it is expressed by the judgement $c_{f} \app c_{a} \downarrow c_{r}$.
+
+A PCA is then defined as a partial applicative structure that is ``functionally complete'', meaning there is a way to encode application expressions 
+(such as $(c_1 \app (c_2 \app c_3)) \app (c_4 \app c_5)$) 
+with $n$~free variables as individual codes accepting $n$~arguments through applications. 
+That is, we ensure that every formal expression involving variables, codes, and application, can be ``internalized'' in a similar vein to the abstraction done in $\lambda$-calculus.
+%
+This ensures the necessary expressiveness for modeling computational systems like the $\lambda$-calculus.
+%Given a partial applicative structure, one can consider application ``expressions'' such as $(c_1 \app (c_2 \app c_3)) \app (c_4 \app c_5)$.
+%%, meaning $c_1 \app c_2 \app c_3$ is shorthand for $(c_1 \app c_2) \app c_3$).
+
+%\revnote{the grammar of expression seems unnecessarily convoluted: why not saying that i is just a natural number?}
+To present the formal definition, we first formalize expressions~$e$ with numbered free variables~$i \in \mathbb{N}$. % and substitution~$e[c_a]$.
+To make the formalism easier to mechanize, we opt for lexical addresses (de Bruijn level notation), rather than nominal variables.
+Lexical addresses are numbers representing the index of a formal parameter within the body of a bound expression.
+For example, given a function $f(x_{0},x_{1},x_{2})$, $2$ is the lexical address of $x_{2}$ because it is the third parameter\emnote{third but 2, can't we rephrase}, so instead of writing $x_{2}$ within the body of $f$, one can use the number $2$.
+%
+%Here we define partial combinatory algebras in terms of functional completeness rather than combinators, and as such we need to formalize expressions, substitution, and the extension of evaluation to expressions.
+$$
+e  {}::={}  i \in \mathbb{N} \mid c \in \mca \mid e \bullet e \qquad\qquad
+E_n(\mca)  {}::={}  \{ e \mid \text{all $i$s in $e$ are $< n$}\} 
+$$
+Term application $\bullet$ is left associative. Elements of $E_{0}\left(\mca\right)$ are called \emph{closed} , while for every $n>0$, elements of $E_{n}\left(\mca\right)$ are called \emph{open}.
+Next, we define substitution~$e\sub{c_a}$ and evaluation to expressions~$e \downarrow c_r$ as follows: %\agnote{Why are we using CbN substitution here instead of CbV?}
+\negspace
+$$\begin{array}{c@{\hspace{1cm}}c}
+    \begin{tabular}{c|c}
+         $e $ & $e\sub{c_a}$ \\
+         \hline
+         $0$ & $c_a$ \\
+         $i + 1$ & $i$ \\
+         $c$ & $c$ \\
+         $e_{1} \bullet e_{2}$ & $e_{1}\sub{c_a} \bullet e_{2}\sub{c_a}$
+    \end{tabular}
+%    e\sub{e'}=
+% \begin{cases}
+%          e' & e=0 \\
+%          i  &  e=i+1\\
+%          c & e=c \\
+%         e_{1}\sub{e'} \bullet e_{2}\sub{e'} & e=e_{1} \bullet e_{2}
+% \end{cases}
+&
+ \begin{tabular}{c}
+$\inferrule*{ }{c \downarrow c}$ \\
+~\\
+$\inferrule*{e_f \downarrow c_f \qquad e_a \downarrow c_a \qquad c_f \app c_a \downarrow c_r}{e_f \bullet e_a \downarrow c_r} $
+    \end{tabular}
+\end{array}
+$$
+\label{exp+sub}
+\negspace
+%
+% We also extend the definition of evaluation to expressions~$e \downarrow c_r$ as follows:
+% %\revnote{in the rhs rule, it seems that $\cdot$ and $\bullet$ should be swapped.}
+% $$
+% \inferrule*{ }{c \downarrow c} \qquad \qquad  \ \inferrule*{e_f \downarrow c_f \\ e_a \downarrow c_a \\ c_f \app c_a \downarrow c_r}{e_f \bullet e_a \downarrow c_r} $$
+
+
+% Next comes substitution, which expresses the idea that variables are ``stand-ins'' for other expressions.
+% The expression $e_{a}\left[e_{b}\right]$ represents the substitution of every free occurrence of the index $0$ by $e_{b}$ within $e_{a}$.
+% Substitution is defined by recursion on the structure of $e_{a}$:
+\begin{definition}[Partial Combinatory Algebra]
+A \emph{partial combinatory algebras (PCA)} is a partial applicative structure $\mca$ 
+%, equipped with an  ``abstraction'' assignment of
+such that for every expression~$e \in E_{n+1}\left(\mca\right)$ there is a code~$\encode{n}{e} \in \mca$, satisfying the following laws:
+% \[ \left\langle \lambda^{n} . - \right\rangle : E_{n+1}\left(\mca\right) \rightarrow \mca \]
+% which takes an open expression and returns a code, abiding by 
+\begin{align*}
+\left\langle \lambda^{n+1} . e \right\rangle \app c_{a} \downarrow \left\langle \lambda^{n} . e \sub{c_{a}} \right\rangle 
+\qquad \qquad
+\left\langle \lambda^{0} . e \right\rangle \app c_{a} \downarrow c_{r} \iff e \sub{c_{a}} \downarrow c_{r}
+\end{align*}
+\end{definition}
+%
+The code $\encode{n}{e}$ is essentially the closure of the open expression $e$,   embodying the $\lambda$-calculus term binding the $n+1$ free variables in~$e$.
+%
+Note that while we use this $\lambda$-construct to specify the result of a partial application, the above definition is equivalent (under certain assumptions) to the perhaps more traditional PCA definition~\cite{hofstra2004partial}.
+%which only requires the partial application to be defined and well-behaved. 
+
+
+
+\subsection{Monads}
+
+Roughly speaking, monads are used to relate a computational effect with a specific endofunctor, say $\monad$, and consider effectful programs that return results of type $A$ in context $X$ as
+% generalized elements of the object $\monad A$.
+% A \emph{generalized element} of an object $Y$ in category $\C$ is 
+morphisms $f \in \hom{\C}{X}{\monad A}$. 
+%
+A \emph{monad} $\monad$ over category $\C$ is a functor $\monad : \C \rightarrow \C$, equipped with two natural transformations $\eta : \termobj \Rightarrow \monad$ and $\mu : \monad \monad \Rightarrow \monad$, satisfying equational laws, such that it forms a monoid object in the category of endofunctors over $\C$.
+% \lcnote{def B}Monads are defined as a triple $\left( T , \eta , \_^{*} \right)$, where $T$ is a functor; for each object $A$ the morphism $\eta_A : A \rightarrow T \left( A \right)$ is the Kleisli identity over $A$; and the Kleisli extension $\_^{*}$ turns every Kleisli morphism $f : A \rightarrow T \left( B \right)$ into a morphism of the form $f^{*} : T \left( A \right) \rightarrow T \left( B \right)$, allowing the composition of Kleisli morphisms.
+
+In the general case, interpreting computational effects in arbitrary categories requires a \emph{strong monad} rather than just a monad~\cite{moggi1991notions}. However, here, for simplicity, we focus on a set theoretic settings, where every monad over the category of sets is a strong monad.
+Hence, we sometimes use a notation similar to the one from $\lambda_{c}$ calculus~\cite{moggi1989computationallamdba}, where $\return{a}$ stands for $\eta\left(a\right)$, often called `return', and $\letin{x}{m}{n}$ stands for $\mu \circ \monad\left(\lambda x . n\right)\left(m\right)$, often called `bind'.
+
+%\lcnote{how a Set-based Kleisli category becomes a Freyd category? I think that should go to the section itself}
+
+%For a monad $\monad$, morphisms of the form $\hom{\C}{A}{\monad B}$ for $A,B \in \obj{\C}$ form a category, called the \emph{Kleisli category}.
+Given a category $\C$ and a monad $\monad$ on $\C$, the \emph{Kleisli category} $\C_{\monad}$ 
+%
+has the same objects as \( \C \), %i.e., \( \obj{\C_{\monad}} = \obj{\C} \),
+while its morphisms are Kleisli morphisms, i.e., $\hom{\C_{\monad}}{A}{B} := \hom{\C}{A}{M B}$. 
+The identity morphism over an object \( A \) is $\eta_{A} \in \hom{\C}{A}{\monad A}$. 
+Composition in \( \C_{\monad} \) is defined for $f \in \hom{\C_{\monad}}{B}{C}$ and $g \in \hom{\C_{\monad}}{A}{B}$ by $\mu \circ \monad f \circ g \in \hom{\C}{A}{\monad C} $.
+% \begin{definition}[Kleisli category]
+% Given a category $\C$ and a monad $\monad$ on $\C$, the \emph{Kleisli category} $\C_{\monad}$ has the following components:
+% \begin{itemize}[leftmargin=0.5cm]
+%     \item Objects are the same as in $\C$:
+%     $~~\obj{\C} := \obj{\C_{\monad}}$
+%     \item Morphisms are Kleisli morphisms:
+%     $~~\hom{\C_{\monad}}{A}{B} := \hom{\C}{A}{M B}$
+%     \item Identity over object $A$ is:
+%     $~~\id_{A} \in \hom{\C_{\monad}}{A}{A} := \eta_{A} \in \hom{\C}{A}{\monad A}$
+%     \item Given morphisms $f \in \hom{\C_{\monad}}{B}{C}$ and $g \in \hom{\C_{\monad}}{A}{B}$, their composition is:\\
+%     $~~ f \circ g \in \hom{\C_{\monad}}{A}{C} := \mu \circ \monad f \circ g \in \hom{\C}{A}{\monad C} $
+% \end{itemize}
+% \end{definition}
+
+
+\section{Monadic Combinatory Algebras}\label{sec:mca}
+
+This section presents the generalization of the notion of PCA to one that supports a wide range of computational effects. %effects captured by monads. 
+%
+%To support general effects we employ the standard structure for describing effects: monads.
+%
+For this, we employ the standard structure for describing and reasoning about general effects: (strong) monads~\cite{moggi1991notions}. 
+This categorical model has the benefit of preserving many useful properties of functions while allowing a wider variety of models.
+%
+Thus,~\Cref{sec:mcadef} defines Monadic Combinatory Algebra (MCAs), generalizing PCAs by encapsulating computational effects via monads,~\Cref{sec:examples} demonstrates their versatility in embedding computational effects, and~\Cref{sec:turing} provides their categorical characterization.
+
+% Thus, \Cref{sec:mcadef} defines the notion of Monadic Combinatory Algebra (MCA), which generalizes the notion of a PCA, but instead of partial computation, exhibits a computational effect encapsulated behind a monad.
+% Then, \Cref{sec:examples} demonstrates the versatility and uniformity of the MCA framework by showing how  some of the most common effectful notions of computations can be embedded within an MCA.
+
+
+\subsection{The Effectful Algebra}\label{sec:mcadef}
+
+Just as PCAs describe the application as a \emph{partial} operator, our generalized notion describes the application as an \emph{effectful} operator, parameterized by some $\mathbf{Set}$ monad.
+%
+
+%\lcnote{do we need to discuss strong monads?}
+
+\begin{definition}[Monadic Applicative Structure \coqdoc{MAS}]
+Given a $\mathbf{Set}$ monad $M$, a \emph{Monadic Applicative Structure} (MAS) over $M$ is a set of ``codes''
+$\mca$ with an application Kleisli function:
+$\left(-\right)\app\left(-\right) : \mca\times\mca \rightarrow M\mca$.
+\end{definition}
+
+Terms with variables and substitution follow the PCA grammar.
+%
+We think of $\left(-\right)\app\left(-\right)$ as a function that takes two codes and returns a `computation' of a code.
+%
+Intuitively, codes are either the encoding of programs, or encodings of inputs of programs.
+Using the same encoding for both allows us to discuss programs that take encodings of other programs as inputs. %and use them.
+That is, viewing a code $c_{f}$ as the encoding of a program, and a code $c_{a}$ as the encoding of its input, $c_{f} \app c_{a}$  denotes the computation executed by running the program encoded by $c_{f}$ on $c_{a}$ as an input.
+So far, this is identical to the PCA settings.
+However, whereas the PAS application function can only produce a code (if anything at all),  the MAS application function can produce any computational effect describable by a monad. 
+%
+%There are various different but equivalent approaches to do so, we will use the following. 
+
+% Given a \emph{MAS} $\mca$, the set $E_{n}\left(\mca\right)$
+% of \emph{terms over }$\mca$ is defined by the grammar:
+% \[
+% \hfill
+% e \ ::= \  0 \ | \  \ldots \ | \  n-1 \ | \  c \in \mca \ | \  e \app e
+% \hfill
+% \]
+% Given a term $e \in E_{n+1}\left(\mca\right)$ and a code $c\in\mca$, their 
+% \emph{substitution} $e\left[c\right] \in E_{n}\left(\mca\right)$ is defined inductively by:
+
+% \begin{center}
+% 	\begin{tabular}[H]{|c|c|} 
+% 		\hline
+% 		$e$ & $e\left[c_{a}\right]$ \\ 
+% 		\hline
+% 		$0$ & $c_{a}$ \\ 
+% 		$i+1$ & $i$ \\
+% 		$c$ & $c$ \\
+% 		$e_{f} \app e_{a}$ & $e_{f}\left[c_{a}\right] \app e_{a}\left[c_{a}\right]$ \\
+% 		\hline
+% 	\end{tabular}
+% \end{center}
+
+To go from the applicative structure to an algebra, we must employ some evaluation map that given a term, `computes' the `value' of the term.
+%
+%The key to the evaluation map is that the evaluation of the codes (i.e., $c \in \mca$) is determined by the underlying monad.
+%
+The key to the evaluation is the way in which it connects to the underlying monad~\cite{wadler1990comprehending}.
+%
+% In general, since the language of monads prescribes a sequential behavior, using it to define an evaluation essentially forces a specific evaluation strategy~\cite{wadler1990comprehending}.\lcnote{contradicts (as written) the next paragraph}
+%
+Intuitively, the evaluation of a code simply returns the code, without exhibiting any effectful behavior.
+Application terms, on the other hand, evaluate using the monadic bind, depending on the specific strategy, and may exhibit the computational effect carried by the monad.
+
+
+
+% The evaluation function described here encodes a Call-by-Value (CbV) strategy.
+% Intuitively, the evaluation of a code simply returns this code, without exhibiting any effectful behavior.
+% The evaluation of application $e_{f} \bullet e_{a}$, as per a CbV strategy, first evaluates the operator term $e_{f}$, getting a code $c_{f}$ as its value, then evaluating the argument term $e_{a}$ to a code $c_{a}$, and finally, executing the program encoded by the operator value $c_{f}$ on the input encoded by $c_{a}$.
+% \lcnote{join zoom? I think you are writing stuff that are already written}
+
+
+
+%
+% To provide the most general structure, we do not commit to any specific evaluation strategy, but rather parameterize our MCA by some monadic evaluation map.
+% \begin{definition}[Monadic Evaluation]
+% Given a MAS over $M$, $\nu :E_{0}\left(\mca\right)\rightarrow M \mca $ is 
+% an \emph{$M$-evaluation} Kleisli map if  $\nu\left(c\right) := \eta\left(c\right)$ for for $c \in \mca$.\lcnote{is this a property we want of all evaluation strategies?}
+% %  
+% \end{definition}
+In principle, MCAs are orthogonal to the specifics of the evaluation strategy. %as long as it obeys the monad on the base codes. 
+That is,  we can define a notion of an MCA based on various evaluation strategies. 
+In this paper, to conform with traditional PCA, 
+%and compatibility with the categorical structures discussed in \Cref{sec:turing},  
+we opt to commit to the common Call-by-Value (CbV) evaluation strategy, codified in the following evaluation model.
+%
+%The following evaluation model codifies a CbV evaluation strategy.
+
+\begin{definition}[CbV Evaluation \coqdoc{eval}]\label{def:cbv-eval}
+Evaluation $\nu$ is 
+defined by induction on $E_{0}\left(\mca\right)$ as follows:
+%
+$$
+\nu\left(c\right) := \return{c} \qquad \qquad
+   % \nu\left(e_{f}\app e_{a}\right) &:=& \text{do}\ c_{f}\leftarrow\nu\left(e_{f}\right)\ ;\ c_{a}\leftarrow\nu\left(e_{a}\right)\ ;\ c_{f} \app c_{a}
+       \nu\left(e_{f} \bullet e_{a}\right) :=
+       \letin{c_{f}}{\nu\left(e_{f}\right)}{\letin{c_{a}}{\nu\left(e_{a}\right)}{c_{f} \app c_{a}}}
+$$
+% $$\begin{array}{l@{\hspace{0.15in}}l@{\hspace{0.15in}}l}
+%     \nu\left(c\right) &:=& \return{c} \\
+%    % \nu\left(e_{f}\app e_{a}\right) &:=& \text{do}\ c_{f}\leftarrow\nu\left(e_{f}\right)\ ;\ c_{a}\leftarrow\nu\left(e_{a}\right)\ ;\ c_{f} \app c_{a}
+%        \nu\left(e_{f} \bullet e_{a}\right) &:=&
+%        \letin{c_{f}}{\nu\left(e_{f}\right)}{\letin{c_{a}}{\nu\left(e_{a}\right)}{c_{f} \app c_{a}}}
+%         % \nu_v\left(e_{f}\right) \bind \left(
+%         % \lambda c_{f} . \nu_v\left(e_{a}\right) \bind \left(
+%         %     \lambda c_{a} . c_{f} \app c_{a}
+%         %     \right)
+%         % \right)
+% \end{array}
+% $$
+%where \lcnote{explain eta and the do notation}
+\end{definition}
+Note that evaluation is reflected by an \emph{equality} in $\mca$. 
+% \emnote{@Ariel: this could be the right place to emphasize that evaluation is reflected by an equality in $\mca$ (and quickly explain how this impacts what follows), and explain that for that we could probably generalized to an ordered settings following \cite{Hofstra06relative,FerEtAl17ordered}.}
+% \lcnote{Etienne, what implications ould you like to explain here? the CPS is far away}
+However, this could be generalized to an ordered setting following~\cite{Hofstra06relative,FerEtAl17ordered}.
+
+
+Next, we turn to the definition of monadic combinatory algebras.
+To ensure they can support general computation, they must be at least as computationally powerful as the $\lambda$-calculus.
+This is done through a similar mechanism to how PCAs are defined.
+But, unlike PCAs, which permit only purely functional behavior (up to non-termination), monadic combinatory algebras accommodate any computational effect representable via monads.
+%monadic combinatory algebras allow for any computational effectful behavior that can be described using monads. \agnote{``any computational effectful behavior that can be described using monads'' is already used a few paragraphs above}
+ 
+%\revnote{Definition 6 does not require the presence of primitive operations (e.g. flip for nondeterminism) in the style of algebraic effects. Maybe this should be mentioned, discussing the possibility of adapting the definition of MCA to its presence, and the impact of such a modification to the rest of the paper. This should be helpful in the following, in particular when expressions like "*may* have codes such as" are used.}
+\begin{definition}[Monadic Combinatory Algebra \coqdoc{MCA}]\label{mca}
+A Monadic Combinatory Algebra (MCA) is a monadic applicative structure $\mca$ such that for every expression~$e \in \Expr{n+1}\left(\mca\right)$ there is a code~$\encode{n}{e} \in \mca$ satisfying the following laws:
+% such that for every $n\in\mathbb{N}$ and every term $e \in E_{n+1}\left(\mca\right)$, there is a code $\encode{n}{e}$, such that:
+$$\begin{array}{@{}llcl}
+\forall n \in \mathbb{N}. \forall e \in \Expr{n+2}\left(\mca\right). \forall c \in \mca. & \encode{n+1}{e} \app c &=& \eta \left( \encode{n}{e\sub{c}} \right) \\
+	\forall e \in \Expr{1}\left(\mca\right).\forall c \in \mca .& \encode{0}{e} \app c &=& \nu \left( e\sub{c} \right)
+\end{array}$$
+\end{definition}
+
+
+% Note the similarity to the definition of a PCA:
+% $$\begin{array}{@{}ll}
+% \forall n.\forall e \in \Expr{n+2}.\forall c_a. & \encode{n+1}{e} \app c_a \downarrow \encode{n}{e[c_a]} \\
+% \forall e \in \Expr{1}.\forall c_a, c_r. & \encode{0}{e} \app c_a \downarrow c_r \iff e[c_a] \downarrow c_r
+% \end{array}$$
+
+%\lcnote{this is CbV, no?}
+
+%\lcnote{adjust to codes}
+The \emph{abstraction} assignment of codes to expressions turns open terms into codes that internalize their evaluation after substitution using the monad's return and bind.
+%%
+Principally, the MCA laws state that it ``delays'' the evaluation of an open term it encloses until all free variables in it are substituted by codes.
+If there is more than one free variable in the term, using $\eta$ means the application of the abstracted term to a code only substitutes the outermost parameter with the argument.
+However,  if the term has exactly one free variable,  applying it to the argument obtains a closed term, which is then immediately evaluated.
+
+Terms that only involve codes given by the abstraction operator alone are called \emph{pure terms}.
+%
+The MCA definition closely resembles that of a PCA; in fact, when evaluating pure terms, the behavior remains identical to a PCA, exhibiting no computational effects beyond non-termination.
+%
+Thus, computational effects arise only through additional codes not definable via abstraction.
+%
+For example, when describing non-deterministic computation, using the powerset monad, the evaluation of pure terms will always result in a set with at most one value, while using the monad allows $\mca$ to have codes which, when applied, yield a set with multiple values (see~\Cref{sec:examples}).
+However, the monad still plays an important role when evaluating pure terms, as it allows interpreting a non-terminating evaluation as special elements within the set of computations, denoting the absence of a value. 
+%
+%The next proposition makes this connection to PCAs precise. 
+%As mentioned, the notion of an MCA is a generalization of a PCA, as shown below.
+Concretely, a PCA is obtained from an MCA by instantiating the monad with the sub-singleton monad, i.e.  $M A$ is the set of subsets of $A$ in which all elements are equal.
+\[
+  \monad A = \{S\subseteq A \mid \forall x_{1},x_{2}\in S. x_{1} = x_{2} \}
+ \qquad\qquad
+\eta_A\left(x\right) = \{x\}
+ \qquad\qquad
+ \mu_A\left(m\right) = \bigcup_{X\in m} X
+\]
+
+\begin{proposition}\label{pca_mca}
+    PCA is a special case of an MCA.
+\end{proposition}
+
+
+%
+\Cref{mca} is equivalent to the (perhaps more familiar) formalization of combinatory completeness via the $\scomb$ and $\kcomb$ combinators~\cite{van2008realizability}.
+%
+That is, we could have alternatively, defined an  MCA as a MAS with $\scomb$ and $\kcomb$ combinators, because $\scomb$ and $\kcomb$ are simply encodings of particular expressions that are sufficient to ensure that all expressions can be encoded, and, in the converse direction, the above MCA laws essentially ensure their existence.
+%
+Note, however, that the characterizing axioms for these combinators in the discourse are tailored to a non-effectful behavior of the calculus. 
+% That is, to obtain the intuitive behavior of these combinators in the more general, effectful setting produced by an underlying monad, we must first generalize the axiomatization of these combinators. 
+Standardly, the axioms of $\scomb$ and $\kcomb$  require all their partial applications to be defined.
+Usually written as $\kcomb \app c_{1} \downarrow$, $\scomb \app c_{1} \downarrow$, and $\scomb \app c_{1} \app c_{2} \downarrow$ for any $c_{1}$ and $c_{2}$.
+In the context of MCAs, however, it is not sufficient for the partial applications to be defined, but they also have to be pure, not triggering any effects beyond the evaluation of their value.
+This constraint ensures $\scomb$ and $\kcomb$ do exactly the same thing they do in PCAs, and nothing else, regardless of the underlying monad.
+For monads, purity is represented with the monad unit.
+Hence, the monadic version of the axioms requires the partial applications of $\scomb$ and $\kcomb$ to return the application of the monad unit over particular codes.
+
+\begin{proposition}[\coqdoc{skmca}]\label{prop:SK}
+    An MCA is equivalent to a MAS with %$\scomb$ and $\kcomb$ combinators.
+  codes $\scode , \kcode , \scodeA{c_{1}} , \scodeB{c_{1}}{ c_{2}}$, and $\kcodeA{c_{1}}$ for any two codes $c_{1}$, $c_{2}$, satisfying the following axioms:
+% \agnote{why do we use $\eta\left(x\right)$ and not $\return{x}$?} 
+%\lcnote{also, we must be uniform with S and K notation}
+$$
+\begin{array}[t]{l@{~}c@{~}l}
+    \scode \app c_{1} &= &\return{\scodeA{c_{1}}}\\
+    \kcode \app c_{1} &=& \return{ \kcodeA{c_{1}}}\\
+\end{array}
+\qquad~~%\vrule
+\begin{array}[t]{l@{~}c@{~}l}
+    \scode \app c_{1} &= &\return{\scodeA{c_{1}}}\\
+    \kcodeA{c_{1}} \cdot c_{2} &= &\return{c_{1}}\\
+\end{array}
+\qquad~~
+\begin{array}[t]{l@{~}c@{~}l}
+% \scode \app c_{1} &= &\return{\scodeA{c_{1}}}\\
+%     \scodeA{c_{1}} \cdot c_{2} &= &\return{\scodeB{c_{1}} {c_{2}}}\\
+    \scodeB{c_{1}}{c_{2}} \app c_{3} &= &\nu\left(\left(c_{1} \bullet c_{3}\right) \bullet \left(c_{2} \bullet c_{3}\right)\right)
+\end{array}
+$$
+\end{proposition}
+
+
+
+
+
+ %\lcnote{can we say smt about Reflexive Domains $A \cong A \rightarrow MA$?  \cite{Simpson1992} even if just a note}
+
+
+
+%\lcnote{explain and connect to eta}
+
+% \begin{definition}[CbV Evaluation]
+% CbV Evaluation $\nu_v$ is 
+% defined by induction on $E_{0}\left(\mca\right)$ as follows:
+% %
+% $$\begin{array}{l@{\hspace{0.15in}}l@{\hspace{0.15in}}l}
+%     \nu_v\left(c\right) &:=& \eta\left(c\right) \\
+%    % \nu\left(e_{f}\app e_{a}\right) &:=& \text{do}\ c_{f}\leftarrow\nu\left(e_{f}\right)\ ;\ c_{a}\leftarrow\nu\left(e_{a}\right)\ ;\ c_{f} \app c_{a}
+%        \nu_v\left(e_{f} \app e_{a}\right) &:=&
+%         \nu_v\left(e_{f}\right) \bind \left(
+%         \lambda c_{f} . \nu_v\left(e_{a}\right) \bind \left(
+%             \lambda c_{a} . c_{f} \app c_{a}
+%             \right)
+%         \right)
+% \end{array}
+% $$
+% where \lcnote{explain eta and the do notation}
+% \end{definition}
+
+
+% \begin{definition}[CbV Monadic Applicative Structure]
+%     Given a $\mathbf{Set}$ monad $M$, a \emph{Call by Value Monadic Applicative Structure} (VMAS) over $M$ is a set of ``codes''
+%     $\mca$ together with an application Kleisli function:
+%     \[\left(-\right)\app\left(-\right) : \mca\times\mca \rightarrow M\mca\]
+% \end{definition}
+% \begin{definition}[CbV Evaluation]
+% Evaluation $\nu$ is a Kleisli map from closed terms to codes:
+% \begin{align*}
+%     \nu & : E_{0}\left(\mca\right) \rightarrow M\left(\mca\right)\\
+%     \nu\left(c\right) &:= \eta\left(c\right)\\
+%     \nu\left(e_{f} \app e_{a}\right) &:=
+%         \nu\left(e_{f}\right) \bind \left(
+%         \lambda c_{f} . \nu\left(e_{a}\right) \bind \left(
+%             \lambda c_{a} . c_{f} \app c_{a}
+%             \right)
+%         \right)
+% \end{align*}
+% \end{definition}
+
+% \begin{definition}[CbV Monadic Combinatory Algebra]
+%     A \emph{Call by Value Monadic Combinatory Algebra} (VMCA) is an VMAS $\mca$ with 
+%     an abstraction operator  for each $n\in\mathbb{N}$ 
+%     \[
+%     \left\langle \lambda^{n}.\left(-\right)\right\rangle :E_{n+1}\left(\mca\right)\rightarrow\mca
+%     \]
+%     s.t:
+%     $$\begin{array}{@{}ll}
+%         \forall n \in \mathbb{N}.\forall e \in E_{n+2}\left(\mca\right).\forall c_{a} \in \mca. & \encode{n+1}{e} \app c_{a} = \eta \left( \encode{n}{e[c_{a}]} \right) \\
+%         \forall e \in E_{1}\left(\mca\right).\forall c_{a} \in \mca. & \encode{0}{e} \app c_{a} = \nu \left( e[c_{a}] \right)
+%     \end{array}$$
+% \end{definition}
+
+
+%\subsection{Illustrative Example: CPS}
+
+\subsection{MCA Instances}\label{sec:examples}
+
+\begin{figure}[t]
+    \centering
+%%%  É : don't know how to make it fit
+\scalebox{1}{
+$\begin{array}{@{}l@{\hspace{0.3cm}}l@{\hspace{0.35cm}}l@{\hspace{0.35cm}}l}
+\hline
+\textbf{Comb. Alg.} & \textbf{Monad} ~\monad A & \textbf{return}~\eta_A\left(x\right)  & \textbf{bind}~\mu_A\left(m\right) \\
+\hline
+\textit{Partial} & \{X\subseteq A \mid 
+%|X|\leq 1 \}
+\forall x,y\in X. x = y \}
+&
+\{x\}
+&
+\bigcup_{X\in m} X\\
+% \mu_A\left(\mathbb{X}\right) = \bigcup_{X\in\mathbb{X}} X \\
+\textit{Relational} & \P\left(A\right) & {\{x\}}
+&
+% { \mu_{A}\left(\mathbb{X}\right) = 
+\bigcup_{X\in m} X \\
+\textit{Stateful} & {
+  \Sigma\rightarrow \P\left(\Sigma\times A\right)
+}
+&{
+  \lambda \sigma . \{(\sigma,x)\}
+}
+&{
+\lambda \sigma . \bigcup_{\left(\sigma',f\right)\in m\left(\sigma\right)}\!\!f\left(\sigma\right)
+}\\
+\textit{CPS} & {
+ \left(A \rightarrow R\right) \rightarrow R
+}&{
+  \lambda k.k\left(x\right)
+}&{
+\lambda k . m\left(\lambda g.g\left(k\right)\right)
+}\\
+\textit{Parameterized} & {
+ \param \rightarrow \{X\subseteq A \mid 
+ %|X| \leq 1 \}
+ \forall x,y\in X. x = y \}
+ }&{
+ \lambda p . \left\{ x \right\}
+ }&{
+ \lambda p . 
+ \bigcup \left\{ g\left(p\right) \mid g \in m\left(p\right) \right\}
+}
+\end{array}$
+}
+    \caption{MCA Instances}
+    \label{fig:instances}
+\end{figure}
+
+
+As demonstrated, PCAs are a special case of MCAs. 
+However, the generalized structure also encompasses many common effectful structures proposed in the literature. This section illustrates how those can be derived from an MCA by instantiating the underlying monad.
+
+% \subsection{Partial Combinatory Algebra}
+% The notion of an MCA is a generalization of a PCA, and the laws of a PCA are precisely the MCA laws when the monad is the sub-singleton monad, i.e.  $M A$ is the set of subsets of $A$ in which all elements are equal:
+% \[M A = \{X\subseteq A \mid \forall x,y\in X. x = y \}
+%  \qquad
+%  \eta_A:x\mapsto \{x\}
+%  \qquad
+%  \mu_A:\mathbb{X}\mapsto \bigcup_{X\in\mathbb{X}} X
+% \]
+
+ 
+\subsubsection{Relational Combinatory Algebra}\label{RCA}
+\emph{Relational Combinatory Algebras} (RCAs) were defined in~\cite{cohen2019effects,CohMiqTat21}
+to account for (demonic) non-determinism.
+Concretely, they were used to show that while all realizability models stemming from PCAs model the principle of Countable Choice, realizability models based on RCAs can, in fact, model the negation of the principle.
+
+RCAs correspond to an MCA with $\monad$ being the \emph{powerset} monad, as in~\Cref{fig:instances}. The powerset monad captures non-deterministic computations by considering the subset of possible results. 
+% \threethings{\monad A = \P\left(A\right)}
+%   {\eta_{A}\left(x\right) = \{x\}}
+%  { \mu_{A}\left(\mathbb{X}\right) = \bigcup_{X\in\mathbb{X}} X}
+  % {\mu_{A}\left(\mathbb{X}\right) = \bigcup_{X\in\mathbb{X}} }
+When $\mca$ is an RCA, it may have codes such as $\code{\mathsf{flip}}$, which nondeterministically returns either $\encode{1}{0}$ or $\encode{1}{1}$ whenever it is applied.
+That behavior is defined by representing the set of possible return values when describing the application of $\code{\mathsf{flip}}$
+:
+$ \code{\mathsf{flip}} \app c = \left\{ \encode{1}{0} , \encode{1}{1} \right\} $.
+
+
+\subsubsection{Stateful Combinatory Algebra}\label{SCA}
+\emph{Stateful Combinatory Algebras} (SCAs) were defined in~\cite{cohen2019effects,CohMiqTat21} as a stateful extension of RCAs.
+SCAs were used to memoize non-deterministic
+computations and recover a realizer of Countable Choice even in the presence of nondeterminism.
+
+SCAs correspond to MCAs where $\monad$ is 
+the \emph{powerset state} monad, as given in~\Cref{fig:instances}. 
+This allows taking a code in a given state and returning a set of all possible pairs of results in new states.
+% \threethings{
+%  \monad A = \Sigma\rightarrow \P\left(\Sigma\times A\right)\\[.5em]
+% }{
+%  \eta_{A}\left(x\right) = \lambda \sigma . \{(\sigma,x)\}
+% }{
+%  \mu_{A}\left(u\right) = \lambda \sigma . \bigcup_{\left(\sigma',f\right)\in u\left(\sigma\right)}\!\!f\left(\sigma\right)
+% }
+In~\cite{cohen2019effects,CohMiqTat21}, a variant of the \emph{increasing} state monad was used, which is a submonad of the powerset state monad:
+$
+\monad A = \left\{ m:\Sigma\rightarrow \P\left(\Sigma\times A\right)\
+ \mid\ \forall\sigma_{0}\in\Sigma.\forall\left(\sigma_{1},x\right)\in m\left(\sigma_{0}\right).\sigma_{0}\leq\sigma_{1}\right\}
+$.
+
+%\lcnote{TODO:example -- allocating a new reference cell with an initial value?--- When $\mca$ is an SCA, it may have codes such as $\code{\mathsf{inc}}$, which }
+
+When $\mca$ is an SCA, it may have codes such as $\code{\mathsf{get}}$ and $\code{\mathsf{inc}}$, implementing a counter.
+For simplicity, we take states to be natural numbers.
+When $\code{\mathsf{get}}$ is applied to a code $c$, it ignores $c$ and returns the Church numeral representing the current state of the counter, leaving the state intact.
+When $\code{\mathsf{inc}}$ is applied to a code $c$, it increments the counter and returns $c$.
+\twothings{
+    \code{\mathsf{get}} \app c = \lambda n . \left\{ \left(\overline{n} , n\right) \right\}
+    }{
+    \code{\mathsf{inc}} \app c = \lambda n . \left\{ \left(c , n+1\right) \right\}
+    }
+
+\subsubsection{CPS Combinatory Algebra}\label{example:CPS}
+% \agnote{We probably should also mention how to deal with nontermination, by taking $R$ to be the subsingleton of some set, or requiring it to have a special value for nontermination}\emnote{I am not sure if we want to put this in the core of the paper, maybe if we really want to comment on this it could be a footnote when introducing R.}
+The double-negation translation~\cite{godel1933intuitionistic},  relating classical logic with intuitionistic logic, points to a connection between classical logic and the continuation monad. % ($M A  = R^{\left(R^{A}\right)}$).
+This connection has been extensively studied, particularly in the context of classical realizability~\cite{Krivine09}.
+However, most work on classical realizability is based on Krivine abstract machines rather than combinatory algebras, which is an entirely different model of computation.
+By utilizing MCAs with the continuation monad, we can align classical realizability with a computational model akin to intuitionistic realizability.
+
+
+Here, we focus on Continuation-Passing-Style (CPS), which is a style of programming in which control is explicitly passed through continuation functions. Thus, instead of returning results directly, functions in CPS receive an extra argument: a continuation function that specifies what to do next with the result.
+%
+A \emph{CPS Combinatory Algebra} (CPSCA) is an MCA where the underlying monad is the CPS monad, as described in~\Cref{fig:instances}.\footnote{In general, classical realizability is not constructed via combinatory algebras, but there are similar structures, e.g.~\cite{FerEtAl17ordered} which uses ordered combinatory algebras, or~\cite{krivine2011realizability} which uses abstract machines.}
+The CPS monad allows for composable and reusable continuations, i.e., it models computations with direct access to the call stack, enabling non-trivial control flow manipulation.
+% \threethings{
+%  \monad A = \left(A \rightarrow R\right) \rightarrow R
+% }{
+%  \eta_{A}\left(x\right) = \lambda k.k\left(x\right)
+% }{
+%  \mu_{A}\left(f\right) = \lambda k . f\left(\lambda g.g\left(k\right)\right)
+% }
+In the above definition, $R$ can be any set, representing the ultimate results of the whole computation.
+%In practice, to be able to denote evaluation of terms that have no value, one should take an $R$ which itself is a set of computations $R = N\left(S\right)$, where $S$ is some set of ultimate results and $N$ is some monad that allows for non-termination, such as the sub-singleton monad.
+
+When $\mca$ is a CPSCA, it may have codes such as $\code{\mathsf{cc}}$ and $\code{\mathsf{K}_{u}}$, which save and replace the current continuation:
+\negspace
+\twothings{
+    \left(\code{\mathsf{cc}} \app c_{a}\right)\left(u\right) = \left(c_{a} \app \code{\mathsf{K}_{u}} \right)\left(u\right)
+}{
+    \left(\code{\mathsf{K}_{u}} \app c_{a}\right)\left(u'\right) = u\left(c_{a}\right)
+}
+
+% The first Classical realizability can be interpreted in a direct-style fashion through control operators in the Continuation-Passing-Style (CPS) monad~\cite{Krivine09}.
+
+\agnote{I feel like the reader/reviewer won't understand the point of the defunctionalization paragraph, so we should probably either properly motivate it, or remove it}\emnote{I'll try to see if it can be improved, but I think having a ref to a nice paper giving a methodology to go from one to the other is rather a good point for us (and it also justifies just giving the machine and claiming it comes from the evaluation as functions without having to give more details).}
+Using CPSCAs, the definitions of evaluation and application can be seen as a CPS form of an evaluator for PCAs.
+By defunctionalization, this leads directly to an \emph{eval/apply} abstract stack machine, providing operational semantics for PCAs~\cite{danvy2004evaluation}.
+The machine has a stack, which can hold either codes $c$ tagged with $\boldsymbol{v}\left(c\right)$, or terms $e$ tagged with $\boldsymbol{t}\left(e\right)$.
+An empty stack is marked as $\emptyset$, while a nonempty stack is marked with $x : \pi$, where $x$ is the top of the stack and $\pi$ is the rest.
+The machine has three states:
+\begin{enumerate}[leftmargin=0.5cm]
+    \item \emph{Eval} state, marked as $e \evalstate \pi$, in which the machine takes a closed term $e$, and a stack $\pi$.
+    \item \emph{Apply} state, marked as $c \applystate \pi$, in which the machine takes a value $c$, and a stack $\pi$.
+    \item \emph{Final} state, marked as simply a code $c$, of the final value.
+\end{enumerate}
+The semantics of the machine is defined via a one-step transition relation $\transition$ between states: 
+% \begin{align*}
+%     \begin{array}{rcl@{\hspace{0.02cm}}c@{\hspace{0.15cm}}rcl}
+%         e_{f}\app e_{a} & \evalstate & \pi & \quad\transition\quad & e_{f} & \evalstate & \boldsymbol{t}\left(e_{a}\right):\pi\\
+%         c & \evalstate & \pi & \quad\transition\quad & c & \applystate & \pi\\
+%         c_{f} & \applystate & \boldsymbol{t}\left(e_{a}\right):\pi & \quad\transition\quad & e_{a} & \evalstate & \boldsymbol{v}\left(c_{f}\right):\pi\\
+%         c_{a} & \applystate & \boldsymbol{v}\left(\left\langle \lambda^{0}.e\right\rangle \right):\pi & \quad\transition\quad & e\sub{c_{a}} & \evalstate & \pi\\
+%         c_{a} & \applystate & \boldsymbol{v}\left(\left\langle \lambda^{n+1}.e\right\rangle \right):\pi & \quad\transition\quad & \left\langle \lambda^{n}.e\sub{c_{a}}\right\rangle  & \applystate & \pi\\
+%         c & \applystate & \emptyset & \quad\transition\quad & c\\
+%     \end{array}
+% \end{align*}
+\[
+    \begin{array}{r@{~}c@{~}l@{\hspace{0.02cm}}c@{\hspace{0.15cm}}r@{~}c@{~}l}
+        e_{f}\app e_{a} & \evalstate & \pi & \quad\transition\quad & e_{f} & \evalstate & \boldsymbol{t}\left(e_{a}\right):\pi\\
+        c & \evalstate & \pi & \quad\transition\quad & c & \applystate & \pi\\
+        c & \applystate & \emptyset & \quad\transition\quad & c\\    
+    \end{array}~~\vrule~~
+       \begin{array}{r@{~}c@{~}l@{\hspace{0.02cm}}c@{\hspace{0.15cm}}r@{~}c@{~}l}
+       c_{f} & \applystate & \boldsymbol{t}\left(e_{a}\right):\pi & \quad\transition\quad & e_{a} & \evalstate & \boldsymbol{v}\left(c_{f}\right):\pi\\
+        c_{a} & \applystate & \boldsymbol{v}\left(\left\langle \lambda^{0}.e\right\rangle \right):\pi & \quad\transition\quad & e\sub{c_{a}} & \evalstate & \pi\\
+        c_{a} & \applystate & \boldsymbol{v}\left(\left\langle \lambda^{n+1}.e\right\rangle \right):\pi & \quad\transition\quad & \left\langle \lambda^{n}.e\sub{c_{a}}\right\rangle  & \applystate & \pi\\
+    \end{array}
+\]
+\subsubsection{Parameterized Combinatory Algebra}\label{example:bauer}
+The notion of \emph{Parameterized Combinatory Algebras} (ParCAs), introduced by Bauer and Hanson  in~\cite{bauer2024countablereals}, 
+is based on a notion of computations that has access to external oracles.
+Using parameterized combinatory algebras the authors constructed a model in which the set of Dedekind real numbers is countable.
+
+A ParCA is precisely an MCA based on the \emph{subsingleton reader} monad. That is, for a set $\param$ of parameters, the parameterized monad is defined in~\Cref{fig:instances}.
+% \threethings{
+%  M A = \param \rightarrow \{X\subseteq A \mid \forall x,y\in X. x = y \}\\[.5em]
+%  }{
+%  \eta_{A}(x):= \lambda p . \left\{ x \right\}
+%  }{
+%  \mu_{A}\left(f\right) := \lambda p . 
+%  \bigcup \left\{ g\left(p\right) \mid g \in f\left(p\right) \right\}
+% }
+A function into the subsingleton reader monad represents a partial computation, which, in addition to its input, has access to some external parameters in a set $\param$.
+%
+The uniformity of the MCA framework here is highlighted by the fact that the comprehensive algebraic axiomatization of ParCA in~\cite{bauer2024countablereals} is naturally derivable from the MCA representation.
+
+Computations with external oracles can be modelled by simply allowing the MCA to have access to external parameters.
+When $\mca$ is a ParCA, where the parameter is taken from predicates over $\mca$, that is $\param = \mca \rightarrow \left\{ 0 , 1 \right\}$, it may have a code such as $\code{\mathsf{search}}$.
+When $\code{\mathsf{search}}$ is applied to another code $c$, it takes a predicate $p$ as parameter, and returns either $\encode{1}{0}$ or $\encode{1}{1}$ according to whether $c$ satisfies $p$:
+\[ \left(\code{\mathsf{search}} \app c\right) = \lambda p . \texttt{if}~p\left(c\right) = 0~\texttt{then}~\left\{ \encode{1}{0} \right\}~\texttt{else}~\left\{ \encode{1}{1} \right\}
+% \begin{cases}
+%     \left\{ \encode{1}{0} \right\} & p\left(c\right) = 0\\
+%     \left\{ \encode{1}{1} \right\} & p\left(c\right) = 1
+% \end{cases}
+\]
+
+
+\subsection{Categorical Characterization of MCAs}\label{sec:turing}
+PCAs have been given a categorical representation in \cite{COCKETT2008}, by establishing their connection to
+Turing categories~\cite{LONGO1990193,COCKETT2008}. 
+%
+Concretely, it was shown that PCAs are PCA-objects in the category of sets, which are essentially the categorical counterpart of the notion of combinatory completeness for PCAs. 
+%
+To obtain a similar categorical characterization for the generalized notion of MCAs which is based on arbitrary monads, we here work 
+% , however, we cannot straightforwardly extend the construction in~\cite{COCKETT2008} since it heavily relies on the notion of restriction, which is specifically tailored to capture partiality whereas MCAs are based on an arbitrary underlying monad.
+% %
+% To circumvent this construction, % which seems to be overfitted to the notion of partiality, 
+% we instead 
+% operate
+within Freyd categories~\cite{Power1997Enviroments,LEVY2003Freyd} which are an extension of the categorical framework designed specifically to model computational effects. 
+%
+Importantly, they abstract the structure of the Kleisli category of a monad by employing one category for values and another one for computations. 
+%
+Due to space limitations, we here provide the key results, leaving full details to the appendix.
+
+% Our definition below of a combinatory object relies on the notion of $\mca$-monomials, generalizing a similar notion defined in \cite{LONGO1990193}.
+% An $\mca$-monomial is a morphism in $\hom{\K}{\mca^{n}}{\mca}$, for some $n \in \mathbb{N}$, defined using only projections, morphisms in $\hom{\C}{\termobj}{\mca}$, and application $\aparr$, used in an applicative order.
+% We say that such a monomial $f \in \hom{\K}{\mca^{n}}{\mca}$ is $\mca$-computable whenever there is a code $c \in \hom{\C}{\termobj}{\mca}$ which emulates $f$ when applied with $\aparr$. (full details can be found in the appendix.)
+
+\begin{definition}[Applicative Object]
+    For a Freyd category $\langle \C, \K, \purefun \rangle$, an \emph{applicative object} is an object $\mca \in \obj{\C}$ equipped with an application morphism $ \aparr  \in \hom{\K}{\mca \times \mca}{\mca}$.
+\end{definition}
+
+\begin{definition}
+[Computable Morphism]
+\label{def:computable}
+Given an applicative object $\mca$ in a Freyd category $\langle \C, \K, \purefun \rangle$ and an $0<n \in \mathbb{N}$, we say that a $\K$ morphism $f \in \hom{\K}{\mca^{n}}{\mca}$ is $\mca$-computable when, for all $k \in \left\{ 0 , \ldots , n-1\right\}$, and all $c_{1} , \ldots , c_{k} \in \hom{\C}{\termobj}{\mca}$, there is a code $\code{f\left(c_{1} , \ldots , c_{k}\right)} \in \hom{\C}{\termobj}{\mca}$ such that the following diagrams commute in $\K$ (where $\code{f}$ is $\code{f\left(c_{1} , \ldots , c_{k}\right)}$ for $k=0$).
+\[\begin{tikzcd}
+{\termobj \times \mca^{n-k}} & & {\mca \times \mca^{n-k}} & {\termobj} && {\mca \times \mca^{k}}\\
+{\mca^{k} \times \mca^{n-k}} & {\mca^{n}} & {\mca} &&& {\mca}
+\arrow["{\purefun\pairing{c_{1} , \ldots , c_{k}}_{k} \ltimes \mca^{n-k}}", from=1-1, to=2-1, swap]
+\arrow["{\alpha^{k}}", from=2-1, to=2-2, swap]
+\arrow["{\purefun \code{f\left(c_{1} , \ldots , c_{k}\right)} \ltimes \mca^{n-k}}"', from=1-1, to=1-3, swap]
+\arrow["f", from=2-2, to=2-3, swap]
+\arrow["{\aparr^{n-k}}"', from=1-3, to=2-3, swap]
+\arrow["{ \purefun \pairing{\code{f} , c_{1} , \ldots , c_{k}} }_{k+1}"', from=1-4, to=1-6, swap]
+\arrow["\purefun \code{f\left(c_{1} , \ldots , c_{k}\right)}", from=1-4, to=2-6, swap]
+\arrow["{\aparr^{k}}"', from=1-6, to=2-6, swap]
+\end{tikzcd}\]
+
+% \[\begin{tikzcd}
+% 	{\termobj \times \mca^{n-k}} &&{\mca^{k} \times \mca^{n-k}}   &&   {\termobj} &
+%     \\
+%     && {\mca^{n}}   &&{\mca \times \mca^{k}} & {\mca}
+% 	\\
+% 	{\mca \times \mca^{n-k}} && {\mca}   &&&	
+%     \arrow["{\purefun\left(\pairing{c_{1} , \ldots , c_{k}}_{k} \times \id\right)}", from=1-1, to=1-3]
+%     \arrow["{\alpha^{k}}", from=1-3, to=2-3]
+% 	\arrow["{\purefun\left( \code{f\left(c_{1} , \ldots , c_{k}\right)} \times \id\right)}"', from=1-1, to=3-1]
+% 	\arrow["f", from=2-3, to=3-3]
+% 	\arrow["{\aparr^{n-k}}"', from=3-1, to=3-3]
+%     \arrow["{ \purefun \pairing{\code{f} , c_{1} , \ldots , c_{k}} }_{k+1}"', from=1-5, to=2-5]
+% 	\arrow["\purefun \code{f\left(c_{1} , \ldots , c_{k}\right)}", from=1-5, to=2-6]
+% 	\arrow["{\aparr^{k}}"', from=2-5, to=2-6]
+% \end{tikzcd}\]
+
+% \[\begin{tikzcd}
+% 	{\termobj \times \mca^{n-k}} && {\mca^{k} \times \mca^{n-k}} & {\mca^{n}} \\
+% 	\\
+% 	{\mca \times \mca^{n-k}} &&& \mca
+% 	\arrow["{\purefun\left(\pairing{c_{1} , \ldots , c_{k}} \times \id\right)}", from=1-1, to=1-3]
+%     \arrow["{\alpha^{k}}", from=1-3, to=1-4]
+% 	\arrow["{\purefun\left( \code{f\left(c_{1} , \ldots , c_{k}\right)} \times \id\right)}"', from=1-1, to=3-1]
+% 	\arrow["f", from=1-4, to=3-4]
+% 	\arrow["{\aparr^{n-k}}"', from=3-1, to=3-4]
+% \end{tikzcd}\]
+% \[\begin{tikzcd}
+% 	{\termobj} && \\
+% 	\\
+% 	{\mca \times \mca^{k}} && \mca
+% 	\arrow["{ \purefun \pairing{\code{f} , c_{1} , \ldots , c_{k}} }_{k+1}"', from=1-1, to=3-1]
+% 	\arrow["\purefun \code{f\left(c_{1} , \ldots , c_{k}\right)}", from=1-1, to=3-3]
+% 	\arrow["{\aparr^{k}}"', from=3-1, to=3-3]
+% \end{tikzcd}\]
+\end{definition}
+
+% Given a applicative object $\mca$, expressions are similar to the ones in \Cref{subsection:PCA}:
+% $$
+% \expr {}::={}  i \in \mathbb{N} \mid c \in \hom{\C}{\termobj}{\mca} \mid \expr \bullet \expr \qquad\qquad
+% E_{n}\left(\mca\right)  {}::={}  \{ \expr \mid \text{all $i$s in $\expr$ are $< n$}\} 
+% $$
+% The evaluation function $\interp{-}_{n}  : E_{n}\left(\mca\right) \rightarrow \hom{\K}{\mca^{n}}{\mca}$ relates expressions to morphisms in $\K$:
+% $$
+%     \interp{i}_{n}  \defeq \purefun \pi_{i+1}^{n}\quad
+%     \interp{c}_{n}  \defeq \purefun \left(c \; \circ \; !\right)\quad
+%     \interp{\expr_{f} \bullet \expr_{a}}_{n} \defeq \aparr \circ \left(\mca \rtimes \interp{\expr_{a}}_{n} \right) \circ \left(\interp{\expr_{f}}_{n} \ltimes \mca^{n} \right) \circ \purefun \Delta
+% $$
+% \begin{definition}[$\mca$-monomials]
+% An $\mca$-monomial is a morphism $f$ in $\K$ s.t there exists $n \in \mathbb{N}$ and a term $\expr_{f} \in E_{n}\left(\mca\right)$ for which $\interp{\expr_{f}}_{n} = f$.
+% \end{definition}
+
+Our definition of a combinatory object relies on the notion of $\mca$-monomials, generalizing~\cite{LONGO1990193}.
+An $\mca$-monomial is a morphism in $\hom{\K}{\mca^{n}}{\mca}$, for some $n \in \mathbb{N}$, defined using only projections, morphisms in $\hom{\C}{\termobj}{\mca}$, and application $\aparr$, used in an applicative order. For $n>0$ the $\mca$-monomial is called positive.
+
+\begin{definition}[Combinatory object]\label{def:mca-obj}
+An applicative object 
+$\mca$ is called a \emph{combinatory object} when all positive $\mca$-monomials are $\mca$-computable.
+\end{definition}
+
+\begin{restatable}{theorem}{combObj}
+Let $\monad$ be a $\setcat$ monad.
+$\mca$ is an MCA over $\monad$ if and only if it is a combinatory object in $\setcat_{\monad}$.
+\end{restatable}
+
+Furthermore, the definition of a PCA-object in a cartesian restriction category~\cite{COCKETT2008}, is the exact counterpart of a combinatory object in a Freyd category, obtained by replacing morphisms of a Freyd category with their counterparts in a cartesian restriction category.
+
+
+\section{MCA-induced Realizability Models}
+\label{sec:realizability}
+
+Since PCAs underpin traditional realizability models, this section explores the application of MCAs in the broader context of realizability theory. 
+%In particular, we are working on a construction of effectful realizability topoi based on MCAs, relating the effectful behavior with the logic using monad modalities and algebras, following the work of \cite{pitts1991evaluation}.
+%
+%Investigating the effects the underlying monad has on the resulting theory is a particularly interesting task, which can lead to new insights into constructive models. 
+%
+By incorporating computational effects, MCAs broaden realizability models, enabling a more extensive semantic framework for diverse logic systems based on computation.
+
+
+
+\emph{Evidenced frames} propose a unifying approach to effectful realizability~\cite{CohMiqTat21}. An evidenced frame is a structure that abstracts the core components of realizability models by focusing solely on the relationship between propositions and their evidence, while omitting the computational specifics of individual models. 
+%
+The evidenced frame abstraction is complete in that any realizability tripos  (i.e. a model of higher-order dependent predicate logic) can be viewed as an evidenced frame, and there is a uniform construction generating a corresponding realizability tripos from an evidenced frame. Besides, the usual construction of a tripos from a PCA smoothly factorizes through the definition of an evidenced frame.
+%\lcnote{maybe put a background on Heyting pa here?}
+
+To provide semantic realizability models from an MCA, we build on this construction and demonstrate how an evidenced frame can be derived from it. 
+This establishes a clear pathway from MCAs to realizability triposes, and in turn, through the tripos-to-topos construction~\cite{pitts2002tripos}, to a realizability topos, which is a model of (extensional, impredicative) dependent type theory (and set theory).
+It further factors an alternative construction of assemblies which, in the case of PCAs, have been broadly studied in relation to the realizability topos.
+
+%\paragraph*{Heyting prealgebras.}
+The following development uses preordered sets, and in particular, complete Heyting prealgebras, for the interpretation of logic.
+A preordered set $\left(\Omega,\leq\right)$ is a set $\Omega$ equipped with a reflexive and transitive ``inequality'' relation $\leq$ over $\Omega$.
+%Given two preordered sets $\left(\Omega_{1},\leq_{1}\right)$ and $\left(\Omega_{2},\leq_{2}\right)$, a function $f : \Omega_{1} \rightarrow \Omega_{2}$ is monotonic when it preserves inequalities, i.e., for any $\truthval , \truthval' \in \Omega_{1}$, if $\truthval \leq_{1} \truthval'$ then $f\left(\truthval\right) \leq_{2} f\left(\truthval'\right)$.
+A Heyting prealgebra extends a preordered set by additional algebraic operations, namely, meet, join and implication.
+%
+In the context of semantics of logic, a preordered set $\Omega$ is used as a set of ``truth values'', and formulas in the logic are interpreted as elements of $\Omega$.
+That is, for $\pred$ a formula, its interpretation  $\interp{\pred}$ is an element of $\Omega$. 
+The preorder relation of a Heyting prealgebra corresponds to the logical entailment $\vdash$ between formulas, while the algebraic counterpart of universal (resp. existential) quantifications is provided by meets $\meet$ (resp. joins $\join$). The bottom and top elements of $\Omega$ are denoted $\boldsymbol{0}$ and $\boldsymbol{1}$ (resp.). This will come in handy in order to give an algebraic structure to the predicates of our realizability models.
+
+% The set of formulas over a given set of free variables is a preordered set, where the inequality relation $\leq$ is given by entailment $\vdash$ between formulas.
+% An interpretation is considered to be sound, when it is monotonic, so for any two formulas $\predA , \predB$, if $\predA \vdash \predB$ then $\interp{\predA} \leq \interp{\predB}$.
+
+% Complete Heyting prealgebras are preordered sets equipped with several operations, such as binary meets ($\meet$), binary joins ($\join$), binary exponentials ($\haimp$), subset infimums ($\infimum$), and subset supremums ($\supremum$).
+
+% In the sequel, the use of complete Heyting prealgebras serves several purposes:
+% \begin{enumerate}
+%     \item By generalizing notions such as sets, predicates, and formulas, they are leading to a development which is inherently agnostic to metatheoretical foundations
+
+%     \item Again through generalization, they allow us to relate the structure of predicates to features of the computational behavior of various effects, such as keeping track of state when considering stateful computation
+
+%     \item They form the skeleton structure underlying evidenced frames, used to interpret intuitionistic higher-order logic
+
+%     \item They relate the structure of the metatheory to that of evidenced frames, thus allowing us to discuss how they affect each other
+% \end{enumerate}
+
+% In the standard discussion on PCA-based realizability, sets of codes are used for the central constructions, of realizability triposes and assemblies.
+% For that reason, ... \agnote{sets vs meta-propositions}
+
+% \agnote{Add subsection to discuss Heyting prealgebras, explain $\P\left(\singleton\right)$}
+
+\subsection{Realizability Triposes via Evidenced Frames}
+\label{sec:EF}
+
+\begin{figure}[t]
+\centering
+\begin{small}
+\resizebox{\textwidth}{!}{ 
+\begin{tabular}{|l|l|l|l|}
+\hline
+\textbf{} & \textbf{Logical Const.} & \textbf{Program Const.} & \textbf{Evidence Relation} \\
+\hline
+\emph{Reflexivity} &  & $\eid \in E$ & $\phi \xle{\eid} \phi$ \\
+\hline
+\textit{Transitivity} &  & $\ecomp{}{} \in E \times E \to E$ & $\phi_1 \xle{e_1} \phi_2 \land \phi_2 \xle{e_2} \phi_3 \Rightarrow \phi_1 \xle{\ecomp{e_1}{e_2}} \phi_3$ \\
+\hline
+\textit{Top} & $\!\top \!\in\! \Phi$ & $\etrue \in E$ & $ \phi \xle{\etrue} \top$ \\
+\hline
+\textit{Conjunction} & $\emeet \!\in\! \Phi \!\times\! \Phi \!\to\! \Phi$ & 
+\makecell[l]{$\epair{\cdot}{\!\cdot} \!\in\! E \!\times\! E \!\to\! E$ \\ $\efst, \esnd \in E$} &
+\makecell[l]{
+$\phi \xle{e_1} \phi_1 \land \phi \xle{e_2} \phi_2 \Rightarrow \phi \xle{\epair{e_1}{e_2}} \phi_1 \emeet \phi_2$
+\\ $\phi_1 \emeet \phi_2 \xle{\efst} \phi_1 \quad , \quad \phi_1 \emeet \phi_2 \xle{\esnd} \phi_2$}
+\\
+\hline
+\makecell[l]{\textit{Universal}\\\textit{Implication}} & $\imp \in \Phi \times \power(\Phi) \to \Phi$ & 
+\makecell[l]{\hbox{$\elambda{} \!\in\! E \!\to\! E$} \\ $\eeval \in E$} &
+\makecell[l]{
+ $ (\forall \phi \in \vec{\phi}.\; \phi_1 \emeet \phi_2 \xle{e} \phi) \Rightarrow \phi_1 \xle{\elambda{e}} \phi_2 \imp \vec{\phi}$
+\\ $\forall \phi \in \vec{\phi}.\; (\phi_1 \imp \vec{\phi}) \emeet \phi_1 \xle{\eeval} \phi$}
+\\
+\hline
+\end{tabular}
+}
+\caption{Evidenced Frame constructs, where $\vec{\phi}\in\power(\Phi)$ and the evidence relations are universally quantified.}
+\label{tab:EF}
+\end{small}
+\end{figure}
+%This section provides a uniform method that takes any instance of MCA for a given monad and constructs the corresponding evidenced frame.
+%
+First, we recall the definition of an evidenced frame.
+\begin{definition}[Evidenced Frame~\cite{CohMiqTat21} \coqdoc{EF}]\label{evidenced-frame}
+An \emph{evidenced frame} is a triple $\ef = \left( \Phi, E, \mbox{$\cdot \xle{\cdot} \cdot$} \right)$, where $\Phi$ is a set of propositions,~$E$ is a set of evidence, and~\mbox{$\phi_1 \xle{e} \phi_2$} is a ternary evidence relation on $\Phi \times E \times \Phi$, 
+along with the structure captured in~\Cref{tab:EF}. 
+%We write $\vec{\phi}$ for an element of $\power(\Phi)$, i.e., a subset of $\Phi$.
+\end{definition}
+% \begin{definition}[Evidenced Frame]\label{evidenced-frame}
+% An \emph{evidenced frame} is a triple $\ef = \left( \Phi, E,  \mbox{$\cdot \xle{\cdot} \cdot$} \right)$, where $\Phi$ is a set of propositions,~$E$ is a collection of evidence, and~\mbox{$\phi_1 \xle{e} \phi_2$} is a ternary evidence relation on $\Phi \times E \times \Phi$, along with the following:
+% \begin{description}[leftmargin=*]
+% \item[Reflexivity] There exists evidence~$\eid \in E$:
+% \begin{itemize}[leftmargin=*]
+% \item $\forall \phi.\; \phi \xle{\eid} \phi$
+% \end{itemize}
+% \item[Transitivity] There exists an operator~$\ecomp{}{} \in E \times E \to E$:
+% \begin{itemize}[leftmargin=*]
+% \item $\forall \phi_1, \phi_2, \phi_3, e, e'.\; \mbox{$\phi_1 \xle{e} \phi_2 \mathrel{\emeet} \phi_2 \xle{e'} \phi_3 \implies \phi_1 \xle{\ecomp{e}{e'}} \phi_3$}$
+% \end{itemize}
+% \item[Top] A proposition~$\!\top \!\in\! \Phi$ such that there exists evidence~$\etrue \!\!\in\! E$:
+% \begin{description}[leftmargin=*,font=\normalfont]
+% \item[\emph{intro:}] $\forall \phi.\; \phi \xle{\etrue} \top$
+% \end{description}
+% \item[Conjunction] An operator~\mbox{$\emeet \!\in\! \Phi \!\times\! \Phi \!\to\! \Phi$} such that there exists an operator~\mbox{$\epair{\cdot}{\!\cdot} \!\in\! E \!\times\! E \!\to\! E$} and evidence~$\efst, \esnd \in E$:
+% \begin{description}[leftmargin=*,font=\normalfont]
+% \item[\emph{intro:}] $\forall \phi, \phi_1, \phi_2, e_1, e_2.\; \mbox{$\phi \xle{e_1} \phi_1 \mathrel{\emeet} \phi \xle{e_2} \phi_2 \!\!\implies\!\! \phi \xle{\epair{e_1}{e_2}} \phi_1 \emeet \phi_2$}$
+% \item[\emph{elim1:}] $\forall \phi_1, \phi_2.\; \phi_1 \emeet \phi_2 \xle{\efst} \phi_1$
+% \item[\emph{elim2:}] $\forall \phi_1, \phi_2.\; \phi_1 \emeet \phi_2 \xle{\esnd} \phi_2$
+% \end{description}
+% \item[Universal Implication] An operator~$\imp \in \Phi \times \power(\Phi) \to \Phi$ such that there exists an operator~\hbox{$\elambda{} \!\in\! E \!\to\! E$} and evidence~$\eeval \!\in\! E$:
+% \begin{description}[leftmargin=*,font=\normalfont]
+% \item[\emph{intro:}] $\forall \phi_1, \phi_2, \vec{\phi}, e.\; (\forall \phi \in \vec{\phi}.\; \phi_1 \emeet \phi_2 \xle{e} \phi) \implies \phi_1 \xle{\elambda{e}} \phi_2 \imp \vec{\phi}$
+% \item[\emph{elim:}] $\forall \phi_1, \vec{\phi}, \phi \in \vec{\phi}.\; (\phi_1 \imp \vec{\phi}) \emeet \phi_1 \xle{\eeval} \phi$
+% \end{description}
+% \end{description}
+% In the above, we write $\vec{\phi}$ for an element of $\power(\Phi)$, i.e., a subset of $\Phi$.
+% \end{definition}
+
+% Intuitively, an evidenced frame $\ef = \left( \Phi, E,  \mbox{$\cdot \xle{\cdot} \cdot$} \right)$ consists of a set of propositions $\Phi$, a collection of evidence $E$, while the relation \mbox{$\varphi \xle{\cdot} \psi$} describes how evidence supports entailments between the propositions $\varphi$ and $\psi$. \emnote{put in a bit more intuitions on components?}
+ The evidenced frame setup mirrors computational processes, where evidence can be thought of as programs or computational artifacts that demonstrate logical relationships. 
+%
+In fact, evidenced frames supplement complete Heyting prealgebras, which are standard models of intuitionistic logic, by adding computational evidence for the validity of the preorder relation. 
+%
+%Thus, while a complete Heyting prealgebra holds the logical component in that the preorder corresponds to logical entailment, 
+Hence, while in a prealgebra,  $\predA \leq \predB$ denotes that the pair $\left(\predA,\predB\right)$ satisfies the preorder relation, in an evidenced frame the corresponding notion is $\evrel{\predA}{e}{\predB}$, meaning the triple $\left(\predA,e,\predB\right)$ satisfies the evidenced relation.
+All the axioms of a complete Heyting prealgebra, described in terms of the preorder relation $\leq$, appear in an evidenced frame in an enhanced form, where $\leq$ is replaced with the evidence relation $\evrel{\cdot}{\cdot}{\cdot}$, and each axiom requires the existence of some ``evidence'' (appearing as $e$ in $\evrel{\predA}{e}{\predB}$) which uniformly witnesses the validity of the axiom.
+% 
+ Evidenced frames are flexible in that they do not assume a specific equational theory which allows them to capture a broader spectrum of computational effects and unify them by focusing on uniform evidence.
+    
+\subsubsection{$M$-Modalities}
+
+As shown in~\cite{CohMiqTat21}, in the standard case of a PCA, $\mca$, the corresponding evidenced frame is that in which $E$ is the set of codes $\mca$, $\Phi$ is its set of subsets $\P\left(\mca\right)$ and for every $\predA , \predB \in \P\left(\mca\right)$ and $c_{f} \in \mca$, $\evrel{\predA}{c_{f}}{\predB}$ stands for:
+$ \forall c_{a} \in \mca . c_{a} \in \predA \Rightarrow \exists c_{r} .\, c_{f} \app c_{a} \downarrow c_{r}\wedge c_{r} \in \predB$. 
+Our goal here is to generalize the embedding of combinatory algebras into evidenced frames and provide a uniform construction of an evidenced frame from any MCA.
+However, the MCA abstraction poses a challenge. 
+For PCAs, the result of the computation $c_{f} \app c_{a}$ is given by the reduction 
+% \lcnote{you mean reduction?}\agnote{the $\downarrow$ notation is used more generally in the context of logic of partial terms, where it's called ``definedness'': \url{https://math.stanford.edu/~feferman/papers/definedness.pdf}}\lcnote{but we are in the context of computation. In fact I see we here even called it evaluation, but in the EF paper it was reduction}\agnote{fair enough} 
+predicate $c_{f} \app c_{a} \downarrow c_{r}$, and then related to a subset $\predB$ through the membership predicate $c_{r} \in \predB$.
+However, in an MCA, the result $c_{f} \app c_{a}$ is in $M\left(\mca\right)$, so it appears within the context of a more abstract notion of computation, and some device is needed to be able to pick the result from the computational context and relate it to a subset, or more generally, to a predicate. 
+In fact, traditional realizability manipulates codes, not computations, and so our device needs to be able to extend predicates defined on values to predicates on computations, which then can be used again in the realizability setting. 
+%\emnote{I rephrased a bit, because I think it is important *not* to carry the intuition that we can always get a value out of computations (for instance, we don't do that for continuations), but rather that we extend the domain on which predicates range.}
+As we discuss below, we will consider predicates on a set $X$ as defined by functions from $X$ to some Heyting prealgebras $\Omega$, hence our device will essentially extend such a function to a function in $M(X) \to \Omega$.
+% \lcnote{I would add here the intuition for the modality. that is smt like " intuitively, we would like that the resulting code after the (possibly effectful) run of the program will be a member of..."}
+% \lcnote{we should say here that this is inherent to realizability that is defined via codes, not computations.}
+
+The device appropriate for this task is called an $M$-modality, which intuitively describes a post-condition over the result of a (possibly effectful) computation.
+A variant of the notion of an $M$-modality first appeared in~\cite{moggi1991notions} and then further elaborated in~\cite{pitts1991evaluation}.\footnote{\Cref{def:modality}  can equivalently be formulated as an oplax algebra $\omega : \monad \Omega \rightarrow \Omega$, similar to the T-modal operator in \cite{moggi1991notions}.
+However, this will require the definition of each particular modality to operate on truth values in $\Omega$, rather than to relate value predicates with computations, which seems easier in practice. }
+
+
+%\lcnote{you mentioned Pitts uses a different name, say which}
+% Constructing an evidenced frame from an MCA requires some additional data. This is because ... \lcnote{TODO: explain the lack of semantics and the need for the modality}
+%\lcnote{TBD: explain why for this we need HpA and why we take predicates as functions. Here we use omega for a different purpose: giving structure for a set of propositions}\emnote{I hope the sentence above and paragraph after adress this} 
+
+\begin{restatable}[$M$-modality \coqdoc{MMod}]{definition}{modality}\label{def:modality}
+    Let  $M$ be a $\mathbf{Set}$ monad, $\mca$ an MCA  over $M$, and $\left(\Omega, \leq\right)$ a complete Heyting prealgebra.
+    An $M$-modality over $\Omega$ is a natural transformation:
+    \[\postmod_{X} : M\left(X\right) \rightarrow \left(X \rightarrow \Omega\right) \rightarrow \Omega 
+    \qquad\text{and we note }\after{x}{m}{\pred\left(x\right)\defeq \postmod\left(m\right)\left(\pred\right)}
+    \]
+satisfying for all $A,B$, $\pred_i : A \rightarrow \Omega$, $f : A \rightarrow M\left(B\right)$, $a\in A$ and $m \in M\left(A\right)$ the following: 
+% We abbreviate   $\postmod\left(m\right)\left(\pred\right)$ by $\after{x}{m}{\pred\left(x\right)}$, where $x$ is bound 
+\begin{description}[leftmargin=*]\setlength\itemsep{0.5em}
+  \item[After-Return.] %\label{eq:after-ret}\tag{A-return}
+    $\qquad\qquad~~\pred\left(a\right) \leq \after{x}{\return{a}}{\pred\left(x\right)}  $ 
+% %    \postmod \return{a}\left(\pred\right)
+%     \end{equation}
+
+ \item[After-Bind] 
+% \label{eq:after-bind}\tag{A-bind}
+   %\postmod\left(m\right)\left(\lambda x . \postmod\left(f \left(x\right)\right)\right)\left(\pred\right) \leq \postmod\left( \letin{x}{m}{f\left(x\right)} \right)\left(\pred\right)
+     $\qquad\qquad~~~~~~\after{x}{m}{\after{y}{f \left(x\right)}{\pred\left(y\right)}} \leq \after{y}{\letin{x}{m}{f\left(x\right)}}{\pred\left(y\right)} $
+%     \end{equation}
+
+\item[Internal Monotonicity.] 
+%      \begin{equation}
+\label{eq:after-inter-mono} %\tag{IntMon}
+%      %\infimum_{c}\left(\predA\left(c\right) \haimp \predB\left(c\right)\right) \leq \postmod\left(m\right)\left(\predA\right) \haimp \postmod\left(m\right)\left(\predB\right)
+     $~~~\infimum_{c}\left(\predA\left(c\right) \haimp \predB\left(c\right)\right) \leq \after{x}{m}{\predA\left(x\right)} \haimp \after{x}{m}{\predB\left(x\right)}$ 
+%     \end{equation}
+\end{description}
+where we apply the standard precedence of quantifiers, for example $\after{x}{m}{\predA\left(x\right)} \haimp \predB\left(x\right) $ is to be read as $\left(\after{x}{m}{\predA\left(x\right)}\right ) \haimp \predB\left(x\right) $.
+
+
+%
+%
+% \begin{description}[leftmargin=*]
+%     \item[After-Return] For any set $A$, $\pred : A \rightarrow \Omega$, and $a \in A$:
+%     \begin{equation}\label{eq:after-ret}\tag{A-return}
+%     \pred\left(a\right) \leq 
+%     \after{x}{\return{a}}{\pred\left(x\right)}   
+% %    \postmod \return{a}\left(\pred\right)
+%     \end{equation}
+
+%     \item[After-Bind] For any sets $A,B$, $\pred : A \rightarrow \Omega$, $f : A \rightarrow M\left(B\right)$, and $m \in M\left(A\right)$:
+%     \begin{equation}\label{eq:after-bind}\tag{A-bind}
+%     %\postmod\left(m\right)\left(\lambda x . \postmod\left(f \left(x\right)\right)\right)\left(\pred\right) \leq \postmod\left( \letin{x}{m}{f\left(x\right)} \right)\left(\pred\right)
+%      \after{x}{m}{\after{y}{f \left(x\right)}{\pred\left(y\right)}} \leq \after{y}{\letin{x}{m}{f\left(x\right)}}{\pred\left(y\right)} 
+%     \end{equation}
+
+%     \item[Internal Monotonicity]For any set $A$, $m \in M\left(A\right)$, $\predA , \predB \!:\! A \rightarrow\!\Omega$:
+%      \begin{equation}\label{eq:after-inter-mono} \tag{IntMon}
+%      %\infimum_{c}\left(\predA\left(c\right) \haimp \predB\left(c\right)\right) \leq \postmod\left(m\right)\left(\predA\right) \haimp \postmod\left(m\right)\left(\predB\right)
+%     \infimum_{c}\left(\predA\left(c\right) \haimp \predB\left(c\right)\right) \leq \after{x}{m}{\predA\left(x\right)} \haimp \after{x}{m}{\predB\left(x\right)} 
+%     \end{equation}
+% \end{description}
+\end{restatable}
+
+Intuitively, $\Omega$ is a set of truth values, so a predicate $\pred$ over a set $X$ is a function $\pred : X \rightarrow \Omega$, and to denote that $\pred$ applies to some $x \in X$, we write $\pred\left(x\right)$ as is standard.
+As for the modality, we read $\after{x}{m}{\pred\left(x\right)}$ as saying that after the computation $m$ yields a value $x$ (in case it does), then $\pred\left(x\right)$ holds.
+%
+To obtain a sound logical framework, the properties of an $M$-modality ensure it is well-behaved with respect to the computational operators of the monad and the logical operators of the complete Heyting prealgebra. 
+
+The use of Heyting prealgebras, rather than subsets, allows us to generalize the standard notion of a subset of codes to more complex subset-like structures, in particular, ones that account for the computational effects and enforce invariants over the computational behavior.
+For example, in the case of stateful nondeterministic computation, as in~\Cref{SCA}, it is useful to consider subsets of pairs of codes and states, $\P\left(\Sigma \times \mca\right)$,  
+%
+and to obtain a well-behaved logic we must restrict attention to ``future-stable'' predicates, i.e.~predicates which, for every nondeterministic stateful computation, if they hold before the change of state, they keep holding for every possible mutation of the state as well.
+In terms of subsets, it means the set of states has to be preordered, and instead of taking $\P\left(\Sigma \times \mca\right)$, we take $\mathcal{U}\left(\Sigma\right)^{\mca}$, where $\mathcal{U}\left(\Sigma\right)$ is the set of all upper subsets of $\Sigma$. This set has the structure of a complete Heyting algebra (and thus, a complete Heyting prealgebra) as a topological space, given by the Alexandrov topology.
+%
+However, the Heyting prealgebra structure of $\P\left(\Sigma \times \mca\right)$ alone is not enough for constructing an evidenced frame over SCAs.
+For this, we need to additionally require the modality preserves implication, which is not the case in the standard angelic and demonic interpretations of nondeterminism, but is guaranteed by internal monotonicity.
+%because to realize the elimination axiom of universal implication we have to 
+\lcnote{TODO: compare this def against Pitts/... and against known names for modality axioms}
+%\emnote{Maybe we could add a note to help intuition : $\leq$ in $\Omega$ reflects entailment, hence the axioms read "if the left-hand side holds, then so does the right-hand side", and then essentially we asks the modality to behave well wrt return/bind and meets in the HpA (better phrasing for this one?).}
+
+The internal monotonicity of the $M$-modality is stronger than the perhaps more well-known ``order-preserving'' property of the $T$-modality in \cite{pitts1991evaluation}.\lcnote{is this needed?}
+Syntactically, internal monotonicity ensures that the modality preserves implication.
+Semantically, it ensures that any property that holds before a computation keeps holding afterwards.
+
+%As noted in \lcnote{CITE}, it is required to obtain the necessary logical implication. 
+
+% \lcnote{TODO: motivate the second part of the lemma}
+% \agnote{I don't think the second property should be explained in the body. It's only relevant for universal implication elimination and it's a rather mundane technicality there, which I've only moved to a lemma to make the proof a bit nicer}
+
+
+%\subsubsection{Consistency}
+\newcommand{\cloop}{c_{\scalebox{0.75}{$\circlearrowright$}}}
+To make sure the induced semantics are meaningful, we must verify that evidence for entailment does not exist for every pair of predicates. 
+For example, in the case of PCAs, one can define the modality
+$\after{x}{m}{\pred\left(x\right)} \defeq \infimum_{x \in m} \pred\left(x\right)$
+corresponding to partial correctness.
+% \[ \after{x}{m}{\pred\left(x\right)} \defeq \infimum_{x \in m} \pred\left(x\right) \]
+However, with this modality, any code that yields no value when applied to any argument, such as $\cloop\defeq \encode{0}{\encode{0}{0 \bullet 0} \bullet \encode{0}{0 \bullet 0}}$, can be used as evidence for the entailment of  any pair of predicates. 
+In particular, consider the predicates $\top = \lambda x . \boldsymbol{1}$ and $\bot = \lambda x . \boldsymbol{0}$, then $\top \evidence{\cloop} \bot$ would mean $1 \leq \infimum_{c \in \nu\left(\cloop\right)} . 0 $.
+Since $\nu\left({\cloop}\right) = \emptyset$,  this statement is vacuously true, and thus we can consistently model an inconsistent theory.
+%which is a meaningless endavour \agnote{too subjective?}.
+
+To eliminate this option, we have to make sure the modality is selective enough to prevent absurd entailments %such as $\top \vdash \bot$ 
+from being evidenced.
+%
+%by tying the consistency of the interpreted theory to the consistency of the metatheory \agnote{In retrospect: This statement is inaccurate. We can still technically model an inconsistent theory even if the metatheory is consistent. We just need to use a trivial Heyting prealgebra. I think I should probably rephrase this statement}.
+To that end, we employ a similar technique to the one mentioned in~\cite{CohMiqTat21}, 
+with a generalized notion of a separator for our setting.
+As we shall see in~\Cref{thm:sep_consistent}, separators will indeed ensure the consistency of the induced evidenced frame.
+\negspace
+\begin{definition}[Separator \coqdoc{separator}]\label{def:separator}
+Given %\emnote{formally, we should again say "a HpA $\Omega$, maybe M-modality should pack it inside} 
+an MCA $\mca$, a Heyting prealgebra $\Omega$ and an $M$-modality $\postmod$ over them, a separator for $\postmod$ (or a $\postmod$-separator) is a combinatory complete subset $\separator$ of $\mca$, such that, for every $c_{f} , c_{a} \in \separator$, the following ``progress'' property holds:
+$ \after{r}{c_{f} \app c_{a}}{\boldsymbol{0}} \leq \boldsymbol{0} $.
+\end{definition}
+% \emnote{should we say a $\postmod$-separator? or is it maybe the case that there are "universal" separators agnostic to the modality? (e.g. smallest combinatory subset of A?)}\agnote{Definitely not universal (inconsistent modalities don't have separators). $\postmod$-separator is good. Added it}
+
+One common separator is the one that consists of all codes (when progress holds for all of them). However, since our framework supports arbitrary forms of effectful computations, at times it will be necessary to exclude some codes from the separator. As a simple example, consider a set of codes that contains $\codef{fail}$, defined such that $\codef{fail} \app c = \emptyset$ for every $c\in\mca$. 
+While we want to allow codes such as $\codef{fail}$ to be used to define and realize propositions, for consistency, $\codef{fail}$ cannot serve as valid evidence for entailment. 
+A more subtle example of a separator for CPS continuations is given in~\Cref{exm:cont}.
+
+In summary, defining realizability semantics from an MCA requires extra structure, captured by the following notion of a monadic core.
+\begin{definition}[Monadic Core]
+    A \emph{monadic core} is a tuple $\effshell:
+    =\left(\mca, \Omega, \postmod, \separator\right)$, where $\mca$ is an MCA  over a $\mathbf{Set}$ monad $M$,   $\postmod$ is an  $M$-modality over $\mca$ and  a complete Heyting prealgebra $\left(\Omega, \leq\right)$, and  $\separator$ is a separator over them.
+\end{definition}
+
+\subsubsection{From Monadic Cores to Evidenced Frames}
+\label{sec:mcaef}
+The next theorem   demonstrates how one can construct evidenced
+frames from a monadic core, i.e., an MCA and an associated $M$-modality.
+%
+The propositions are taken to be functions from the MCA to the complete Heyting
+prealgebra underlying the $M$-modality. 
+As explained, this is so that propositions are given an algebraic structure generalizing their usual definition as sets of codes. %\lcnote{TBD: continue  according to  the previous explanations of HpA over sets}
+%
+Evidence are elements of the
+separator (rather than arbitrary codes), and conceptually the evidence relation holds when the separator maps realizers for the input proposition to
+computations that, after they terminate, yield realizers for the output proposition. 
+
+\begin{restatable}[Evidenced Frame over Monadic Core \coqdoc{MCA_EF}]{theorem}{MCAEF}\label{thm:MCAtoEF}
+Let $\effshell=\left(\mca, \Omega,\postmod, \separator\right)$ be a monadic core. %$\mca$ be an MCA  over a $\mathbf{Set}$ monad $M$, $\left(\Omega, \leq\right)$ a complete Heyting prealgebra, and $\postmod$ an  $M$-modality over them with separator $\separator$.
+The triple $\left( \Omega^\mca, \separator, \evrel{\cdot}{\cdot}{\cdot} \right)$ forms an evidenced frame, where \negspace
+\[ \evrel{\predA}{e}{\predB} \defeq \evexpand{\predA}{e}{\predB}.\]
+\end{restatable}
+
+ \begin{proof}[Proof Sketch.]
+ We define the logical and program constructs, while the proofs that they satisfy the required properties can be found in~\cite{Coqproofs}. 
+%Note that all the evidence defined in the proof is in the separator because it is combinatory complete.
+Let $\code{\codef{p_{1}}} \defeq \encode{1}{0}$ and $\code{\codef{p_{2}}} \defeq \encode{1}{1}$.
+\begin{description}
+    \item[\textit{Reflexivity}:]
+    Take $\eid \defeq \encode{0}{0}$. 
+    \item[\textit{Transitivity}:] 
+    Take $\ecomp{e_1}{e_2} \defeq \encode{0}{e_{2} \bullet \left(e_{1} \bullet 0 \right)}$. 
+    \item[\textit{Top}:] Take $\top \defeq \lambda e.\boldsymbol{1}$ and $\etrue \defeq \eid$.
+    \item[\textit{Conjunction}:] Take $\left(\phi_1 \emeet \phi_2 \right) \left(e\right) \defeq \after{c_{1}}{e \app \codepA}{\phi_{1}\left(c_{1}\right)} \meet \after{c_{2}}{e \app \codepB}{\phi_{2}\left(c_{2}\right)}$, and 
+    $     \epair{e_1}{e_2} \defeq  \encode{1}{1 \bullet \left(e_{1} \bullet 0\right) \bullet \left(e_{2} \bullet 0\right)} ,
+    \efst \defeq  \encode{0}{0 \bullet \codepA} ,
+     \esnd \defeq  \encode{0}{0 \bullet \codepB}.$
+    \item[\textit{Universal Implication}:] Take 
+    $
+    \phi \imp \vec{\phi} \left(e\right)  \defeq  \infimum_{\phi \in \vec{\phi}}\infimum_{c \in \mca}\left(\phi\left(c\right) \sqsupset \after{r}{e \app c}{\phi\left(r\right)}\right)
+    $, and $
+    \elambda{e} \defeq  \encode{1}{e \bullet \left(\encode{2}{2 \bullet 0 \bullet 1} \bullet 0 \bullet 1\right)} , 
+    \eeval \defeq  \encode{0}{\eid \bullet \left( 0 \bullet \codepA\right) \bullet \left( 0 \bullet \codepB\right)}.$
+\qedhere
+    \end{description}
+\end{proof}
+
+The above theorem, together with the $\UFam$ construction~\cite[Def. V.4]{CohMiqTat21} that constructs a realizability tripos from an evidenced frame, thus provides the following realizability semantics for MCAs.
+%
+As for the standard PCA-based tripos, a set $I$ is mapped to a family of propositions indexed by $I$, which is given a structure of Heyting prealgebra by considering the existence of a uniform realizer (i.e. compatible with any $i\in I$) to witness the preordering relation. As in the evidenced frame, the M-modality is used to handle computations instead of only values. Morphisms are simply mapped to reindexing functions along them.
+\begin{corollary}\label{cor:tripos}
+Let $\effshell=\left(\mca, \Omega, \postmod, \separator\right)$ be a monadic core.
+Then the following functor $\Trip$ from $\Set^\op$ to the category of Heyting prealgebras is a tripos.
+\[
+\begin{array}{r@{~~}c@{~~}l}
+\Trip(I) &\defeq& \left( (\Omega^\mca)^I, \leq_I\right)
+\qquad\quad
+\Trip(f)(\varphi) \defeq j \mapsto \varphi(f(j))\\
+\varphi \leq_I \psi &\defeq& \exists e\in\separator. \forall i\in I.\forall c\in\mca. \varphi(i)(c) \leq 
+\after{r}{e \app c}{\psi(i)\left(r\right)}
+\end{array}\]
+%is a tripos.
+\end{corollary}
+
+
+We can now verify that the use of a separator indeed ensures the consistency of the induced evidenced
+frame, as shown in the following theorem. 
+%\agnote{I should probably elaborate what I mean by ``consistency'' here, since technically all it really says is that $\Omega$ is trivial}
+\begin{restatable}[\coqdoc{agreement}]{theorem}{sepconsistent}
+\label{thm:sep_consistent}
+Let $\effshell=\left(\mca, \Omega, \postmod, \separator\right)$ be a monadic core.
+% and $\left( \Omega^\mca, \separator, \evrel{\cdot}{\cdot}{\cdot} \right)$ the induced evidenced frame. 
+Then the induced evidenced frame
+% $\left(\exists e \in \separator . \top \evidence{e} \bot\right) \quad \iff \quad \left(\boldsymbol{1} \leq \boldsymbol{0}\right)$
+has an evidence $e \in \mca$ such that $\top \evidence{e} \bot $ iff $\boldsymbol{1} \leq \boldsymbol{0}$.
+\end{restatable}
+%\agnote{Should the proof be in the appendix?}\emnote{I'd say no, it is short and an enlightening!}
+
+ With that in mind, an $M$-modality over a non-trivial $\Omega$ is called \emph{consistent} when it has a separator.
+% \begin{definition}[Consistent Modality]
+% An $M$-modality is called \emph{consistent} when it has a separator.
+% \end{definition}
+%\agnote{I should probably redefine the EF such that instead of taking $\mca$ for the set of evidence, I'll take $\separator$}
+For example, $\after{x}{m}{\pred\left(x\right)} \defeq \infimum_{x \in m} \pred\left(x\right)$ is not a consistent $M$-modality 
+%The existence of a separator prevents $\after{x}{m}{\pred\left(x\right)} \defeq \forall x \in m . \pred\left(x\right)$ from being a valid modality.
+because %$\cloop$ %$\encode{0}{\encode{0}{0 \bullet 0} \bullet \encode{0}{0 \bullet 0}}$ 
+%has to be in 
+$\cloop \in \separator$ (due to combinatory completeness), and so:
+$ \boldsymbol{0} \geq \after{x}{\cloop \app c}{\boldsymbol{0}} = \infimum_{x \in \emptyset} \boldsymbol{0} = \boldsymbol{1} $,  for any code $c \in \separator$.
+Therefore,  $\boldsymbol{1} \leq \boldsymbol{0}$, which only holds in the trivial complete Heyting prealgebra, where all elements are equivalent.
+
+%\agnote{Should I explain why the example modalities are consistent?}
+%\lcnote{I think in each of the examples we will need to state the separator once we add it to the EF def. 
+
+
+\subsubsection{Realizability Examples}
+This section illustrates the utility of the MCA framework by providing a few examples of how natural realizability models can be obtained via MCAs.
+%
+We first show that the standard realizability tripos can be obtained from the PCA-based monadic core (cf.~\Cref{pca_mca}).
+
+\begin{example}[PCAs \coqdoc{partiality_monad}]
+    \Cref{pca_mca} shows that PCAs correspond to the sub-singleton monad 
+    $\monad A = \{S\subseteq A \mid \forall x_{1},x_{2}\in S. x_{1} = x_{2} \}$.
+   Following the standard intuitions of realizability models based on PCAs, when applying an evidence of $\predA \xle e \predB$ to a code $c$ such that $\predA(c)$,  
+   the $M$-modality $\after{x}{e\app c}{\predB}$ should express that the computation $e\app c$ returns a valid code for $\predB$, that is, that there exists such a valid code in the corresponding sub-singleton.
+   %
+   To that end, we take %\footnote{Which generalizes the Boolean algebra  $\{0,1\}$ to make it compatible with intuitionistic meta-theory.} 
+   $\Omega = \P\left(\singleton\right)$ (generalizing the Boolean algebra  $\{0,1\}$ making it compatible with intuitionistic meta-theory), and $\after{x}{m}{\pred(x)} \defeq \supremum_{x\in m} \pred(x)$,  for which the whole set $\mca$ defines as usual a valid separator.
+   It is then easy to verify that the evidenced frame obtained from \Cref{thm:MCAtoEF} is the expected one described earlier~\cite{CohMiqTat21}.
+
+   
+   \lcnote{add RCA and SCA}
+   
+ %   \agnote{Yes, to define it internally, you simply use the fact $\Omega$ is a complete Heyting prealgebra, and define: $\after{x}{m}{\vaprhi} \defeq \bigvee_{x \in m}\left(\pred\left(x\right)\right)$. However, what you actually need to do, technically, is define $\Omega$ and $\omega$ rather than $\after{-}{-}{-}$, and in a classical metatheory, a good candidate for $\Omega$ is $\left\{ 0 , 1\right\}$ and the standard $\omega$ (of PCA semantics) is $\omega\left(\left\{x\right\}\right) = x$}
+ % \lcnote{I think here the after is just substitution. In which case we do get the standard EF}
+
+
+\end{example}
+
+
+Next, to further demonstrate the uniformity and utility of our framework, we go back to a couple of our MCA instances from~\Cref{sec:examples}. We equip each instance with a corresponding $M$-modality and demonstrate that this indeed recovers the expected model.
+
+\begin{example}[RCA \coqdoc{powerset_monad}]\label{ex:relational}
+As described in~\Cref{RCA}, relational realizability use the powerset monad $\monad A = \P \left(A\right)$.
+PCAs are then a special case of RCAs, as the sub-singleton is a special case of the powerset monad.
+The standard modalities for RCAs are the M-modalities of angelic and demonic nondeterminism, both using $\Omega = \P\left(\singleton\right)$ as in  PCAs.
+For angelic nondeterminism, the modality is the same as the one used for PCAs, $\after{x}{m}{\pred(x)} \defeq \supremum_{x\in m} \pred(x)$, and $\mca$ is always a separator.
+However, for demonic nondeterminism, we take the infimum rather than the supremum.
+To allow for a separator, the definition of a modality
+%As discussed in \Cref{def:separator}, taking $\after{x}{m}{\pred(x)} \defeq \infimum_{x\in m} \pred(x)$ makes the existence of a separator impossible, so to allow for it, one 
+has to conjoin some ``termination'' predicate $m \Downarrow$, that implies progress for the elements of the designated separator, yielding the definition: $\after{x}{m}{\pred(x)} \defeq m\Downarrow \wedge \infimum_{x\in m} \pred(x)$.
+\end{example}
+
+%Next, we discuss the addition of state to realizability.
+
+\begin{example}[SCA \coqdoc{state_monad}]
+As in~\Cref{SCA}, for $\Sigma$ a preordered set of states, SCAs use the increasing (powerset) state monad, $\monad A = \left\{ m:\Sigma\rightarrow \P\left(\Sigma\times A\right)\
+\! \mid \! \forall\sigma_{0}\in\Sigma, \left(\sigma_{1},x\right)\in m\left(\sigma_{0}\right).\sigma_{0}\leq\sigma_{1}\right\}
+$.
+To account for state, predicates have an extra component in $\Sigma$, so $\Omega = \Sigma \rightarrow \P\left(\singleton\right)$, and they are restricted so that they must be ``future-stable'', i.e. upward closed with respect to states.
+As in RCAs, there are angelic and demonic modalities: 
+%Since $\Omega = \Sigma \rightarrow \P\left(\singleton\right)$, there is an added component of a state index, $\sigma$.
+the angelic is $\left(\after{x}{m}{\pred(x)}\right)^{\sigma} \defeq \infimum_{\sigma' \geq \sigma} \supremum_{\left(x,\sigma''\right)\in m\left(\sigma'\right)} \left(\pred(x)\right)^{\sigma''}$, and 
+the demonic again uses a ``termination'' predicate and is given by:  
+$\left(\after{x}{m}{\pred(x)}\right)^{\sigma} \defeq \infimum_{\sigma' \geq \sigma} .  m\left(\sigma'\right) \Downarrow \wedge \infimum_{\left(x,\sigma''\right)\in m\left(\sigma'\right)} \left(\pred(x)\right)^{\sigma''}$.
+
+\end{example}
+
+%
+%The next example is for classical realizability through the CPS continuation monad. 
+
+% \emnote{we should definitely give examples of M-modalities and see whether we can recover the expected EFs, e.g. for PCAs and the continuation monad}
+
+\begin{example}[Continuations \coqdoc{continuation_monad}]\label{exm:cont}
+As observed in~\Cref{example:CPS}, the continuation monad provides a particular instance
+of an MCA replaying a (CbV) CPS translation. Since Krivine classical realizability~\cite{Krivine09} is known to be equivalent to the composition of CPS translation with a standard intuitionistic realizability interpretation~\cite{OlivaStreicher08}, we can easily replay this construction in our setting using a CPSCA based on the continuation monad $\monad A = \left(A \rightarrow R\right) \rightarrow R$.  
+Krivine realizability models crucially realies on a parameter $\pole$, the so-called \emph{pole}, which intuitively contains the computations considered as valid; here, this will simply be a subset of $R$. 
+Any pole induces an orthogonality relation between elements of $A$ and of $A\to R$: a function $f$ in the latter is said to be orthogonal to $a$, written $f\bot a$ when $f(a)\in\pole$.
+
+Since our algebras follow a call-by-value discipline, realizers should be defined using two layers of orthogonality~\cite{Munch09focalisation,GardelleMiquey23}: given a formula $A$, its interpretation is primitively defined by a set of values $\llbracket A \rrbracket$. Then its set of opponents are the continuations $k$ orthogonal to any $a\in\llbracket A \rrbracket$, while a realizer will be orthogonal to any such continuation. 
+Last, as is usual in Krivine realizability, as soon as the pole is non-empty, there is at least one continuation $k$ and $c_a\in\mca$ such that $k(c_a)\in\pole$. Then, the computation $\code{\mathsf{K}_{k}}\app c_a$, which drops the current continuation and applies instead $k$ to $c_a$, would be a realizer of $\bot$. To circumvent this issue, we consider the set PL of \emph{proof-like} codes obtained by combinatorial completeness extended with the code $\code{\mathsf{cc}}$. As in~\cite{Krivine09}, a pole $\pole$ is consistent if for any proof-like term $m$, there exists a continuation $k$ such that $m(k)\notin\pole$. For any such pole, the set PL defines a separator.
+
+Formally, for $\Omega \defeq \P(\singleton)$, a fixed consistent pole $\pole\subset R$ and $\pred : A\to \Omega$,  we define:\negspace
+\[\after{x}{m}{\pred\left(x\right)}\defeq \infimum_{k\in A\to R} \left(\Big(\infimum_{a\in A}\left( \pred(a) \haimp k\bot a\right)\Big) \haimp m\bot k\right)\]
+This definition, which satisfies the expected axiom of an $M$-modality and admits the set PL as separator, induces via \Cref{thm:MCAtoEF} an evidenced frame corresponding to an indirect-style presentation of a (call-by-value) Krivine realizability model analogous to the one in \cite{GardelleMiquey23}.
+\end{example}
+
+%Finally, we provide a more recent example, based on the reader monad. 
+
+\begin{example}[Parameterized \coqdoc{parametric_monad}]
+%~(cf.~\Cref{example:bauer})]
+%\lcnote{can we give here an invalidation of CC? to have a truly NEW result}
+
+Bauer~\cite{bauer2024countablereals} provides a construction of a parameterized realizability tripos from a ParCA.
+%
+The same tripos can be obtained from the MCA representation given in~\Cref{example:bauer} following the construction in~\Cref{cor:tripos}, taking the following $M$-modality (given a set of parameters $\param$):\negspace
+%The resulting tripos derived \agnote{should I mention it is derived through the UFAM construction?} from the following 
+%\agnote{standard (since $\pred$ depends only on $x$ and not on $p$)}\lcnote{?} 
+%modality, given a set of parameters $P$:
+\[ \after{x}{m}{\pred\left(x\right)} \defeq \bigcap_{p \in \param} \bigcup_{x \in m\left(p\right)} \pred\left(x\right). \]
+%
+The modality extends the one for PCAs by requiring the computation to yield a value in $\phi$ for every possible parameter in $\param$.
+Just as in a PCA, here too the set $\mca$ provides a separator. Moreover, for the induced logic to be non-trivial the set of parameters $\param$ has to be non-empty.
+
+
+% This modality is equivalent to the form $\forall p \in P . m \Vdash_{p} \pred$ mentioned (up to a change of notation) in \cite{bauer2024countablereals}.
+% \agnote{should I add the proofs of the axioms?}
+% To see the connection, note that when $\Omega^{A} = \P\left(A\right)$, the definition becomes:
+% \[ \forall p \in P .\exists x \in m\left(p\right) . x \in \pred\]
+% which in the notation of partial functions, is equivalent to:
+% \[ \forall p \in P . m\left(p\right)\downarrow \wedge\, m\left(p\right) \in \pred\]
+% or, using the same notation as in \cite{bauer2024countablereals}:
+% \[ \forall p \in P . \left(p \mid m\right)\downarrow \wedge \left(p \mid m\right) \in \pred \]
+% which is exactly $\forall p \in P . m \Vdash_{p} \pred$ as $m \Vdash_{p} \pred$ appears in \cite{bauer2024countablereals}. \agnote{well, he uses $e$ instead of $m$ and $\pred\left(x\right)$ instead of $\pred$ (because he assumes $\pred$ is already applied to some element in the context), so maybe we want to modify accordingly}
+
+\end{example}
+
+\subsection{Connection to Assembly Models}
+\label{sec:assemblies}
+
+% \emnote{- intro to assemblies, why they were useful for standard intuitionistic realizability (easier than the topos, morphisms are function, etc...) + refs }
+To further highlight how MCAs naturally generalize PCAs, we here discuss how the construction of assemblies over PCAs, a foundational technique in the study of realizability toposes~\cite{van2008realizability}, seamlessly extends to MCAs.
+% While the first categorical accounts for realizability semantics were developed in Hyland's \emph{effective topos} \Eff~\cite{hyland1980tripos}, this topos, whose objects are pairs $(X,E_X)$ where $E_X$ is a partial equivalence relation (PER) over $X$, is arguably tricky to manipulate. In particular, although the morphisms are required to respect the PERs, their lack of reflexivity permits the existence of elements $x\in X$ for which $E_X(x,x)$, which acts as an existence predicate, is not satisfied.
+% To overcome this, one can consider instead 
+Assemblies $\Asm_\A$ over a PCA $\A$,  are pairs $(X,\asmmap{X}{\cdot})$ where $\asmmap{X}{\cdot}$ maps any $x\in X$ to a non-empty subsets of $\A$ witnessing $x$'s existence.
+The categories of assemblies $\Asm_\A$ are somewhat simpler to handle, and sufficient to model rich intuitionistic systems like the Calculus of Construction \cite{CarFreSce90assemblies}.  In fact, assemblies can be identified as a particular subcategory of the realizability topos, which in itself is a quasi-topos. Moreover, several works studying completions mechanisms within toposes \cite{RobinsonRosolini90completions,Menni2000completions} emphasized that the realizability topos could be recovered as the ex/reg completions of $\Asm_\A$. 
+% Assemblies thus provide, starting from a PCA, an alternate path to study the resulting realizability topos, which has been extensively studied over the years, until very recent works connecting assemblies with ideas coming from homotopy type theory~\cite{Speight24} and synthetic computability~\cite{Swan24oraclemodalities}.
+
+Recently, following a line of work aiming to provide an algebraic counterpart to Krivine realizability using \emph{implicative algebras}, Castro \emph{et al.} extended the usual definition of assemblies to such algebras~\cite{CasMiqKrz23}. While they manage to prove that the resulting assemblies define a quasi-topos as expected, in this context the usual completion mechanism techniques seem to fail and relating assemblies with the corresponding implicative topos remains an open problem to date.
+Following the connection established between implicative algebras and evidenced frames in \cite{CohMiqTat21}, we can adapt their construction to define assemblies over any evidenced frame which, combined with \Cref{thm:MCAtoEF} , provide us with a construction of assemblies over any MCA. Note that assemblies over a PCA or an implicative algebra are then recovered by considering the corresponding evidenced frame.
+
+
+
+\begin{definition}[Category $\Asm_{\ef}$]
+The category of assemblies over an evidenced frame $\ef = \left(\Phi , E , \rightarrow\right)$, is given by:
+\negspace
+\begin{description}
+    \item[Objects :] an \emph{assembly} over $\ef$ is a tuple $X=\left(\underlying{X},  \real{X}\right)$ where $\underlying{X}$ is a set and $\real{X} : \underlying{X} \rightarrow \Phirel$, where $\Phirel=\{\varphi\in\Phi \mid \exists e\in E. \top \xle e \varphi\}$ is the subset of evidenced relations.
+    \item[Morphisms :] given two assemblies $X , Y$, a \emph{morphism} $f$ from $X$ to $Y$ is a function $\underlying{f} : \underlying{X} \rightarrow \underlying{Y}$ s.t. there exists an evidence $\tau_f \in E$, s.t for all $x \in \underlying{X}$, 
+    $ \real{X} (x) \evidence{\tau_f} \real{Y}(f\left(x\right))$.
+That evidence $\tau_f$ is said to ``\emph{track}'' $f$.
+%\lcnote{the font is confusing. maybe $c_f$ instead?}\emnote{fixed it with $\tau_f$ borrowed from~\cite{CasMiqKrz23}}
+\end{description}
+\end{definition}
+%\lcnote{does it make sense to look at some of the examples? will there be an interesting difference/similarity?} \emnote{nope, you will get exactly the same things (up to the fact that EFs define "realized" by a binary relation and we thus use $\top \xle e \varphi$ instead of the unary $e\Vdash \varphi$)}
+
+To prove that this indeed defines a category, it suffices to observe that 
+the \emph{identity morphism} over assembly $X$ is simply the identity function $\id_{\underlying{X}}$ over $\underlying{X}$ tracked by the reflexivity evidence $e_{\id}$; and that if $f$ is tracked by $\tau_f$ and $g$ is tracked by $\tau_g$, then their composition $f \circ g$ is the composition of $\underlying{f} \circ \underlying{g}$ tracked by the transitivity evidence $\tau_g;\tau_f$.
+%
+Studying more in-depth the category $\Asm_\ef$ is out of the scope of this paper, but 
+we conjecture that one could follow the development for implicative assemblies in~\cite{CasMiqKrz23} to prove that the $\Asm_{\ef}$ is also finitely (co)complete, locally cartesian closed and possesses a strong object classifier, and defines then a quasi-topos.
+% \footnote{Indeed, 
+% %apart from set-theoretic constructions on the underlying sets of assemblies (which can be replayed in this setting), 
+% the proofs in~\cite{CasMiqKrz23} mainly rely on propositions having enough structure to account for the standard constructors and %conjunctions, disjunctions, intersections, etc., 
+% the existence of adequate realizers, expressed by means of $\lambda$-terms in the separator of any implicative algebra. Here, the former requirement is trivially provided by the definition of $\Phi$ in evidenced frames, and the latter can be mimicked using evidence in $E$. For instance, the fact that $\asm_{ef}$ has products matches the conjunction axioms and the corresponding evidence $\efst$, $\esnd$ and $\epair{}{}$.}. 
+Nonetheless, as for the implicative case, it is not clear whether some mechanism analogous to the ex/reg completion could connect it to the topos induced by the evidenced frame.
+
+% \section{Related Work}
+
+% \lcnote{TBD}
+% \lcnote{cite Tabareau}
+% a recent line of work involves extending the (intensional) type theory underlying the Coq proof assistant with logical principles and computational effects~\cite{Pedrot+Tabareau:lics:2017,Boulier+Pedrot+Tabareau:cpp:2017,Pedrot+Tabareau:esop:2018,Pedrot+Tabareau+Fehrmann+Tanter:icfp:2019,Pedrot+al:lics:2020,Pedrot+Tabareau:popl:2020}.
+% %
+% In particular, P\'edrot and Tabareau~\cite{Pedrot+Tabareau:popl:2020}~prove that any \emph{observably} effectful type theory (with other standard properties) is necessarily inconsistent.
+% %
+% These extensions are usually guided by specific principles or computational capabilities such as exceptions, while being justified via a syntactic model by translating back to type theory, as advocated in~\cite{Boulier+Pedrot+Tabareau:cpp:2017}. Nonetheless, these works have different purposes than the present one, in that they aim at justifying the soundness of theories involving dependent types that may refer to the desired effectful computations. In turns, here we define a syntactic translation for $\hol$, that has no dependencies and consequently no way to refer to the effectful realizers at play.
+
+
+\section{Conclusion and Future Work}\label{sec:conc}
+This paper introduces Monadic Combinatory Algebras (MCAs) as a novel extension of PCAs that encompasses a wide range of computational effects through the use of monads. This new framework addresses the limitations of traditional PCAs, which only support non-termination as a computational effect, by providing a more comprehensive model capable of internalizing effects such as nondeterminism, stateful computations, continuations and oracles.
+%
+%We further provided a categorical characterization of MCAs through Freyd Categories, enriching the understanding of the relationship between combinatory algebras and categorical models of computation.
+%
+We link MCAs to realizability theory (generalizing the role of PCAs in traditional realizability models)
+by providing two uniform constructions of realizability models from MCAs, triposes and assemblies, that factor through evidenced frames. 
+%
+ Overall, MCAs provide a powerful and flexible framework for internalizing computational effects that opens up new avenues in the study of effectful computations and their algebraic and categorical models. 
+ 
+% \lcnote{connect better to related work:  a generalization of a specific case}
+% Doing so highlights\agnote{???} the details of MCAs as an interesting special case of the categorical perspective, while showcasing how to extend the discussion of monad-based restrictions, and thus, monad-based PCA objects, to non-commutative monads.
+% To our knowledge, currently, the only results regarding monad-based restrictions discuss commutative monads.
+
+Future research into the MCA framework presents several directions for exploration. 
+%
+A key one is examining how different underlying monads affect the resulting theory, potentially providing novel insights into constructive models of computation. 
+%While this paper demonstrated how MCAs naturally encapsulate various computational effects, 
+Further work is also needed to extend the MCA scope to unaddressed effects, such as probabilistic computation. 
+Notably, our MCA structure is based on $\setcat$-monads, whereas probabilistic computation is typically formalized using the Giry monad~\cite{giry2006categorical} in the category $\mathbf{Meas}$ (measurable spaces and functions). Advancing the theory of combinatory objects in Freyd categories % rather than Kleisli categories over $\setcat$, 
+will enable the exploration of broader computational effects beyond $\setcat$-based monads.
+% A particularly intriguing task is to investigate the influence of the underlying monad on the resulting theory. Such studies could yield new insights into constructive models of computation.
+% %\textbf{Incorporating more effects.}
+% Moreover, while we demonstrated the utility and generality of the MCA framework in naturally capturing a wide range of standard computational effects, further work is needed to extend its support to effects not addressed in this paper, such as probabilistic computation.
+% \revnote{I guess that discrete probabilistic computation could be captured as an MCA by simply considering the monad $D$ such that $D(X)$ is the set of all distributions on X having countable support.}
+% The MCA structure presented in this paper was based  on monads in the $\setcat$ category.
+% However, when it comes to probabilistic computation, the usual category theoretic formalization is based on the Giry monad, which is a monad in a different category, $\mathbf{Meas}$, of measurable spaces and functions~\cite{giry2006categorical}.
+% Thus, further developing the theory of MCA objects in Freyd categories, rather than Kleisli categories over $\setcat$, will allow us to explore other common computational effects that go beyond $\setcat$ monads.
+%Constructing an MCA on the Giry monad could lead to a realizability model based on probabilistic computation, but there are several challenges in the way:
+%First, MCAs are currently defined in terms of sets, so a generalization of MCAs to more general categories is needed.
+% Moreover, the Giry monad is not a strong monad in $\mathbf{Meas}$~\cite{sato2018giry},  thus supporting it entails adjusting the formalism developed in this work. % so it does not rely on strong monads.
+%, and, in fact, $\mathbf{Meas}$ does not seem to form a proper underlying category for a tripos, because predicates of measurable spaces do not, in general, form measurable spaces.
+%So $\effhol$ will have to be replaced with a formalism that does not rely on strong monads for its semantics and keeps some separation between computational types and logic types.
+%\textbf{Furthering the categorical setting.}
+%To fully explore the interplay between combinatory algebras and categorical models of computation, 
+Moreover, a more comprehensive categorical understanding of MCAs, via their connections to structures like monoidal, enriched, and higher categories, is needed.
+%not only to enrich the theoretical foundation of MCAs but also 
+%to provide a deeper understanding of the interplay between combinatory algebras and categorical models of computation.
+%This could be achieved by investigating their relationships with other categorical structures, such as monoidal categories, enriched categories, and higher categories.
+%and may reveal new connections and provide a more comprehensive categorical framework for effectful computations.
+\lcnote{discuss extending the categorical setting to the modality and cite}
+
+The MCA framework can also be further extended to support more diverse and complex notions of computation such as hybrid effects, where multiple monads are combined to model complex interactions between different computational effects. 
+%
+Additionally, the framework can be enriched by incorporating alternative evaluation strategies, such as Call-by-Name, which may uncover new computational behaviors. 
+%Specifically, the Call-by-Name strategy can be used to further relate to Call-by-Name  style classical realizability~\cite{GardelleMiquey23}.
+%Another extension of the MCA framework can be obtained by incorporating alternative evaluation strategies such as Call-by-Name which may reveal new computational behaviors. 
+%Specifically, the Call-by-Name strategy can be used to further relate to works on classical realizability, which can be based on Call-by-Name operational semantics~\cite{GardelleMiquey23}.
+
+% Another promising direction involves exploring alternative evaluation strategies within the MCA framework. 
+% The current focus on Call-by-Value could be expanded to include Call-by-Name and other strategies, which may reveal new computational behaviors, especially when combined with effectful computations.
+% Specifically, the Call-by-Name strategy can be used to further relate to works on classical realizability, which can be based on Call-by-Name operational semantics~\cite{GardelleMiquey23}.
+
+
+% %\textbf{Combining effects.}
+% The MCA framework can also be taken further by exploring how MCAs can be extended to support hybrid effects, where multiple monads are combined to model complex interactions between different types of computational effects. Investigating the algebraic structures and properties that arise from such combinations will provide deeper insights into the nature of effectful computations.
+
+
+
+\clearpage
+
+
+\bibliography{ref}
+\appendix
+\newpage
+\onecolumn
+\clearpage
+
+
+\appendix
+\vshort{
+\section*{Appendix: Elaborated \Cref{sec:turing} --- Categorical Characterization of MCAs}
+
+\setcounter{lemma}{0}
+\renewcommand{\thelemma}{\Alph{section}\arabic{lemma}}
+\setcounter{definition}{0}
+\renewcommand{\thedefinition}{\Alph{section}\arabic{definition}}
+
+\input{categories}
+}
+\vlong{
+\input{app_new}
+}
+\end{document}

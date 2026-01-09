@@ -424,7 +424,7 @@ class CcsdTexCompile {
     }
 
     public static function checkForCompilationError($file): string {
-        return self::checkForLine($file.'.log','/latex error|found error:|dvips error|emergency stop|Undefined control sequence/');
+        return self::checkForLine($file.'.log','/Package pdftex.def Error: File|latex error|found error:|dvips error|emergency stop|Undefined control sequence/');
     }
 
     public static function checkForBadCitation($file): string {
@@ -461,7 +461,7 @@ class CcsdTexCompile {
         if ( is_file($file.'.log') ) {
             foreach ( file($file.'.log', FILE_IGNORE_NEW_LINES | FILE_SKIP_EMPTY_LINES) as $line ) {
                 if ( preg_match('/^No file (.*)\./', $line, $match) || preg_match('/File (.*) not found\./', $line, $match) ) {
-                    if ( preg_match('/["`\']?'.$file.'[\'`"]?\.(aux|bbl|ind|toc|brf|lof|lot)/', $match[1]) ) {
+                    if ( preg_match('/["`\']?'.$file.'[\'`"]?\.(aux|bbl|ind|toc|brf|lof|lot|loe)/', $match[1]) ) {
                         continue;
                     }
                     return str_replace(array("'", '"', '`'), '', $match[1]);

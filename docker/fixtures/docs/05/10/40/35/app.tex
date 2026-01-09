@@ -1,0 +1,1195 @@
+\appendix
+
+\section{Evidenced Frame from MCA with Modality}
+
+We recall the definition of evidenced frame.
+\begin{definition*}[Evidenced Frame]\label{evidenced-frame}
+An \emph{evidenced frame} is a triple $\ef = \left( \Phi, E,  \mbox{$\cdot \xle{\cdot} \cdot$} \right)$, where $\Phi$ is a set of propositions,~$E$ is a collection of evidence, and~\mbox{$\phi_1 \xle{e} \phi_2$} is a ternary evidence relation on $\Phi \times E \times \Phi$, along with the following:
+\begin{description}[leftmargin=*]
+\item[Reflexivity] There exists evidence~$\eid \in E$:
+\begin{itemize}[leftmargin=*]
+\item $\forall \phi.\; \phi \xle{\eid} \phi$
+\end{itemize}
+\item[Transitivity] There exists an operator~$\ecomp{}{} \in E \times E \to E$:
+\begin{itemize}[leftmargin=*]
+\item $\forall \phi_1, \phi_2, \phi_3, e, e'.\; \mbox{$\phi_1 \xle{e} \phi_2 \mathrel{\emeet} \phi_2 \xle{e'} \phi_3 \implies \phi_1 \xle{\ecomp{e}{e'}} \phi_3$}$
+\end{itemize}
+\item[Top] A proposition~$\!\top \!\in\! \Phi$ such that there exists evidence~$\etrue \!\!\in\! E$:
+\begin{description}[leftmargin=*,font=\normalfont]
+\item[\emph{intro:}] $\forall \phi.\; \phi \xle{\etrue} \top$
+\end{description}
+\item[Conjunction] An operator~\mbox{$\emeet \!\in\! \Phi \!\times\! \Phi \!\to\! \Phi$} such that there exists an operator~\mbox{$\epair{\cdot}{\!\cdot} \!\in\! E \!\times\! E \!\to\! E$} and evidence~$\efst, \esnd \in E$:
+\begin{description}[leftmargin=*,font=\normalfont]
+\item[\emph{intro:}] $\forall \phi, \phi_1, \phi_2, e_1, e_2.\; \mbox{$\phi \xle{e_1} \phi_1 \mathrel{\emeet} \phi \xle{e_2} \phi_2 \!\!\implies\!\! \phi \xle{\epair{e_1}{e_2}} \phi_1 \emeet \phi_2$}$
+\item[\emph{elim1:}] $\forall \phi_1, \phi_2.\; \phi_1 \emeet \phi_2 \xle{\efst} \phi_1$
+\item[\emph{elim2:}] $\forall \phi_1, \phi_2.\; \phi_1 \emeet \phi_2 \xle{\esnd} \phi_2$
+\end{description}
+\item[Universal Implication] An operator~$\imp \in \Phi \times \power(\Phi) \to \Phi$ such that there exists an operator~\hbox{$\elambda{} \!\in\! E \!\to\! E$} and evidence~$\eeval \!\in\! E$:
+\begin{description}[leftmargin=*,font=\normalfont]
+\item[\emph{intro:}] $\forall \phi_1, \phi_2, \vec{\phi}, e.\; (\forall \phi \in \vec{\phi}.\; \phi_1 \emeet \phi_2 \xle{e} \phi) \implies \phi_1 \xle{\elambda{e}} \phi_2 \imp \vec{\phi}$
+\item[\emph{elim:}] $\forall \phi_1, \vec{\phi}, \phi \in \vec{\phi}.\; (\phi_1 \imp \vec{\phi}) \emeet \phi_1 \xle{\eeval} \phi$
+\end{description}
+\end{description}
+In the above, we write $\vec{\phi}$ for an element of $\power(\Phi)$, i.e., a subset of $\Phi$.
+\end{definition*}
+
+In this section we provide a detailed proof of~\Cref{thm:MCAtoEF}. To ease readability, we review the key definitions and theorems below.
+
+\modality*
+
+\MCAEF*
+
+====
+
+\begin{definition}[Complete Heyting pre-Algebra]
+A Complete Heyting pre-Algebra \agnote{we don't actually need all the co-complete structure of Heyting pre-Algebra, just the conjunctive / cartesian-closed part, so maybe I should use a different name} is a set $\Omega$ equipped with a pre-order $\leq$, and the following operators:
+\begin{itemize}
+    \item Top
+    \[ \boldsymbol{1} \in \Omega \]
+
+    \item Binary meets - for every $\truthval_{1} , \truthval_{2} \in \Omega$:
+    \[ \truthval_{1} \meet \truthval_{2} \in \Omega \]
+
+    \item Infimum - for every set $S \subset \Omega$:
+    \[ \infimum S \in \Omega \]
+    When $\pred : X \rightarrow \Omega$ for some set $X$, we sometimes use the indexed form $\infimum_{x \in X}\left(\pred\left(x\right)\right)$ to denote:
+    \[ \infimum \left\{ \pred\left(x\right) \middle| x \in X \right\} \]
+
+    \item Exponentials - for every $\truthval_{1} , \truthval_{2} \in \Omega$:
+    \[ \truthval_{1} \haimp \truthval_{2} \in \Omega \]
+\end{itemize}
+
+The operators has to abide the following axioms:
+\agnote{should I specifiy this?}
+\lcnote{Find the actual math structure needed. If it has a name, replace, if not, stay with this+add a footnote+ref}\agnote{after giving it some further thought, I believe if we only have the operators mentions above, all the other structure of complete Heyting pre-algebra is derivable in much the same way as in the case of EFs, so it will always be a complete Heyting pre-algebra anyway}
+
+\end{definition}
+
+
+We construct the following helper codes:
+\begin{itemize}
+    \item $\codetuple{c_{1}}{c_{2}} \defeq \encode{0}{0 \bullet c_{1} \bullet c_{2}}$
+
+    \item $\code{\codef{p_{1}}} \defeq \encode{1}{0}$
+
+    \item $\code{\codef{p_{2}}} \defeq \encode{1}{1}$
+    
+    \item Given code $e$:
+    $\codeuncurry{e} \defeq \encode{0}{e \bullet \left(0 \bullet \codepA\right) \bullet \left(0 \bullet \codepB\right)}$
+\end{itemize}
+
+We construct the following codes:
+\begin{enumerate}
+    \item \[\codeid \defeq \encode{0}{0}\]
+
+    \item Given codes $e_{1} , e_{2}$:
+    \[\code{e_{1} ; e_{2}} \defeq \encode{0}{e_{2} \bullet \left(e_{1} \bullet 0 \right)}\]
+
+    \item
+    \[\code{\top} \defeq \codeid\]
+
+    \item Given codes $e_{1} , e_{2}$:
+    \[\codepair{e_{1}}{e_{2}} \defeq \encode{1}{1 \bullet \left(e_{1} \bullet 0\right) \bullet \left(e_{2} \bullet 0\right)}\]
+
+    \item
+    \[\code{\codef{fst}} \defeq \encode{0}{0 \bullet \codepA}\]
+
+    \item
+    \[\code{\codef{snd}} \defeq \encode{0}{0 \bullet \codepB}\]
+
+    \item Given code $e$:
+    \[\codecurry{e} \defeq \encode{1}{e \bullet \left(\encode{2}{2 \bullet 0 \bullet 1} \bullet 0 \bullet 1\right)}\]
+
+    \item
+    \[ \codeeval \defeq \codeuncurry{ \codeid } \]
+
+    % \item Given code $e$:
+    % \[\codethunk{e} \defeq \encode{1}{e \bullet 0}\]
+
+    % \item Given code $e$:
+    % \[\coderun{e} \defeq \encode{0}{e \bullet 0 \bullet \codeid}\]
+
+\end{enumerate}
+
+Furthermore, we define the following predicates $\mca \rightarrow \Omega$:
+\begin{itemize}
+    \item $\top\left(e\right) \defeq \boldsymbol{1}$
+    
+    \item Given $\predA , \predB : \mca \rightarrow \Omega$:
+    \[\left(\predA \emeet \predB\right)\left(e\right) \defeq \after{c_{1}}{e \app \codepA}{\predA\left(c_{1}\right)} \meet \after{c_{2}}{e \app \codepB}{\predB\left(c_{2}\right)}\]
+
+    \item Given $\predA : \mca \rightarrow \Omega$ and $\preds \in \P\left(\Omega^{\mca}\right)$:
+    \[\left(\predA \imp \preds\right)\left(e\right) \defeq \infimum_{\predB \in \preds}\infimum_{c \in \mca}\left(\predA\left(c\right) \haimp \after{r}{e \app c}{\predB\left(r\right)}\right) \]
+
+\end{itemize}
+
+We define the evidence relation:
+\[ \evrel{\predA}{e}{\predB} \defeq \evexpand{\predA}{e}{\predB} \]
+
+\extmon*
+
+\begin{proof}
+    Assume for all $ x \in A $, $ \predA\left(x\right) \leq \predB\left(x\right)$. By currying, we get:
+    \[\boldsymbol{1} \leq \predA\left(x\right) \haimp \predB\left(x\right) \]
+    Since this holds for all $x \in A$, then:
+    \begin{align*}
+        & \boldsymbol{1} \leq \infimum_{x \in A}\left(\predA\left(x\right) \haimp \predB\left(x\right)\right)
+        \leql{\eqref{eq:after-inter-mono}} \after{x}{m}{\predA\left(x\right)} \haimp \after{x}{m}{\predB\left(x\right)}
+    \end{align*}
+    From which, by uncurrying, we obtain:
+    \[ \after{x}{m}{\predA\left(x\right)} \leq \after{x}{m}{\predB\left(x\right)}. \]
+    \qedhere
+\end{proof}
+
+\begin{lemma}
+    For all $A$, $\pred : A \rightarrow \Omega$, $\theta \in \Omega$, and $m \in M\left(A\right)$:
+    
+    \[\after{x}{m}{\left(\theta \haimp \pred\left(x\right)\right)} \leq \theta \haimp \after{x}{m}{\pred\left(x\right)}\]
+\end{lemma}
+\begin{proof}
+    By reflexivity, we have:
+    \[ \forall x \in A . \theta \haimp \pred\left(x\right) \leq \theta \haimp \pred\left(x\right) \]
+    by uncurrying $\theta$ and then currying $\theta \haimp \pred\left(x\right)$, we get:
+    \[ \forall x \in A . \theta \leq \left(\theta \haimp \pred\left(x\right)\right) \haimp  \pred\left(x\right) \]
+    so by the infimum property we get:
+    \begin{align*}
+        & \theta \\
+        & \leq \infimum_{x \in A} \left(\left(\theta \haimp \pred\left(x\right)\right) \haimp \pred\left(x\right) \right)\\
+        & \leql{\eqref{eq:after-inter-mono}} \after{x}{m}{\left(\theta \haimp \pred\left(x\right)\right)} \haimp \after{x}{m}{ \pred\left(x\right)}
+    \end{align*}
+    Now, by uncurrying $\after{x}{m}{\left(\theta \haimp \pred\left(x\right)\right)}$ and currying $\theta$ we get:
+    \[ \after{x}{m}{\left(\theta \haimp \pred\left(x\right)\right)} \leq \theta \haimp \after{x}{m}{ \pred\left(x\right)} \]
+\end{proof}
+
+\begin{lemma}\label{lemma:after-conj2}
+    For all $A$, $\pred : A \rightarrow \Omega$, $\theta \in \Omega$, and $m \in M\left(A\right)$:
+    
+    \[\theta \meet \after{x}{m}{\pred\left(x\right)} \leq \after{x}{m}{\left(\theta \meet \pred\left(x\right)\right )}\]
+\end{lemma}
+\begin{proof}
+    By reflexivity, we have:
+    \[ \forall x \in A . \theta \meet \pred\left(x\right) \leq \theta \meet \pred\left(x\right) \]
+    by currying $\pred\left(x\right)$ we get:
+    \[ \forall x \in A . \theta \leq \pred\left(x\right) \haimp \left(\theta \meet \pred\left(x\right)\right) \]
+    so by the infimum property we get:
+    \begin{align*}
+        & \theta \\
+        & \leq \infimum_{x \in A} \left( \pred\left(x\right) \haimp \left(\theta \meet \pred\left(x\right)\right) \right)\\
+        & \leql{\eqref{eq:after-inter-mono}} \after{x}{m}{\pred\left(x\right)} \haimp \after{x}{m}{\left(\theta \meet \pred\left(x\right)\right)}
+    \end{align*}
+    Now, by uncurrying $\after{x}{m}{\pred\left(x\right)}$ we get:
+    \[ \theta \meet \after{x}{m}{\pred\left(x\right)} \leq \after{x}{m}{\left( \theta \meet \pred\left(x\right) \right)} \]
+\end{proof}
+
+\begin{lemma}[Universal Implication Uncurrying]\label{lemma:uni-imp-uncurry}
+    \[ \dfrac{\evrel{\predA}{e}{\left(\predB \imp \preds\right)}}{\forall \predC \in \preds .\evrel{\left(\predA \emeet \predB\right)}{\codeuncurry{e}}{\predC}}  \]
+\end{lemma}
+\begin{proof}
+    We need to prove:
+    \[ \dfrac{\evexpand{\predA}{e}{\left(\predB \imp \preds\right)}}{\forall \predC \in \preds .\evexpand{\left(\predA \emeet \predB\right)}{\codeuncurry{e}}{\predC}}  \]
+    Given a $\predC \in \preds$, due to the lower bound property of $\infimum$, we have, for $\predC$:
+    \begin{align*}
+        & \infimum_{\predC \in \preds}\infimum_{c_{2} \in \mca}\left(\predB\left(c_{2}\right) \haimp \after{r}{f \app c_{2}}{\predC\left(r\right)}\right) \\
+        & \leq \infimum_{c_{2} \in \mca}\left(\predB\left(c_{2}\right) \haimp \after{r}{f \app c_{2}}{\predC\left(r\right)}\right)\\
+        & \leql{\eqref{eq:after-inter-mono}} \after{c_{2}}{c \app \codepB}{\predB\left(c_{2}\right)} \haimp \after{c_{2}}{c \app \codepB}{\after{r}{f \app c_{2}}{\predC\left(r\right)}}
+    \end{align*}
+
+    By \cref{lemma:after-mono}, it gives us, for any $c_{1} \in \mca$:
+    \begin{align*}
+        & \after{f}{e \app c_{1}}{\infimum_{\predC \in \preds}\infimum_{c_{2} \in \mca}\left(\predB\left(c_{2}\right) \haimp \after{r}{f \app c_{2}}{\predC\left(r\right)}\right)}
+        \\
+        & \leq \after{f}{e \app c_{1}}{\after{c_{2}}{c \app \codepB}{\predB\left(c_{2}\right)} \haimp \after{c_{2}}{c \app \codepB}{\after{r}{f \app c_{2}}{\predC\left(r\right)}}}
+    \end{align*}
+
+    So given $c_{1} \in \mca$, consider the premise as instantiated with $c_{1}$.
+    
+    \begin{align*}
+        & \predA\left(c_{1}\right)\\
+        & \leq \after{f}{e \app c_{1}}{\infimum_{\predC \in \preds}\infimum_{c_{2} \in \mca}\left(\predB\left(c_{2}\right) \haimp \after{r}{f \app c_{2}}{\predC\left(r\right)}\right)}\\
+        % & \leql{\eqref{lemma:after-mono}} \after{f}{e \app c_{1}}{\infimum_{c_{2} \in \mca}\left(\predB\left(c_{2}\right) \haimp \after{r}{f \app c_{2}}{\predC\left(r\right)}\right)}\\
+        & \leql{\eqref{lemma:after-mono}} \after{f}{e \app c_{1}}{\after{c_{2}}{c \app \codepB}{\predB\left(c_{2}\right)} \haimp \after{c_{2}}{c \app \codepB}{\after{r}{f \app c_{2}}{\predC\left(r\right)}}}\\
+        & \leql{\eqref{lemma:after-imp}} \after{c_{2}}{c \app \codepB}{\predB\left(c_{2}\right)} \haimp \after{f}{e \app c_{1}}{ \after{c_{2}}{c \app \codepB}{\after{r}{f \app c_{2}}{\predC\left(r\right)}}}
+    \end{align*}
+
+    So by uncurrying $\after{c_{2}}{c\app\codepB}{\predB\left(c_{2}\right)}$ and then currying $\predA\left(c_{1}\right)$ we get:
+
+    \begin{align*}
+        & \after{c_{2}}{c\app\codepB}{\predB\left(c_{2}\right)}\\& \leq \predA\left(c_{1}\right) \haimp \after{f}{e \app c_{1}}{ \after{c_{2}}{c \app \codepB}{\after{r}{f \app c_{2}}{\predC\left(r\right)}}}
+    \end{align*}
+
+    Now, since it holds for every $c_{1} \in \mca$, that:
+
+    \begin{align*}
+        & \after{c_{2}}{c\app\codepB}{\predB\left(c_{2}\right)}\\
+        & \leq \infimum_{c_{1}} \left( \predA\left(c_{1}\right) \haimp \after{f}{e \app c_{1}}{ \after{c_{2}}{c \app \codepB}{\after{r}{f \app c_{2}}{\predC\left(r\right)}}}\right)\\
+        & \leql{\eqref{eq:after-inter-mono}} \after{c_{1}}{c \app \codepA}{\predA\left(c_{1}\right)} \haimp \after{c_{1}}{c \app \codepA}{\after{f}{e \app c_{1}}{ \after{c_{2}}{c \app \codepB}{\after{r}{f \app c_{2}}{\predC\left(r\right)}}}}
+    \end{align*}
+
+    So by uncurrying again we get:    
+    \begin{align*}
+        & \left(\predA \emeet \predB\right)\left(c\right)\\
+        & = \after{c_{1}}{c \app \codepA}{\predA\left(c_{1}\right)} \meet \after{c_{2}}{c \app \codepB}{\predB\left(c_{2}\right)}\\
+        & \leq \after{c_{1}}{c \app \codepA}{\after{f}{e \app c_{1}}{\after{c_{2}}{c \app \codepB}{\after{r}{f \app c_{2}}{\predC\left(r\right)}}}} \\
+        & \leql{\eqref{eq:after-bind}} \after{r}{\left( \letin{c_{1}}{c \app \codepA}{\letin{f}{e \app c_{1}{\letin{c_{2}}{c \app \codepB}{f \app c_{2}}}}} \right)}{\predC\left(r\right)} \\
+        & = \after{r}{ \nu\left(e \bullet \left(c \bullet \codepA\right) \bullet \left(c \bullet \codepB\right)\right)}{\predC\left(r\right)} \\
+        & = \after{r}{\encode{0}{e \bullet \left(0 \bullet \codepA\right) \bullet \left(0 \bullet \codepB\right)} \app c}{\predC\left(r\right)} \\
+        & = \after{r}{\codeuncurry{e} \app c}{\predC\left(r\right)}
+    \end{align*}
+\end{proof}
+
+\begin{theorem}[Evidenced Frame of MCAs with Modality]
+The aformentioned structure forms an Evidenced Frame
+\end{theorem}
+
+\begin{proof}
+We prove each case separately:
+\begin{enumerate}
+    \item \textbf{Reflexivity:}
+    Proof obligation:
+    \[ \evexpand{\pred}{\codeid}{\pred} \]
+    Proof: Given $c \in \mca$
+    \begin{align*}
+        & \pred\left(c\right) \\
+        & \leq \after{r}{\return{c}}{\pred\left(r\right)} \\
+        & = \after{r}{\encode{0}{0} \app c}{\pred\left(r\right)} \\
+        & = \after{r}{\codeid \app c}{\pred\left(r\right)}
+    \end{align*}
+
+    \item \textbf{Transitivity:}
+    Proof obligation:
+    \[ \dfrac{
+        \begin{array}{c}
+            \evexpand{\predA}{e_{s}}{\predB}\\
+            \evexpand{\predB}{e_{t}}{\predC}
+        \end{array}}
+    {\evexpand{\predA}{\code{e_{s} ; e_{t}}}{\predC}} \]
+    Proof: Given the assumptions above, and a $c \in \mca$
+    \begin{align*}
+        & \predA\left(c\right) \\
+        & \leq \after{s}{e_{s} \app c}{\predB\left(s\right)} \\
+        & \leql{\eqref{lemma:after-mono}} \after{s}{e_{s} \app c}{\after{r}{e_{t} \app s}{\predC\left(r\right)}} \\
+        & \leql{\eqref{eq:after-bind}} \after{r}{\left(\letin{s}{e_{s} \app c}{e_{t} \app s}\right)}{\predC\left(r\right)} \\
+        & = \after{r}{\encode{0}{e_{t} \bullet \left(e_{s} \bullet 0\right)} \app c}{\predC\left(r\right)} \\
+        & = \after{r}{\code{e_{s} ; e_{t}} \app c}{\predC\left(r\right)}
+    \end{align*}
+
+    \item \textbf{Top}:
+    Proof obligation:
+    \[ \dfrac{}{\evexpand{\pred}{\codeid}{\top}} \]
+    Proof:
+    Given a $c \in \mca$:
+    \begin{align*}
+        & \pred\left(c\right)\\
+        & \leq \boldsymbol{1}\\
+        & \leql{\eqref{eq:after-ret}} \after{r}{\return{c}}{\boldsymbol{1}}\\
+        & = \after{r}{\return{c}}{\top\left(r\right)}\\
+        & = \after{r}{\codeid \app c}{\top\left(r\right)}
+    \end{align*}
+
+    \item \textbf{Conjunction Introduction}:
+    Proof obligation:
+    \[ \dfrac{
+        \begin{array}{c}
+            \evexpand{\pred}{e_{1}}{\predA}\\
+            \evexpand{\pred}{e_{2}}{\predB}
+        \end{array}}
+    {\evexpand{\pred}{\codepair{e_{1}}{e_{2}}}{\left(\predA \emeet \predB\right)}} \]
+    Proof:
+    By combining the assumptions, we get, for any $c \in \mca$:
+    \begin{align*}
+        &\pred\left(c\right)\\
+        &\leq \after{c_{2}}{e_{2} \app c}{\predB\left(c_{2}\right)} \meet  \after{c_{1}}{e_{1} \app c}{\predA\left(c_{1}\right)} \\
+        &\leql{\eqref{lemma:after-conj}} \after{c_{1}}{e_{1} \app c}{\left(\after{c_{2}}{e_{2} \app c}{\predB\left(c_{2}\right)} \meet \predA\left(c_{1}\right)\right)}\\
+        &\leql{\eqref{lemma:after-mono}} \after{c_{1}}{e_{1} \app c}{\left(\predA\left(c_{1}\right) \meet \after{c_{2}}{e_{2} \app c}{\predB\left(c_{2}\right)}\right)}\\
+        &\leql{\eqref{lemma:after-mono} + \eqref{lemma:after-conj}} \after{c_{1}}{e_{1} \app c}{\left(\after{c_{2}}{e_{2} \app c}{\left(\predA\left(c_{1}\right) \meet \predB\left(c_{2}\right)\right)}\right)}
+    \end{align*}
+
+    Now, by using \eqref{lemma:after-mono} twice over each of the projections of $\meet$, we get:
+    \begin{enumerate}
+        \item $ \pred\left(c\right) \leq \after{c_{1}}{e_{1} \app c}{\after{c_{2}}{e_{2} \app c}{\predA\left(c_{1}\right)}} $
+
+        \item $ \pred\left(c\right) \leq \after{c_{1}}{e_{1} \app c}{\after{c_{2}}{e_{2} \app c}{\predB\left(c_{2}\right)}} $
+    \end{enumerate}
+
+    So we get:
+    \begin{enumerate}
+        \item
+        \begin{align*}
+            & \pred\left(c\right)\\
+            \leq & \after{c_{1}}{e_{1} \app c}{\after{c_{2}}{e_{2} \app c}{\predA\left(c_{1}\right)}}\\
+            \leql{\eqref{lemma:after-mono} \circ \eqref{lemma:after-mono} \circ \eqref{eq:after-ret}} & \after{c_{1}}{e_{1} \app c}{\after{c_{2}}{e_{2} \app c}{ \after{r_{1}}{\return{c_{1}}}{\predA\left(r_{1}\right)} }}\\
+            \leql{\eqref{lemma:after-mono} \circ \eqref{eq:after-bind}} & \after{c_{1}}{e_{1} \app c}{ \after{r_{1}}{\left( \letin{c_{2}}{e_{2} \app c}{\return{c_{1}}} \right)}{ \predA\left(r_{1}\right) } } \\
+            \leql{\eqref{eq:after-bind}} & \after{r_{1}}{\left(\letin{c_{1}}{e_{1} \app c}{ \letin{c_{2}}{e_{2} \app c}{\return{c_{1}}} }\right)}{\predA\left(r_{1}\right)}\\
+            = & \after{r_{1}}{ \encode{0}{0 \bullet \left(e_{1} \bullet c\right)\bullet \left(e_{2} \bullet c\right)} \app \encode{1}{0}  }{\predA\left(r_{1}\right)}\\
+            = & \after{r_{1}}{ \encode{0}{0 \bullet \left(e_{1} \bullet c\right)\bullet \left(e_{2} \bullet c\right)} \app \codepA  }{\predA\left(r_{1}\right)}
+        \end{align*}
+        
+        \item 
+        \begin{align*}
+            & \pred\left(c\right)\\
+            \leq & \after{c_{1}}{e_{1} \app c}{\after{c_{2}}{e_{2} \app c}{\predB\left(c_{2}\right)}}\\
+            \leql{\eqref{lemma:after-mono} \circ \eqref{lemma:after-mono} \circ \eqref{eq:after-ret}} & \after{c_{1}}{e_{1} \app c}{\after{c_{2}}{e_{2} \app c}{ \after{r_{2}}{\return{c_{2}}}{\predB\left(r_{2}\right)} }}\\
+            \leql{\eqref{lemma:after-mono} \circ \eqref{eq:after-bind}} & \after{c_{1}}{e_{1} \app c}{ \after{r_{2}}{\left( \letin{c_{2}}{e_{2} \app c}{\return{c_{2}}} \right)}{ \predB\left(r_{2}\right) } } \\
+            \leql{\eqref{eq:after-bind}} & \after{r_{2}}{\left(\letin{c_{1}}{e_{1} \app c}{ \letin{c_{2}}{e_{2} \app c}{\return{c_{2}}} }\right)}{\predB\left(r_{2}\right)}\\
+            = & \after{r_{2}}{ \encode{0}{0 \bullet \left(e_{1} \bullet c\right)\bullet \left(e_{2} \bullet c\right)} \app \encode{1}{1}  }{\predB\left(r_{2}\right)}\\
+            = & \after{r_{2}}{ \encode{0}{0 \bullet \left(e_{1} \bullet c\right)\bullet \left(e_{2} \bullet c\right)} \app \codepB  }{\predB\left(r_{2}\right)}
+        \end{align*}
+    \end{enumerate}
+
+    Combining both, we get:
+    \begin{align*}
+        & \pred\left(c\right)\\
+        \leq & \after{r_{1}}{ \encode{0}{0 \bullet \left(e_{1} \bullet c\right)\bullet \left(e_{2} \bullet c\right)} \app \codepA  }{\predA\left(r_{1}\right)} \\
+        & \meet \after{r_{2}}{ \encode{0}{0 \bullet \left(e_{1} \bullet c\right)\bullet \left(e_{2} \bullet c\right)} \app \codepB  }{\predB\left(r_{2}\right)} \\
+        = & \left(\predA \emeet \predB\right)\left(\encode{0}{0 \bullet \left(e_{1} \bullet c\right)\bullet \left(e_{2} \bullet c\right)}\right)\\
+        \leql{\eqref{eq:after-ret}} & \after{r}{\return{ \encode{0}{0 \bullet \left(e_{1} \bullet c\right)\bullet \left(e_{2} \bullet c\right)} }}{ \left(\predA \emeet \predB\right)\left(r\right) }\\
+        = & \after{r}{\codepair{e_{1}}{e_{2}} \app c}{ \left(\predA \emeet \predB\right)\left(r\right) }
+    \end{align*}
+
+    \item \textbf{Conjunction Elimination}: 
+    Proof obligation:
+    \[ \dfrac{}{\evexpand{\left(\predA \emeet \predB\right)}{\code{\codef{fst}}}{\predA}} \]
+    Proof: Given $c \in \mca$,
+    \begin{align*}
+        & \left(\predA \emeet \predB\right)\left(c\right)\\
+        = & \after{c_{1}}{c \app \codepA}{ \predA\left(c_{1}\right) } \meet \after{c_{2}}{c \app \codepB}{ \predB\left(c_{2}\right) }\\
+        \leq & \after{c_{1}}{c \app \codepA}{ \predA\left(c_{1}\right) }\\
+        = & \after{c_{1}}{ \encode{0}{0 \bullet \codepA} \app c }{ \predA\left(c_{1}\right) }\\
+        = & \after{c_{1}}{ \code{\codef{fst}} \app c }{ \predA\left(c_{1}\right) }
+    \end{align*}
+    and:
+    \begin{align*}
+        & \left(\predA \emeet \predB\right)\left(c\right)\\
+        = & \after{c_{1}}{c \app \codepB}{ \predA\left(c_{1}\right) } \meet \after{c_{2}}{c \app \codepB}{ \predB\left(c_{2}\right) }\\
+        \leq & \after{c_{2}}{c \app \codepB}{ \predB\left(c_{2}\right) }\\
+        = & \after{c_{2}}{ \encode{0}{0 \bullet \codepB} \app c }{ \predB\left(c_{2}\right) }\\
+        = & \after{c_{2}}{ \code{\codef{snd}} \app c }{ \predB\left(c_{2}\right) }
+    \end{align*}
+    
+    \item \textbf{Universal Implication Introduction}: Proof obligation:
+    \[\dfrac{\forall \predC \in \preds \evexpand{\left(\predA \emeet \predB\right)}{e}{\predC}}{ \evexpand{\predA}{\codecurry{e}}{\left(\predB \imp \preds\right)} }\]
+    Proof:
+    Expanding the assumption, we get for all $\predC \in \preds$, and all $c \in \mca$:
+    \begin{align*}
+        & \after{c_{1}}{c \app \codepA}{\predA\left(c_{1}\right)} \meet \after{c_{2}}{c \app \codepB}{\predB\left(c_{2}\right)}\\
+        \leq & \after{r}{e \app c}{\predC\left(r\right)}  
+    \end{align*}
+    Note that for any $c_{1} , c_{2} \in \mca$:
+    \begin{align*}
+        & \codetuple{c_{1}}{c_{2}} \app \codepA = \return{ c_{1}}\\
+        & \codetuple{c_{1}}{c_{2}} \app \codepB = \return{c_{2}}
+    \end{align*}
+    So, for any $\predC \in \preds$, and any $c_{1} , c_{2} \in \mca$, we take:
+    \[ c = \codetuple{c_{1}}{c_{2}} \]
+    so the assumption becomes:
+    \begin{align*}
+        &\after{c_{1}}{\codetuple{c_{1}}{c_{2}} \app \codepA}{\predA\left(c_{1}\right)} \meet \after{c_{2}}{\codetuple{c_{1}}{c_{2}} \app \codepB}{\predB\left(c_{2}\right)}\\
+        \leq & \after{r}{e \app \codetuple{c_{1}}{c_{2}}}{\predC\left(r\right)}  
+    \end{align*}
+    In addition, note that, for any $\predC \in \preds$ and $c_{1} , c_{2} \in \mca$:
+    \begin{align*}
+        \predA\left(c_{1}\right)
+        &\leql{\eqref{eq:after-ret}} \after{c_{1}'}{\return{c_{1}}}{\predA\left(c_{1}'\right)} = \after{c_{1}'}{\codetuple{c_{1}}{c_{2}} \app \codepA}{\predA\left(c_{1}'\right)}\\
+        \predB\left(c_{2}\right)
+        &\leql{\eqref{eq:after-ret}} \after{c_{2}'}{\return{c_{2}}}{\predB\left(c_{2}'\right)} = \after{c_{2}'}{\codetuple{c_{1}}{c_{2}} \app \codepB}{\predB\left(c_{2}'\right)}
+    \end{align*}
+    Combining all of the above, we get, for all $\predC \in \preds$ and all $c_{1} , c_{2} \in \mca$:
+    \begin{align*}
+        \predA\left(c_{1}\right) \meet \predB\left(c_{2}\right) \leq \after{r}{e \app \codetuple{c_{1}}{c_{2}}}{\predC\left(r\right)}
+    \end{align*}
+    By currying $\predB\left(c_{2}\right)$ we get:
+    \begin{align*}
+        \predA\left(c_{1}\right) \leq \predB\left(c_{2}\right) \haimp \after{r}{e \app \codetuple{c_{1}}{c_{2}}}{\predC\left(r\right)}
+    \end{align*}
+    Now, since it holds for all $\predC \in \preds$ and all $c_{2} \in \mca$, we get, by the infimum property, for all $c_{1} \in \mca$:
+    \begin{align*}
+        &\predA\left(c_{1}\right)\\
+        \leq & \infimum_{\predC \in \preds}\infimum_{c_{2} \in \mca}\left( \predB\left(c_{2}\right) \haimp \after{r}{e \app \codetuple{c_{1}}{c_{2}}}{\predC\left(r\right)}\right)\\
+        = & \infimum_{\predC \in \preds}\infimum_{c_{2} \in \mca}\left( \predB\left(c_{2}\right) \haimp \after{r}{ \nu\left( e \bullet \left(\encode{2}{2 \bullet 0 \bullet 1} \bullet c_{1} \bullet c_{2} \right)\right) }{\predC\left(r\right)}\right)\\
+        = & \infimum_{\predC \in \preds}\infimum_{c_{2} \in \mca}\left( \predB\left(c_{2}\right) \haimp \after{r}{ \encode{0}{ e \bullet \left(\encode{2}{2 \bullet 0 \bullet 1} \bullet c_{1} \bullet 0 \right) } \app c_{2} }{\predC\left(r\right)}\right)\\
+        \leql{\eqref{eq:after-ret}} & \after{f}{\return{\encode{0}{ e \bullet \left(\encode{2}{2 \bullet 0 \bullet 1} \bullet c_{1} \bullet 0 \right) }}}{ \infimum_{\predC \in \preds}\infimum_{c_{2} \in \mca}\left( \predB\left(c_{2}\right) \haimp \after{r}{ f \app c_{2} }{\predC\left(r\right)}\right) }\\
+        = & \after{f}{ \codecurry{e} \app c_{1} }{\left( \predB \imp \preds \right)\left(f\right)}
+    \end{align*}
+
+    \item \textbf{Universal Implication Elimination}:
+    Proof obligation:
+    \[ \dfrac{}{\forall \predB \in \preds \evrel{\left(\left(\predA \imp \preds\right) \emeet \predA\right)}{\codeeval}{\predB}}  \]
+    Proof:
+    By Reflexivity, we have:
+    \[{\evrel{\predA \imp \preds}{\codeid}{\predA \imp \preds}} \]
+    From which, by~\cref{lemma:uni-imp-uncurry}, we get:
+    \[ {\forall \predB \in \preds .\evrel{\left(\left(\predA \imp \preds\right) \emeet \pred\right)}{\codeuncurry{\codeid}}{\predB}} \]
+    From this, we get the desired result, since $\codeeval = \codeuncurry{\codeid}$.
+
+\end{enumerate}
+\end{proof}
+
+\section{Assemblies over EFs}
+\agnote{TODO: add the nonempty axiom}
+\begin{definition}[Assembly]
+Given an EF $\left(\Phi , E , \rightarrow\right)$, an \emph{assembly} over $\left(\Phi , E , \rightarrow\right)$ is a tuple:
+\[ X = \left(\underlying{X} ,  \real{X}\right) \]
+where:
+\[ \real{X} : \underlying{X} \rightarrow \Phi \]
+\end{definition}
+
+\begin{definition}[Assembly Morphism]
+Given two assemblies $X , Y$, a \emph{morphism} $f$ from $X$ to $Y$ is a function:
+\[ \underlying{f} : \underlying{X} \rightarrow \underlying{Y} \]
+s.t there exists an evidence $\codef{f} \in E$, s.t for all $x \in \underlying{X}$:
+\[ \real{X}\left(x\right) \evidence{\codef{f}} \real{Y}\left(f\left(x\right)\right) \]
+That evidence $\codef{f}$ is said to ``track'' $f$.
+\end{definition}
+
+The \emph{identity morphism} over assembly $X$ is the identity function $\id_{\underlying{X}}$ over $\underlying{X}$ tracked by the reflexivity evidence $e_{\id}$.
+If $f$ is tracked by $\codef{f}$ and $g$ is tracked by $\codef{g}$, then their composition $f \circ g$ is tracked the composition of $\underlying{f} \circ \underlying{g}$ tracked by the transitivity evidence $\codef{g} ; \codef{f}$.
+
+
+
+============OLD===============
+
+
+\begin{definition}[state monad transformers]\lcnote{CITE}
+    
+\end{definition}
+
+\begin{theorem}
+    The Kleisli category of a state monad transformer is a $P$-category.
+\end{theorem}
+
+\begin{proof}
+    TBD
+\end{proof}
+
+known: a $P$-category produces a restriction.
+
+\begin{corollary}
+    The $P$-category induced by a state monad transformer has a restriction structure.
+\end{corollary}
+
+Discussion: when is it trivial and when it is not (through examples)
+
+\begin{theorem}
+    Let $M$ be a monad that is either commutative or a state transformer monad. 
+    The MCA over $M$ is a PCA-object over the associated restriction structure.
+\end{theorem}
+
+\begin{proof}
+    
+\end{proof}
+
+\lcnote{discussion on the relation to the literature that just assumes the existence of the restriction}
+
+
+\begin{lemma}[Proven in TBD]
+    A commutative monad M produces a restriction category.
+\end{lemma}
+
+
+\begin{theorem}
+    For a commutative monad M, the induced MCA produces a Turing Category.
+\end{theorem}
+
+\begin{enumerate}
+    \item We want to show MCAs are Turing objects in Kleisli categories
+    \item Turing objects with non-trivial models require a non-trivial restriction structure, to convey partiality
+    \item An important and useful example of a non-trivial restriction is derivable in all P-categories, which is a weaker form of cartesian categories, where the terminal morphisms aren't unique
+    \item There is a known result that shows Kleisli categories of commutative moands are P-categories, however, there is no result (to my knowledge) that discusses non-commutative monads (such as state)
+    \item However, I'm convinced in many cases, such as the state monad, you can still get non-trivial restrictions by following a similar construction to the one of P-categories
+    \item Kleisli categories of strong monads aren't generally monoidal, unless the monad is also commutative. However, they are always a premonoidal category (as long as the monad is strong)
+    \item There is a result that shows how premonoidal categories can be represented as monoidal categories where all the morphisms have an extra parameter, of ``runtime''.
+    \item Thus, instead of requiring that the Kleisli category be a P-category, you can instead require it from the corresponding monoidal category
+    \item I can show that this can be achieved by requiring that the underlying Kleisli category has a special object $R$ along with two morphisms $\mathsf{put}: R \rightarrow M\left(1\right)$ and its right inverse $\mathsf{get} : 1 \rightarrow M\left(R\right)$
+    \item This requirement applies to the state monad, all the commutative monads, and possibly others which I haven't checked yet
+    \item I have an abstract proof using string diagrams, and I know what it would mean for the corresponding monoidal category. Now I'm trying to figure out how to translate it to the underlying Kleisli category to get a restriction
+
+\end{enumerate}
+
+
+\subsection{Equational Lifting Monad}
+\lcnote{not sure we here need all the definitions. we don't use them anywhere. all we say about equational lifting monads is before Corollary 21, and we can just state that result and cite. Or am I missing somewhere that you actually use these defs?}
+
+\begin{definition}[Symmetric monoidal monad]
+Given a symmetric monoidal category $\C$, with tensor product $\otimes$ and swap map $\sigma$.
+A symmetric monoidal monad is a monad $\left(\monad , \mu , \eta\right)$ equipped with a natural transformation:\lcnote{what's A,B? sigma?}
+\[ \lift_{A,B} : \monad A \times \monad  B \rightarrow \monad\left(A \times B\right) \]
+satisfying the following
+\[\begin{tikzcd}
+	{A \times B} && {\monad A \times \monad B} \\
+	\\
+	&& {\monad\left(A \times B\right)}
+	\arrow["{\eta_{A} \times \eta_{B}}", from=1-1, to=1-3]
+	\arrow["{\eta_{A \times B}}"', from=1-1, to=3-3]
+	\arrow["{\lift_{A,B}}", from=1-3, to=3-3]
+\end{tikzcd}
+\qquad
+\begin{tikzcd}
+	{\monad A \otimes \monad B} && {\monad \left(A \otimes B\right)} \\
+	\\
+	{\monad B \times \monad A} && {\monad\left(B \times A\right)}
+	\arrow["{\lift_{A,B}}", from=1-1, to=1-3]
+	\arrow["\sigma"', from=1-1, to=3-1]
+	\arrow["{\monad\sigma}"', from=1-3, to=3-3]
+	\arrow["{\lift_{B,A}}"', from=3-1, to=3-3]
+\end{tikzcd}\]
+\end{definition}
+
+The strength $\strength_{A,B} : A \times \monad B \rightarrow \monad\left(A \times B\right)$ is defined as $\strength_{A,B} \defeq \lift_{A,B} \circ \eta_{A} \times \id_{B}$.
+Obtaining $\lift$ from $\strength$ can be done by:
+\[\tikzstyle{every node}=[font=\small]
+\begin{tikzcd}[scale=1, transform shape]
+	{\monad A \times \monad B} & {\monad\left(\monad A \times B\right)} & {\monad\left( B \times \monad A\right)} & {\monad \monad \left(B \times A\right)} & {\monad \left(A \times B\right)}
+	\arrow["{\strength_{\monad A,B}}", from=1-1, to=1-2]
+	\arrow["{\monad \sigma}", from=1-2, to=1-3]
+	\arrow["{\monad \strength_{B,A}}", from=1-3, to=1-4]
+	\arrow["{\ext{\left(\monad \sigma\right)}}", from=1-4, to=1-5]
+\end{tikzcd}\]
+
+In $\setcat$, $\strength$ and $\lift$ can be defined directly as:\lcnote{undefined notation}
+\[ \strength\left(x,n\right) = \letin{y}{n}{\eta\left(x,y\right)}  \qquad ;\qquad \lift\left(m,n\right) = \letin{y}{n}{\letin{x}{m}{\eta\left(x,y\right)}} \]
+Note that commutativity means the above definition is equal to:
+\[ \lift\left(m,n\right) = \letin{x}{m}{\letin{y}{n}{\eta\left(x,y\right)}} \]
+
+\begin{definition}[Equational lifting monad]
+An \emph{equational lifting monad} is a symmetric monoidal monad in which for every object $A$:
+\[\begin{tikzcd}
+	{\monad A} && {\monad A \times \monad A} \\
+	\\
+	{M\left(A \times A \right)} && {\monad\left(\monad A \times A \right)}
+	\arrow["\Delta", from=1-1, to=1-3]
+	\arrow["{\monad \Delta}"', from=1-1, to=3-1]
+	\arrow["{\strength_{\monad A,A}}", from=1-3, to=3-3]
+	\arrow["{\monad \left(\eta_{A} \times \id\right)}"', from=3-1, to=3-3]
+\end{tikzcd}\]
+In $\setcat$, that means for any $A$ and $m \in \monad A$:
+\[ \letin{x}{m}{\eta\left(m,x\right)} = \letin{x}{m}{\eta\left(\eta\left(x\right),x\right)} \]
+\end{definition}
+
+From an equational lifting monad one can obtain a P-category structure by defining: \lcnote{this is very unclear. not sure what you are defining here. or what is the widehat for. In any case, if it is a known result, cite it}
+\begin{align*}
+    \widehat{\pi_{1}} &\defeq \eta \circ \pi_{1}\\
+    \widehat{\pi_{2}} &\defeq \eta \circ \pi_{2}\\
+    \widehat{\pair{f}{g}} &\defeq \lift \circ \pair{f}{g}
+\end{align*}
+
+In $\setcat$, that means:
+\begin{align*}
+    \widehat{\pi_{1}}\left(x,y\right) &= \eta\left(x\right)\\
+    \widehat{\pi_{2}}\left(x,y\right) &= \eta\left(y\right)\\
+    \widehat{\pair{f}{g}}\left(s\right) &= \letin{x}{f\left(s\right)}{\letin{y}{g\left(s\right)}{\eta\left(x,y\right)}}
+\end{align*}
+
+
+====
+
+
+
+\subsubsection{Call by Name}
+
+For CbN, substitution is defined between a term and another term, and application is defined between a code and a \emph{closed} term.
+%
+Therefore, the application Kleisli function of the applicative structure is restricted to $\left(-\right)\app\left(-\right) : \mca \times E_{0}\left(\mca\right) \rightarrow M\mca$.
+
+% $$
+% \begin{array}{|@{}|l|l|@{}}\hline
+%     e & e[e_{0}] \\\hline
+%     0 & e_{0} \\
+%     i+1 & i \\
+%     c & c \\
+%     e_f \app e_a & e_f[e_{0}] \app e_a[e_{0}] \\\hline
+% \end{array}
+% $$
+
+% Terms are defined as in CbV.
+% Application is defined between a code and a \textbf{closed} term.
+% \begin{definition}[CbN Monadic Applicative Structure]
+%     Given a $\mathbf{Set}$ monad $M$, a \emph{Call by Name Monadic Applicative Structure} (NMAS) over $M$ is a set of ``codes''
+%     $\mca$ together with an application Kleisli function:
+%     \[\left(-\right)\app\left(-\right) : \mca \times E_{0}\left(\mca\right) \rightarrow M\mca\]
+% \end{definition}
+
+\begin{definition}[CbN Evaluation]
+CbN Evaluation $\nu_n$ is 
+defined by induction on $E_{0}\left(\mca\right)$ as follows:
+$$\begin{array}{l@{\hspace{0.15in}}l@{\hspace{0.15in}}l}
+    \nu_n\left(c\right) &:=& \eta\left(c\right) \\
+       \nu_n\left(e_{f} \app e_{a}\right) &:=&
+            \nu\left(e_{f}\right) \bind \left(
+            \lambda c_{f} . c_{f} \app e_{a}
+            \right)
+\end{array}
+$$
+\end{definition}
+
+Note how, in the CbN case, the evaluation of the application does not evaluate the argument.
+%
+With the CbN evaluation, in the MCA laws, the codes are replaced by closed terms.  
+
+% \begin{definition}[CbN Monadic Combinatory Algebra]
+%     A \emph{Call by Name Monadic Combinatory Algebra} (NMCA) is an NMAS $\mca$ with 
+%     an abstraction operator  for each $n\in\mathbb{N}$ 
+%     \[
+%     \left\langle \lambda^{n}.\left(-\right)\right\rangle :E_{n+1}\left(\mca\right)\rightarrow\mca
+%     \]
+%     s.t:
+%     $$\begin{array}{@{}ll}
+%         \forall n \in \mathbb{N}.\forall e \in E_{n+2}\left(\mca\right).\forall e_{0} \in E_{0}\left(\mca\right). & \encode{n+1}{e} \app e_{0} = \eta \left( \encode{n}{e[e_{0}]} \right) \\
+%         \forall e \in E_{1}\left(\mca\right).\forall e_{0} \in E_{0}\left(\mca\right). & \encode{0}{e} \app e_{0} = \nu \left( e[e_{0}] \right)
+%     \end{array}$$
+% \end{definition}
+
+\begin{example}
+As in the CbV case, defunctionalization leads to an abstract machine, however unlike in the CbV case there is no need to make a distinction between terms and values in the stack.
+The machine is much simpler:
+
+\begin{align*}
+    \begin{array}{ccccccc}
+        e_{f}\app e_{a} & \evalstate & \pi & \quad\succ_{1}\quad & e_{f} & \evalstate & e_{a}:\pi\\
+        c & \evalstate & \pi & \quad\succ_{1}\quad & c & \applystate & \pi\\
+        \left\langle \lambda^{0}.e\right\rangle  & \applystate & e_{0}:\pi & \quad\succ_{1}\quad & e\left[e_{0}\right] & \evalstate & \pi\\
+        \left\langle \lambda^{n+1}.e\right\rangle  & \applystate & e_{0}:\pi & \quad\succ_{1}\quad & \left\langle \lambda^{n}.e\left[e_{0}\right]\right\rangle  & \applystate & \pi
+    \end{array}
+\end{align*}
+
+Note the similarities to Krivine machine.
+In fact, we can add $\boldsymbol{cc}$ and $\boldsymbol{k}_{\pi}$:
+
+\begin{align*}
+    \begin{array}{ccccccc}
+        \boldsymbol{cc} & \applystate & e_{0}:\pi & \quad\succ_{1}\quad & e_{0} & \evalstate & \boldsymbol{k}_{\pi}:\pi\\
+        \boldsymbol{k}_{\pi} & \applystate & e_{0}:\pi' & \quad\succ_{1}\quad & e_{0} & \evalstate & \pi
+    \end{array}
+\end{align*}
+
+Naively attempting to refunctionalize the above definition is challenging, because that would convert the stack to a continuation, while $\boldsymbol{K}_{\pi}$ holds a concrete stack.
+However, we can replace $\boldsymbol{k}_{\pi}$ with $\boldsymbol{k}_{u}$, where $u$ is a continuation, to get the refunctionalized rules for $\boldsymbol{cc}$ and $\boldsymbol{k}_{u}$:
+
+\begin{align*}
+    \left(\boldsymbol{cc} \app e\right)\left(u\right) &= \nu\left(e\right)\left(\lambda c . \left(c \app \boldsymbol{k}_{u}\right)\left(u\right)\right)\\
+    \left(\boldsymbol{k}_{u} \app e\right)\left(u'\right) &= \nu\left(e\right)\left(u\right) 
+\end{align*}
+
+Note how the definition explicitly mentions the continuations rather than using the monadic notation.
+That is because $\boldsymbol{k}_{u}$ is parametrized by the continuation $u$.
+\end{example}
+
+
+\emnote{I think it is not that hard to refunctionalize $\boldsymbol{cc}$, the key is to see that
+you can define a refunctionalization of stacks just like one would
+do in a usual CPS translation (see for instance section 3.2 of \cite{GardelleMiquey23}).
+If the target was the $\lambda$-calculus, this would roughly be
+two translations  $[\app]_{\mathrm{t}}$ / $[\app]_{\mathrm{a}}$ from terms/stacks
+to terms/continuations, in this cas something like:}
+\[
+ \begin{array}{rcl}
+[\boldsymbol{K}_{\pi}]_{\mathrm{t}} &\defeq & \lambda k.k\,(\lambda ek'.e\,[\pi]_\pi)\\
+%[ e : \pi]_\pi &\defeq& \lambda e.e\app [k_\pi]_t \\
+%[\boldsymbol{cc}]_{\mathsf{t}} &\defeq & \\
+\end{array}
+\]
+
+\paragraph{Back to CbV}
+
+\lcnote{??}
+\agnote{I suspect the following is the CbV version, I still need to prove it:}
+
+\begin{align*}
+    \left(\boldsymbol{cc} \app c_{a}\right)\left(u\right) &= \left(c_{a} \app \boldsymbol{k}_{u} \right)\left(u\right)\\
+    \left(\boldsymbol{k}_{u} \app c_{a}\right)\left(u'\right) &= u\left(c_{a}\right)
+\end{align*}
+
+That's equivalent to adding the following rules to the CbV machine:
+
+\begin{align*}
+    \begin{array}{ccccccc}
+        c_{a} & \applystate & \boldsymbol{v}\left(\boldsymbol{cc} \right):\pi & \quad\succ_{1}\quad & \boldsymbol{k}_{\pi}  & \applystate & \boldsymbol{v}\left(c_{a}\right) : \pi\\
+        c_{a} & \applystate & \boldsymbol{v}\left(\boldsymbol{k}_{\pi} \right):\pi' & \quad\succ_{1}\quad & c_{a} & \applystate & \pi
+    \end{array}
+\end{align*}
+
+
+
+
+\section*{Turing objects}
+
+
+, which is the standard category that supports the monadic structure by having morphisms whose codomain is in the image the monad~\cite{moggi1991notions}.
+%
+therefore, our goal is to show that MCAs are PCA-objects within the Kleisli category of the underlying monad. 
+
+However, since MCAs take arbitrary monads, not every monad has the necessary structure to form such an object. 
+This is because not every monad induces a non-trivial restriction product structure, which is required for capturing the categorical structure of the application operator.
+%
+Therefore, our contribution in this section is twofold. First, we give a sufficient condition for a monad to carry the necessary structure to form non-trivial restriction product structure (\Cref{sec:P-cat}). 
+For this, we use the notion of a $P$-category that \lcnote{TODO}
+%
+We also provide examples of standard monads satisfying this structure. 
+%
+Second, we give the main theorem that relates an MCA based on monads with a $P$-category structure on their Kleisli category to PCA-objects in the Kliesli category (\Cref{sec:pca-object}).
+%
+The next section provides the necessary background on the categorical characterization of PCAs, which we then build upon.
+
+
+
+\subsection{Background: the Categorical Perspective of PCAs}
+
+%\lcnote{restrictions+ intuitive explanation of restrictions w.r.t. products}
+%\subsection{Restriction Structures}\label{sec:restriction}
+%To convey partiality, Turing objects require a restriction structure. 
+
+The categorical definition of a PCA object relies on a specific notion of products, which, in turn, relies on a general notion of restrictions.%\label{sec:restriction}
+%
+A restriction structure is a convenient way of handling partiality in category theory.
+Roughly speaking, considering morphisms as partial maps, a restriction assigns to each partial map $f$ a partial identity map $\restrict{f}$ with the same domain as $f$.
+
+\begin{definition}[Restriction structure]
+A \emph{restriction structure} on a category $\C$ assigns to every morphism $f : A \rightarrow B$ a morphism $\restrict{f} : A \rightarrow A$  s.t. the following hold:
+\begin{description}
+    \item[reflexivity] For % $A,B \in \obj{\C}$, and 
+    $f : A \rightarrow B$:
+    $ f \circ \restrict{f} = f $
+
+    \item[commutativity] For  %$A,B_{1},B_{2} \in \obj{\C}$, 
+    $f : A \rightarrow B_{1}$ and $g : A \rightarrow B_{2}$:
+     $\restrict{f} \circ \restrict{g} = \restrict{g} \circ \restrict{f}$ 
+
+    \item[transitivity] For % $A,B_{1},B_{2} \in \obj{\C}$, 
+    $f : A \rightarrow B_{1}$ and $g : A \rightarrow B_{2}$:
+     $\restrict{f \circ \restrict{g}} = \restrict{f} \circ \restrict{g}$ 
+
+    \item[name?] For % $A,B,C \in \obj{\C}$, 
+    $f : B \rightarrow C$ and $g : A \rightarrow B$:
+     $\restrict{f} \circ g = g \circ \restrict{f \circ g} $
+\end{description}
+\end{definition}
+
+
+For every category, there is a \emph{trivial} restriction that assigns $\restrict{f} = \id$ for every morphism $f$.
+To obtain interesting models of partial maps, however, we require \emph{non-trivial} restrictions.
+
+
+An important example of restrictions are restrictions derived in total copy categories, also called P-categories, first introduced in \cite{robinson1988categories}.
+
+\begin{definition}[P-category]
+A P-category is a category $\C$ equipped with:
+\begin{enumerate}
+    \item A \emph{merging} bifunctor
+    $\mpar : \C \times \C \rightarrow \C$
+
+    \item A \emph{copy} natural tranformation $\mcopy$ with components
+     $\mcopy_{X} : X \rightarrow X \mpar X $
+
+    \item For every object $A$, a \emph{first projection} and a \emph{second projection}  natrual transformations $\mfst^{A}$ and $\msnd^{A}$, respectively, with components
+    $\mfst^{A}_{X} : X \mpar A \rightarrow X $ and $\msnd^{A}_{X} : A \mpar X \rightarrow X$
+
+    % \item For every object $A$, a \emph{second projection} natrual transformation $\msnd^{A}$ with components:
+    % \[\msnd^{A}_{X} : A \mpar X \rightarrow X \]
+\end{enumerate}
+satisfying the following properties:
+\begin{description}
+    \item[Swapping:] The isomorphism family $\mswap_{X,Y} : X \mpar Y \rightarrow Y \mpar X$, defined as:
+    \[ \mswap_{X,Y} \defeq \left( \msnd^{X}_{Y} \mpar \mfst^{Y}_{X} \right) \circ \mcopy_{X \mpar Y} \]
+    is natural in both $X$ and $Y$
+
+    \item[Associativity:] The isomorphism family $\massoc_{X,Y,Z} : X \mpar \left(Y \mpar Z\right) \rightarrow \left(X \mpar Y\right) \mpar Z$, defined as
+    \[ \massoc_{X,Y,Z} \defeq \left(\id_{X \mpar Y} \mpar \msnd^{Y}_{Z} \right) \circ \left( \left(\id_{X} \mpar \mfst^{Z}_{Y}\right) \mpar \msnd^{X}_{Y \mpar Z} \right) \circ \mcopy_{X \mpar \left(Y \mpar Z\right)} \]
+    is natural in $X$, $Y$, and $Z$
+
+    \item[Projections--copy:] The projections and their merge are left inverses of copy:
+    \[ \mfst \circ \mcopy = \msnd \circ \mcopy = \left(\mfst \mpar \msnd\right) \circ \mcopy = \id \]
+
+    % \item[] Merging the projections yields a left inverse of copy:
+    % \[ \left(\mfst \mpar \msnd\right) \circ \mcopy = \id \]
+
+    \item[Collating] Collating projections:
+    \begin{align*}
+        \mfst \circ \left(\id \mpar \mfst\right) = \mfst \circ \left(\id \mpar \msnd\right) &= \mfst \quad ; \quad
+        \msnd \circ \left(\mfst \mpar \id\right) = \msnd \circ \left(\msnd \mpar \id \right) &= \msnd
+    \end{align*}
+\end{description}
+\end{definition}
+As shown in \cite{robinson1988categories}, for any morphism $f : A \rightarrow B$ in a P-category $\C$, one can define a restriction $\restrict{f} : A \rightarrow A$ as the composite 
+\[\begin{tikzcd}
+	A && {A \mpar A} && {A \mpar B} && A
+	\arrow["{\mcopy_{A}}", from=1-1, to=1-3]
+	\arrow["{\id \mpar f}", from=1-3, to=1-5]
+	\arrow["\mfst", from=1-5, to=1-7]
+\end{tikzcd}\]
+
+\lcnote{why is the partial order important? do we actually use it?}
+A restriction in $\C$ induces a partial order on the hom-sets of $\C$.
+Given two morphisms $f , g : A \rightarrow B$, we write
+\[ f \leq g \quad \iff f = g \circ \restrict{f} \]
+The restriction axioms ensure that this is indeed a partial order. The reflexivity and transitivity axioms ensure reflexivity and transitivity, and the commutativity axiom, combined with reflexivity, ensures antisymmetry.
+
+\agnote{TODO: define cartesian restriction products}
+Products in a restriction category (i.e., a category with a restriction structure) are \emph{not} categorical
+products, but instead are products in a bicategorical sense.
+That is, 
+
+%
+\begin{definition}[PCA object]
+    
+\end{definition}
+
+\lcnote{PCA gives a PCA object (aka relative object...)}
+\lcnote{connect to Turing objects : PCA objects are Turing objects in the category of computable morphisms.}
+
+
+\subsection{Generalizing to MCAs}\label{sec:P-cat}
+
+
+% \lcnote{EXAMPLES OF MONADS inducing A P category}
+% \lcnote{here should go a discussion on when is it trivial and when it is not (through examples?)}
+
+% Given a P-category $\C$, and a morphism $f : A \rightarrow B$ in $\C$, the \emph{domain} of $f$, $\restrict{f} : A \rightarrow A$ is defined as the composite:
+% \[\begin{tikzcd}
+% 	A && {A \mpar A} && {A \mpar B} && A
+% 	\arrow["{\mcopy_{A}}", from=1-1, to=1-3]
+% 	\arrow["{\id \mpar f}", from=1-3, to=1-5]
+% 	\arrow["\mfst", from=1-5, to=1-7]
+% \end{tikzcd}\]
+% A proof that $\restrict{f}$ is a restriction is given in: \cite{robinson1988categories}
+
+
+%\subsection{Non-Commutative Monads}\label{sec:mainThm}
+%\agnote{TODO: explain the notation}
+
+As discussed in \cite{cockett2007restriction,BUCALO199922}, %\agnote{cite the original equational lifting monads paper as well}, 
+equational lifting monads, which are commutative monads with an extra property, give rise a $P$-category.
+That, in turn, induces a restriction structure through the construction given in the previous section.
+%
+However, many interesting examples involve non-commutative moands. 
+For example, %\lcnote{here we should go over the examples from the previous section and say which is commutative and which isn't and motivate with state.}
+two of the most important monads that arise in the discussion of computational effects, namely, the continuation monad and state monad, are non-commutative.
+
+Our next theorem shows that some non-commutative moands also give rise a $P$-category, thus yielding a non-trivial restriction structure on their Kleisli categories.
+
+\begin{theorem}
+Given a P-category $\C$ where the merging bifunctor $\mpar$, partially applied on some object $\runtime$ in $\C$, has a right adjoint $\expobj{-}{\runtime}$, the Kleisli category $\C_{\monad}$ of the monad of the adjunction $\monad X = \expobj{\left(X \mpar \runtime\right)}{\runtime}$ is a P-category.
+\end{theorem}
+
+\begin{proof}
+We define a category $\C^{\mpar \runtime}$ as the category which has the same objects as $\C$, with the hom-sets given by merging with $\runtime$ on the right:
+\[\hom{\C^{\mpar\runtime}}{A}{B} = \hom{\C}{A \mpar \runtime}{B \mpar \runtime} \]
+The identity over $A$ is $\id_{A \mpar \runtime}$, and composition is the composition of $\C$.
+
+The functor $J : \C^{\mpar\runtime} \rightarrow \C$ which acts on objects with $J A = A \mpar \runtime$ and injects the morphisms $J f = f$ is full and faithful, so $\C^{\mpar\runtime}$ is equivalent to a full subcategory of $\C$.
+
+Since $\C$ is a P-category, it has its own $\mcopy$, $\mfst$, and $\msnd$, which we will mark respectively as $\widehat{\mcopy}$, $\widehat{\mfst}$, $\widehat{\msnd}$.
+We also mark the derived natural isomorphisms of swap and associator, respectively, as $\widehat{\mswap}$, and $\widehat{\massoc}$.
+Consider the following morphisms in $\C^{\mpar\runtime}$, for every $X$ and $A$:
+$$\arraycolsep=1pt\def\arraystretch{2}
+\begin{array}
+{l@{\hspace{0.1in}}l@{\hspace{0.1in}}l@{\hspace{0.15in}}l@{\hspace{0.15in}}l}
+    \widetilde{\mcopy}_{X} &\defeq& \widehat{\massoc} \circ \widehat{\mcopy}_{X \mpar \runtime}  &:&  X \mpar \runtime \rightarrow \left(\left(X \mpar \runtime\right) \mpar X\right) \mpar \runtime\\
+    \widetilde{\mfst}^{A}_{X} &\defeq &\widehat{\mfst}^{A \mpar \runtime}_{X \mpar \runtime} \circ \widehat{\massoc}^{-1}& : & \left(\left(X \mpar \runtime\right) \mpar A\right)\mpar \runtime \rightarrow X \mpar \runtime\\
+    \widetilde{\msnd}^{A}_{X} &\defeq &\widehat{\msnd}^{A \mpar \runtime}_{X \mpar \runtime} \circ \widehat{\massoc}^{-1}& : & \left(\left(A \mpar \runtime\right) \mpar X\right) \mpar \runtime \rightarrow X \mpar \runtime
+\end{array}$$
+Given any two objects $A_{1},A_{2} \in \C^{\mpar\runtime}$ (that is, two objects in $\C$) we define, in $\C$: 
+\[A_{1} \widetilde{\mpar} A_{2} \defeq \left(\left(A_{1} \mpar \runtime \right) \mpar A_{2}\right) \mpar \runtime\]
+That object corresponds to $\left(A_{1} \mpar \runtime \right) \mpar A_{2}$ in $\C^{\mpar \runtime}$.
+
+Given any two morphisms $f_{1} : A_{1} \rightarrow B_{1}$ and $f_{2} : A_{2} \rightarrow B_{2}$ in $\C^{\mpar\runtime}$, which are morphisms $f_{1} : A_{1} \mpar \runtime \rightarrow B_{1} \mpar \runtime$ and $f_{2} : A_{2} \mpar \runtime \rightarrow B_{2} \mpar \runtime$ in $\C$, we define:
+\[f_{1} \widetilde{\mpar} f_{2} \defeq \widehat{\massoc} \circ \left(f_{1} \mpar f_{2}\right) \circ \widehat{\massoc}^{-1}\]
+
+The morphism families $\widetilde{\mpar}$, $\widetilde{\mcopy}$, $\widetilde{\mfst}$, and $\widetilde{\msnd}$ form a P-category on $\C^{\mpar\runtime}$.
+To verify it, note that in all of the required laws the compositions of $\widehat{\massoc}$ and its inverse cancel each other, yielding the corresponding equations for the underlying P-category structure in $\C$.
+Similarly, naturality is inherited from the naturality of the corresponding transformations in $\C$, since the composition of natural trasnformations is natural.
+
+Now, since $\hom{\C^{\mpar \runtime}}{A}{B}$ is equivalent to $\hom{\C_{\monad}}{A}{B}$, we get the same structure in $\C$.
+\end{proof}
+
+% For example, as we show next, given an equational lifting monad $\cmonad$, and some object $\runtime$ in $\C$, the $\runtime$-state monad $\cmonad$-transformer
+% \[ \monad{X} \defeq \runtime \rightarrow \cmonad\left(X \times \runtime\right) \]
+% has a structure of a P-category structure on its Kleisli category, despite not necessarily being commutative.
+
+As mentioned, given an equational lifting monad $\cmonad$ on a category $\C$, its Kleisli category $\C_{\cmonad}$ has a P-category structure~\cite{cockett2007restriction}. 
+Thus, we obtain the following corollary.
+
+\begin{corollary}
+Given a cartesian category $\C$, an equational lifting monad $\cmonad$ on $\C$ where $\C_{\cmonad}$ that has Kleisli exponentials, then given some object $\runtime$ in $\C$, the Kleisli category $\C_{\monad}$ of the $\runtime$-state monad $\cmonad$-transformer
+$ \monad{X} \defeq \runtime \rightarrow \cmonad\left(X \times \runtime\right) $
+is a P-category.
+\end{corollary}
+
+% Given in the following theorem.
+% \begin{theorem}
+% The following constructs form a P-category:
+% \begin{enumerate}
+%     \item $X \mpar Y \defeq X \times \runtime \times Y$
+%     \item $f_{1} \mpar f_{2} \defeq \curry{\lift^{\cmonad} \circ \left( \uncurry{f_{1}} \times \uncurry{f_{2}} \right)}$
+%     \item $\mcopy_{X} \defeq \curry{\eta^{\cmonad} \circ \pair{\id}{\id}}$
+%     \item $\mfst^{A}_{X} \defeq \curry{\eta^{\cmonad} \circ \pair{\pi^{4}_{1}}{\pi^{4}_{2}}}$
+%     \item $\msnd^{A}_{X} \defeq \curry{\eta^{\cmonad} \circ \pair{\pi^{4}_{2}}{\pi^{4}_{3}}}$
+% \end{enumerate}
+% \end{theorem}
+% \begin{proof}
+% We prove the properties one by one, using the internal language of strong monads with Kleisli exponentials.\agnote{(That's Moggi's $\lambda_{c}$)}, so the definitions above give us:
+% \begin{enumerate}
+%     \item
+%     \[ \left(f_{1} \mpar f_{2}\right)\left(x_{1},r_{1},x_{2}\right) = \lambda r_{2} . \letin{y_{1}}{f_{1}\left(x_{1}\right)\left(r_{1}\right)}{\letin{y_{2}}{f_{2}\left(x_{2}\right)\left(r_{2}\right)}{ \return{\left( y_{1} , y_{2} \right)} }}\]
+%     \item \[\mcopy_{X}\left(x\right) = \lambda r . \return{\left(x,r,x,r\right)} \]
+%     \item
+%     \[\mfst^{A}_{X}\left(x,r_{1},a\right) = \lambda r_{2} . \return{\left(x, r_{1}\right)} \]
+%     \item
+%     \[\msnd^{A}_{X}\left(a,r_{1},x\right) = \lambda r_{2} . \return{\left(x, r_{2}\right)} \]
+% \end{enumerate}
+
+% Similarly, the derived morphisms are:
+% \begin{enumerate}
+%     \item $\mswap_{X,Y}$ in the internal language is written as:
+%     \[ \mswap_{X,Y}\left(x,r_{1},y\right) = \lambda r_{2} . \return{\left(y,r_{2},x,r_{1}\right)} \]
+
+%     \item
+%     \[ \massoc_{X,Y,Z} \defeq \left(\id_{X \mpar Y} \mpar \msnd^{Y}_{Z} \right) \circ \left( \left(\id_{X} \mpar \mfst^{Z}_{Y}\right) \mpar \msnd^{X}_{Y \mpar Z} \right) \circ \mcopy_{X \mpar \left(Y \mpar Z\right)} \]
+% \end{enumerate}
+
+% \begin{enumerate}
+%     \item The morphism family $\mswap_{X,Y} : X \mpar Y \rightarrow Y \mpar X$
+%     is natural in both $X$ and $Y$
+
+%     \item The morphism family $\massoc_{X,Y,Z} : X \mpar \left(X \mpar Z\right) \rightarrow \left(X \mpar Y\right) \mpar Z$
+%     is natural in $X$, $Y$, and $Z$
+
+%     \item The projections are left inverses of copy:
+%     \[ \ext{\mfst} \circ \mcopy = \ext{\msnd} \circ \mcopy = \eta \]
+%     That is:
+%     \[ \ext{\curry{\eta^{\cmonad} \circ \pair{\pi^{4}_{1}}{\pi^{4}_{2}}}} \circ \curry{\eta^{\cmonad} \circ \pair{\id}{\id}} = \ext{\curry{\eta^{\cmonad} \circ\pair{\pi^{4}_{3}}{\pi^{4}_{4}}}} \circ \curry{\eta^{\cmonad} \circ \pair{\id}{\id}} = \eta \]
+
+%     \item Merging the projections yields a left inverse of copy:
+%     \[ \ext{\left(\mfst \mpar \msnd\right)} \circ \mcopy = \eta \]
+
+%     \item Collating projections:
+%     \begin{align*}
+%         \ext{\mfst} \circ \left(\eta \mpar \mfst\right) = \ext{\mfst} \circ \left(\eta \mpar \msnd\right) &= \mfst\\
+%         \ext{\msnd} \circ \left(\mfst \mpar \eta\right) = \ext{\msnd} \circ \left(\msnd \mpar \eta \right) &= \msnd
+%     \end{align*}
+% \end{enumerate}
+% \end{proof}
+
+
+
+% We say a strong monad $\monad$ on cartesian category $\C$ is \emph{resettable} if it has the follow data:
+% \begin{enumerate}
+%     \item A designated \emph{runtime} object $R$
+
+%     \item A bifunctor $\mpar : \C_{\monad} \times \C_{\monad} \rightarrow \C_{\monad}$ on the Kleisli category of $\monad$, with objects map
+%     \[A_{1} \mpar A_{2} = A_{1} \times R \times A_{2}\]
+
+%     \item A \emph{copy} natural transformation $\mcopy$ with components:
+%     \[ \mcopy_{X} : X \rightarrow \monad\left(X \mpar X\right) \]
+
+%     \item For every object $A$ in $\C$, a \emph{reset} natural transformation $\mreset^{A}$ with components:
+%     \[ \mreset^{A}_{X} : A \mpar X \rightarrow X \]
+%     (note that $\mreset^{A}_{X}$ is natural in $X$, but not in $A$)
+% \end{enumerate}
+
+
+{\color{magenta}
+TO DO: 
+\begin{itemize}
+    \item explore MCA w CbN
+    \item example of a new construction:
+    \begin{itemize}
+        \item countable reals
+        \item invalidating CC with the reader monad
+        \item Oracle modalidy~\url{https://arxiv.org/pdf/2406.05818}
+    \end{itemize}
+    \item why just Set monads? what can we say more using Fryed?
+\end{itemize}
+}
+
+
+
+\section{Combinatory Completeness}
+To define combinatory completeness, we need a categorical counterpart for terms over an applicative structure. To that end, we adapt the work in~\cite{COCKETT2008}  to define the category of $\mca$-polynomials.
+\begin{definition}[Category of Polynomials]
+\agnote{Ensure this is a Freyd category}
+Given an applicative system $\mca$ in a Freyd category $\langle \C, \K, \purefun \rangle$, the category $\mca^{*}$ is the smallest cartesian subcategory of $\C$ which contains all the powers of $\mca$ as objects (that is, $\termobj, \mca, \mca^{2} , \ldots$) along with their projections and pairings, and all the codes $c \in \hom{C}{\termobj}{\mca}$.
+The category $\mca^{*}_{\aparr}$ is the smallest premonoidal subcategory of $\K$ containing the image of $J$ restricted to $\mca^{*}$ (that is, the image of $J \mid_{\mca^{*}}$ \agnote{I need to define it}), and $\aparr \in \hom{\K}{\mca \times \mca}{\mca}$.
+The category of $\mca$-polynomials is the Freyd category $\langle \mca^{*}, \mca^{*}_{\aparr}, \purefun \mid_{\mca^{*}} \rangle$.
+
+% the category of $\mca$-polynomials is the smallest premonoidal subcategory of $\K$ which has the powers of $\mca$ as objects (that is, $\termobj, \mca, \mca^{2} , \ldots$), which contains $\aparr$, the image of $\purefun$ over projections and pairings, and the image of $\purefun$ over global elements of $\mca$ (that is, morphisms in $\hom{\C}{\termobj}{\mca}$.
+% The morphisms in the category of $\mca$-polynomials are called $\mca$-polynomial morphisms.
+\end{definition}
+
+As noted in \cite{Power1997Enviroments}, Freyd categories provide sound semantics for the first-order fragment of $\lambda_{c}$-calculus.
+With this in mind, we define the following internal language for the category of polynomials:
+There are two sorts of terms, named values and computations.
+The syntax is given in \Cref{table:comp-lambda}. \agnote{The syntax is adapted from \cite{faggian2021evaluation}, how should I acknowledge that?}
+\begin{table}
+    \centering
+    \begin{tabular}{rccl}
+         Values:       & $V$ & ::= & $x$ | $c$ \\
+         Computations: & $M$ & ::= & $\return{V}$ | $\letin{x}{M}{M}$ | $V \app V$ \\
+    \end{tabular}
+    \caption{Polynomial Language}
+    \label{table:comp-lambda}
+\end{table}
+In the syntax, $x$ denotes a variable and $c$ denotes a code.
+Building on the definitions in \cite{Power1997Enviroments}, the internal language is the first-order fragment of $\lambda_{c}$-calculus over the base type $\mca$ and the signature which contains the following function symbols:
+\begin{itemize}
+    \item For each code $c \in \hom{\C}{\termobj}{\mca}$, a constant symbol $c$
+    \item The function symbol $\left(-\right) \app \left(-\right)$ with arity $\left(\mca , \mca\right)$ and result type $\mca$
+\end{itemize}
+\agnote{Should I describe the type structure?}
+The soundness of the language for the category of $\mca$-polynomials follows from \cite{Power1997Enviroments}.
+% Since the language only has one type, it can be considered as a first-order variant of the untyped $\lambda_{c}$ calculus.
+
+With the category of polynomials, we define an MCA-object:
+\begin{definition}[MCA-object]
+An \emph{MCA-object} is a MAS-object $\mca$ in a Freyd category where all the $\mca$-polynomial morphisms are computable.
+\end{definition}
+
+
+\begin{theorem}
+Let $\monad$ be a $\setcat$ monad.
+$\mca$ is an MCA over $\monad$ if and only if it is an MCA-object in $\setcat_{\monad}$.
+\end{theorem}
+\begin{proof}
+~\\
+$(\Rightarrow:)$
+Let  $\mca$ be an MCA over a $\setcat$ monad $\monad$. By \Cref{lem:MAS},  $\mca$ is an applicative system in $\setcat_{\monad}$.
+Given an $\mca$-polynomial $f : \mca^{n} \rightarrow \mca$ in $\setcat_{\monad}$, we want to show it has a code that represents it.
+That is, that there exists a code $c_{f}$, s.t for every $n$ codes $c_{1} , \ldots , c_{n}$, $f\left(c_{1} , \ldots , c_{n}\right) = \aparr^{\left(n\right)}\left(c_{f} , c_{1} , \ldots , c_{n} \right)$.
+
+% The case of $n = 0$ is trivial because...
+% \agnote{Explain the case for $n = 0$}
+
+% For $n > 0$, we consider the syntactic form of $f$ as a term in the internal language with $n$ free variables.
+% Since it is polynomial, then by lemma\agnote{define and prove lemma} it corresponds to a term constructed with only $\letin{-}{-}{-}$, $\return{-}$, codes, and variables.
+
+Thus, we prove the following claim by induction over the structure of the term:
+For every context $\Gamma = \context{x_{1} , \ldots , x_{n}}$, every $\mca$-polynomial term \agnote{define it} $e \in \trmcxt{\Gamma}$ has an expression $\iexp{e}$ such that $e\sub{\assign{x_{1}}{ c_{1}} , \ldots , \assign{x_{n}}{c_{n}}} = \nu\left(\iexp{e}\sub{c_{1}}\cdots\sub{c_{n}}\right)$.
+
+We prove by induction on the structure of $e$.
+
+Case $e = \return{c}$ for some code $c$:
+Then $\iexp{e} \defeq \iexp{c} = c$ and $\nu\left(c\sub{c_{1}}\cdots\sub{c_{n}}\right) = \nu\left(c\right) = \return{c}$.
+
+Case $e = \return{x_{k}}$ for some code $x_{k} \in \Gamma = \context{x_{1} , \ldots , x_{n}}$:
+Then $\iexp{e} \defeq \iexp{x_{k}} = k$ and $\nu\left(k\sub{c_{1}}\cdots\sub{c_{n}}\right) = \nu\left(c\right) = \return{c_{k}}$.
+
+Case $e = a_{1} \app a_{2}$ where $a_{1}$ and $a_{2}$ are atoms (either codes or variables):
+Then $\iexp{a_{1} \app a_{2}} = \iexp{a_{1}} \bullet \iexp{a_{2}}$, and for every two codes $c_{1} , c_{2} \in \mca$, $\nu\left(c_{1} \bullet c_{2}\right) = c_{1} \app c_{2}$.
+
+Case $e = \letin{x}{e_{1}}{e_{2}}$, where $e_{1} \in \trmcxt{\Gamma}$ and $e_{2} \in \trmcxt{\Gamma , x}$:
+Then by the induction hypothesis, there is an expression $\iexp{e_{1}} \in \Expr{n}\left(\mca\right)$, and an expression $\iexp{e_{2}} \in \Expr{n+1}\left(\mca\right)$, such that for every $c_{1} , \ldots , c_{n} , c_{a} \in \mca$:
+\begin{align*}
+    e_{1}\sub{\assign{x_{1}}{ c_{1}} , \ldots , \assign{x_{n}}{c_{n}}} &= \nu\left(\iexp{e_{1}}\sub{c_{1}}\cdots\sub{c_{n}}\right)\\
+    e_{2}\sub{\assign{x_{1}}{ c_{1}} , \ldots , \assign{x_{n}}{c_{n}} , \assign{x}{c_{a}}} &= \nu\left(\iexp{e_{2}}\sub{c_{1}}\cdots\sub{c_{n+1}}\right)
+\end{align*}
+So we define:
+\begin{align*}
+    \widehat{\iexp{e_{1}}} &\defeq \iexp{e_{1}} \bullet 0 \cdots \bullet \left(n-1\right)\\
+    \widehat{\iexp{e_{2}}} &\defeq \encode{n}{\iexp{e_{2}}} \bullet 0 \cdots \bullet \left(n-1\right)\\
+    \iexp{e} &\defeq \widehat{\iexp{e_{2}}} \bullet \widehat{\iexp{e_{1}}}
+\end{align*}
+and we get:
+\begin{align*}
+    &\nu\left(\iexp{e}\sub{c_{1}}\cdots\sub{c_{n}}\right)\\
+    &=\nu\left(\left(\widehat{\iexp{e_{2}}} \bullet \widehat{\iexp{e_{1}}}\right)\sub{c_{1}}\cdots\sub{c_{n}}\right)\\
+    &=\nu\left(\encode{n}{\iexp{e_{2}}} \bullet 0 \cdots \bullet \left(n-1\right) \bullet \left(\widehat{\iexp{e_{1}}}\sub{c_{1}}\cdots\sub{c_{n}}\right)\right)\\
+    &=\letin{c_{f}}{ \nu\left(\encode{n}{\iexp{e_{2}}} \bullet 0 \cdots \bullet \left(n-1\right)\right) }{}\\
+    &\letin{c_{a}}{ \nu\left(\left(\widehat{\iexp{e_{1}}}\sub{c_{1}}\cdots\sub{c_{n}}\right)\right) }{ c_{f} \app c_{a} }\\
+    &=\letin{c_{f}}{ \return{\encode{0}{\iexp{e_{2}}\sub{c_{1}} \cdots \sub{c_{n}}}} }{}\\
+    &\letin{c_{a}}{ \nu\left(\left(\widehat{\iexp{e_{1}}}\sub{c_{1}}\cdots\sub{c_{n}}\right)\right) }{ c_{f} \app c_{a} }\\
+    &=\letin{c_{a}}{ \nu\left(\left(\widehat{\iexp{e_{1}}}\sub{c_{1}}\cdots\sub{c_{n}}\right)\right) }{ \encode{0}{\iexp{e_{2}}\sub{c_{1}} \cdots \sub{c_{n}}} \app c_{a} }\\
+    &=\letin{c_{a}}{ \nu\left(\left(\widehat{\iexp{e_{1}}}\sub{c_{1}}\cdots\sub{c_{n}}\right)\right) }{ \nu\left(\iexp{e_{2}}\sub{c_{1}} \cdots \sub{ c_{n}}\sub{c_{a}}\right) }\\
+    &=\letin{c_{a}}{ \nu\left(\left(\widehat{\iexp{e_{1}}}\sub{c_{1}}\cdots\sub{c_{n}}\right)\right) }{ e_{2}\sub{\assign{x_{1}}{ c_{1}} , \ldots , \assign{x_{n}}{c_{n}} , \assign{x}{c_{a}}} }\\
+    &=\letin{c_{a}}{ e_{1}\sub{\assign{x_{1}}{ c_{1}} , \ldots , \assign{x_{n}}{c_{n}}} }{ e_{2}\sub{\assign{x_{1}}{ c_{1}} , \ldots , \assign{x_{n}}{c_{n}} , \assign{x}{c_{a}}} }\\
+    &=\left(\letin{c_{a}}{ e_{1} }{ e_{2}\sub{\assign{x}{c_{a}}} }\right)\sub{\assign{x_{1}}{ c_{1}} , \ldots , \assign{x_{n}}{c_{n}}}\\
+    &=\left(\letin{x}{ e_{1} }{ e_{2} }\right)\sub{\assign{x_{1}}{ c_{1}} , \ldots , \assign{x_{n}}{c_{n}}}\\
+    &=e\sub{\assign{x_{1}}{ c_{1}} , \ldots , \assign{x_{n}}{c_{n}}}
+\end{align*}
+
+So we have proved the claim, and with it, given a polynomial $e : \mca^{n} \rightarrow \mca$, if $n = 0$ then $e$ is necessarily already a code in $\mca$ making the diagrams commute.
+If there is some $m \in \mathbb{N}$ s.t $n = m+1$, we take $\encode{m}{\iexp{e}}$, and then:
+\begin{align*}
+    &\aparr^{\left(n\right)}\left(\encode{m}{\iexp{e}} , c_{1} , \cdots , c_{m+1}\right)\\
+    &\nu\left(\encode{m}{\iexp{e}} \bullet c_{1} \bullet \cdots \bullet c_{m+1}\right)\\
+    &\nu\left(\iexp{e} \sub{c_{1}} \cdots \sub{c_{m+1}}\right)\\
+    &\nu\left(e \sub{\assign{x_{1}}{c_{1}} , \ldots , \assign{x_{m+1}{c_{m+1}}}}\right)\\
+    &\nu\left(e\left(c_{1} , \ldots , c_{m+1}\right)\right)
+\end{align*}
+\agnote{TODO: fix abuse of notation. A term is not the function it represents, so make it precise.}
+
+% ...
+% \agnote{
+% By induction: Given a polynomial f:$\mca^{n}\rightarrow\mca$ with normal form (prove the existence of a normal form in a separate lemma) in $\lambda_{c}$ with n+1 free variables, there is a code $c_{f}\in\mca$, s.t for all $c_{1},\ldots,c_{n}\in\mca$,$ \nu\left(c_{f}\bullet c_{1}\bullet\ldots\bullet c_{n}\right)=f\left(c_{1},\ldots,c_{n}\right)$. Prove by induction on the depth of the normal form (i.e - number of let-ins), take the code of the internal polynomial and use it to construct an expression, which you can then abstract with the $\encode{-}{-}$ from the MCA.}
+~\\
+$(\Leftarrow:)$
+Let $\mca$ be an MCA-object in $\setcat_{\monad}$.
+By \Cref{lem:MAS}, $\mca$ is a MAS. \emnote{isn't the lemma stating the opposite implication?}\agnote{It should be bidirectional, but you're right, it wasn't properly clarified and I should be more careful with the proof}
+Given an $n \in \mathbb{N}$, and an expression $e \in \Expr{n+1}\left(\mca\right)$, we define the abstraction of $e$, we first define a function $\closeexp{e} : \mca^{n+1} \rightarrow \Expr{0}\left(\mca\right)$ by consecutive substitutions:
+\begin{equation*}
+    \closeexp{e}\left(c_{1} , \ldots , c_{n+1}\right) \defeq e\left[c_{1}\right]\left[c_{2}\right]\cdots\left[c_{n+1}\right]
+\end{equation*}
+With $\closeexp{e}$, we get a Kleisli function $\nu \circ \closeexp{e} : \mca^{n+1} \rightarrow \monad\left(\mca\right)$.
+
+We recall the definition of $\nu$ in \Cref{def:cbv-eval}:
+$$\begin{array}{l@{\hspace{0.15in}}l@{\hspace{0.15in}}l}
+    \nu\left(c\right) &:=& \return{c} \\
+       \nu\left(e_{f} \bullet e_{a}\right) &:=&
+       \letin{c_{f}}{\nu\left(e_{f}\right)}{\letin{c_{a}}{\nu\left(e_{a}\right)}{c_{f} \app c_{a}}}
+\end{array}$$
+% In categorical terms, it is the same as:
+% $$\begin{array}{l@{\hspace{0.15in}}l@{\hspace{0.15in}}l}
+%     \nu\left(c\right) &:=& \purefun \left(c\right) \\
+%        \nu\left(e_{f} \bullet e_{a}\right) &:=& \left( \aparr \circ \left( \mca \ltimes \nu \right) \circ \left( \Expr{0}\left(\mca\right) \rtimes \nu \right) \right)\left(e_{f} , e_{a}\right)
+% \end{array}$$
+% where $\circ$ is the composition in the Kleisli category of $\monad$.
+
+To see that $\nu \circ \closeexp{e}$ is $\mca$-polynomial, we do induction on the structure of $e$:
+\paragraph{Case $e = i \in \left\{0,\ldots,n\right\}$}
+Then for all $c_{1} , \ldots , c_{n+1} \in \mca$:
+\begin{align*}
+    & \left(\nu \circ \closeexp{e}\right)\left(c_{1} , \ldots , c_{n+1}\right)\\
+    = & \nu\left(i\left[c_{1}\right]\left[c_{2}\right]\cdots\left[c_{n+1}\right]\right)\\
+    = & \nu\left(c_{i+1}\right)\\
+    = & \return{c_{i+1}}\\
+    = & \left(\purefun\left(\pi_{i+1}^{n+1}\right)\right)\left(c_{1} , \ldots , c_{n+1}\right)
+\end{align*}
+So $\nu \circ \closeexp{e} = \purefun \left(\pi_{i+1}^{n+1}\right)$, which is $\mca$-polynomial since it is in the image of $\purefun$ over a projection.
+
+\paragraph{Case $e = c \in \mca$}
+Then for all $c_{1} , \ldots , c_{n+1} \in \mca$:
+\begin{align*}
+    & \left(\nu \circ \closeexp{e}\right)\left(c_{1} , \ldots , c_{n+1}\right)\\
+    = & \nu\left(c\left[c_{1}\right]\left[c_{2}\right]\cdots\left[c_{n+1}\right]\right)\\
+    = & \nu\left(c\right)\\
+    = & \return{c}\\
+    = & \purefun\left( c\right)\left(c_{1} , \ldots , c_{n+1}\right)\\
+\end{align*}
+So $\nu \circ \closeexp{e} = \purefun\left(c\right)$, which is $\mca$-polynomial since it is the image of $\purefun$ on a code.
+
+\paragraph{Case $e = e_{f} \bullet e_{a}$}
+Then for all $c_{1} , \ldots , c_{n+1} \in \mca$:
+\begin{align*}
+    & \left(\nu \circ \closeexp{e}\right)\left(c_{1} , \ldots , c_{n+1}\right)\\
+    = & \nu\left(\left(e_{f} \bullet e_{a}\right)\left[c_{1}\right]\left[c_{2}\right]\cdots\left[c_{n+1}\right]\right)\\
+    = & \nu\left(e_{f}\left[\cdots\right] \bullet e_{a}\left[\cdots\right] \right)\\
+    = & \letin{c_{f}}{\nu\left(e_{f}\left[\cdots\right]\right)}{\letin{c_{a}}{\nu\left(e_{a}\left[\cdots\right]\right)}{c_{f} \app c_{a}}}\\
+    = & \left( \aparr \circ \left( \left(\nu \circ \closeexp{e_{a}}\right) \ltimes \mca \right) \circ \left( \mca^{n+1} \rtimes \left(\nu \circ \closeexp{e_{f}}\right) \right) \circ \purefun\Delta \right)\left(c_{1} , \ldots , c_{n+1}\right)
+\end{align*}
+where $e'\left[\cdots\right] \defeq e'\left[c_{1}\right]\left[c_{2}\right]\cdots\left[c_{n+1}\right]$, $\Delta \defeq \pair{\id}{\id}$, and $\circ$ is the composition in the Kleisli category of $\monad$.
+So $\nu \circ \closeexp{e} = \aparr \circ \left( \mca \ltimes \left(\nu \circ \closeexp{e_{a}}\right) \right) \circ \left( \mca^{n+1} \rtimes \left(\nu \circ \closeexp{e_{f}}\right) \right) \circ \purefun\Delta$.
+Since $\nu \circ \closeexp{e_{f}}$ and $\nu \circ \closeexp{e_{a}}$ are $\mca$-polynomial by the induction hypothesis, $\aparr$ is $\mca$-polynomial by definition, $\purefun \Delta$ is $\mca$-polynomial as a morphism in the image of $\purefun$, and both $f \ltimes \mca$ and $\mca^{n+1} \ltimes f$ are $\mca$-polynomial whenever $f$ is, then $\nu \circ \closeexp{e}$ is $\mca$-polynomial.
+
+Since $\nu \circ \closeexp{e}$ is $\mca$-polynomial, and since $\mca$ is a MCA-object, then by \Cref{def:computable} there is a code $c_{\nu \circ \closeexp{e}} \in \mca$ (taking $k=0$) such that for all $c_{1} , \ldots , c_{n+1} \in \mca$:
+\begin{equation*}
+    \nu\left(e\left[c_{1}\right]\left[c_{2}\right]\cdots\left[c_{n+1}\right]\right) = \aparr^{ \left(n+1\right)}\left(c_{\nu \circ \closeexp{e}} , c_{1} , \ldots , c_{n+1}\right)
+\end{equation*}
+
+So we define $\encode{n}{e} \defeq c_{\nu \circ \closeexp{e}}$.
+Now all that is left is to verify the axioms:
+\paragraph{$\encode{0}{e} \app c = \nu \left( e[c] \right)$}
+Follows immediately from the definition of $\encode{0}{e}$.
+
+\paragraph{$\encode{n+1}{e} \app c = \eta\left(\encode{n}{e[c]}\right)$} Follows from the commutative triangle.
+
+\agnote{TODO: By induction?. There is a notation collision between return ($\eta$) and substitution.}
+\lcnote{true! can we use curly brackets for sub?}\agnote{I'll try to think of something}
+
+\end{proof}

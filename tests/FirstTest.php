@@ -1,64 +1,19 @@
 <?php
 
-
-define('LATEX', '/usr/local/texlive/2023');     # Latex courant
-define('LATEX2020', '/usr/local/texlive/2020'); # Latex version
-define('LATEX2016', '/usr/local/texlive/2016'); # Latex version fixe 2016
-define('LATEX2014', '/usr/local/texlive/2014'); # Latex version fixe 2014
+namespace Ccsd\Convert\Tests;
 
 require_once __DIR__ . "/../tex.php";
 require_once __DIR__ . "/../Convert/Config.php";
+require_once __DIR__ . "/ccsdTestCase.php";
 
-class Ccsd_Compile_Test1 extends \PHPUnit\Framework\TestCase {
-    private $tempchrootrep ='';
-    private $temprep = '';
-    /**
-     * @var CcsdTexCompile
-     */
-    private $compilateur = null;
-    private $Conf = array();
+use CcsdTexCompile;
+use TexCompileException;
+use Convert\Config;
 
-    public $pdfCreated = array();
-    public $fileCreated = array();
-
-    // ...
-    protected function setUp(): void
-    {
-
-        $this->tempchrootrep = BASETEMPREP . DIRECTORY_SEPARATOR . uniqid() . DIRECTORY_SEPARATOR;
-        $this->temprep = CHROOT . $this->tempchrootrep;
-        $this->pdfCreated = array();
-        $this->Conf['texlive'] = LATEX;
-        $this->Conf['tex'] = "tex -interaction=nonstopmode";
-        $this->Conf['latex'] = "latex -interaction=nonstopmode";
-        $this->Conf['pdflatex'] = "pdflatex -interaction=nonstopmode";
-        $this->Conf['bibtex'] = "bibtex -terse";
-        $this->Conf['makeindex'] = "makeindex -q";
-        $this->Conf['dvips'] = "dvips -q -Ptype1";
-        $this->Conf['ps2pdf'] = "/usr/bin/ps2pdf14";
-        $this->Conf['chroot'] = "/usr/sbin/chroot";
-        $this->compilateur = new CcsdTexCompile(LATEX, $this->Conf, $this->tempchrootrep, CHROOT);
-
-        $config = \Convert\Config::getConfig();
-        if ($testDocRoot = $config->get('test.docroot')) {
-            $this->testDocRoot = $testDocRoot;
-        }
-        // printf("DocRoot = %s\n", $this->testDocRoot);
-
-        parent::setUp();
-    }
-
-    private function copyDocuments($fromDir, $toDir): void {
-        // printf("Copy %s%s to %s\n",$this->testDocRoot, $fromDir, $toDir);
-        if (! mkdir($toDir, 0777, true)) {
-            print "Error in mkdir $toDir\n";
-            exit;
-        }
-        recurseCopy($this->testDocRoot . $fromDir, $toDir, false);
-    }
+class FirstTest extends CcsdTestCase {
 
     public function testValues1() {
-        $compil = new CcsdTexCompile(LATEX, $this -> Conf, '.', '');
+        $compil = new CcsdTexCompile(LATEX, $this -> config, '.', '');
         $this -> assertNotEmpty($compil -> checkForCompilationError('f1'));
         $this -> assertTrue((bool) $compil -> checkForBadCitation('f1'));
         $this -> assertFalse((bool) $compil -> checkForBadNatbib('f1'));
@@ -66,16 +21,17 @@ class Ccsd_Compile_Test1 extends \PHPUnit\Framework\TestCase {
     }
 
     public function testValues2() {
-        $compil = new CcsdTexCompile(LATEX, $this -> Conf, __DIR__.'/exemple1', '');
-        $this -> assertEquals( __DIR__.'/exemple1', $compil -> chrootedCompileDir());
+        $file =  __DIR__.'/exemple1';
+        $compil = new CcsdTexCompile(LATEX, $this -> config, $file, '');
+        $this -> assertEquals( $file, $compil -> chrootedCompileDir());
         $this -> assertEquals('latex',$compil -> checkTexBin(), "Pb pour determiner le type du fichier tex 1");
-        $this -> assertEquals(__DIR__.'/exemple1', $compil -> getCompileDir());
+        $this -> assertEquals($file, $compil -> getCompileDir());
     }
 
     public function testValues3() {
-        $compil = new CcsdTexCompile(LATEX, $this -> Conf, BASETEMPREP, CHROOT);
+        $compil = new CcsdTexCompile(LATEX, $this -> config, BASETEMPREP, CHROOT);
 
-        $config= \Convert\Config::getConfig();
+        $config= Config::getConfig();
         if (! $config->get('use.docker')) {
             $this->assertTrue($compil->isChrooted());
             $this->assertTrue($compil->isExecutable(LATEX . '/bin/' . $compil->arch . '/pdflatex'), "Pb d'exe latex");
@@ -100,8 +56,8 @@ class Ccsd_Compile_Test1 extends \PHPUnit\Framework\TestCase {
             try {
                 $this -> pdfCreated = $this -> compilateur -> compile($bin,$dir,$tex_files,'');
                 $this -> assertTrue(true);
-            }  catch (TexCompileException $e) {
-                $this -> assertTrue(false);
+            }  catch (\TexCompileException $e) {
+                $this -> fail();
             }
             recurseRmdir($this -> temprep);
         }
@@ -118,14 +74,14 @@ class Ccsd_Compile_Test1 extends \PHPUnit\Framework\TestCase {
             try {
                 $this -> pdfCreated = $this -> compilateur -> compile($bin,$dir,$tex_files,'');
                 $this -> assertTrue(false);
-            }  catch (TexCompileException $e) {
+            }  catch (\TexCompileException $e) {
                 $this -> assertTrue(true);
             }
             recurseRmdir($this -> temprep);
         }
     }
     public function testCompile3() {
-        foreach (array('/docs/preprod/01/00/04/28', '/docs/preprod/01/00/07/98', '/docs/preprod/01/00/19/84') as $dir) {
+        foreach (array('/docs/preprod/01/00/04/28', '/docs/preprod/01/00/07/98', '/docs/preprod/01/00/19/84', '/docs/01/38/07/39' ) as $dir) {
             $this->copyDocuments($dir, $this -> temprep);
             recurseUnzip($this -> temprep);
             chdir($this -> temprep);
@@ -134,7 +90,7 @@ class Ccsd_Compile_Test1 extends \PHPUnit\Framework\TestCase {
             try {
                 $this -> pdfCreated = $this -> compilateur -> compile($bin,$dir,$tex_files,'');
                 $this -> assertTrue(true);
-            }  catch (TexCompileException $e) {
+            }  catch (\TexCompileException $e) {
                 $this -> assertTrue(false);
             }
             recurseRmdir($this -> temprep);
@@ -150,14 +106,15 @@ class Ccsd_Compile_Test1 extends \PHPUnit\Framework\TestCase {
             try {
                 $this -> pdfCreated = $this -> compilateur -> compile($bin,$dir,$tex_files,'');
                 $this -> assertTrue(true);
-            }  catch (TexCompileException $e) {
+            }  catch (\TexCompileException $e) {
+                print "Error: " . $e->getMessage() . "\n";
                 $this -> assertTrue(false);
             }
             recurseRmdir($this -> temprep);
         }
     }
     public function testCompile5() {
-        foreach (array('/docs/01/37/67/31') as $dir) {
+        foreach (array('/docs/05/10/40/35') as $dir) {
             $this->copyDocuments($dir, $this -> temprep);
             recurseUnzip($this -> temprep);
             chdir($this -> temprep);
@@ -166,7 +123,7 @@ class Ccsd_Compile_Test1 extends \PHPUnit\Framework\TestCase {
             try {
                 $this -> pdfCreated = $this -> compilateur -> compile($bin,$dir,$tex_files,'');
                 $this -> assertTrue(true);
-            }  catch (TexCompileException $e) {
+            }  catch (\TexCompileException $e) {
                 $this -> assertTrue(false);
             }
             recurseRmdir($this -> temprep);

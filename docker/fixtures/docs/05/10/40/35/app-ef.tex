@@ -1,0 +1,365 @@
+
+
+
+% \section{Elaborated~\Cref{sec:mcaef}: From Effect Shells to Evidenced Frames}
+
+
+% We recall the definition of evidenced frame.
+% \begin{definition}[Evidenced Frame]\label{evidenced-frame}
+% An \emph{evidenced frame} is a triple $\ef = \left( \Phi, E,  \mbox{$\cdot \xle{\cdot} \cdot$} \right)$, where $\Phi$ is a set of propositions,~$E$ is a collection of evidence, and~\mbox{$\phi_1 \xle{e} \phi_2$} is a ternary evidence relation on $\Phi \times E \times \Phi$, along with the following:
+% \begin{description}[leftmargin=*]
+% \item[Reflexivity] There exists evidence~$\eid \in E$:
+% \begin{itemize}[leftmargin=*]
+% \item $\forall \phi.\; \phi \xle{\eid} \phi$
+% \end{itemize}
+% \item[Transitivity] There exists an operator~$\ecomp{}{} \in E \times E \to E$:
+% \begin{itemize}[leftmargin=*]
+% \item $\forall \phi_1, \phi_2, \phi_3, e, e'.\; \mbox{$\phi_1 \xle{e} \phi_2 \mathrel{\emeet} \phi_2 \xle{e'} \phi_3 \implies \phi_1 \xle{\ecomp{e}{e'}} \phi_3$}$
+% \end{itemize}
+% \item[Top] A proposition~$\!\top \!\in\! \Phi$ such that there exists evidence~$\etrue \!\!\in\! E$:
+% \begin{description}[leftmargin=*,font=\normalfont]
+% \item[\emph{intro:}] $\forall \phi.\; \phi \xle{\etrue} \top$
+% \end{description}
+% \item[Conjunction] An operator~\mbox{$\emeet \!\in\! \Phi \!\times\! \Phi \!\to\! \Phi$} such that there exists an operator~\mbox{$\epair{\cdot}{\!\cdot} \!\in\! E \!\times\! E \!\to\! E$} and evidence~$\efst, \esnd \in E$:
+% \begin{description}[leftmargin=*,font=\normalfont]
+% \item[\emph{intro:}] $\forall \phi, \phi_1, \phi_2, e_1, e_2.\; \mbox{$\phi \xle{e_1} \phi_1 \mathrel{\emeet} \phi \xle{e_2} \phi_2 \!\!\implies\!\! \phi \xle{\epair{e_1}{e_2}} \phi_1 \emeet \phi_2$}$
+% \item[\emph{elim1:}] $\forall \phi_1, \phi_2.\; \phi_1 \emeet \phi_2 \xle{\efst} \phi_1$
+% \item[\emph{elim2:}] $\forall \phi_1, \phi_2.\; \phi_1 \emeet \phi_2 \xle{\esnd} \phi_2$
+% \end{description}
+% \item[Universal Implication] An operator~$\imp \in \Phi \times \power(\Phi) \to \Phi$ such that there exists an operator~\hbox{$\elambda{} \!\in\! E \!\to\! E$} and evidence~$\eeval \!\in\! E$:
+% \begin{description}[leftmargin=*,font=\normalfont]
+% \item[\emph{intro:}] $\forall \phi_1, \phi_2, \vec{\phi}, e.\; (\forall \phi \in \vec{\phi}.\; \phi_1 \emeet \phi_2 \xle{e} \phi) \implies \phi_1 \xle{\elambda{e}} \phi_2 \imp \vec{\phi}$
+% \item[\emph{elim:}] $\forall \phi_1, \vec{\phi}, \phi \in \vec{\phi}.\; (\phi_1 \imp \vec{\phi}) \emeet \phi_1 \xle{\eeval} \phi$
+% \end{description}
+% \end{description}
+% In the above, we write $\vec{\phi}$ for an element of $\power(\Phi)$, i.e., a subset of $\Phi$.
+% \end{definition}
+
+% In this section we provide a detailed proof of~\Cref{thm:MCAtoEF}. To ease readability, we also review the key definitions and theorems below.
+
+% \modality*
+
+We start by providing a series of useful lemmas. 
+
+\begin{restatable}{lemma}{extmon}\label{lemma:after-mono}
+    For all $A$, $\predA , \predB : A \rightarrow \Omega$, and $m \in M\left(A\right)$: 
+$$\begin{array}{c}       \dfrac{%\forall x \in A . 
+\predA\left(x\right) \leq \predB\left(x\right)}{\after{x}{m}{\predA\left(x\right)}\leq\after{x}{m}{\predB\left(x\right)}}
+% \\~\\
+%         \after{x}{m}{\theta \haimp \predB\left(x\right)} \leq \theta \haimp \after{x}{m}{\predB\left(x\right)}
+    \end{array}$$
+\end{restatable}
+
+
+    \begin{proof}
+    Assume for all $ x \in A $, $ \predA\left(x\right) \leq \predB\left(x\right)$. By currying, we get:
+    \[\boldsymbol{1} \leq \predA\left(x\right) \haimp \predB\left(x\right) \]
+    Since this holds for all $x \in A$, then:
+    \begin{align*}
+        & \boldsymbol{1} \leq \infimum_{x \in A}\left(\predA\left(x\right) \haimp \predB\left(x\right)\right)
+        \leql{\eqref{eq:after-inter-mono}} \after{x}{m}{\predA\left(x\right)} \haimp \after{x}{m}{\predB\left(x\right)}
+    \end{align*}
+    From which, by uncurrying, we obtain:
+    \[ \after{x}{m}{\predA\left(x\right)} \leq \after{x}{m}{\predB\left(x\right)}. \]
+    \qedhere
+\end{proof}
+
+
+\begin{lemma}\label{lemma:after-imp}\label{lemma:after-conj}
+%\lcnote{where is the first one used?}
+    For all $A$, $\pred : A \rightarrow \Omega$, $\theta \in \Omega$, and $m \in M\left(A\right)$:
+    \begin{enumerate}
+        \item 
+$    \after{x}{m}{\left(\theta \haimp \pred\left(x\right)\right)} \leq \theta \haimp \after{x}{m}{\pred\left(x\right)}$
+    \item 
+$    \theta \meet \after{x}{m}{\pred\left(x\right)} \leq \after{x}{m}{\left(\theta \meet \pred\left(x\right)\right )}$
+    \end{enumerate}
+\end{lemma}
+\begin{proof} ~
+\begin{enumerate}
+    \item 
+    By reflexivity, we have:
+    \[ \forall x \in A . \theta \haimp \pred\left(x\right) \leq \theta \haimp \pred\left(x\right) \]
+    by uncurrying $\theta$ and then currying $\theta \haimp \pred\left(x\right)$, we get:
+    \[ \forall x \in A . \theta \leq \left(\theta \haimp \pred\left(x\right)\right) \haimp  \pred\left(x\right) \]
+    so by the infimum property we get:
+    \begin{align*}
+        % & 
+        \theta  \leq \infimum_{x \in A} \left(\left(\theta \haimp \pred\left(x\right)\right) \haimp \pred\left(x\right) \right)
+        % \\
+        % & 
+        \leql{\eqref{eq:after-inter-mono}} \after{x}{m}{\left(\theta \haimp \pred\left(x\right)\right)} \haimp \after{x}{m}{ \pred\left(x\right)}
+    \end{align*}
+    Now, by uncurrying $\after{x}{m}{\left(\theta \haimp \pred\left(x\right)\right)}$ and currying $\theta$ we get:
+    \[ \after{x}{m}{\left(\theta \haimp \pred\left(x\right)\right)} \leq \theta \haimp \after{x}{m}{ \pred\left(x\right)} \]
+    \item 
+    By reflexivity, we have:
+    \[ \forall x \in A . \theta \meet \pred\left(x\right) \leq \theta \meet \pred\left(x\right) \]
+    by currying $\pred\left(x\right)$ we get:
+    \[ \forall x \in A . \theta \leq \pred\left(x\right) \haimp \left(\theta \meet \pred\left(x\right)\right) \]
+    so by the infimum property we get:
+    \begin{align*}
+        % & 
+        \theta  \leq \infimum_{x \in A} \left( \pred\left(x\right) \haimp \left(\theta \meet \pred\left(x\right)\right) \right)
+        % \\
+        % & 
+        \leql{\eqref{eq:after-inter-mono}} \after{x}{m}{\pred\left(x\right)} \haimp \after{x}{m}{\left(\theta \meet \pred\left(x\right)\right)}
+    \end{align*}
+    Now, by uncurrying $\after{x}{m}{\pred\left(x\right)}$ we get:
+    \[ \theta \meet \after{x}{m}{\pred\left(x\right)} \leq \after{x}{m}{\left( \theta \meet \pred\left(x\right) \right)} \]
+    \qedhere
+\end{enumerate}
+\end{proof}
+
+%%%%%%%%%%%%
+
+\MCAEF*
+
+\begin{proof}
+We define the logical and program components and show that they satisfy the required properties in each case.
+We use the abbreviations: $\code{\codef{p_{1}}} \defeq \encode{1}{0}$ and $\code{\codef{p_{2}}} \defeq \encode{1}{1}$.
+\begin{description}[leftmargin=*]
+    \item[Reflexivity:]
+    Take $\eid \defeq \encode{0}{0}$. 
+    We  need to show that $$ \evexpand{\pred}{\codeid}{\pred}.$$
+    For $c \in \mca$:
+    \[ \pred\left(c\right) 
+         \leq  \after{r}{\return{c}}{\pred\left(r\right)} = \after{r}{\encode{0}{0} \app c}{\pred\left(r\right)} 
+        = \after{r}{\codeid \app c}{\pred\left(r\right)} \]
+    
+    \item[Transitivity:] 
+    Take $\ecomp{e_1}{e_2} \defeq \encode{0}{e_{2} \bullet \left(e_{1} \bullet 0 \right)}$. 
+    We need to show: 
+        \[ \dfrac{
+        \begin{array}{c}
+            \evexpand{\predA}{e_{s}}{\predB}\\
+            \evexpand{\predB}{e_{t}}{\predC}
+        \end{array}}
+    {\evexpand{\predA}{\code{e_{s} ; e_{t}}}{\predC}} \]
+    Given the assumptions, for $c \in \mca$:
+    \[
+    \begin{array}{cl}
+         & \predA\left(c\right)\\
+         \leq & \after{s}{e_{s} \app c}{\predB\left(s\right)}\\
+         \leql{\Cref{lemma:after-mono}} & \after{s}{e_{s} \app c}{\after{r}{e_{t} \app s}{\predC\left(r\right)}}\\
+         \leql{\text{A.Bind}} & \after{r}{\left(\letin{s}{e_{s} \app c}{e_{t} \app s}\right)}{\predC\left(r\right)}\\
+         = & \after{r}{\encode{0}{e_{t} \bullet \left(e_{s} \bullet 0\right)} \app c}{\predC\left(r\right)} 
+     = \after{r}{\code{e_{s} ; e_{t}} \app c}{\predC\left(r\right)}
+    \end{array}
+    \]
+    
+    \item[Top:] Take $\top \defeq \lambda e.\boldsymbol{1}$ and $\etrue \defeq \eid$. 
+    We need to show: 
+    \[ \evexpand{\pred}{\codeid}{\top} \]
+    For $c \in \mca$:
+    \begin{align*}
+        % & 
+        \pred\left(c\right) \leq \boldsymbol{1} \leql{\text{A.Return}} \after{r}{\return{c}}{\boldsymbol{1}}
+        % \\
+        % & \qquad 
+        = \after{r}{\return{c}}{\top\left(r\right)} = \after{r}{\codeid \app c}{\top\left(r\right)}
+    \end{align*}
+
+    \item[Conjunction:] Take:
+    $$\begin{array}{r@{\hspace{0.05cm}}c@{\hspace{0.05cm}}l}
+    \left(\phi_1 \emeet \phi_2 \right) \left(e\right) &\defeq& \after{c_{1}}{e \app \codepA}{\phi_{1}\left(c_{1}\right)} \meet \after{c_{2}}{e \app \codepB}{\phi_{2}\left(c_{2}\right)} \\  
+    \epair{e_1}{e_2} &\defeq & \encode{1}{1 \bullet \left(e_{1} \bullet 0\right) \bullet \left(e_{2} \bullet 0\right)} \\
+    \efst &\defeq & \encode{0}{0 \bullet \codepA} \\
+     \esnd &\defeq & \encode{0}{0 \bullet \codepB}
+    \end{array}$$
+    For \emph{intro}, 
+    we need to show:
+        \[ \dfrac{
+        \begin{array}{c}
+            \evexpand{\pred}{e_{1}}{\predA}\\
+            \evexpand{\pred}{e_{2}}{\predB}
+        \end{array}}
+    {\evexpand{\pred}{\codepair{e_{1}}{e_{2}}}{\left(\predA \emeet \predB\right)}} \]
+    By combining the assumptions, we get, for any $c \in \mca$:
+    \[
+    \begin{array}{cl}
+         & \pred\left(c\right)\\
+         \leq & \after{c_{2}}{e_{2} \app c}{\predB\left(c_{2}\right)} \meet  \after{c_{1}}{e_{1} \app c}{\predA\left(c_{1}\right)}\\
+         \leql{\Cref{lemma:after-conj}} & \after{c_{1}}{e_{1} \app c}{\left(\after{c_{2}}{e_{2} \app c}{\predB\left(c_{2}\right)} \meet \predA\left(c_{1}\right)\right)}\\
+         \leql{\Cref{lemma:after-mono}} & \after{c_{1}}{e_{1} \app c}{\left(\predA\left(c_{1}\right) \meet \after{c_{2}}{e_{2} \app c}{\predB\left(c_{2}\right)}\right)}\\
+         \leql{\Cref{lemma:after-mono} + \Cref{lemma:after-conj}} & \after{c_{1}}{e_{1} \app c}{\left(\after{c_{2}}{e_{2} \app c}{\left(\predA\left(c_{1}\right) \meet \predB\left(c_{2}\right)\right)}\right)}
+    \end{array}
+    \]
+    
+    Now, by using \Cref{lemma:after-mono} twice over each of the projections of $\meet$, we get:
+    \begin{enumerate}
+        \item $ \pred\left(c\right) \leq \after{c_{1}}{e_{1} \app c}{\after{c_{2}}{e_{2} \app c}{\predA\left(c_{1}\right)}} $
+
+        \item $ \pred\left(c\right) \leq \after{c_{1}}{e_{1} \app c}{\after{c_{2}}{e_{2} \app c}{\predB\left(c_{2}\right)}} $
+    \end{enumerate}
+
+    Using (1) we obtain: 
+    \[
+    \begin{array}{cl}
+        & \pred\left(c\right)\\
+        \leq & \after{c_{1}}{e_{1} \app c}{\after{c_{2}}{e_{2} \app c}{\predA\left(c_{1}\right)}}\\
+        \leql{\Cref{lemma:after-mono} +             \text{A.Return}} & \after{c_{1}}{e_{1} \app c}{\after{c_{2}}{e_{2} \app c}{ \after{r_{1}}{\return{c_{1}}}{\predA\left(r_{1}\right)} }}\\
+        \leql{\Cref{lemma:after-mono} + \text{A.Bind}} & \after{c_{1}}{e_{1} \app c}{ \after{r_{1}}{\left( \letin{c_{2}}{e_{2} \app c}{\return{c_{1}}} \right)}{ \predA\left(r_{1}\right) } }\\
+        \leql{\text{A.Bind}}  & \after{r_{1}}{\left(\letin{c_{1}}{e_{1} \app c}{ \letin{c_{2}}{e_{2} \app c}{\return{c_{1}}} }\right)}{\predA\left(r_{1}\right)}\\
+        = & \after{r_{1}}{ \encode{0}{0 \bullet \left(e_{1} \bullet c\right)\bullet \left(e_{2} \bullet c\right)} \app \encode{1}{0}  }{\predA\left(r_{1}\right)}\\
+        = & \after{r_{1}}{ \encode{0}{0 \bullet \left(e_{1} \bullet c\right)\bullet \left(e_{2} \bullet c\right)} \app \codepA  }{\predA\left(r_{1}\right)}
+    \end{array}
+    \]
+    
+    Similarly, from (2) we obtain:
+    \[ \pred\left(c\right) \leq \after{r_{2}}{ \encode{0}{0 \bullet \left(e_{1} \bullet c\right)\bullet \left(e_{2} \bullet c\right)} \app \codepB  }{\predB\left(r_{2}\right)} \]
+
+    Combining both, we get:
+    \[
+    \begin{array}{cl}
+         & \pred\left(c\right)\\
+         \leq & \hphantom{\meet \;} \after{r_{1}}{ \encode{0}{0 \bullet \left(e_{1} \bullet c\right)\bullet \left(e_{2} \bullet c\right)} \app \codepA  }{\predA\left(r_{1}\right)}\\
+         &  
+         \meet \; \after{r_{2}}{ \encode{0}{0 \bullet \left(e_{1} \bullet c\right)\bullet \left(e_{2} \bullet c\right)} \app \codepB  }{\predB\left(r_{2}\right)}\\
+         = & \left(\predA \emeet \predB\right)\left(\encode{0}{0 \bullet \left(e_{1} \bullet c\right)\bullet \left(e_{2} \bullet c\right)}\right)\\
+         \leql{\text{A.Return}} & \after{r}{\return{ \encode{0}{0 \bullet \left(e_{1} \bullet c\right)\bullet \left(e_{2} \bullet c\right)} }}{ \left(\predA \emeet \predB\right)\left(r\right) }\\
+         = & \after{r}{\codepair{e_{1}}{e_{2}} \app c}{ \left(\predA \emeet \predB\right)\left(r\right) }
+    \end{array}
+    \]
+    
+    For \emph{elim1} we need to show:
+     \[ \evexpand{\left(\predA \emeet \predB\right)}{\code{\codef{fst}}}{\predA} \]
+    For $c \in \mca$:
+    \[\begin{array}{cl}
+         & \left(\predA \emeet \predB\right)\left(c\right)\\
+        = &
+          \after{c_{1}}{c \app \codepA}{ \predA\left(c_{1}\right) } \meet \after{c_{2}}{c \app \codepB}{ \predB\left(c_{2}\right) }
+        % \\
+        % &
+        \leq  \after{c_{1}}{c \app \codepA}{ \predA\left(c_{1}\right) }
+         \\
+        =&  \after{c_{1}}{ \encode{0}{0 \bullet \codepA} \app c }{ \predA\left(c_{1}\right) } 
+        \\
+        = & \after{c_{1}}{ \code{\codef{fst}} \app c }{ \predA\left(c_{1}\right) }
+    \end{array}\]
+    The proof of  \emph{elim2} is analogous. 
+
+    \item[Universal Implication] Take:
+    $$\begin{array}{r@{\hspace{0.05cm}}c@{\hspace{0.05cm}}l}
+    \phi \imp \vec{\phi} \left(e\right)  &\defeq & \infimum_{\phi \in \vec{\phi}}\infimum_{c \in \mca}\left(\phi\left(c\right) \sqsupset \after{r}{e \app c}{\phi\left(r\right)}\right)
+    \\ 
+    \elambda{e} &\defeq & \encode{1}{e \bullet \left(\encode{2}{2 \bullet 0 \bullet 1} \bullet 0 \bullet 1\right)}\\ 
+    \eeval &\defeq & \encode{0}{\eid \bullet \left( 0 \bullet \codepA\right) \bullet \left( 0 \bullet \codepB\right)}
+    \end{array}$$
+    For \emph{intro}, we need to show: 
+    \[\dfrac{\forall \predC \in \preds \evexpand{\left(\predA \emeet \predB\right)}{e}{\predC}}{ \evexpand{\predA}{\codecurry{e}}{\left(\predB \imp \preds\right)} }\]
+    Expanding the assumption, we get for all $\predC \in \preds$, and $c \in \mca$:
+    \[ \after{c_{1}}{c \app \codepA}{\predA\left(c_{1}\right)} \meet \after{c_{2}}{c \app \codepB}{\predB\left(c_{2}\right)}
+        \leq  \after{r}{e \app c}{\predC\left(r\right)} \]
+    Instantiating with $c=\codetuple{c_{1}}{c_{2}}$, for which we have  
+$ \codetuple{c_{1}}{c_{2}} \app \codepA = \return{ c_{1}}$ and  $\codetuple{c_{1}}{c_{2}} \app \codepB = \return{c_{2}}$, obtains: 
+    \[ \after{c_{1}'}{\return{c_{1}}}{\predA\left(c_{1}'\right)}
+        \meet 
+        \after{c_{2}'}{\return{c_{2}}}{\predB\left(c_{2}'\right)} \leq  \after{r}{e \app \codetuple{c_{1}}{c_{2}}}{\predC\left(r\right)} \]
+    From this, using after-ret, we get: 
+    \[
+        \predA\left(c_{1}\right) \meet \predB\left(c_{2}\right) \leq \after{r}{e \app \codetuple{c_{1}}{c_{2}}}{\predC\left(r\right)}
+    \]
+    By currying $\predB\left(c_{2}\right)$ we get:
+    \[
+        \predA\left(c_{1}\right) \leq \predB\left(c_{2}\right) \haimp \after{r}{e \app \codetuple{c_{1}}{c_{2}}}{\predC\left(r\right)}
+    \]
+    Since this holds for all $\predC \in \preds$ and $c_{2} \in \mca$, we get, by the infimum property, for all $c_{1} \in \mca$:
+    \[
+    \begin{array}{@{}c@{\hspace{-0.2cm}}l}
+         & \predA\left(c_{1}\right) \\
+         \leq & \infimum_{\predC \in \preds \, , \, c_{2} \in \mca}\left( \predB\left(c_{2}\right) \haimp \after{r}{e \app \codetuple{c_{1}}{c_{2}}}{\predC\left(r\right)}\right)\\
+         = & \infimum_{\predC \in \preds \, , \, c_{2} \in \mca}\left( \predB\left(c_{2}\right) \haimp \after{r}{ \nu\left( e \bullet \left(\encode{2}{2 \bullet 0 \bullet 1} \bullet c_{1} \bullet c_{2} \right)\right) }{\predC\left(r\right)}\right)\\
+         = & \infimum_{\predC \in \preds \, , \, c_{2} \in \mca}\left( \predB\left(c_{2}\right) \haimp \after{r}{ \encode{0}{ e \bullet \left(\encode{2}{2 \bullet 0 \bullet 1} \bullet c_{1} \bullet 0 \right) } \app c_{2} }{\predC\left(r\right)}\right)\\
+         \leql{\text{A.Return}} & \after{f}{\return{\encode{0}{ e \bullet \left(\encode{2}{2 \bullet 0 \bullet 1} \bullet c_{1} \bullet 0 \right) }}}{ \infimum_{\predC \in \preds \, , \, c_{2} \in \mca}\left( \predB\left(c_{2}\right) \haimp \after{r}{ f \app c_{2} }{\predC\left(r\right)}\right) }\\
+         = & \after{f}{ \codecurry{e} \app c_{1} }{\left( \predB \imp \preds \right)\left(f\right)}\\
+    \end{array}
+    \]
+    
+    For \emph{elim}, we need to show:
+        \[ \forall \predB \in \preds \evrel{\left(\left(\predA \imp \preds\right) \emeet \predA\right)}{\codeeval}{\predB}  \]
+    For this, we first prove the following uncurrying lemma, in which we use the abbreviation $\codeuncurry{e} \defeq \encode{0}{e \bullet \left(0 \bullet \codepA\right) \bullet \left(0 \bullet \codepB\right)}$.
+    
+
+\begin{lemma}[Universal Implication Uncurrying]\label{lemma:uni-imp-uncurry}
+    \[ \dfrac{\evrel{\predA}{e}{\left(\predB \imp \preds\right)}}{\forall \predC \in \preds .\evrel{\left(\predA \emeet \predB\right)}{\codeuncurry{e}}{\predC}}  \]
+\end{lemma}
+\begin{proof}
+    We need to prove:
+    \[ \dfrac{\evexpand{\predA}{e}{\left(\predB \imp \preds\right)}}{\forall \predC \in \preds .\evexpand{\left(\predA \emeet \predB\right)}{\codeuncurry{e}}{\predC}}  \]
+    Given a $\predC \in \preds$, due to the lower bound property of $\infimum$, we have:
+    \[
+    \begin{array}{cl}
+         & \infimum_{\predC \in \preds}\infimum_{c_{2} \in \mca}\left(\predB\left(c_{2}\right) \haimp \after{r}{f \app c_{2}}{\predC\left(r\right)}\right) \\
+         \leq & \infimum_{c_{2} \in \mca}\left(\predB\left(c_{2}\right) \haimp \after{r}{f \app c_{2}}{\predC\left(r\right)}\right)\\
+         \leql{\eqref{eq:after-inter-mono}} & \after{c_{2}}{c \app \codepB}{\predB\left(c_{2}\right)} \haimp \after{c_{2}}{c \app \codepB}{\after{r}{f \app c_{2}}{\predC\left(r\right)}}\\
+    \end{array}
+    \]
+
+    By \Cref{lemma:after-mono}, we get that for any $c_{1} \in \mca$:
+    \[
+    \begin{array}{cl}
+         & \after{f}{e \app c_{1}}{\infimum_{\predC \in \preds}\infimum_{c_{2} \in \mca}\left(\predB\left(c_{2}\right) \haimp \after{r}{f \app c_{2}}{\predC\left(r\right)}\right)} \\
+         \leq & \after{f}{e \app c_{1}}{\after{c_{2}}{c \app \codepB}{\predB\left(c_{2}\right)} \haimp \after{c_{2}}{c \app \codepB}{\after{r}{f \app c_{2}}{\predC\left(r\right)}}}
+    \end{array}
+    \]
+
+    Instantiating our premise with $c_{1}$ obtains:
+    \[ \begin{array}{cl}
+         & \predA\left(c_{1}\right)\\
+         \leq & \after{f}{e \app c_{1}}{\infimum_{\predC \in \preds}\infimum_{c_{2} \in \mca}\left(\predB\left(c_{2}\right) \haimp \after{r}{f \app c_{2}}{\predC\left(r\right)}\right)}\\
+        \leql{\Cref{lemma:after-mono}} & \after{f}{e \app c_{1}}{\left(\after{c_{2}}{c \app \codepB}{\predB\left(c_{2}\right)} \haimp \after{c_{2}}{c \app \codepB}{\after{r}{f \app c_{2}}{\predC\left(r\right)}}\right)}\\
+        \leql{\Cref{lemma:after-imp}} & \after{c_{2}}{c \app \codepB}{\predB\left(c_{2}\right)} \haimp \after{f}{e \app c_{1}}{ \after{c_{2}}{c \app \codepB}{\after{r}{f \app c_{2}}{\predC\left(r\right)}}}
+    \end{array} \]
+
+    So by uncurrying $\after{c_{2}}{c\app\codepB}{\predB\left(c_{2}\right)}$ and then currying $\predA\left(c_{1}\right)$ we get:
+    \[
+    \begin{array}{cl}
+        & \after{c_{2}}{c\app\codepB}{\predB\left(c_{2}\right)}\\
+        \leq & \predA\left(c_{1}\right) \haimp \after{f}{e \app c_{1}}{ \after{c_{2}}{c \app \codepB}{\after{r}{f \app c_{2}}{\predC\left(r\right)}}}
+    \end{array}
+    \]
+
+    Now, for every $c_{1} \in \mca$, we have that:
+    \[
+    \begin{array}{cl}
+        & \after{c_{2}}{c\app\codepB}{\predB\left(c_{2}\right)}\\
+        \leq &\infimum_{c_{1}} \left( \predA\left(c_{1}\right) \haimp \after{f}{e \app c_{1}}{ \after{c_{2}}{c \app \codepB}{\after{r}{f \app c_{2}}{\predC\left(r\right)}}}\right)\\
+        \leql{\eqref{eq:after-inter-mono}} & \after{c_{1}}{c \app \codepA}{\predA\left(c_{1}\right)} \haimp \after{c_{1}}{c \app \codepA}{\after{f}{e \app c_{1}}{ \after{c_{2}}{c \app \codepB}{\after{r}{f \app c_{2}}{\predC\left(r\right)}}}}
+    \end{array}
+    \]
+
+    Therefore,  by uncurrying again we get: 
+    \[    
+    \begin{array}{cl}
+         & \left(\predA \emeet \predB\right)\left(c\right)\\
+         = &\after{c_{1}}{c \app \codepA}{\predA\left(c_{1}\right)} \meet \after{c_{2}}{c \app \codepB}{\predB\left(c_{2}\right)}\\
+         \leq & \after{c_{1}}{c \app \codepA}{\after{f}{e \app c_{1}}{\after{c_{2}}{c \app \codepB}{\after{r}{f \app c_{2}}{\predC\left(r\right)}}}} \\
+         \leql{\text{A.Bind}} & \after{r}{\left( \letin{c_{1}}{c \app \codepA}{\letin{f}{e \app c_{1}{\letin{c_{2}}{c \app \codepB}{f \app c_{2}}}}} \right)}{\predC\left(r\right)} \\
+         = & \after{r}{ \nu\left(e \bullet \left(c \bullet \codepA\right) \bullet \left(c \bullet \codepB\right)\right)}{\predC\left(r\right)}\\
+         = & \after{r}{\encode{0}{e \bullet \left(0 \bullet \codepA\right) \bullet \left(0 \bullet \codepB\right)} \app c}{\predC\left(r\right)} \\
+         = & \after{r}{\codeuncurry{e} \app c}{\predC\left(r\right)}
+    \end{array}
+    \]
+\end{proof}
+
+
+    To get back to the proof of \emph{elim}, by Reflexivity, we have:
+    \[{\evrel{\predA \imp \preds}{\codeid}{\predA \imp \preds}} \]
+    From which, by~\Cref{lemma:uni-imp-uncurry}, we get:
+    \[ {\forall \predB \in \preds .\evrel{\left(\left(\predA \imp \preds\right) \emeet \predA\right)}{\codeuncurry{\codeid}}{\predB}} \]
+    From this, we get the desired result, since $\codeeval = \codeuncurry{\codeid}$.  
+\qedhere
+\end{description}
+\end{proof}
+
+\sepconsistent*
+\begin{proof}
+    ($\Rightarrow$) If there exists $e\in\separator$ such that $\top \evidence{e} \bot$, then for every $c \in \mca$:
+    \[ \boldsymbol{1} = \top\left(c\right) \leq \after{r}{e \app c}{\bot\left(r\right)} = \after{r}{e \app c}{\boldsymbol{0}} \leq \boldsymbol{0} \]
+
+    ($\Leftarrow$) If $\boldsymbol{1} \leq \boldsymbol{0}$, then $\top \evidence{\codeid} \bot $ since for every $c \in \mca$:
+    \[ \top\left(c\right) = \boldsymbol{1} \leq \boldsymbol{0} \leql{\text{A.Return}} \after{r}{\return{c}}{\boldsymbol{0}} = \after{r}{\codeid \app c}{\bot\left(r\right)} \qedhere\]
+\end{proof}
+
+

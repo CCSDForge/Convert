@@ -1,0 +1,267 @@
+
+\newcommand{\app}{\mathop{\cdot}}
+\newcommand{\Expr}[1]{E_{#1}}
+\newcommand{\encode}[2]{c_{\lambda^{#1}.#2}}
+% \newcommand{\code}[1]{\left\langle #1 \right\rangle}
+\newcommand{\code}[1]{e_{#1}}
+\newcommand{\preimage}[1]{\left(#1\right)^{-1}}
+\newcommand{\postmod}{\Diamond}
+
+\renewcommand{\P}{\mathcal{P}\!}
+\newcommand{\C}{\mathbb{C}}
+\newcommand{\K}{\mathbb{K}}
+\newcommand{\id}{\mathrm{id}}
+
+\newcommand{\mca}[0]{\mathbb{A}}
+
+\renewcommand{\encode}[2]{\left\langle\lambda^{#1}.#2\right\rangle}
+\newcommand{\absterm}[2]{\left|\lambda^{#1}.#2\right|}
+\newcommand{\PreOrd}{\text{\bf PreOrd}}
+
+\newcommand{\tripos}{\mathcal{T}}
+\newcommand{\bind}{\gg\!\!=}
+
+\newcommand{\evleq}{\leq_{\mca}}
+
+\newcommand{\interp}[1]{\left\llbracket #1 \right\rrbracket}
+
+\newcommand{\cxtinterp}[1]{\left\{\left\{#1\right\}\right\}}
+
+\newcommand{\phis}{\varphi_{1} , \ldots , \varphi_{n}}
+
+
+% \newcommand{\letin}[3]{\left[ #1 \leftarrow #2 \, \mid \, #3 \right]}
+\newcommand{\letin}[3]{\mathsf{let}\ #1\  \Leftarrow #2 \ \mathsf{in} \ #3}
+
+\newcommand{\evalstate}{\vartriangleright}
+\newcommand{\applystate}{\blacktriangleleft}
+
+\newcommand{\obj}[1]{\mathbf{Obj}\left(#1\right)}
+\renewcommand{\hom}[3]{#1\left(#2,#3\right)}
+\newcommand{\asm}{\mathbf{Asm}}
+\newcommand{\termobj}{\mathbf{1}}
+% \newcommand{\pair}[2]{\vartriangleleft #1 , #2 \vartriangleright}
+\newcommand{\tuple}[1]{\left\langle #1 \right\rangle}
+\newcommand{\pair}[2]{\tuple{#1 , #2}}
+\newcommand{\emptytuple}{\tuple{}}
+
+\newcommand{\fst}{\pi_{1}}
+\newcommand{\snd}{\pi_{2}}
+% \newcommand{\const}{\text{const}}
+\newcommand{\valasfun}[1]{\left[#1\right]}
+\newcommand{\codezero}{\code{\textsf{zero}}}
+\newcommand{\codesucc}{\code{\textsf{succ}}}
+\newcommand{\codepred}{\code{\textsf{pred}}}
+\newcommand{\numrep}{\textsf{num}}
+\newcommand{\predzero}{\textsc{zero?}}
+\newcommand{\fixcomb}{\mathcal{Y}}
+\newcommand{\underlying}[1]{\left|#1\right|}
+\newcommand{\realize}{\Vdash}
+\newcommand{\defeq}{:=}
+\newcommand{\setcat}{\mathbf{Set}}
+\newcommand{\codef}{\mathsf}
+
+
+\newcommand{\restrict}[1]{\overline{#1}}
+\newcommand{\kopy}{\Delta}
+\newcommand{\delete}{!}
+
+\newcommand{\lift}{\varphi}
+\newcommand{\strength}{\psi}
+\newcommand{\ext}[1]{#1^{*}}
+
+\newcommand{\aparr}{\circledast}
+
+\newcommand{\monad}{M}
+
+
+\newcommand{\mcopy}{\mathsf{copy}}
+\newcommand{\mreset}{\mathsf{reset}}
+\newcommand{\mfst}{\mathsf{fst}}
+\newcommand{\msnd}{\mathsf{snd}}
+\newcommand{\mpar}{\circledast}
+\newcommand{\mswap}{\mathsf{swap}}
+\newcommand{\massoc}{\mathsf{assoc}}
+\newcommand{\runtime}{S}
+\newcommand{\cmonad}{N}
+
+\newcommand{\curry}[1]{\left\lceil #1 \right\rceil }
+\newcommand{\uncurry}[1]{\left\lfloor #1 \right\rfloor }
+\newcommand{\expfun}[2]{{#1}^{#2}}
+\newcommand{\expobj}[2]{{#1}^{#2}}
+\newcommand{\return}[1]{\left[#1\right]}
+\newcommand{\statecat}[3]{#1^{#2}_{#3}}
+
+\newcommand{\unitobj}{\mathbb{I}}
+\newcommand{\tensor}{\otimes}
+\newcommand{\scomb}{\mathsf{s}}
+\newcommand{\kcomb}{\mathsf{k}}
+\newcommand{\purefun}{J}
+\newcommand{\kcode}{\code{\mathsf{K}}}
+\newcommand{\scode}{\code{\mathsf{S}}}
+\newcommand{\transition}{\hookrightarrow}
+\newcommand{\kcodeA}[1]{\code{\mathsf{K}\left(#1\right)}}
+\newcommand{\scodeA}[1]{\code{\mathsf{S}\left(#1\right)}}
+\newcommand{\scodeB}[2]{\code{\mathsf{S}\left(#1,#2\right)}}
+
+
+\newcommand{\real}[1]{\mathcal{R}_{#1}}
+\newcommand{\evidence}[1]{\overset{#1}{\rightarrow}}
+
+\newcommand{\codeid}{\code{\codef{id}}}
+\newcommand{\codek}{\code{\codef{K}}}
+\newcommand{\codeP}[1]{\code{\codef{p_{#1}}}}
+\newcommand{\codepA}{\codeP{1}}
+\newcommand{\codepB}{\codeP{2}}
+% \newcommand{\codecurry}[1]{\code{\lambda \, #1}}
+\newcommand{\codecurry}[1]{\elambda{#1}}
+\newcommand{\codeuncurry}[1]{\rho \, #1}
+\newcommand{\codeeval}{\code{\codef{eval}}}
+\newcommand{\codethunk}[1]{\code{\forall\lambda \, #1}}
+\newcommand{\coderun}[1]{\code{\forall\rho \, #1}}
+% \newcommand{\codepair}[2]{\triangleleft #1 , #2 \triangleright}
+\newcommand{\codepair}[2]{\epair{#1}{#2}}
+
+\newcommand{\evrel}[3]{#1 \evidence{#2} #3}
+\newcommand{\evexpand}[3]{\forall c \in \mca . #1\left(c\right) \leq \after{r}{#2 \app c}{#3\left(r\right)}}
+
+
+\newcommand{\pole}{\bot\!\!\!\bot}
+\newcommand{\llangle}{\langle\!|}
+\newcommand{\rrangle}{|\!\rangle}
+\newcommand{\alsu}{{\mathtt{as}}}
+\newcommand{\xle}[1]{\xrightarrow{\!#1\!}}
+\newcommand{\eid}{e_{\mathtt{id}}}
+\newcommand{\asid}{e_{\mathtt{id}}^\alsu}
+\newcommand{\ecompos}[2]{#1 \mathop{;} #2}
+\newcommand{\acomp}[2]{#1 \mathop{;^\alsu} #2}
+\newcommand{\etrue}{e_{\scriptscriptstyle\top}}
+\newcommand{\atrue}{e_\top^\alsu}
+\newcommand{\efalse}{e_\bot}
+\newcommand{\afalse}{e_\bot^\alsu}
+\newcommand{\epair}[2]{\llangle #1, #2 \rrangle}
+\newcommand{\tpair}[2]{( #1, #2 )}
+\newcommand{\efst}{e_{\mathtt{fst}}}
+\newcommand{\afst}{e_{\mathtt{fst}}^\alsu}
+\newcommand{\esnd}{e_{\mathtt{snd}}}
+\newcommand{\asnd}{e_{\mathtt{snd}}^\alsu}
+\newcommand{\elambda}[1]{\lambda #1}
+\newcommand{\aslambda}[1]{\lambda^\alsu #1}
+\newcommand{\eeval}{e_{\mathtt{eval}}}
+\newcommand{\aseval}{e_{\mathtt{eval}}^\alsu}
+\newcommand{\efa}[1]{\Pi #1}
+\newcommand{\asforall}[1]{\bigsqcap^\alsu #1}
+\newcommand{\eproj}{e_\Pi}
+\newcommand{\asproj}{e_\sqcap ^\alsu}
+\newcommand{\inter}{\prod}
+\newcommand{\eexists}[1]{\bigsqcup #1}
+\newcommand{\einj}{e_\sqcup}
+\newcommand{\union}{\bigcup}
+\newcommand{\imp}{\supset}
+\newcommand{\power}{\mathcal{P}}
+\newcommand{\instance}{\textbf{\textrm{H}}}
+\newcommand{\ecomp}[2]{#1 \mathop{;} #2}
+
+
+%$\overunderset{\diamond}{\diamond}{\langle} $
+ \newcommand{\after}[3]{ {\langle \!\!\mathrel{\raisebox{-4pt}{$\diamond$}}}\, #1 \leftarrow #2  {\mathrel{\raisebox{-4pt}{$\diamond$}}\!\!\rangle}\,   #3 }
+
+
+\newcommand{\leql}[1]{\underset{\scriptscriptstyle{ #1 }}{\leq} }
+
+\newcommand{\UFam}{\mathsf{UFam}}
+\newcommand{\Eff}{\ensuremath{\mathcal{E}\!f\!f}}
+\newcommand{\asmmap}[2]{\|#2\|_{#1}}
+\newcommand{\Asm}{\ensuremath{\mathbf{Asm}}}
+\newcommand{\Set}{\ensuremath{\mathbf{Set}}}
+\newcommand{\op}{\mathrm{op}}
+\newcommand{\ef}{\ensuremath{\mathcal{E\!F}}}
+\newcommand{\Phirel}{\Phi_{\mathsf{ev}}}
+\newcommand{\rt}{\mathbf{RT}}
+\newcommand{\A}{\mathcal{A}}
+\newcommand{\Trip}{\mathcal{T}}
+\newcommand{\codetuple}[2]{\left\langle #1 , #2 \right\rangle}
+\newcommand{\effshell}{\ensuremath{\mathcal{MC}}_M}
+
+
+\newcommand{\emeet}{\wedge}
+
+\newcommand{\meet}{\sqcap}
+\newcommand{\join}{\sqcup}
+\newcommand{\haimp}{\sqsupset}
+\newcommand{\infimum}{\bigsqcap}
+\newcommand{\supremum}{\bigsqcup}
+
+\newcommand{\pred}{\phi}
+\newcommand{\predI}[1]{\pred_{#1}}
+\newcommand{\predA}{\predI{1}}
+\newcommand{\predB}{\predI{2}}
+\newcommand{\predC}{\predI{3}}
+\newcommand{\preds}{\vec{\pred}}
+\newcommand{\truthval}{\theta}
+
+\newcommand{\separator}{\mathcal{S}}
+
+\newcommand{\singleton}{\star}
+
+\newcommand{\param}{\mathbf{P}}
+
+\newcommand{\pairing}[1]{\left\langle #1 \right\rangle}
+
+\newcommand{\closeexp}[1]{\left\{ #1 \right\}}
+
+\newcommand{\context}[1]{\left[ #1 \right]}
+% \newcommand{\trmcxt}[2]{\textbf{Trm}^{#2}\left(#1\right)}
+\newcommand{\trmcxt}[1]{\textbf{Trm}\left(#1\right)}
+
+\newcommand{\sub}[1]{\!\left\{ #1 \right\}}
+\newcommand{\assign}[2]{#1 := #2}
+\newcommand{\poly}{\mca\left[X\right]}
+\newcommand{\iexp}[1]{\mathsf{exp}\left(#1\right)}
+
+\newcommand{\arity}{\mathcal{In}}
+\newcommand{\coarity}{\mathcal{Out}}
+
+
+
+
+%%%%%%%%%%%%%% Ugly macros
+
+\newlength{\fstlen}
+\newlength{\sndlen}
+\newlength{\thdlen}
+\newlength{\mysep}
+\newlength{\thesep}
+\newcommand{\twothings}[2]{
+  \settowidth{\fstlen}{$#1$}
+  \setlength{\mysep}{0.5\textwidth}
+  \addtolength{\mysep}{-\fstlen}
+  \addtolength{\mysep}{-15pt}
+\[
+  #1
+  \hspace{\mysep}
+  #2
+\]
+}
+
+\newcommand{\threethings}[3]{
+  \settowidth{\fstlen}{$#1$}
+  \settowidth{\sndlen}{$#2$}
+  \settowidth{\thdlen}{$#2$}
+  \setlength{\mysep}{\textwidth}
+  \addtolength{\mysep}{-\fstlen}
+  \addtolength{\mysep}{-\sndlen}
+  \addtolength{\mysep}{-\thdlen}
+  \addtolength{\mysep}{-15pt}
+  \setlength{\thesep}{\dimexpr(\mysep)/3\relax}
+\[
+  #1
+  \hspace{\thesep}
+  #2
+  \hspace{\thesep}
+  #3
+\]
+}
+
+\newcommand{\expr}{p}
+

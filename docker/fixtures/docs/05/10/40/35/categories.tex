@@ -1,0 +1,873 @@
+%\section{Elaborated \Cref{sec:turing}: Categorical Characterization of MCAs}
+
+
+% PCAs have been given a categorical representation in \cite{COCKETT2008}, by establishing their connection to
+% Turing categories~\cite{LONGO1990193,COCKETT2008}. 
+% %
+% Concretely, it was shown that PCAs are PCA-objects in the category of sets. %, which are, in a sense, Turing objects in the category of computable morphisms.
+% %To relate the algebraic structure of PCAs to a more abstract categorical representation \lcnote{why?}, \cite[?] have shown that PCAs are PCA objects in the category of sets. 
+% Thus, PCA-objects are essentially the categorical counterpart of the notion of combinatory completeness for PCAs. 
+% %
+
+% The goal of this section is to obtain a similar categorical characterization for the generalized notion of MCAs.
+% %
+% Nonetheless, we cannot straightforwardly extend the construction in~\cite{COCKETT2008} since it heavily relies on the notion of restriction, which is specifically tailored to capture partiality. 
+% %
+% Since MCAs are based on an arbitrary underlying monad, i.e., arbitrary computational effects,  generalizing said construction entails developing a notion of restriction that fits various effects. 
+% At this point, it is unclear if, and how, this can be done. 
+
+% To circumvent this construction, which seems to be overfitted to the notion of partiality, we instead 
+% operate within Freyd categories~\cite{Power1997Enviroments,LEVY2003Freyd}.
+% %
+% Freyd categories are an extension of the categorical framework designed specifically to model computational effects. 
+% %
+% Importantly, they abstract the structure of the Kleisli category of a monad by employing one category for values and another one for computations. 
+% %
+% By invoking this more expressive structure, Freyd categories enable the composition and interaction of effectful computations while preserving their algebraic properties. 
+% %
+% %They have also been used to axiomatize models of Call-by-Value programming languages~\cite{LEVY2003Freyd}, which contributed to our choice of focusing on CbV MCAs.
+
+We first recall the formal definition of Freyd categories and some associated categorical components~\cite{POWER2002Premonoidal}. %, which are needed for our categorical construction.
+% , which uses the notion of premonoidal categories~\cite{POWER2002Premonoidal}. A premonoidal category generalizes
+% of the concept of monoidal category, by requiring a tensor product which is merely a functor of two variables, rather than a bifunctor.
+% Formally, it is a binoidal category equipped with coherent associativity and unit natural isomorphism.
+\revnote{Some further explanation is needed to motivate the
+concepts of binoidal category, etc. It seems like the idea is that
+the tensor is separately functorial in each argument, but not
+simultaneously functorial. By that token, one might guess that this
+is like a semigroup in the monoidal 1-category of (strict)
+categories equipped with the so-called "funny" tensor product. If
+that is so, would a "premonoidal" category be a monoid object in
+(Cat,FunnyTensor)? And what is the significance of various morphisms
+being central? Anyway, all this is surely fine, but some explanation
+that motivates these things would help make the paper more
+accessible to less specialist readers. Ultimately it seems that
+these notions are aiming to build in a failure of interchange,
+corresponding to the way that effects can't usually re-ordered.}
+%
+We start with binoidal categories, which capture the idea of non-commutativity of general effectful computation.
+For example, given two computations $m_{1} , m_{2}$ in the state monad (\Cref{SCA}), then $\letin{x_{1}}{m_{1}}{\letin{x_{2}}{m_{2}}{\left(x_{1} , x_{2}\right)}}$ will generally not yield the same computation as $\letin{x_{2}}{m_{2}}{\letin{x_{1}}{m_{1}}{\left(x_{1} , x_{2}\right)}}$, because in the former case $m_{2}$ depends on the state modified by $m_{1}$, while in the latter case $m_{1}$  depends on the state modified by $m_{2}$, so the order in which they are sequenced matter.
+Binoidal categories abstract this behavior.
+
+\begin{definition}[Binoidal Category]
+    A category $\C$ is a \emph{binoidal category} if :
+    \begin{itemize}[leftmargin=0.5cm]
+        \item For every  $A , B \in\C$, there is an object $A \otimes B$
+        \item For every $A\in\C$, there is a functor $A \rtimes \left(-\right)$, sending morphisms in $\hom{\C}{B_{1}}{B_{2}}$ to  morphisms in $\hom{\C}{A \otimes B_{1}}{A \otimes B_{2}}$
+        \item For every object $B \in \C$, a functor $\left(-\right) \ltimes B$ , sending morphisms in $\hom{\C}{A_{1}}{A_{2}}$ to  morphisms in $\hom{\C}{A_{1} \otimes B}{A_{2} \otimes B}$
+    \end{itemize}
+\end{definition}
+
+A morphism $f : A \rightarrow B$ in a binoidal category $\K$ is \emph{central} if for every other morphism $u : X \rightarrow Y$ in $\K$, $\left(u \ltimes B\right) \circ \left(X \rtimes f\right) = \left(Y \rtimes f\right) \circ \left(u \ltimes A\right)$ and $\left(f \ltimes Y\right) \circ \left(A \rtimes u\right) = \left(B \rtimes u\right) \circ \left(f \ltimes X\right)$.
+Given a binoidal category $\K$,  the centre of $\K$ is 
+the subcategory of $\K$ consisting of all the objects of $\K$ and the central morphisms.
+%%the wide subcategory spanned by central morphisms
+
+\begin{definition}[Symmetric Premonoidal Category]
+A \emph{symmetric premonoidal category} is a binoidal category equipped with an object $\mathbb{I}$  and  the following central natural isomorphisms:
+%\agnote{Should we explain the notation of naturality with the two $:$s?}
+\begin{description}[font=\normalfont,leftmargin=0.5cm]
+    \item[Associator:]~~~~ %$\alpha
+         $\alpha_{A,B,C} 
+         : \left(A \otimes B\right) \otimes C \rightarrow A \otimes \left(B \otimes C\right)$ 
+    \item[Left and right unitor:]~~~~ %$\lambda:
+        $ \lambda_{A} : 
+        \mathbb{I} \otimes A \rightarrow A $ and  $ \rho_{A} 
+        : A \otimes \mathbb{I} \rightarrow A $
+    % \item[Right unitor:]~~~~ %$\rho
+    %     $ \rho_{A} 
+    %     : A \otimes \mathbb{I} \rightarrow A $
+    \item[Swap:]~~~~ %$\sigma:
+        $ \sigma_{A,B} : 
+       A \otimes B \rightarrow B \otimes A $
+\end{description}
+The above natural isomorphisms obey the triangle and pentagon coherence laws as their counterparts in a monoidal category.
+\end{definition}
+
+% \begin{definition}[Symmetric Premonoidal Category]
+% A premonoidal category is \emph{symmetric}, if in addition, it has the following central isomorphism:
+% \begin{itemize}[leftmargin=0.5cm]
+%     \item Swap $\sigma$:
+%         $ \sigma_{A,B} : A \otimes B \rightarrow B \otimes A $
+% \end{itemize}
+% which obeys the coherence laws as its counterpart in a monoidal category.
+% \end{definition}
+
+\begin{definition}[Freyd Category]
+    A Freyd category is a triple $\langle \C, \K, \purefun \rangle$ such that:
+    \begin{itemize}[leftmargin=0.5cm]
+        \item $\C$ is a cartesian category 
+        \item $\K$ is a symmetric premonoidal category with the same objects as $\C$
+     \item $\purefun : \C \rightarrow \K$ is an identity on objects functor, strictly preserving symmetric premonoidal structure, whose image lies inside the centre of $\K$.
+     \end{itemize}
+     %C is called the \emph{value} category and its morphisms are called value morphisms. K is called the producer category and its morphisms are called producer morphisms.
+\end{definition}
+
+% To be able to reason formally on categories, a common technique in categorical logic is to assign a category with a typed formal language, called the internal language of the category, where the types and contexts are the objects of the category, typed terms in a context are morphisms between the corresponding objects, and the equality relation between terms corresponds to the equality between the corresponding morphisms.
+
+% As noted in \cite{power2002closed}, closed Freyd categories, provide sound semantics to $\lambda_{c}$-calculus.
+% Since $\lambda_{c}$-calculus has, in particular, the $\letin{-}{-}{-}$ and $\return{-}$ constructs used to define MCAs, we shall define an internal language for Freyd categories using the appropriate fragment of $\lambda_{c}$-calculus.
+% Unlike closed Freyd categories, general Freyd categories do not necessarily have the appropriate structure to interpret $\lambda$-terms in $\lambda_{c}$-calculus, so we only consider a fragment of $\lambda_{c}$-calculus which omits them.
+
+% Given a Freyd category $\left(\C , \K, \purefun\right)$, we define a formal language where types are the objects of $\C$ (and $\K$).
+% Given objects $A_{1} , \ldots , A_{n}$ in $\C$, a context $\context{x_{1} : A_{1} , \ldots , x_{n} : A_{n}}$ is a list of typed variables, corresponding to the object $A_{1} \times \ldots \times A_{n}$ (with right associativity of $\times$).
+% Terms in the internal language are used to denote specific morphisms in the category.
+% Given a context $\context{x_{1} : A_{1} , \ldots , x_{n} : A_{n}}$ and a type $B$, the set of terms of type $B$ in context $\context{x_{1} : A_{1} , \ldots , x_{n} : A_{n}}$ is denoted as....
+% \agnote{TODO: continue description, probably should add signature}
+
+% As a formal calculus for reasoning on Freyd categories, we define a family of interpretation functions, indexed by contexts, as follows:
+% Given objects $A_{1} , \ldots , A_{n} , B$ in $\C$, the function:
+% \begin{equation*}
+%     \interp{-}_{\context{x_{1} : A_{1} , \ldots , x_{n} : A_{n}}}^{B} : \trmcxt{\context{x_{1} : A_{1} , \ldots , x_{n} : A_{n}}} \rightarrow \hom{\K}{A_{1} \times \ldots \times A_{n}}{B}
+% \end{equation*}
+% assigns each term with a morphism in $K$, between the appropriate objects.
+% It is defined as follows:
+% \agnote{TODO}
+% \begin{align*}
+%     \interp{-}_{\context{x_{1} : A_{1} , \ldots , x_{n} : A_{n}}}^{B}\\
+% \end{align*}
+
+
+% Now we can define the categorical structures corresponding to MCAs within a Freyd category, starting with the notion of an applicative system.
+% %
+% %We exploit the structure of the Freyd category by defining it within the $\K$ category, which intuitively represents the effectful computations. \emnote{+ while $\C$ represents?} \emnote{code = $\C(1,\mca)$ ? }
+
+% \begin{definition}[Applicative Object]
+% For a Freyd category $\langle \C, \K, \purefun \rangle$, an \emph{applicative object} is an object $\mca \in \obj{\C}$ equipped with an application morphism $ \aparr  \in \hom{\K}{\mca \times \mca}{\mca}$.
+% \end{definition}
+
+%\lcnote{this is a general construction for general arity. does not belong here, or at least not in so many details. it is not unique to MCA stuff}
+To define \emph{combinatory objects} we extend the $\aparr$ morphism of the applicative object to an $n$-ary operator.
+The iterated product $A^{n}$ of an object $A$ is recursively defined as:
+$A^{0} \defeq \termobj$, $A^{1} \defeq A$, and 
+$A^{n+2} \defeq A \times A^{n+1}$.
+\agnote{TODO: should also generalize associator}
+Then, projections and pairings are similarly generalized.
+The association $\alpha$ is generalized to normalize pairs of arbitrary iterated products to a single iterated product, with $\alpha^{0} \defeq \lambda$, $\alpha^{1} \defeq \id$, and $\alpha^{n+2}$ defined as the composition:
+\[\begin{tikzcd}
+	{A^{k+2} \times A^{m}} & {A \times \left(A^{k+1} \times A^{m}\right)} & {A^{m+k+2}}
+	\arrow["{\alpha}", from=1-1, to=1-2]
+	\arrow["{A \rtimes \alpha^{k+1}}", from=1-2, to=1-3]
+\end{tikzcd}\]
+% Given a positive integer $n \geq 2$, and a positive integer $k \leq n$, we define $\pi^{n}_{k} \in \hom{\K}{A^{n}}{A}$ recursively by: $ \pi^{n}_{1} \defeq \pi_{1}$, $\pi^{2}_{2} \defeq \pi_{2}$, and $\pi^{n+1}_{k+1} \defeq \pi_{1} \circ \pi^{n}_{k}$.
+% Pairings $\pairing{f_{1} , \ldots , f_{n}}_{n} \in \hom{\K}{A}{B^{n}}$ (where $f_{i} \in \hom{\K}{A}{B}$ for each $i \in \left\{ 1 , \ldots , n \right\}$) are defined recursively by taking $\pairing{}_{0} \defeq \id_{\termobj}$ $\pairing{f}_{1} \defeq f$, and given $f_{i} \in \hom{\K}{A}{B_{i}}$ for each $i \in \left\{ 1 , 2 , \ldots , n+1 \right\}$, $\pairing{f_{1} , f_{2} , \ldots , f_{n+1}}_{n+1} \defeq \pairing{f_{1} , \pairing{f_{2} , \ldots , f_{n+1}}_{n} }$.
+
+%\lcnote{is it true that $ \pi^{n}_{1} \defeq \pi_{1}$ for all n?}
+% \begin{align*}
+%     \pi^{2}_{1} &\defeq \pi_{1}\\
+%     \pi^{2}_{2} &\defeq \pi_{2}\\
+%     \pi^{n+1}_{1} &\defeq \pi_{1}\\
+%     \pi^{n+1}_{k+1} &\defeq \pi_{1} \circ \pi^{n}_{k}
+% \end{align*}
+Finally, $\aparr^{n} \in \hom{\K}{\mca^{n+1}}{\mca}$ is defined by: $\aparr^{0} \defeq \rho$,
+% by defining the iterated product $A^{n+1} \defeq A \times A^{n}$, generalizing projections such that $\pi_i^j$ stands for the $i$th element in a list with $j$ elements\lcnote{TODO: improve}, and then defining 
+%$\aparr^{n} : \mca^{n+1} \rightarrow \mca$ by:  
+$\aparr^{1} \defeq \aparr$, and taking  $\aparr^{n+2}$ to be:
+\[\begin{tikzcd}
+	{\mca \times \left(\mca \times \mca^{n+1}\right)} & {\left(\mca \times \mca\right) \times \mca^{n+1}} & {\mca \times \mca^{n+1}} & \mca
+	\arrow["{\alpha^{-1}}", from=1-1, to=1-2]
+	\arrow["{\aparr \ltimes \mca^{n+1}}", from=1-2, to=1-3]
+	\arrow["{\aparr^{n+1}}", from=1-3, to=1-4]
+\end{tikzcd}\]
+
+
+% For any positive integer $n$, we define the iterated product $A^{n}$ of an object $A$ recursively as:
+% \begin{align*}
+%     A^{1} &\defeq A\\
+%     A^{n+1} &\defeq A \times A^{n}
+% \end{align*}
+% Projections are similarly generalized.
+% Given a positive integer $n \geq 2$, and a positive integer $k \leq n$, we define $\pi^{n}_{k} : A^{n} \rightarrow A$ by recursion on $n$ and $k$:
+% \begin{align*}
+%     \pi^{2}_{1} &\defeq \pi_{1}\\
+%     \pi^{2}_{2} &\defeq \pi_{2}\\
+%     \pi^{n+1}_{1} &\defeq \pi_{1}\\
+%     \pi^{n+1}_{k+1} &\defeq \pi_{1} \circ \pi^{n}_{k}
+% \end{align*}
+% \agnote{it's probably wrong, I'll fix it later. Also, it might not be the right place to discuss iterated products, maybe somewhere earlier}
+
+% For arbitrary positive integer $n$, as:
+% \[\aparr^{n} : \mca^{n+1} \rightarrow \mca\]
+% by taking $\aparr^{1} = \aparr$, and taking $\aparr^{n+1}$ to be:
+% \[\begin{tikzcd}
+% 	{\mca \times \left(\mca \times \mca^{n}\right)} && {\left(\mca \times \mca\right) \times \mca^{n}} && {\mca \times \mca^{n}} && \mca
+% 	\arrow["{\alpha^{-1}}", from=1-1, to=1-3]
+% 	\arrow["{\aparr \ltimes \mca^{n}}", from=1-3, to=1-5]
+% 	\arrow["{\aparr^{\left(n\right)}}", from=1-5, to=1-7]
+% \end{tikzcd}\]
+
+% To capture the underlying notion of computation in a Freyd category, we use the notion of computable morphisms.
+% % , where $\alpha^k$ denoted \lcnote{TBD}
+% % \lcnote{remove () from subscripts}
+
+% \begin{definition}[Computable Morphism]\label{def:computable}
+% Given an applicative object $\mca$ in a Freyd category $\langle \C, \K, \purefun \rangle$ and an $0<n \in \mathbb{N}$, we say that a $\K$ morphism $f \in \hom{\K}{\mca^{n}}{\mca}$ is $\mca$-computable when, for all $k \in \left\{ 0 , \ldots , n-1\right\}$, and all $c_{1} , \ldots , c_{k} \in \hom{\C}{\termobj}{\mca}$, there is a code $\code{f\left(c_{1} , \ldots , c_{k}\right)} \in \hom{\C}{\termobj}{\mca}$ such that the following diagrams commute in $\K$ (where $\code{f}$ is $\code{f\left(c_{1} , \ldots , c_{k}\right)}$ for $k=0$).
+% \[\begin{tikzcd}
+% 	{\termobj \times \mca^{n-k}} && {\mca^{k} \times \mca^{n-k}}   &&   {\termobj} &
+%     \\
+%     && {\mca^{n}}   &&&
+% 	\\
+% 	{\mca \times \mca^{n-k}} && {\mca}   && {\mca \times \mca^{k}} & {\mca}	
+%     \arrow["{\purefun\left(\pairing{c_{1} , \ldots , c_{k}}_{k} \times \id\right)}", from=1-1, to=1-3]
+%     \arrow["{\alpha^{k}}", from=1-3, to=2-3]
+% 	\arrow["{\purefun\left( \code{f\left(c_{1} , \ldots , c_{k}\right)} \times \id\right)}"', from=1-1, to=3-1]
+% 	\arrow["f", from=2-3, to=3-3]
+% 	\arrow["{\aparr^{n-k}}"', from=3-1, to=3-3]
+%     \arrow["{ \purefun \pairing{\code{f} , c_{1} , \ldots , c_{k}} }_{k+1}"', from=1-5, to=3-5]
+% 	\arrow["\purefun \code{f\left(c_{1} , \ldots , c_{k}\right)}", from=1-5, to=3-6]
+% 	\arrow["{\aparr^{k}}"', from=3-5, to=3-6]
+% \end{tikzcd}\]
+
+% % \[\begin{tikzcd}
+% % 	{\termobj \times \mca^{n-k}} && {\mca^{k} \times \mca^{n-k}} & {\mca^{n}} \\
+% % 	\\
+% % 	{\mca \times \mca^{n-k}} &&& \mca
+% % 	\arrow["{\purefun\left(\pairing{c_{1} , \ldots , c_{k}} \times \id\right)}", from=1-1, to=1-3]
+% %     \arrow["{\alpha^{k}}", from=1-3, to=1-4]
+% % 	\arrow["{\purefun\left( \code{f\left(c_{1} , \ldots , c_{k}\right)} \times \id\right)}"', from=1-1, to=3-1]
+% % 	\arrow["f", from=1-4, to=3-4]
+% % 	\arrow["{\aparr^{n-k}}"', from=3-1, to=3-4]
+% % \end{tikzcd}\]
+% % \[\begin{tikzcd}
+% % 	{\termobj} && \\
+% % 	\\
+% % 	{\mca \times \mca^{k}} && \mca
+% % 	\arrow["{ \purefun \pairing{\code{f} , c_{1} , \ldots , c_{k}} }_{k+1}"', from=1-1, to=3-1]
+% % 	\arrow["\purefun \code{f\left(c_{1} , \ldots , c_{k}\right)}", from=1-1, to=3-3]
+% % 	\arrow["{\aparr^{k}}"', from=3-1, to=3-3]
+% % \end{tikzcd}\]
+% \end{definition}
+
+
+%%%%%TO INCORPORATE
+% \footnote{The notion of combinatory completeness can also be captured recursively using an alternative notion of $\mca$-computable, which is more amenable for generalizing beyond well-pointed categories, but seems to be equivalent in the context of this paper.}
+
+
+\begin{definition}[$\mca$-monomials]
+Given a applicative object $\mca$, $\mca$-monomials are defined using expressions similar to the ones in \Cref{subsection:PCA}:
+$$
+\expr {}::={}  i \in \mathbb{N} \mid c \in \hom{\C}{\termobj}{\mca} \mid \expr \bullet \expr \qquad\qquad
+E_{n}\left(\mca\right)  {}::={}  \{ \expr \mid \text{all $i$s in $\expr$ are $< n$}\} 
+$$
+
+The evaluation function $\interp{-}_{n}  : E_{n}\left(\mca\right) \rightarrow \hom{\K}{\mca^{n}}{\mca}$ relates expressions to $\K$-morphisms:
+\begin{align*}
+    \interp{i}_{n} & \defeq \purefun \pi_{i+1}^{n}\\
+    \interp{c}_{n} & \defeq \purefun \left(c \; \circ \; !\right)\\
+    \interp{\expr_{f} \bullet \expr_{a}}_{n} &\defeq \aparr \circ \left(\mca \rtimes \interp{\expr_{a}}_{n} \right) \circ \left(\interp{\expr_{f}}_{n} \ltimes \mca^{n} \right) \circ \purefun \Delta
+\end{align*}
+
+An $\mca$-monomial is a morphism $f$ in $\K$ s.t there exists $n \in \mathbb{N}$ and a term $\expr_{f} \in E_{n}\left(\mca\right)$ for which $\interp{\expr_{f}}_{n} = f$.
+
+\end{definition}
+
+% There are various ways to define the combinatory completeness requirement in the categorical setting, see, e.g.,~\cite{COCKETT2008}.
+% %
+% %There are various equivalent ways of defining MCA objects. One way is define combinatory completeness as is done in \cite{COCKETT2008}.
+% Here, we take the following one, and then show that it is equivalent to a standard $\scomb$ and $\kcomb$ characterization.
+% However, as in \Cref{prop:SK}, we need to ensure the partial applications of the combinators do not yield any effectful computational behavior.
+% To that end, we need to define a stronger notion of computability, that also ensures purity.
+% For that, we first need to define partial application.
+% \begin{definition}[Partial Application]
+% Given an applicative system $\mca$ in a Freyd category $\langle \C, \K, \purefun \rangle$, a $\K$ morphism $f \in \hom{\K}{\mca^{n+1}}{\mca}$, and a code $c \in \hom{\C}{\termobj}{\mca}$.
+% The partial application of $f$ on $c$ is a morphism $f\left(c\right) \in \hom{\K}{\mca^{n}}{\mca}$, defined as the composite:
+% \[\begin{tikzcd}
+% 	{\mca^{n}} & {\termobj \times \mca^{n}} & {\mca \times \mca^{n}} & \mca
+% 	\arrow["{\lambda^{-1}}", from=1-1, to=1-2]
+% 	\arrow["{\purefun c \times \id}", from=1-2, to=1-3]
+% 	\arrow["{f}", from=1-3, to=1-4]
+% \end{tikzcd}\]
+
+% \end{definition}
+
+% \begin{definition}[Purely Computable Morphism]
+% Given an applicative system $\mca$ in a Freyd category $\langle \C, \K, \purefun \rangle$, we say that a $\K$ morphism $f \in \hom{\K}{\mca^{n}}{\mca}$ is purely $\mca$-computable when
+% % , for every $k \in \left\{ 0 , \ldots , n-1 \right\}$, there is a morphism $p_{k} \in \hom{\C}{\mca^{k}}{\mca}$ such that, for every $k \in \left\{ 0 , \ldots , n-2 \right\}$, the following diagram commutes in $\K$:
+% % \[\begin{tikzcd}
+% % 	{\mca^{k} \times \mca} && {\mca^{k+1}} \\
+% % 	\\
+% % 	{\mca \times \mca} && \mca
+% % 	\arrow["{\alpha^{\left[ k \right]}}", from=1-1, to=1-3]
+% % 	\arrow["{\purefun p_{k} \times \id}"', from=1-1, to=3-1]
+% % 	\arrow["{\purefun p_{k+1}}", from=1-3, to=3-3]
+% % 	\arrow["{\aparr}"', from=3-1, to=3-3]
+% % \end{tikzcd}\]
+% % \agnote{define $\alpha^{\left[ k \right]}$}
+% % and in addition, the following diagram commutes in $\K$:
+% % \[\begin{tikzcd}
+% % 	{\mca^{n-1} \times \mca} && {\mca^{n}} \\
+% % 	\\
+% % 	{\mca \times \mca} && \mca
+% % 	\arrow["{\alpha^{\left[ n \right]}}", from=1-1, to=1-3]
+% % 	\arrow["{\purefun p_{n-1} \times \id}"', from=1-1, to=3-1]
+% % 	\arrow["{f}", from=1-3, to=3-3]
+% % 	\arrow["{\aparr}"', from=3-1, to=3-3]
+% % \end{tikzcd}\]
+% \end{definition}
+% % It is easy \agnote{is ``easy'' the right word?} to verify by induction that every purely $\mca$-computable morphism is $\mca$-computable.
+
+% \begin{definition}[Combinatory Object]\label{def:mca-obj-app}
+% An applicative object 
+% $\mca$ is called a \emph{combinatory object} when all $\mca$-monomials are $\mca$-computable.
+% \end{definition}
+% \emnote{sth is strange here, two different definitions of the same concept}
+% \lcnote{nice to have:can we relate to the "abstraction" formulation?}\agnote{I'm rewriting the whole thing to use the abstraction instead}
+
+\begin{lemma}\label{lemma:eval-subst}
+For all $n \in \mathbb{N}$, all $\expr \in E_{n}\left(\mca\right)$, and all $c_{1} , \ldots , c_{n} \in \hom{\C}{\termobj}{\mca}$:
+\[ \interp{ \expr \sub{c_{1}} \cdots \sub{c_{n}} }_{0} = \interp{\expr}_{n} \circ \purefun \pairing{ c_{1} , \ldots , c_{n} }_{n} \]
+\end{lemma}
+\begin{proof}
+    By structural induction on $\expr$.
+\end{proof}
+
+\begin{proposition}
+    Let $\mca$ be an applicative object.
+$\mca$ is a combinatory object iff the $\kcomb$ and $\scomb$ morphisms in $\K$ defined below are $\mca$-computable.
+$$\begin{array}{l@{\hspace{0.2cm}}l}
+    \kcomb : \mca^{2} \rightarrow \mca & 
+    \kcomb \defeq \purefun \pi_{1} \\
+    \scomb : \mca^{3} \rightarrow \mca &
+    \scomb \defeq \aparr \circ \left(\mca \rtimes \aparr\right) \circ \left(\aparr \ltimes \mca^{2} \right) \circ \purefun \pair{\pair{\pi^{3}_{1}}{\pi^{3}_{3}}}{\pair{\pi^{3}_{2}}{\pi^{3}_{3}}}
+\end{array}$$
+\end{proposition}
+
+
+\begin{proof}
+    Let $\mca$ be an applicative object.
+    Assuming all positive $\mca$-monomials are $\mca$-computable, we consider the expressions $\expr_{\kcomb} \in E_{2}\left(\mca\right)$ and $\expr_{\scomb} \in E_{3}\left(\mca\right)$:
+$$
+        \expr_{\kcomb} \defeq 0 \quad  \quad
+        \expr_{\scomb} \defeq \left(0 \bullet 2\right) \bullet \left(1 \bullet 2\right)
+$$
+    Since $\interp{\expr_{\kcomb}}_{2} = \kcomb$ and $\interp{\expr_{\scomb}}_{3} = \scomb$, then $\kcomb$ and $\scomb$ are $\mca$-monomials, and thus $\mca$-computable.
+
+    Conversely, if $\kcomb$ and $\scomb$ are $\mca$-computable, let $\kcode$ and $\scode$ be their corresponding codes (with their associated codes of partial applications).
+    For every term $\expr \in E_{n+1}\left(\mca\right)$, we define a code $\encode{n}{\expr} \in \hom{\C}{\termobj}{\mca}$ using the following bracket abstraction algorithm.
+    First, for every $\expr \in E_{n+1}\left(\mca\right)$, we define a closed abstraction expression $\absterm{n}{\expr} \in E_{0}\left(\mca\right)$ as follows:
+$$
+\begin{array}{l@{\qquad}|>{\qquad}l}
+    \absterm{n}{0} \defeq K_{n} &
+    \absterm{n+1}{j+1} \defeq \kcode \bullet \absterm{n}{j}\\
+    \absterm{n}{c} \defeq K_{n+1} \bullet c &
+    \absterm{n}{\expr_{1} \bullet \expr_{2}} \defeq S_{n+1} \bullet \absterm{n}{\expr_{1}} \bullet \absterm{n}{\expr_{2}}
+\end{array}$$
+%For any $n \in \mathbb{N}$.
+The definition uses $K_{n}$ and $S_{n}$, which are the $n$-ary $K$ and $S$ combinators~\cite{Goldberg-Mayer:2015},  
+ where 
+  $  B  \defeq \scode \bullet \left( \kcode \bullet \scode \right) \bullet \kcode$:
+$$
+\begin{array}{l@{\qquad\quad}l@{\qquad\quad}l}
+     K_{0} \defeq \scode \bullet \kcode \bullet \kcode 
+     & K_{1} \defeq \kcode & 
+     K_{n+2} \defeq B \bullet \kcode \bullet K_{n+1}
+     \\
+     S_{0} \defeq \scode \bullet \kcode \bullet \kcode & 
+     S_{1} \defeq \scode &
+    S_{n+2} \defeq B \bullet \scode \bullet \left( B \bullet S_{n+1}\right)
+\end{array}
+$$
+Since $\kcomb$ and $\scomb$ are $\mca$-computable, the axioms ensure that for every $\expr \in E_{n+1}\left(\mca\right)$ there is a code $\encode{n}{\expr} \in \hom{\C}{\termobj}{\mca}$ such that $\interp{\absterm{n}{\expr}}_{0} = \purefun \encode{n}{\expr}$, and for all $c_{1} , \ldots , c_{k} \in \hom{\C}{\termobj}{\mca}$ (where $k<n$) the following hold:
+\begin{align}  
+        \interp{\encode{n-k}{ \expr\sub{c_{1}}\cdots\sub{c_{k}}} \bullet 0 \bullet \cdots \bullet n-k-1}_{n-k} &= \interp{ \expr\sub{c_{1}}\cdots\sub{c_{k}} }_{n-k}
+        \\
+            \interp{\encode{n}{\expr} \bullet c_{1} \bullet \cdots \bullet c_{k}}_{0} &= \interp{\encode{n-k}{ \expr\sub{c_{1}}\cdots\sub{c_{k}}}}_{0}
+\end{align}
+Using \Cref{lemma:eval-subst}, the above equations correspond to the square and triangle diagrams of \Cref{def:computable}.
+Hence we take $\code{f\left(c_{1},\ldots,c_{k}\right)}$ to be a $\encode{n-k}{\expr_{f}\sub{c_{1}}\cdots\sub{c_{k}}}$, for which it is straightforward to verify the combinatory object conditions.
+% To prove 1 and 2, we first prove the following properties, for every $n \in \mathbb{N}$, by induction on $n$:
+% \begin{align*}
+%     \interp{ K_{n} \bullet 0 \bullet 1 \bullet \cdots \bullet n }_{n+1} &= \interp{ 0 }_{n+1}\\
+%     \interp{ S_{n} \bullet 0 \bullet 1 \bullet 2 \bullet \ldots \bullet n+1 }_{n+2} &= \interp{ 0 \bullet 2 \bullet \ldots \bullet n+1 \bullet \left( 1 \bullet 2 \bullet \ldots \bullet n+1\right) }_{n+2}\\
+% \end{align*}
+% The rest follows by structural induction on $\expr$, using \Cref{lemma:eval-subst}.
+\end{proof}
+
+
+Next we relate the set-based MCAs to the abstract categorical notion of combinatory objects.
+For this, we recall that the Kleisli category of every strong monad is a premonoidal category~\cite{power1997premonoidal}. 
+%
+Here, we work in $\setcat$, where every monad is strong.
+%
+Together, this entails that for every monad, the Kleisli category gives rise to a Freyd category.
+%
+Since the details of the construction are relevant to our result, we here provide them below.
+
+
+% [\cite{LEVY2003Freyd}]
+\begin{lemma}
+Given a $\setcat$ monad $\monad$, the triple $\langle\setcat , \setcat_{\monad}, \purefun_{\monad}\rangle$
+forms a Freyd category, where $\setcat_{\monad}$ is the Kleisli category of $\monad$ over $\setcat$,  and $\purefun_{\monad} : \setcat \rightarrow \setcat_{\monad}$ is the canonical functor defined by $\purefun_{\monad}\left(f\right) = \eta \circ f$.
+%, the triple $\langle\setcat , \setcat_{\monad}, \purefun_{\monad}\rangle$ forms a Freyd category.
+\end{lemma}
+\begin{proof}
+%The Kleisli category of every strong monad is a Freyd category.
+%We refer to \cite{power1997premonoidal} for the full proof as pertaining for strong monads.
+Given a monad $\monad$, the constructs making $\left(\setcat , \setcat_{\monad}, \purefun_{\monad} \right)$ a Freyd category are:
+\begin{itemize}[leftmargin=0.5cm]
+    \item The cartesian structure of $\setcat$ is given by the cartesian product of sets $\times$
+    \item For % every sets $A_{1}, A_{2}, B$ and 
+    every function $f : A_{1} \rightarrow \monad A_{2}$: 
+    $ \left(f \ltimes B \right)\left(x_{1},y\right) = \letin{x_{2}}{f\left(x_{1}\right)}{\return{ \left(x_{2}, y\right) } } $
+    \item For %every sets $A, B_{1}, B_{2}$ and 
+    every function $f : B_{1} \rightarrow \monad B_{2}$: 
+    $\left(A \rtimes f\right)\left(x,y_{1}\right) = \letin{y_{2}}{f\left(y_{1}\right)}{\return{ \left(x, y_{2}\right) } } $
+    \item The associator, left unitor, right unitor, and swap  are given by composing $\eta$ on the associator, left unitor, right unitor, and swap of the underlying cartesian structure of $\setcat$.
+\end{itemize}
+The Freyd requirements for this construction are easily verified.
+\end{proof}
+
+%\agnote{TODO:add more text to explain the transition from codomain A to MA.}
+
+Since the application morphism of an applicative system is a morphism in $\K$, which is the category of computations in a Freyd category, it corresponds to the Kleisli application of an MAS.
+%With that, we can make the next claim. \lcnote{in the lemma we should also use "is the same thing"}
+
+\begin{lemma}\label{lem:MAS}
+Let $\monad$ be a $\setcat$ monad.
+    $\mca$ is a MAS over $\monad$ if and only if it is an applicative object in $\setcat_{\monad}$.
+\end{lemma}
+\begin{proof}
+    The application morphism of the applicative object is the application Kleisli function of the MAS: 
+    $\aparr\left(c_{1} , c_{2}\right) = c_{1} \app c_{2}$. %\lcnote{A/MA - Kleisli?}
+\end{proof}
+
+\combObj*
+
+\begin{proof}
+We use the $\scomb$ and $\kcomb$ formulation of an MCA given in~\Cref{prop:SK} to prove the equivalence to $\scomb$ and $\kcomb$ being $\mca$-computable. 
+Using the same set of codes $\scode , \kcode , \scodeA{c_{1}} , \scodeB{c_{1}}{ c_{2}}$, and $\kcodeA{c_{1}}$ for any two codes $c_{1}$, $c_{2}$, it is easy to verify that the equations in~\Cref{prop:SK} are equivalent to those in~\Cref{def:computable}.
+\end{proof}
+
+
+% Before proving both directions, note several easily verifiable facts:
+% \begin{itemize}
+%     \item For each $c_{f} , c_{1} , \ldots , c_{n} \in \mca$:
+%     \begin{equation*}
+%         \aparr^{\left(n\right)}\left(c_{f} , c_{1} , \ldots , c_{n}\right) = \nu\left(c_{f} \bullet c_{1} \bullet \cdots \bullet c_{n}\right)
+%     \end{equation*}
+
+%     \item The definitions of $\kcomb$ and $\scomb$ from \Cref{def:mca-obj} in $\setcat_{\monad}$ become:
+% \begin{align*}
+%     \kcomb\left(c_{1},c_{2}\right) &\defeq \return{c_{1}}\\
+%     \scomb\left(c_{1} , c_{2} , c_{3}\right) & \defeq \nu\left(\left(c_{1} \bullet c_{3}\right) \bullet \left(c_{2} \bullet c_{3}\right)\right)
+% \end{align*}
+
+%     \item \Cref{def:computable}, when applied to $\kcomb$ and $\scomb$ , translate to the following requirements:
+% There exists codes $\code{\kcomb} , \code{\scomb} \in \mca$, and for each $c_{1} , c_{2}$, there exists codes $\code{\kcomb\left(c_{1}\right)} , \code{\scomb\left(c_{1}\right)} , \code{\scomb\left(c_{1} , c_{2}\right)} \in \mca$, such that:
+% \begin{align*}
+%     \return{c_{1}} &= \nu\left(\code{\kcomb} \bullet c_{1} \bullet c_{2}\right)\\
+%     &= \code{\kcomb\left(c_{1}\right)} \app c_{2}\\
+%     \nu\left(\left(c_{1} \bullet c_{3}\right) \bullet \left(c_{2} \bullet c_{3}\right)\right) &= \nu\left(\code{\kcomb} \bullet c_{1} \bullet c_{2} \bullet c_{3}\right)\\
+%     &= \nu\left(\code{\scomb\left(c_{1}\right)} \bullet c_{2} \bullet c_{3}\right)\\
+%     &=\code{\scomb\left(c_{1},c_{2}\right)} \app c_{3}
+% \end{align*}
+% and in addition:
+% \begin{align*}
+%     \code{\kcomb} \app c_{1} &= \return{\code{\kcomb\left(c_{1}\right)}}\\
+%     \code{\scomb} \app c_{1} &= \return{\code{\scomb\left(c_{1}\right)}}\\
+%     \nu\left(\code{\scomb} \bullet c_{1} \bullet c_{2}\right) &= \return{\code{\scomb\left(c_{1},c_{2}\right)}}
+% \end{align*}
+% Now to prove each direction.
+% \end{itemize}
+% ~\\
+% $(\Rightarrow:)$
+% Let $\mca$ be an MCA over $\monad$. By \Cref{prop:SK}, there are codes $\scode , \kcode , \scodeA{c_{1}} , \scodeB{c_{1}}{ c_{2}}$, and $\kcodeA{c_{1}}$ for any two codes $c_{1}$, $c_{2}$ which, by the equations of the MCA, obtain that $\scomb$ and $\kcomb$ are $\mca$-computable.
+% , s.t for any $c_{1} , c_{2} , c_{3} \in \mca$:
+% $$
+% \begin{array}{rcl}
+%     \kcode \app c_{1} &=& \return{ \kcodeA{c_{1}}}\\
+%     \kcodeA{c_{1}} \cdot c_{2} &= &\return{c_{1}}\\
+%     \scode \app c_{1} &= &\return{\scodeA{c_{1}}}\\
+%     \scodeA{c_{1}} \cdot c_{2} &= &\return{\scodeB{c_{1}} {c_{2}}}\\
+%     \scodeB{c_{1}}{c_{2}} \app c_{3} &= &\nu\left(\left(c_{1} \bullet c_{3}\right) \bullet \left(c_{2} \bullet c_{3}\right)\right)
+% \end{array}
+% $$
+% Using those, we obtain: 
+% %It is immediately evident that 
+% $$
+%  \begin{array}{r@{\hspace{0.1cm}}l@{\hspace{0.6cm}}r@{\hspace{0.1cm}}l}
+%      \kcomb\left(c_{1} , c_{2}\right)  = &\code{\kcomb\left(c_{1}\right)} \app c_{2}
+%      &
+%      \code{\kcomb} \app c_{1} = &\return{\code{\kcomb\left(c_{1}\right)}}
+%      \\
+%      \scomb\left(c_{1} , c_{2} , c_{3}\right)  = &\code{\scomb\left(c_{1},c_{2}\right)} \app c_{3} 
+%      &
+%      \code{\scomb} \app c_{1} =&
+%      \return{\code{\scomb\left(c_{1}\right)}}
+%  \end{array}
+%  $$
+% % $\kcomb\left(c_{1} , c_{2}\right) = \code{\kcomb\left(c_{1}\right)} \app c_{2}$, 
+% % $\scomb\left(c_{1} , c_{2} , c_{3}\right) = \code{\scomb\left(c_{1},c_{2}\right)} \app c_{3}$, $\code{\kcomb} \app c_{1} = \return{\code{\kcomb\left(c_{1}\right)}}$, and $\code{\scomb} \app c_{1} = \return{\code{\scomb\left(c_{1}\right)}}$, and 
+% From this, the rest follows directly from the monad laws.
+% ~\\
+% $(\Leftarrow:)$
+% Let $\mca$ be an MCA-object. There exist codes $\code{\kcomb}$ and $\code{\scomb}$, and for each $c_{1} , c_{2} , c_{3} \in \mca$, codes  $\code{\kcomb\left(c_{1}\right)}$, $\code{\scomb\left(c_{1}\right)}$, and $\code{\scomb\left(c_{1},c_{2}\right)}$, such that the aforementioned equations\lcnote{which?} hold.
+% We show that $\mca$ is an MCA using~\Cref{prop:SK}, by the following definitions: 
+% $$
+% \begin{array}{rcl}
+%     \kcode \app c_{1} &=& \return{ \kcodeA{c_{1}}}\\
+%     \kcodeA{c_{1}} \cdot c_{2} &= &\return{c_{1}}\\
+%     \scode \app c_{1} &= &\return{\scodeA{c_{1}}}\\
+%     \scodeB{c_{1}}{c_{2}} \app c_{3} &= &\nu\left(\left(c_{1} \bullet c_{3}\right) \bullet \left(c_{2} \bullet c_{3}\right)\right)\\
+%     \scodeA{c_{1}} \cdot c_{2} &=& \return{\scodeB{c_{1}} {c_{2}}}
+% \end{array} 
+% $$
+% are immediately evident, and $
+%     \scodeA{c_{1}} \cdot c_{2} = \return{\scodeB{c_{1}} {c_{2}}}\\$ is derivable from:
+%     \begin{align*}
+%         &\scodeA{c_{1}} \cdot c_{2}\\
+%         &= \letin{c_{f}}{\return{\scodeA{c_{1}}}}{c_{f} \app c_{2}}\\
+%         &= \letin{c_{f}}{\code{\scomb} \app c_{1}}{c_{f} \app c_{2}}\\
+%         &= \nu\left(\code{\scomb} \bullet c_{1} \bullet c_{2}\right)\\
+%         &= \return{\code{\scomb\left(c_{1},c_{2}\right)}}
+%     \end{align*}
+% So from \Cref{prop:SK} we get an MCA.
+
+
+% Since MAS over a monad $\monad$ is the same as an applicative system in $\setcat_{\monad}$, we get the following useful property:
+
+% \begin{lemma}
+% Given an applicative system $\mca$ in $\setcat_{\monad}$, the following equality holds, for any positive integer $n$:
+% \[ \aparr^{\left(n\right)}\left(c_{1} , \left( c_{2} , \left(\ldots , c_{n+1}\right)\right)\right) = \nu\left(c_{1} \bullet c_{2} \bullet \ldots \bullet c_{n+1}\right) \]
+% \end{lemma}
+% \begin{proof}
+% First, note that in $\setcat_{\monad}$, the definition of $\aparr^{\left(n\right)}$ becomes:
+% \begin{align*}
+%     \aparr^{\left(1\right)}\left(c_{1} , c_{2}\right) &= c_{1} \app c_{2}\\
+%     \aparr^{\left(n+1\right)}\left(c_{1} , \left(c_{2} , cs\right)\right) &= \letin{c_{f}}{c_{1} \app c_{2}}{\aparr^{\left(n\right)}\left(c_{f} , cs\right)}
+% \end{align*}
+
+% By induction on $n$.
+
+% For the base case, when $n = 1$, we get, by definition:
+% \begin{align*}
+%     \nu\left(c_{1} \bullet c_{2}\right) &= \letin{c'_{1}}{\nu\left(c_{1}\right)}{\letin{c'_{2}}{\nu\left(c_{2}\right)}{c'_{1} \app c'_{2} }}\\
+%     &= \letin{c'_{1}}{\eta\left(c_{1}\right)}{\letin{c'_{2}}{\eta\left(c_{2}\right)}{c'_{1} \app c'_{2} }}\\
+%     &= c_{1} \app c_{2} = \aparr^{\left(1\right)}\left(c_{1} , c_{2}\right)
+% \end{align*}
+
+% Assuming by induction that:
+% \[ \aparr^{\left(k\right)}\left(c_{1} , \left( c_{2} , \left(\ldots , c_{k+1}\right)\right)\right) = \nu\left(c_{1} \bullet c_{2} \bullet \ldots \bullet c_{k+1}\right) \]
+% and taking $n = k+1$, we get, by definition:
+% \[ \nu\left(c_{1} \bullet c_{2} \bullet \ldots \bullet c_{k+1} \bullet c_{k+2} \right) = \letin{c_{f}}{\nu\left(c_{1} \bullet c_{2} \bullet \ldots \bullet c_{k+1} \right)}{ \letin{c_{a}}{\nu\left(c_{k+2}\right)}{ c_{f} \app c_{n}} } \]
+% Now, the induction hypothesis allows us to replace $\nu\left(c_{1} \bullet c_{2} \bullet \ldots \bullet c_{k+1}\right)$ by $\aparr^{\left(k\right)}\left(c_{1} , \left( c_{2} , \left(\ldots , c_{k+1}\right)\right)\right)$ within the above equation, giving us:
+% \begin{align*}
+%     \nu\left(c_{1} \bullet c_{2} \bullet \ldots \bullet c_{k+1} \bullet c_{k+2} \right) = \letin{c_{f}}{\aparr^{\left(k\right)}\left(c_{1} , \left( c_{2} , \left(\ldots , c_{k+1}\right)\right)\right)}{ \letin{c_{a}}{\nu\left(c_{k+2}\right)}{ c_{f} \app c_{n}} }
+% \end{align*}
+% On the other hand, by definition of $\aparr^{\left(n\right)}$, as noted above, we get:
+% \[ \aparr^{\left(k+1\right)}\left(c_{1} , \left( c_{2} , \left(\ldots , c_{k+1} , c_{k+2}\right) \right)\right) \]
+
+% \end{proof}
+
+
+
+% \begin{proof}
+% ~\\%We show equivalence in both directions.
+% $(\Rightarrow:)$ Let  $\mca$ be an MCA over a $\setcat$ monad $\monad$. By \Cref{lem:MAS},  $\mca$ is an applicative system in $\setcat_{\monad}$, and so it remains to show that the $\kcomb$ and $\scomb$ morphisms are purely $\mca$-computable.
+% To that end, we use the codes defined in 
+
+
+
+% To that end, we take the codes $\kcode \defeq \encode{1}{0}$, and $\scode \defeq \encode{2}{0 \bullet 2 \bullet \left(1 \bullet 2\right)}$.
+% By following the equations dictated by the MCA, we get:
+% $$
+% \begin{array}{lcl}
+%      \nu\left(\kcode \bullet c_{1} \bullet c_{2}\right) &=& \nu\left(c_{1}\right)\\
+%      \nu\left(\scode \bullet c_{1} \bullet c_{2} \bullet c_{3}\right) &=& \nu\left(\left(c_{1} \bullet c_{3}\right) \bullet \left(c_{2} \bullet c_{3}\right)\right)
+% \end{array}
+% $$
+% % $\mca$ equipped with the morphism $\aparr\left(c_{1} , c_{2}\right) = c_{1} \app c_{2}$ obtain an applicative system in $\setcat_{\monad}$.
+% % We use the MCA application to define $\aparr$:
+% % \[ \aparr\left(c_{1} , c_{2}\right) = c_{1} \app c_{2} \]
+% Note that in $\setcat_{\monad}$, the definition of $\aparr^{\left(n\right)}$ becomes:
+% $$
+% \begin{array}{lcl}
+%     \aparr^{\left(1\right)}\left(c_{1} , c_{2}\right) &=& c_{1} \app c_{2}\\
+%     \aparr^{\left(n+1\right)}\left(c_{1} , \left(c_{2} , cs\right)\right) &=& \letin{c_{f}}{c_{1} \app c_{2}}{\aparr^{\left(n\right)}\left(c_{f} , cs\right)}
+% \end{array}$$
+
+% So, in particular: 
+% $$
+% \begin{array}{l@{\hspace{0.04in}}l@{\hspace{0.04in}}l@{\hspace{0.04in}}l@{\hspace{0.04in}}l}
+%     \aparr^{\left(2\right)}\left(\kcode, \left(c_{1}, c_{2}\right)\right) 
+%     &=& \nu\left(c_{1}\right)
+%     &=& \kcomb\left(c_{1}, c_{2}\right)
+%     \\
+%     \aparr^{\left(3\right)}\left(\scode, \left(c_{1}, \left(c_{2}, c_{3}\right)\right)\right) 
+%     &=& \nu\left(\left(c_{1} \bullet c_{3}\right) \bullet \left(c_{2} \bullet c_{3}\right)\right)
+%     &=& \scomb\left(c_{1}, \left(c_{2} , c_{3}\right)\right) 
+% \end{array}
+% $$
+% %%%%Proof details
+% \begin{comment}
+% So, in particular:
+% \begin{align*}
+%     \aparr^{\left(2\right)}\left(\kcode, \left(c_{1}, c_{2}\right)\right) &= \letin{c_{f}}{\kcode \app c_{1}}{ c_{f} \cdot c_{2} }\\
+%     &= \nu\left(\kcode \bullet c_{1} \bullet c_{2}\right) \\
+%     &= \nu\left(c_{1}\right)\\
+%     \aparr^{\left(3\right)}\left(\scode, \left(c_{1}, \left(c_{2}, c_{3}\right)\right)\right) &= \letin{c_{f}}{\scode \app c_{1}}{\aparr^{\left(2\right)}\left(c_{f} , \left(c_{2} , c_{3}\right)\right)}\\
+%     &= \letin{c_{f}}{\scode \app c_{1}}{\letin{c_{g}}{c_{f} \app c_{2}}{ c_{g} \cdot c_{3 }}}\\
+%     &= \nu\left(\scode \bullet c_{1} \bullet c_{2} \bullet c_{3}\right)\\
+%     &= \nu\left(\left(c_{1} \bullet c_{3}\right) \bullet \left(c_{2} \bullet c_{3}\right)\right)
+% \end{align*}
+
+% On the other hand, in $\setcat$, the definitions of $\kcomb$ and $\scomb$ become:
+% $$\begin{array}{l@{\hspace{0.15in}}l@{\hspace{0.15in}}l}
+% \kcomb\left(c_{1}, c_{2}\right) &= &\eta\left(c_{1}\right) = \nu\left(c_{1}\right)\\
+%      \scomb\left(c_{1}, \left(c_{2} , c_{3}\right)\right) &=& \nu\left(\left(c_{1} \bullet c_{3}\right) \bullet \left(c_{2} \bullet c_{3}\right)\right) 
+% \end{array}$$
+
+% Bringing it all together, we get:
+% $$
+% \begin{array}{lcl}
+% \kcomb\left(c_{1}, c_{2}\right) &= &\aparr^{\left(2\right)}\left(\kcode, \left(c_{1}, c_{2}\right)\right)\\
+%     \scomb\left(c_{1}, \left(c_{2} , c_{3}\right)\right) &= &\aparr^{\left(3\right)}\left(\scode, \left(c_{1}, \left(c_{2}, c_{3}\right)\right)\right)
+% \end{array}
+% $$
+% \end{comment}
+% This entails that both $\kcomb$ and $\scomb$ are $\mca$-computable.
+
+% %\paragraph*{An MCA-object in $\setcat_{\monad}$ is an MCA over $\monad$}
+% $(\Leftarrow:)$
+% Let $\mca$ be an MCA-object in $\setcat_{\monad}$. Since $\kcomb$ and $\scomb$ are $\mca$-computable, there are codes $\kcode$ and $\scode$ such that:
+% $$
+% \begin{array}{lcl}
+%     \aparr^{\left(2\right)}\left(\kcode, \left(c_{1}, c_{2}\right)\right) &=& \kcomb\left(c_{1}, c_{2}\right)\\
+%     \aparr^{\left(3\right)}\left(\scode, \left(c_{1}, \left(c_{2}, c_{3}\right)\right)\right)
+%     &=& \scomb\left(c_{1}, \left(c_{2} , c_{3}\right)\right)
+% \end{array}
+% $$
+
+
+
+% That is, by definition\lcnote{which? in set}:
+% $$
+% \begin{array}{lcl}
+%     \nu\left(\kcode \bullet c_{1} \bullet c_{2}\right) &=& \nu\left(c_{1}\right)\\
+%     \nu\left(\scode \bullet c_{1} \bullet c_{2} \bullet c_{3}\right) &=& \nu\left(\left(c_{1} \bullet c_{3}\right) \bullet \left(c_{2} \bullet c_{3}\right)\right)
+% \end{array}
+% $$
+% Therefore, $\kcode$ and $\scode$ satisfy the axioms of \Cref{prop:SK}\agnote{no longer true, need to fix the proof}, meaning $\mca$ is an MCA over $\monad$. 
+% \end{proof}
+
+
+% To relate to the connection between PCAs and Turing categories~\cite{COCKETT2008}, we here show that the key notion that underlines Turing categories, namely restriction categories, is a special case of Freyd categories. 
+
+The categorical definition of a PCA-object in Turing categories relies on a specific notion of products, which, in turn, relies on a general notion of restrictions~\cite{COCKETT2008}.\label{sec:restriction}
+%
+A restriction structure is a convenient way of handling partiality in category theory.
+Roughly speaking, considering morphisms as partial maps, a restriction assigns to each partial map $f$ a partial identity map $\restrict{f}$ with the same domain as $f$.
+%
+To relate to that definition, we here show that cartesian restriction categories are a special case of Freyd categories.  
+%
+
+\begin{definition}[Restriction structure]
+A \emph{restriction structure} on a category $\C$ assigns to every morphism $f : A \rightarrow B$ a morphism $\restrict{f} : A \rightarrow A$  s.t. the following hold:
+\begin{itemize}[leftmargin=0.5cm]
+    \item For % $A,B \in \obj{\C}$, and 
+    $f : A \rightarrow B$:
+    $ f \circ \restrict{f} = f $
+    \item For  %$A,B_{1},B_{2} \in \obj{\C}$, 
+    $f : A \rightarrow B_{1}$ and $g : A \rightarrow B_{2}$:
+     $\restrict{f} \circ \restrict{g} = \restrict{g} \circ \restrict{f}$ and $ \restrict{f \circ \restrict{g}} = \restrict{f} \circ \restrict{g}$ 
+%    \item For % $A,B_{1},B_{2} \in \obj{\C}$, 
+%    $f : A \rightarrow B_{1}$ and $g : A \rightarrow B_{2}$:
+%     $\restrict{f \circ \restrict{g}} = \restrict{f} \circ \restrict{g}$ 
+    \item For % $A,B,C \in \obj{\C}$, 
+    $f : B \rightarrow C$ and $g : A \rightarrow B$:
+     $\restrict{f} \circ g = g \circ \restrict{f \circ g} $
+\end{itemize}
+\end{definition}
+
+
+%For every category, there is a \emph{trivial} restriction that assigns $\restrict{f} = \id$ for every morphism $f$.
+A morphism $f$ is \emph{total} when $\restrict{f} = \id$.
+The total morphsims in a category $\C$ form a subcategory of $\C$, called $\text{Tot}\left(\C\right)$.
+%
+A restriction in $\C$ induces a partial order on the hom-sets of $\C$ as follows 
+%Given two morphisms $f , g : A \rightarrow B$, we write
+$ f \leq g  \iff f = g \circ \restrict{f}$.
+%The restriction axioms ensure that this is indeed a partial order. The reflexivity and transitivity axioms ensure reflexivity and transitivity, and the commutativity axiom, combined with reflexivity, ensures antisymmetry.
+%
+A \emph{cartesian restriction category} is a category with a restriction structure along with restriction cartesian products and restriction terminal objects which are  weaker variants of the standard notions that still form a monoidal category~\cite{cockett2007restriction}.
+In a cartesian restriction category $\C$, the subcategory $\text{Tot}\left(\C\right)$ is a cartesian subcategory of $\C$.
+
+\begin{proposition}
+    Cartesian restriction categories induce Freyd categories. 
+\end{proposition}
+
+\begin{proof}
+    Let $\C$ be a cartesian restriction categories. The induced Freyd category is defined by $\langle \text{Tot}\left(\C\right) , \C  , \purefun \rangle$
+    where $\purefun$ is the inclusion functor of $\text{Tot}\left(\C\right)$ into $\C$.
+It is straightforward to verify that it indeed forms a Freyd category.
+\end{proof} 
+
+The definition of a PCA-object in a cartesian restriction category~\cite{COCKETT2008}, using S and K combinators, is the exact counterpart of our definition of a combinatory object in a Freyd category, by merely replacing morphisms of a Freyd category with their counterparts in a cartesian restriction category.
+In fact, the additional requirement needed in that formulation, namely that the code morphism has to be total, is subsumed by taking it from the underlying cartesian category  through the functor given in the definition of the Freyd category.
+
+\begin{proposition}
+In Freyd categories induced by cartesian restriction categories, 
+combinatory objects are PCA-objects, as defined in~\cite{COCKETT2008}.
+\end{proposition}
+
+% \subsection{Monomials and Combinatory Completeness}
+
+% Given a applicative object $\mca$, $\mca$-monomials are defined using expressions similar to the ones in \Cref{subsection:PCA}:
+
+% $$
+% e  {}::={}  i \in \mathbb{N} \mid c \in \hom{\C}{\termobj}{\mca} \mid e \bullet e \qquad\qquad
+% E_{n}\left(\mca\right)  {}::={}  \{ e \mid \text{all $i$s in $e$ are $< n$}\} 
+% $$
+
+% The following evaluation function relates the expressions to morphisms in $\K$:
+% \begin{align*}
+%     \interp{-}_{n} & : E_{n}\left(\mca\right) \rightarrow \hom{\K}{\mca^{n}}{\mca}\\
+%     \interp{i}_{n} & \defeq \pi_{i}^{n}\\
+%     \interp{c}_{n} & \defeq \purefun \left(c \; \circ \; !\right)\\
+%     \interp{e_{f} \bullet e_{a}}_{n} &\defeq \aparr \circ \left(\mca \rtimes \interp{e_{a}}_{n} \right) \circ \left(\interp{e_{f}}_{n} \ltimes \mca^{n} \right)
+% \end{align*}
+
+% An $\mca$-monomial is a morphism $f$ in $\K$ s.t there exists $n \in \mathbb{N}$ and a term $e_{f} \in E_{n}\left(\mca\right)$ for which $\interp{e_{f}}_{n} = f$.
+
+% \begin{theorem}
+% The following two conditions are equivalent:
+% \begin{enumerate}
+%     \item $\kcomb$ and $\scomb$ are $\mca$-computable
+%     \item All $\mca$-monomials are $\mca$-computable
+% \end{enumerate}
+% \end{theorem}
+
+% \begin{proof}
+%     Let $\mca$ be an applicative object.
+%     Assuming all $\mca$-monomials are $\mca$-computable, we consider the expressions $e_{\kcomb} \in E_{2}\left(\mca\right)$ and $e_{\scomb} \in E_{3}\left(\mca\right)$:
+%     \begin{align*}
+%         e_{\kcomb} &\defeq 0\\
+%         e_{\scomb} &\defeq \left(0 \bullet 2\right) \bullet \left(1 \bullet 2\right)
+%     \end{align*}
+%     Since $\interp{e_{\kcomb}}_{2} = \kcomb$ and $\interp{e_{\scomb}}_{3} = \scomb$, then $\kcomb$ and $\scomb$ are $\mca$-monomials, and thus $\mca$-computable by assumption.
+
+%     Conversely, if $\scomb$ and $\kcomb$ are $\mca$-computable, then for every term $e \in E_{n+1}\left(\mca\right)$, we can define a code $\encode{n}{e} \in \hom{\C}{\termobj}{\mca}$ using the following bracket abstraction algorithm.
+%     First, we define a closed abstraction expression $\absterm{n}{e} \in E_{0}\left(\mca\right)$ for every $n \in \mathbb{N}$ and any $e \in E_{n+1}\left(\mca\right)$ as follows:
+% $$
+% \begin{array}{l@{\qquad}|>{\qquad}l}
+%     \absterm{n}{0} \defeq K_{n} &
+%     \absterm{n+1}{j+1} \defeq \kcode \bullet \absterm{n}{j}\\
+%     \absterm{n}{c} \defeq K_{n+1} \bullet c &
+%     \absterm{n}{e_{1} \bullet e_{2}} \defeq S_{n+1} \bullet \absterm{n}{e_{1}} \bullet \absterm{n}{e_{2}}
+% \end{array}$$
+% %For any $n \in \mathbb{N}$.
+% The definition uses $K_{n}$ and $S_{n}$, which are the $n$-ary $K$ and $S$ combinators~\cite{Goldberg-Mayer:2015},  
+%  where 
+%   $  B  \defeq \scode \bullet \left( \kcode \bullet \scode \right) \bullet \kcode$:
+% $$
+% \begin{array}{l@{\qquad\quad}l@{\qquad\quad}l}
+%      K_{0} \defeq \scode \bullet \kcode \bullet \kcode 
+%      & K_{1} \defeq \kcode & 
+%      K_{n+2} \defeq B \bullet \kcode \bullet K_{n+1}
+%      \\
+%      S_{0} \defeq \scode \bullet \kcode \bullet \kcode & 
+%      S_{1} \defeq \scode &
+%     S_{n+2} \defeq B \bullet \scode \bullet \left( B \bullet S_{n+1}\right)
+% \end{array}
+% $$
+% Since $\kcomb$ and $\scomb$ are $\mca$-computable, the axioms ensure there is a code $c_{n , e} \in \hom{\C}{\termobj}{\mca}$ for any $n \in \mathbb{N}$ and any $e \in E_{n+1}\left(\mca\right)$ such that $\nu\left(\absterm{n}{e}\right) = \return{c_{n , e}}$, hence we take $\encode{n}{e}$ to be a $c_{n , e}$, for which it is straightforward to verify the combinatory object conditions.
+% \end{proof}
+
+% % \newcommand{\compterm}{M}
+% % \newcommand{\valterm}{V}
+
+% % \begin{table}[H]
+% %     \centering
+% %     \begin{tabular}{rccl}
+% %          Values:       & $\valterm$ & ::= & $x$ | $c$ \\
+% %          Computations: & $\compterm$ & ::= & $\return{\valterm}$ | $\letin{x}{\compterm}{\compterm}$ | $\valterm \app \valterm$ \\
+% %     \end{tabular}
+% %     \caption{Monomial Language}
+% %     \label{table:poly-lang}
+% % \end{table}
+
+% % \begin{align*}
+% %     \interp{x_{i}}^{v}_{x_{0} , \ldots , x_{n-1}} &\defeq \pi^{n}_{i}\\
+% %     \interp{c}^{v}_{\Gamma} &\defeq c\\
+% %     \interp{\return{\valterm}}^{c}_{\Gamma} &\defeq \purefun \interp{\valterm}^{v}\\
+% %     \interp{\letin{x}{\compterm_{1}}{\compterm_{2}}}^{c}_{\Gamma} &\defeq \compterm_{2} \circ \left( \compterm_{1} \ltimes \mca^{n}\right) \circ \purefun \Delta\\
+% %     \interp{\valterm_{1} \app \valterm_{2}}^{c}_{\Gamma} &\defeq \aparr \circ \purefun \pair{ \interp{\valterm_{1}}^{c}_{\Gamma} }{ \interp{\valterm_{2}}^{c}_{\Gamma} }
+% % \end{align*}
+
+% % We extend the application to an arbitrary number of arguments:
+% % \begin{align*}
+% %     \valterm_{f} \bullet^{1} \left( \valterm \right) &\defeq \valterm_{f} \app \valterm\\
+% %     \valterm_{f} \bullet^{n+1} \left( \valterm_{1} , \ldots , \valterm_{n+1} \right) &\defeq \letin{ x }{ \valterm_{f} \bullet^{n}\left(\valterm_{1} , \ldots , \valterm_{n}\right) }{ x \app \valterm_{n+1} }
+% % \end{align*}
+
+% % \begin{definition}\label{def:monomial}
+% % A monomial over $\mca$ is a morphism $f \in \hom{\K}{\mca^{n}}{\mca}$ s.t there exists a computation $\compterm_{f}$ with $n$ free variables $x_{1} , \ldots , x_{n}$ s.t $\interp{\compterm_{f}}^{c}_{x_{1} , \ldots , x_{n}} = f$
+% % \end{definition}
+
+% % The axioms of \Cref{def:computable} can now be reformulated through the language of monomials, as follows:
+
+% % We say a computation $\compterm$ in context $\Gamma = x_{1} , \ldots , x_{n}$ is computable when, for all $k \in \left\{ 0 , \ldots , n - 1 \right\}$, and all codes $c_{1} , \ldots , c_{k}$, there is a code $e_{\compterm\left(c_{1} , \ldots , c_{k}\right)}$ s.t:
+% % \begin{align*}
+% %     \compterm \sub{\assign{x_{1}}{c_{1}} , \ldots \assign{x_{k}}{c_{k}}} &=  c_{\compterm\left(c_{1} , \ldots , c_{k}\right)} \bullet^{n-k} \left(x_{k+1}, \ldots , x_{n}\right)\\
+% %     c_{\compterm} \bullet^{k}\left(  c_{1} , \ldots , c_{k} \right) &= \return{c_{\compterm\left(c_{1} , \ldots , c_{k}\right)}}
+% % \end{align*}
+
+% % \begin{lemma}
+% %     A monomial $f$ is $\mca$-computable if its corresponding computation $\compterm_{f}$ is computable
+% % \end{lemma}
+
+% % \begin{theorem}
+% % The following definitions of combinatory completeness are equivalent:
+% % \begin{enumerate}
+% %     \item $\kcomb$ and $\scomb$ are $\mca$-computable
+% %     \item All monomials are $\mca$-computable
+% % \end{enumerate}
+% % \end{theorem}
+% % \begin{proof}
+% %     If all monomials are $\mca$-computable, then so are $\kcomb$ and $\scomb$, because they are monomials, given by: \agnote{TODO: define $\vdash$}
+% %     \begin{align*}
+% %         x_{1} , x_{2} \vdash \compterm_{\kcomb} &= \return{x_{1}}\\
+% %         x_{1} , x_{2} , x_{3} \vdash \compterm_{\scomb} &= \letin{ x_{f} }{ x_{1} \app x_{3} }{ \letin{ x_{a} }{ x_{2} \app x_{3} }{ x_{f} \app x_{a} } }
+% %     \end{align*}
+% %     So one direction is trivial.
+% %     For the other direction, assuming $\kcomb$ and $\scomb$ are $\mca$-computable, we get the following:
+% %     \begin{align*}
+% %     \return{ x_{1} } &= \letin{ x_{a} }{ c_{\kcomb} \app x_{1} }{ x_{a} \app x_{2} } \\
+% %     \return{ c_{1} } &= c_{\kcomb\left(c_{1}\right)} \app x_{2}\\
+% %     c_{\kcomb} \app c_{1} &= \return{ c_{\kcomb\left(c_{1}\right)} }\\
+% %         \compterm_{\scomb} \sub{\assign{x_{1}}{c_{1}} , \ldots \assign{x_{k}}{c_{k}}} &=  c_{\scomb\left(c_{1} , \ldots , c_{k}\right)} \bullet^{n-k} \left(x_{k+1}, \ldots , x_{n}\right)\\
+% %     c_{\scomb} \bullet^{k}\left(  c_{1} , \ldots , c_{k} \right) &= \return{ c_{\scomb\left(c_{1} , \ldots , c_{k}\right)} }\\
+% %     \end{align*}
+% % \end{proof}
+
+% % \subsection{MCA-object as a Model of Untyped $\lambda_{c}$ Calculus}
+
+% % To conclude this section, we relate MCA-objects with untyped $\lambda_{c}$ calculus by providing an interpretation and proving soundness and completeness.
+
+% % A signature is a tuple \agnote{I use $\sigma_{\text{comp}}$ instead of $\sigma_{\text{prod}}$ here, should I mention it?}
+% % \[ \left( \sigma_{\text{val}} , \sigma_{\text{comp}} , \arity_{\text{val}} , \arity_{\text{comp}} \right) \]
+% % where $\sigma_{\text{val}}$ is a set of pure function symbols,
+% % $\sigma_{\text{comp}}$ is a set of effectful function symbols, $\arity_{\text{val}} : \sigma_{\text{val}} \rightarrow  \mathbb{N}$ is an assignment of an arity for each pure symbol, and $\arity_{\text{comp}}$ is an assignment of an arity for each effectful symbol.
+
+% % \begin{table}
+% %     \centering
+% %     \begin{tabular}{rccl}
+% %          Values:       & $V$ & ::= & $x$ | $\lambda x . M$ | $s_{\text{val}}$ \\
+% %          Computations: & $M$ & ::= & $\return{V}$ | $\letin{x}{M}{M}$ | $V \, V$ | $s_{\text{comp}}$ \\
+% %     \end{tabular}
+% %     \caption{Untyped $\lambda_{c}$ Calculus}
+% %     \label{table:untyped-lambda}
+% % \end{table}
+% % \agnote{I consider removing the symbols and leaving only pure codes}
+% % In the syntax... \agnote{TODO: explain}
+
+% % \begin{definition}[Interpretation of Untyped $\lambda_{c}$ Calculus]
+% % A value with $n$ free variables is interpreted as a pure morphism in $\hom{\C}{\mca^{n}}{\mca}$.
+% % A computation with $n$ free variables is interpreted as an effectful morphism in $\hom{\K}{\mca^{n}}{\mca}$.
+% % The interpretation is parameterized by a context $\Gamma = \context{x_{1} , \ldots , x_{n}}$ keeping track on all the possible free variables in the interpreted term.
+
+
+% % \begin{align*}
+% %     \interp{x_{k}}_{\context{x_{1} , \ldots , x_{n}}} & \defeq \pi^{n}_{k}\\
+% % \end{align*}
+% % \end{definition}

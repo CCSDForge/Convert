@@ -5,3 +5,9 @@
 *.bak
 *.tmp
 .idea
+tests/.phpunit.result.cache
+tests/phpunit
+tests/phpunit.d/
+tests/phpunit.phar
+tests/tmp
+

@@ -6,8 +6,8 @@ PHPUNIT=php phpunit
 all: all_tests
 
 all_tests: goodDir phpunit
-	$(PHPUNIT)  t1.php    # --bootstrap bootstrap.php
-	$(PHPUNIT)  t2.php    # --bootstrap bootstrap.php
+	$(PHPUNIT)  FirstTest.php   # --bootstrap bootstrap.php
+	$(PHPUNIT)  SecondTest.php    # --bootstrap bootstrap.php
 
 phpunit:
 	curl https://phar.phpunit.de/phpunit-11.5.46.phar > phpunit

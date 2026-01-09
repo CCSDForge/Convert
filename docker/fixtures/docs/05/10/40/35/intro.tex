@@ -1,0 +1,116 @@
+\section{Introduction}
+
+%\paragraph*{PCA role and importance}
+Partial Combinatory Algebras (PCAs) offer a foundational algebraic model for the untyped $\lambda$-calculus, which underpins various notions of computability~\cite{feferman1975language,hofstra2004partial}.
+%
+PCAs have been widely applied in areas such as realizability interpretations of logic and type theory~\cite{kleene1945interpretation,van2008realizability}, as well as in the construction of categories of assemblies and sheaves~\cite{FREY20192000}. 
+%
+A key feature of PCAs is their partiality, meaning that the application of a program to an input is defined as a partial operator, i.e. not all inputs are guaranteed to produce valid outputs. 
+%
+This property allows PCAs to naturally support non-termination as a computational effect. 
+However, PCAs are inherently limited in their ability to model other critical effects, such as nondeterminism, stateful computation, or exceptions.
+%
+%\paragraph*{PCA limitations}
+Thus, despite their foundational significance,  traditional PCAs are inherently limited in their computational scope and thus restricted in their utility to support modern computation, which often demands a broader treatment of side effects.
+
+While extensions of PCAs, such as PCAs with errors (PCAE),  with choice (PCAC), with partiality and exceptions (PCAX) \cite{cohen2019effects,CohMiqTat21}, have been developed to accommodate specific effects, these approaches often rely on incorporating additional structures or operations into the underlying algebraic framework. 
+%PCAs do offer ways in which various effects can be modeled \emph{indirectly}, usually by incorporating additional structures or operations into the underlying algebraic framework. 
+%Notable examples include: PCAs with errors (PCAE),  with choice (PCAC), with partiality and exceptions (PCAX) \cite{cohen2019effects,CohMiqTat21}. %\lcnote{continue}
+%
+However, the ability to internally support various computational effects is crucial for the development of robust and expressive computational theories.
+%
+Therefore, our goal is to develop a  unified framework that internalizes a wide range of computational effects into combinatory algebra  in a manner as natural as the support for non-termination in PCAs. 
+%
+This %will provide a more comprehensive understanding of computation by incorporating a wider range of computational effects into a uniform framework, which in turn will 
+will allow for a more encompassing study of computation and new insights in the wide range of application domains of combinatory algebras.
+%its relationship with realizability models and programming languages.
+
+
+% \paragraph*{computational effects, importance, and monad representation}
+% \paragraph*{MCA}
+
+A common categorical device for analyzing computational effects in the study of programming languages is through monads~\cite{moggi1991notions,wadler1995monads}.
+%
+Concretely, (strong) monads are a special kind of functors that allow the composition of Kleisli morphisms, i.e., morphisms where the target is an object in the image of the functor.
+%
+Using monads, a procedure that takes a value of type $A$ to a value of type $B$, while possibly invoking some computational effect, can be modeled by a morphism from $A$ to $M B $, where $M$ is some monad which embodies the effect.
+For example, a common way to model nondeterministic computation is to use the powerset monad, which assigns to each set its set of subsets, so the output subset is the set of possible values the computation may yield.
+
+% \lcnote{this is specific to Kleisli}
+% Monads are defined as a triple $\left( T , \eta , \_^{*} \right)$, where $T$ is a functor; for each object $A$ the morphism $\eta_A : A \rightarrow T \left( A \right)$ is the Kleisli identity over $A$; and the Kleisli extension $\_^{*}$ turns every Kleisli morphism $f : A \rightarrow T \left( B \right)$ into a morphism of the form $f^{*} : T \left( A \right) \rightarrow T \left( B \right)$, allowing the composition of Kleisli morphisms.
+% %
+
+
+To address the limitations of PCAs, this paper introduces Monadic Combinatory Algebras (MCAs), a novel generalization of PCAs designed to encapsulate a broader spectrum of computational effects by integrating monads into the combinatory algebra framework. 
+%The essence of MCAs lies in their construction, which builds the combinatory algebra over an underlying computational effect,  represented by a monad. 
+%
+Leveraging the monadic structure enables MCAs to internalize various side effects, such as non-deterministic computations, stateful computations, exceptions, and more.
+%
+Hence, MCAs can go beyond partiality and seamlessly integrate a wide range of effects through the underlying monad.
+In doing so they provide a powerful framework for \emph{internally} supporting effectful computations, which makes them particularly valuable in modern computational contexts.
+%thus broadening the applicability and relevance of combinatory algebras in contemporary computability theory and programming language semantics.
+%
+In fact, we show that MCAs can be instantiated to capture known effectful frameworks, such as non-determinism, stateful computation, continuations and parametric realizability.
+
+% We show that MCAs can be parameterized by the underlying evaluation strategy. This flexibility allows for the representation of different evaluation strategies, such as Call by Value (CbV) and Call by Name (CbN), within the same theoretical framework. We show that this parameterization is particularly beneficial in the context of Continuation-Passing Style (CPS) transformations, where different evaluation strategies can have substantial implications on the resulting computation.
+
+%\paragraph*{categorical connection}
+We further provide a categorical characterization of MCAs within the context of Freyd categories, in the spirit of a similar characterization previously known of PCAs in Turing categories~\cite{COCKETT2008}. Specifically, we define a notion of a combinatory object in a Freyd category, and show that for monads in the category of sets, $\setcat$, the algebraic notion of an MCA  precisely coincides with the categorical notion of a combinatory object in the Kleisli category $\setcat_{\monad}$ of $\monad$ over $\setcat$, which forms a Freyd category.
+
+
+Finally, we explore the application of MCAs in the context of realizability theory, building upon the foundational role of PCAs in traditional realizability models~\cite{van2008realizability}.
+%
+Effectful realizability and more generally extensions of the Curry-Howad paradigm using effects to account for more advanced reasoning principles have been extensively studied over the last decades, with various approaches exploring its theoretical and practical implications~\cite{BerBezCoq98,Krivine09,Boulier+Pedrot+Tabareau:cpp:2017,Pedrot+Tabareau:esop:2018,Pedrot+Tabareau+Fehrmann+Tanter:icfp:2019,Pedrot+al:lics:2020,Pedrot+Tabareau:popl:2020}. Among these, the role of monads has been pivotal in modeling and managing effects, offering a structured and algebraic perspective on effectful computation. 
+Separately, the combinatorial approach to realizability has also garnered some new attention, emphasizing 
+the benefits of working with combinators for algebraic purposes~\cite{Hofstra06relative,Streicher13krivine,FerEtAl17ordered,Speight24}. 
+Yet, regarding effects these works were mostly focused on the particular case of Krivine realizability, i.e.,  computations manipulating continuations~\cite{Streicher13krivine,FerEtAl17ordered}. 
+In this work, we present the first integration of these perspectives, combining the algebraic insights of monads with the combinatorial methodology to offer a unified framework for realizability and monads.
+
+
+%for many years PCAs have been used as the computational basis on top of which realizability models were built~\cite{van2008realizability}. 
+Two standard realizability models stemming from PCAs are given by topoi and assemblies. 
+From a categorical perspective, starting from a PCA one would define a tripos, and then use the tripos-to-topos construction to get a topos~\cite{hyland1980tripos}. 
+Properties of this realizability topos can be studied more easily directly into its subcategories of assemblies, which again can be defined over any PCA. 
+Cohen \emph{et al.} observed that effectfull realizability models could be defined in a uniform way using a structure called \emph{evidenced frame}, factorizing the usual construction of a tripos from a PCA and making it compatible with effectful computational system~\cite{CohMiqTat21}. 
+Leveraging this, we here define evidenced frames over general MCAs, and even extend this approach to consider assemblies over any evidenced frame. This illustrates how traditional approaches to realizability based on PCAs easily generalize to MCAs.                    
+Moreover, the utility of the MCA framework is highlighted through several examples of known realizability models that arise naturally through the uniform MCA-based constructions. 
+% \textbf{Main contribution:}
+% \begin{itemize}[leftmargin=*]
+%     \item We put forward the concept of Monadic Combinatory Algebras (MCAs), extending the foundational structure of PCAs to support a wide range of computational effects through underlying monads.
+%     \item We demonstrate how MCAs can naturally model various effectful computations, including nondeterministic, stateful computations, and continuations.
+%     \item We establish a categorical characterization of MCAs within Freyd Categories, enriching the relationship between combinatory algebras and categorical models of computation.
+%     \item We show how MCAs induce effectfull realizability models by building evidenced frames, and how several known models can be retrieved by selecting appropriate monads.
+% \end{itemize}
+
+
+\paragraph*{Outline and Main contributions.} 
+\begin{itemize}[leftmargin=*]
+ \item \Cref{sec:background} reviews the necessary background on PCAs and monads.
+\item \Cref{sec:mca} formally defines the novel structure of Monadic Combinatory Algebras%(\Cref{sec:mcadef})
+, extending the foundational structure of PCAs to support a wide range of computational effects through underlying monads. 
+The utility of the MCA framework is illustrated by modeling various computational effects 
+%, such as non-deterministic, stateful computations, CPS continuations, and parametric realizability 
+(\Cref{sec:examples}), and the categorical characterization of MCAs is established within Freyd Categories~(\Cref{sec:turing}). %, enriching the relationship between combinatory algebras and categorical models of computation \Cref{sec:pca-object}.
+%\Cref{sec:turing} establishes the categorical characterization of MCAs in Freyd Categories.
+\item \Cref{sec:realizability} shows how usual realizability semantics (namely triposes and assemblies) can be generalized to MCAs, via uniform constructions factoring through evidenced frames. 
+\item \Cref{sec:conc} concludes with a summary of contributions and directions for future research.
+\item We supplement our development with an accompanying Rocq mechanization~\cite{Coqproofs}, hyperlinked with this paper via clickable \coqdoc{} icons.
+
+%, focusing on the definition of the MCA-framework and its relation to evidenced frames.
+%
+\end{itemize}
+
+
+% Traditional models of computation, such as Turing machines and lambda calculus, assume total functions (functions defined for all inputs). PCAs extend these models to include partial functions, which are essential for representing computations that may not halt or may not be defined for certain inputs.
+% %
+% Our goal is to generalize computation models.
+% Just like PCA generalized combinatory algebra by supporting partiality.
+
+
+% PCAs are used in realizability interpretations of logic and type theory, providing a bridge between syntactic proofs and their computational content. This allows for the extraction of algorithms from constructive proofs.
+
+
+% PCAs form the basis for constructing categories of assemblies and sheaves, which are used in categorical logic to study models of type theories and higher-order logics.
+% These categories have internal languages that can be interpreted using PCAs, linking syntax (type theory) and semantics (category theory).
+
+% But while PCAs can \emph{model} effectful computations, such as those involving state, exceptions, or non-determinism, our goal is to extend the algebra itself so that it can \emph{internalize} effectful computations, not simply model them.

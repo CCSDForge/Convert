@@ -1,0 +1,66 @@
+\appendix
+\section{Proof of \Cref{pca_mca}}
+\begin{proof}
+A PCA is obtained from an MCA by instantiating the monad with the sub-singleton monad, i.e.  $M A$ is the set of subsets of $A$ in which all elements are equal.
+\[
+  \monad A = \{S\subseteq A \mid \forall x_{1},x_{2}\in S. x_{1} = x_{2} \}
+ \qquad\qquad
+\eta_A\left(x\right) = \{x\}
+ \qquad\qquad
+ \mu_A\left(\mathbb{X}\right) = \bigcup_{X\in\mathbb{X}} X
+\]
+The sub-singleton monad, of sets with at most one element, allows for the interpretation of deterministic binary relations as functions, where the codomain is in the monad.
+%A binary relation $R \subseteq A \times B$ is deterministic when for any $x \in A$ and any $y_{1} , y_{2} \in B$, if both $\left(x,y_{1}\right) \in R$ and $\left(x,y_{2}\right) \in R$, then $y_{1} = y_{2}$.
+Given a deterministic relation $R \subseteq A \times B$, it is equivalent to a function $\widehat{R} : A \rightarrow \{S\subseteq B \mid \forall y_{1},y_{2}\in S. y_{1} = y_{2} \}$ where $\widehat{R}(a)= \{b\}$ if $R(a,b)$ and $\widehat{R}(a)=\emptyset$ otherwise.
+Because the evaluation relation is determinstic, using the sub-singleton monad to define an MCA, the MCA laws become the laws of a PCA.
+That is,  instead of using $c_{f} \app c_{a} \downarrow c$ and $e \downarrow c$ in a PCA, we use $c_{f} \app c_{a} = \left\{ c \right\}$ and $\nu\left(e\right) = \left\{ c \right\}$ in the MCA, respectively. We note that, when working in a classical metatheory, PCAs can also be obtained by instantiating MCAs with the maybe monad.
+%\lcnote{nice to have: remark about maybe}
+\end{proof}
+
+\section{Proof of~\Cref{prop:SK}}
+\begin{proof}
+    Let $\mca$ be a monadic applicative structure. 
+    If $\mca$ is an MCA then  the $\scode$ and~$\kcode$ combinators are the codes $\encode{2}{(0 \app 2) \app (1 \app 2)}$ and~$\encode{1}{0}$ modeling the $\lambda$-calculus terms $\lambda x.\lambda y.\lambda z.\,(x~z)~(y~z)$ and~$\lambda x.\lambda y.x$, respectively.
+    
+    Conversely, if $\mca$ has $\scode$ and $\kcode$ combinators satisfying the axioms, then for every term $e \in E_{n+1}\left(\mca\right)$, we can define a code $\encode{n}{e}$ using the following bracket abstraction algorithm.
+    First, we define a closed abstraction term $\absterm{n}{e} \in E_{0}\left(\mca\right)$ for every $n \in \mathbb{N}$ and any $e \in E_{n+1}\left(\mca\right)$ as follows:
+$$
+\begin{array}{l@{\qquad}|>{\qquad}l}
+    \absterm{n}{0} \defeq K_{n} &
+    \absterm{n+1}{j+1} \defeq \kcode \bullet \absterm{n}{j}\\
+    \absterm{n}{c} \defeq K_{n+1} \bullet c &
+    \absterm{n}{e_{1} \bullet e_{2}} \defeq S_{n+1} \bullet \absterm{n}{e_{1}} \bullet \absterm{n}{e_{2}}
+\end{array}$$
+%For any $n \in \mathbb{N}$.
+The definition uses $K_{n}$ and $S_{n}$, which are the $n$-ary $K$ and $S$ combinators~\cite{Goldberg-Mayer:2015},  
+ where 
+  $  B  \defeq \scode \bullet \left( \kcode \bullet \scode \right) \bullet \kcode$:
+$$
+\begin{array}{l@{\qquad\quad}l@{\qquad\quad}l}
+     K_{0} \defeq \scode \bullet \kcode \bullet \kcode 
+     & K_{1} \defeq \kcode & 
+     K_{n+2} \defeq B \bullet \kcode \bullet K_{n+1}
+     \\
+     S_{0} \defeq \scode \bullet \kcode \bullet \kcode & 
+     S_{1} \defeq \scode &
+    S_{n+2} \defeq B \bullet \scode \bullet \left( B \bullet S_{n+1}\right)
+\end{array}
+$$
+The axioms ensure there is a code $c_{n , e} \in \mca$ for any $n \in \mathbb{N}$ and any $e \in E_{n+1}\left(\mca\right)$ such that $\nu\left(\absterm{n}{e}\right) = \return{c_{n , e}}$, hence we take $\encode{n}{e}$ to be a $c_{n , e}$, for which it is straightforward to verify the MCA conditions.
+% To verify that it satisfies the equations of \Cref{mca}, we check each case:
+    % such as the one in \cite{turner1979another}.
+    % If $\mca$ has the $\scomb$ and $\kcomb$ combinators, then for every term $e \in E_{n+1}\left(\mca\right)$, we can define a code $\encode{n}{e}$\lcnote{TODO: either encode or explain in words}, for which it is 
+    % straightforward to verify that the MCA laws hold\lcnote{is it straightforward? or is there smt interesting w return and bind?}\agnote{I believe it is straightforward but I'll write it down later if we have time}.
+\end{proof}
+
+\clearpage
+\setcounter{lemma}{0}
+\renewcommand{\thelemma}{\Alph{section}\arabic{lemma}}
+
+
+\section{Elaborated \Cref{sec:turing} --- Categorical Characterization of MCAs}
+\input{categories}
+
+\clearpage
+\section{Elaborated~\Cref{sec:mcaef}: From Effect Shells to Evidenced Frames}
+\input{app-ef}

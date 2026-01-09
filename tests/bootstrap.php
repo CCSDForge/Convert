@@ -17,6 +17,11 @@ class Bootstrap {
             $compilationDir = $configCompilDir;
         }
         define('BASETEMPREP',$compilationDir);
+
+        define('LATEX', '/usr/local/texlive/2023');     # Latex courant
+        define('LATEX2020', '/usr/local/texlive/2020'); # Latex version
+        define('LATEX2016', '/usr/local/texlive/2016'); # Latex version fixe 2016
+        define('LATEX2014', '/usr/local/texlive/2014'); # Latex version fixe 2014
     }
 }
 
