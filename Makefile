@@ -13,11 +13,9 @@ DOCKER_COMPOSE_EXEC_LATEX 		= $(DOCKER_COMPOSE) run --rm -u root $(LATEX_SERVICE
 help:
 	@echo "Usage:"
 	@echo "  To install locally,         do : make build up"
-#	@echo "      Shortcut : make install   (build up vendor dsfr npm-install)"
-#	@echo "      ShortcutT: make preprare  (load-schema load-data npm-build)"
-#	@echo "  To enter docker container,  do : make enter-php or make enter-mysql..."
-#	@echo "  To test,                    do : make test  or TEST_PRGM=./tests/...Mytest.php make test"
-#	@echo "  To debug test,              do : make test-debug or  TEST_PRGM=./tests/...Mytest.php make test-debug"
+	@echo "  To enter docker container,  do : make enter-php or make enter-latex..."
+	@echo "  To test,                    do : make test  or TEST_PRGM=./tests/...Mytest.php make test"
+	@echo "  To debug test,              do : make test-debug or  TEST_PRGM=./tests/...Mytest.php make test-debug"
 #	@echo "           (Verify your docker IP and you must have a 'Docker' server configuration in your IDE)"
 #	@echo "  To deploy                   do : make deploy-preprod or make deploy-production"
 

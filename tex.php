@@ -7,6 +7,8 @@
    The directory of source files is only read access
  */
 
+require_once __DIR__ . '/Convert/Config.php';
+
 use Convert\Config;
 
 class TexCompileException extends Exception {
